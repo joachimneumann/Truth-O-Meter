@@ -1,0 +1,488 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
+		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
+		AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3533255AA99300AD0B14 /* ContentView.swift */; };
+		AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3533255AA99300AD0B14 /* ContentView.swift */; };
+		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
+		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
+		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
+		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
+		AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
+		AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
+		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
+		AACB1EB5255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
+		AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* Display.swift */; };
+		AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* Display.swift */; };
+		AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
+		AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
+		AACB1ECC255BCADE00BA34B5 /* NeedleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1ECB255BCADE00BA34B5 /* NeedleValue.swift */; };
+		AACB1ECD255BCADE00BA34B5 /* NeedleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1ECB255BCADE00BA34B5 /* NeedleValue.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
+		AA2B3533255AA99300AD0B14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2B353C255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
+		AA9A4D30255C2481002F5F00 /* TrueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueButton.swift; sourceTree = "<group>"; };
+		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
+		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
+		AACB1EBF255BC62800BA34B5 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
+		AACB1ECB255BCADE00BA34B5 /* NeedleValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleValue.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA2B3536255AA99400AD0B14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B353E255AA99400AD0B14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA2B352C255AA99300AD0B14 = {
+			isa = PBXGroup;
+			children = (
+				AA2B3531255AA99300AD0B14 /* Shared */,
+				AA2B353B255AA99400AD0B14 /* iOS */,
+				AA2B3542255AA99400AD0B14 /* macOS */,
+				AA2B353A255AA99400AD0B14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA2B3531255AA99300AD0B14 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AACB1ECA255BCAC500BA34B5 /* Model */,
+				AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */,
+				AA2B3533255AA99300AD0B14 /* ContentView.swift */,
+				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
+				AACB1EBA255BC5BF00BA34B5 /* Display.swift */,
+				AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */,
+				AACB1EBF255BC62800BA34B5 /* Needle.swift */,
+				AA9A4D30255C2481002F5F00 /* TrueButton.swift */,
+				AACB1EB3255BB18600BA34B5 /* C.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AA2B353A255AA99400AD0B14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */,
+				AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA2B353B255AA99400AD0B14 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B353C255AA99400AD0B14 /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		AA2B3542255AA99400AD0B14 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA2B3543255AA99400AD0B14 /* Info.plist */,
+				AA2B3544255AA99400AD0B14 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		AACB1ECA255BCAC500BA34B5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AACB1ECB255BCADE00BA34B5 /* NeedleValue.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA2B3538255AA99400AD0B14 /* Truth-O-Meter (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA2B354D255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (iOS)" */;
+			buildPhases = (
+				AA2B3535255AA99400AD0B14 /* Sources */,
+				AA2B3536255AA99400AD0B14 /* Frameworks */,
+				AA2B3537255AA99400AD0B14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Truth-O-Meter (iOS)";
+			productName = "Truth-O-Meter (iOS)";
+			productReference = AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA2B3540255AA99400AD0B14 /* Truth-O-Meter (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA2B3550255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (macOS)" */;
+			buildPhases = (
+				AA2B353D255AA99400AD0B14 /* Sources */,
+				AA2B353E255AA99400AD0B14 /* Frameworks */,
+				AA2B353F255AA99400AD0B14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Truth-O-Meter (macOS)";
+			productName = "Truth-O-Meter (macOS)";
+			productReference = AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA2B352D255AA99300AD0B14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					AA2B3538255AA99400AD0B14 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					AA2B3540255AA99400AD0B14 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = AA2B3530255AA99300AD0B14 /* Build configuration list for PBXProject "Truth-O-Meter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA2B352C255AA99300AD0B14;
+			productRefGroup = AA2B353A255AA99400AD0B14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA2B3538255AA99400AD0B14 /* Truth-O-Meter (iOS) */,
+				AA2B3540255AA99400AD0B14 /* Truth-O-Meter (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA2B3537255AA99400AD0B14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B353F255AA99400AD0B14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA2B3535255AA99400AD0B14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB1ECC255BCADE00BA34B5 /* NeedleValue.swift in Sources */,
+				AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */,
+				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
+				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
+				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
+				AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */,
+				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
+				AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B353D255AA99400AD0B14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACB1ECD255BCADE00BA34B5 /* NeedleValue.swift in Sources */,
+				AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */,
+				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
+				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
+				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
+				AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */,
+				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
+				AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA2B354B255AA99400AD0B14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA2B354C255AA99400AD0B14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AA2B354E255AA99400AD0B14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
+				PRODUCT_NAME = "Truth-O-Meter";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA2B354F255AA99400AD0B14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
+				PRODUCT_NAME = "Truth-O-Meter";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA2B3551255AA99400AD0B14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
+				PRODUCT_NAME = "Truth-O-Meter";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA2B3552255AA99400AD0B14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8A4DL788W9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
+				PRODUCT_NAME = "Truth-O-Meter";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA2B3530255AA99300AD0B14 /* Build configuration list for PBXProject "Truth-O-Meter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2B354B255AA99400AD0B14 /* Debug */,
+				AA2B354C255AA99400AD0B14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA2B354D255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2B354E255AA99400AD0B14 /* Debug */,
+				AA2B354F255AA99400AD0B14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA2B3550255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2B3551255AA99400AD0B14 /* Debug */,
+				AA2B3552255AA99400AD0B14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA2B352D255AA99300AD0B14 /* Project object */;
+}
