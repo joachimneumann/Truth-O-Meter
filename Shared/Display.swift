@@ -8,31 +8,20 @@
 import SwiftUI
 
 struct Display: View {
-    var isOn: Bool
+    @State var target: Target
     var body: some View {
-        if (isOn) {
-            Text("Display: On")
-        } else {
-            Text("Display Off")
+        ZStack {
+            DisplayBackground()
+            Needle(target: target)
         }
-//        VStack {
-//            ZStack {
-//                DisplayBackground()
-//                Needle()
-//            }
-//            .aspectRatio(1.9, contentMode: .fit)
-//        }
+        .aspectRatio(1.9, contentMode: .fit)
     }
-    func isOn(value: Bool) {
-        
-    }
-
 }
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Display(isOn: true)
+            Display(target: Target())
         }
     }
 }
