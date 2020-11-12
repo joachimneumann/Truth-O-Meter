@@ -9,10 +9,11 @@ import SwiftUI
 
 struct TrueButton: View {
     @EnvironmentObject var truthModel: TruthModel
+    @EnvironmentObject var userSettings: UserSettings
     var body: some View {
         HStack {
             Spacer()
-            Text("Is that true?")
+            Text(userSettings.question)
                 .font(.system(size: 24, design: .monospaced))
                 .fontWeight(.bold)
                 .aspectRatio(contentMode: .fill)
@@ -35,6 +36,7 @@ struct TrueButton: View {
 struct TrueButton_Previews: PreviewProvider {
     static var previews: some View {
         TrueButton()
+            .environmentObject(UserSettings())
     }
 }
 

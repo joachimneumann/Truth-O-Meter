@@ -22,6 +22,7 @@ struct C {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
     struct Colors {
+        static let frameColor = Color(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0)
         static let bullshitRed = Color(red: 255.0/255.0, green: 126.0/255.0, blue: 121.0/255.0)
         static let gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
     }

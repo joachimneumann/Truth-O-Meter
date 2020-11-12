@@ -20,6 +20,9 @@ struct DisplayBackground: View {
                 .stroke(C.Colors.gray, style: fineStrokeStyle)
             TopArcRed()
                 .stroke(C.Colors.bullshitRed, style: fineStrokeStyle)
+                .clipped()
+            RoundedRectangle(cornerRadius: 25, style: .continuous)
+                .stroke(C.Colors.frameColor, lineWidth: 4)
         }
     }
 }
@@ -55,10 +58,6 @@ struct TopArcBlack: Shape {
                 path.move(to: a)
                 path.addLine(to: b)
             }
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.startAngle, endAngle: C.startAngle, clockwise: false)
-            path.move(to: temp.currentPoint!)
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.startAngle, clockwise: false)
-            path.addLine(to: temp.currentPoint!)
         }
         return p
     }
@@ -68,7 +67,11 @@ struct TopArcRed: Shape {
     func path(in rect: CGRect) -> Path {
         var temp = Path()
         let p: Path = Path { path in
+            
+            // top arc
             path.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.midAngle, endAngle: C.endAngle, clockwise: false)
+            
+            // little red ticks on the right
             for proportion in [0.79, 0.87, 0.94] {
                 let end = C.proportionalAngle(proportion: proportion)
                 temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
@@ -76,12 +79,20 @@ struct TopArcRed: Shape {
                 temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
                 path.addLine(to: temp.currentPoint!)
             }
+            
+            // red divider line
             temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
             path.move(to: temp.currentPoint!)
             temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
             path.addLine(to: temp.currentPoint!)
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.startAngle, endAngle: C.endAngle, clockwise: false)
-            path.move(to: temp.currentPoint!)
+            
+            // line at the beginning
+            path.move(to: C.displayCenter(rect: rect))
+            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.startAngle, clockwise: false)
+            path.addLine(to: temp.currentPoint!)
+
+            // line at the end
+            path.move(to: C.displayCenter(rect: rect))
             temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.endAngle, clockwise: false)
             path.addLine(to: temp.currentPoint!)
         }

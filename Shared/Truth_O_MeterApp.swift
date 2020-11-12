@@ -10,10 +10,13 @@ import SwiftUI
 @main
 struct Truth_O_MeterApp: App {
     let truthModel = TruthModel()
+    let userSettings = UserSettings()
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(truthModel)
+            ContentView()
+                .environmentObject(truthModel)
+                .environmentObject(userSettings)
         }
     }
 }
