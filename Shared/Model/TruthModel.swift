@@ -12,13 +12,13 @@ import GameplayKit
 
 class TruthModel: ObservableObject {
     @Published var current = 0.5
-    private var noisyApproaching: Double = 0.5
-    private var approaching: Double = 0.75
+    private var noisy: Double = 0.5
     private var target: Double = 0.5 {
         didSet {
-            print("target didSet \(target)")
+            print("target didSet \(target.format(f: ".3"))")
         }
     }
+    private var times = [1.0, 2.0, 3.0]
 
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
@@ -27,34 +27,38 @@ class TruthModel: ObservableObject {
     }
 
     func newTruth(updateTo: Double) {
-        target = updateTo
-    }
-    // approach the target
-    lazy var longTermTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { _ in
-        let f_slow = 0.9
-        self.approaching = f_slow * self.approaching + (1-f_slow)*self.target
-    }
-
-    // add noise approach
-    lazy var noiseTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { _ in
-        let n = self.distribution.nextInt()
-        let noise = 0.001 * Double(n)
-        self.noisyApproaching = self.approaching + noise
-    }
-
-    // smoothing
-    lazy var lowpassTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
-        let f_fast = 0.97
-        self.current = f_fast * self.current + (1-f_fast)*self.noisyApproaching
-        if self.current < -0.02 { self.current = -0.02 }
-        if self.current > 1.02 { self.current = 1.02 }
-
+        let inversed = 1.0 - updateTo
+        self.target = self.target + 0.2*(inversed-self.target)
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[0]) {
+            self.target = self.target + 0.4*(inversed-self.target)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[1]) {
+            self.target = self.target + 0.75*(inversed-self.target)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[2]) {
+            self.target = inversed
+        }
     }
 
     init() {
-        longTermTimer.fire()
         noiseTimer.fire()
         lowpassTimer.fire()
+    }
+
+    // add noise approach
+    private lazy var noiseTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { _ in
+        let n = self.distribution.nextInt()
+        let noise = 0.001 * Double(n)
+        self.noisy = self.target + noise
+    }
+
+    // smoothing
+    private lazy var lowpassTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
+        let f_fast = 0.97
+        self.current = f_fast * self.current + (1-f_fast)*self.noisy
+        if self.current < -0.02 { self.current = -0.02 }
+        if self.current > 1.02 { self.current = 1.02 }
+
     }
     
 }

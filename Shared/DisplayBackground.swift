@@ -94,6 +94,5 @@ struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         DisplayBackground()
             .aspectRatio(1.9, contentMode: .fit)
-            .background(Color.yellow)
     }
 }
