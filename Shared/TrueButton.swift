@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct TrueButton: View {
-    let newLongTermValue: (_ target: Double) -> Void
-
+    @ObservedObject var truth: Truth
     var body: some View {
         HStack {
             Spacer()
@@ -27,8 +26,7 @@ struct TrueButton: View {
     }
     
     func taphandler(p: CGPoint, r: CGRect) {
-        print("TrueButton: \(p.x / r.size.width)")
-        newLongTermValue(Double(p.x / r.size.width))
+        truth.newTruth(updateTo: Double(p.x / r.size.width))
     }
 }
 
@@ -36,7 +34,7 @@ struct TrueButton: View {
 
 struct TrueButton_Previews: PreviewProvider {
     static var previews: some View {
-        TrueButton() {_ in }
+        TrueButton(truth: Truth())
     }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 struct Truth_O_MeterApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(target: Target())
+            ContentView(truth: Truth())
         }
     }
 }

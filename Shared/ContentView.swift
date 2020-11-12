@@ -7,17 +7,17 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
-    @State var target: Target
-    
+    @ObservedObject var truth: Truth
     var body: some View {
         VStack {
-            Display(target: target)
+            Display(truth: truth)
             Spacer()
-            TrueButton() { newLongTermValue in
-                print("ContentView: \(newLongTermValue)")
-                target.longTerm = newLongTermValue
-            }
+            TrueButton(truth: truth)
+//            TrueButton() { value in
+//                truth.newTruth(updateTo: value)
+//            }
             .padding(.all)
         }
     }
@@ -25,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(target: Target())
+        ContentView(truth: Truth())
     }
 }

@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct Needle: View {
-    @StateObject var target = Target()
+    @ObservedObject var truth: Truth
     var body: some View {
-        TheNeedle(v: target.value)
-            .stroke(C.Colors.bullshitRed,
-            style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+        HStack {
+            TheNeedle(v: truth.currentValue())
+                .stroke(C.Colors.bullshitRed,
+                    style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+        }
     }
 }
+
 
 struct TheNeedle: Shape {
     var v: Double
     func path(in rect: CGRect) -> Path {
         var temp = Path()
         var path = Path()
-
-        temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: v), clockwise: false)
+        temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: v), clockwise: true)
         let a = temp.currentPoint!
         path.move(to: C.displayCenter(rect: rect))
         path.addLine(to: a)
@@ -33,7 +35,7 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle()
+        Needle(truth: Truth())
             .aspectRatio(1.9, contentMode: .fit)
             .background(Color.yellow)
     }
