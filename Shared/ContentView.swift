@@ -9,7 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Display()
+        VStack {
+            Display()
+            Spacer()
+            TrueButton()
+                .padding(.all)
+        }
     }
 }
 

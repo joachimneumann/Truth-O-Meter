@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Display: View {
+
     var body: some View {
         VStack {
             ZStack {
@@ -15,9 +16,6 @@ struct Display: View {
                 Needle()
             }
             .aspectRatio(1.9, contentMode: .fit)
-            Spacer()
-            TrueButton()
-                .padding(.all)
         }
     }
 }
