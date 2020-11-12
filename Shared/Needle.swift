@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct Needle: View {
-    @StateObject var needleValue = NeedleValue()
+    @StateObject var target = Target()
     var body: some View {
-        TheNeedle(v: needleValue.value)
+        TheNeedle(v: target.value)
             .stroke(C.Colors.bullshitRed,
             style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
     }

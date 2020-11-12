@@ -1,5 +1,5 @@
 //
-//  NeedleValue.swift
+//  Target.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 11/11/20.
@@ -8,7 +8,7 @@
 import Foundation
 import GameplayKit
 
-class NeedleValue: ObservableObject {
+class Target: ObservableObject {
     @Published var value = 0.5
     var target: Double = 0.5
     var noisyTarget: Double = 0.5
