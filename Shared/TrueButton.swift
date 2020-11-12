@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrueButton: View {
-    @ObservedObject var truth: Truth
+    @EnvironmentObject var truthModel: TruthModel
     var body: some View {
         HStack {
             Spacer()
@@ -26,7 +26,7 @@ struct TrueButton: View {
     }
     
     func taphandler(p: CGPoint, r: CGRect) {
-        truth.newTruth(updateTo: Double(p.x / r.size.width))
+        truthModel.newTruth(updateTo: Double(p.x / r.size.width))
     }
 }
 
@@ -34,7 +34,7 @@ struct TrueButton: View {
 
 struct TrueButton_Previews: PreviewProvider {
     static var previews: some View {
-        TrueButton(truth: Truth())
+        TrueButton()
     }
 }
 

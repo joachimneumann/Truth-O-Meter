@@ -15,6 +15,8 @@
 		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
+		AA7FF68B255D1BA100A65D87 /* TruthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7FF68A255D1BA100A65D87 /* TruthModel.swift */; };
+		AA7FF68C255D1BA100A65D87 /* TruthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7FF68A255D1BA100A65D87 /* TruthModel.swift */; };
 		AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
 		AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
 		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
@@ -23,8 +25,6 @@
 		AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* Display.swift */; };
 		AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
 		AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
-		AACB1ECC255BCADE00BA34B5 /* Truth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1ECB255BCADE00BA34B5 /* Truth.swift */; };
-		AACB1ECD255BCADE00BA34B5 /* Truth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1ECB255BCADE00BA34B5 /* Truth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +37,11 @@
 		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
+		AA7FF68A255D1BA100A65D87 /* TruthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruthModel.swift; sourceTree = "<group>"; };
 		AA9A4D30255C2481002F5F00 /* TrueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueButton.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AACB1EBF255BC62800BA34B5 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
-		AACB1ECB255BCADE00BA34B5 /* Truth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +117,7 @@
 		AACB1ECA255BCAC500BA34B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AACB1ECB255BCADE00BA34B5 /* Truth.swift */,
+				AA7FF68A255D1BA100A65D87 /* TruthModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,12 +219,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACB1ECC255BCADE00BA34B5 /* Truth.swift in Sources */,
 				AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */,
+				AA7FF68B255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */,
 			);
@@ -234,12 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACB1ECD255BCADE00BA34B5 /* Truth.swift in Sources */,
 				AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
 				AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */,
+				AA7FF68C255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */,
 			);

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct Needle: View {
-    @ObservedObject var truth: Truth
+    @EnvironmentObject var truthModel: TruthModel
     var body: some View {
         HStack {
-            TheNeedle(v: truth.currentValue())
+            TheNeedle(v: truthModel.currentValue())
                 .stroke(C.Colors.bullshitRed,
                     style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
@@ -35,8 +35,9 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle(truth: Truth())
+        Needle()
             .aspectRatio(1.9, contentMode: .fit)
             .background(Color.yellow)
+            .environmentObject(TruthModel())
     }
 }

@@ -1,14 +1,16 @@
 //
-//  Truth.swift
+//  TruthModel.swift
 //  Truth-O-Meter
 //
-//  Created by Joachim Neumann on 11/11/20.
+//  Created by Joachim Neumann on 11/12/20.
 //
+
+import Foundation
 
 import Foundation
 import GameplayKit
 
-class Truth: ObservableObject {
+class TruthModel: ObservableObject {
     @Published var current = 0.5
     private var noisyApproaching: Double = 0.5
     private var approaching: Double = 0.75

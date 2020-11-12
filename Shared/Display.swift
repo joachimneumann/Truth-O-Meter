@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct Display: View {
-    @ObservedObject var truth: Truth
     var body: some View {
         ZStack {
             DisplayBackground()
-            Needle(truth: truth)
+            Needle()
         }
         .aspectRatio(1.9, contentMode: .fit)
     }
@@ -20,6 +19,7 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Display(truth: Truth())
+        Display()
+        .environmentObject(TruthModel())
     }
 }

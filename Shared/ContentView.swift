@@ -9,15 +9,11 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var truth: Truth
     var body: some View {
         VStack {
-            Display(truth: truth)
+            Display()
             Spacer()
-            TrueButton(truth: truth)
-//            TrueButton() { value in
-//                truth.newTruth(updateTo: value)
-//            }
+            TrueButton()
             .padding(.all)
         }
     }
@@ -25,6 +21,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(truth: Truth())
+        ContentView()
+        .environmentObject(TruthModel())
     }
 }

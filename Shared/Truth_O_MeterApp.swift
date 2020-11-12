@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
+    let truthModel = TruthModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView(truth: Truth())
+            ContentView().environmentObject(truthModel)
         }
     }
 }
