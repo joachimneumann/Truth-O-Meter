@@ -11,19 +11,22 @@ struct TrueButton: View {
     @EnvironmentObject var truthModel: TruthModel
     @EnvironmentObject var userSettings: UserSettings
     
-    @State private var trueButtonWidth: CGFloat = .zero
-
     var body: some View {
         let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({
-            var relativeTap: Double = Double($0.startLocation.x / trueButtonWidth)
+            var relativeTap: Double = Double($0.startLocation.x / userSettings.width)
             if relativeTap < 0.0 { relativeTap = 0.0 }
             if relativeTap > 1.0 { relativeTap = 1.0 }
-            print(relativeTap)
-            truthModel.newTruth(updateTo: relativeTap)
+            print("\($0.startLocation.x) in \(userSettings.width) --> \(relativeTap)")
+            
+            truthModel.newTruth(updateTo: 1.0)//relativeTap)
         })
         GeometryReader { geo in
             ZStack{
-                Text(userSettings.question)
+                Path { path in
+                    let w = geo.size.width
+                    print("xx \(w)")
+                }
+                Text("userSettings.question")
                     .font(.system(size: 24, design: .monospaced))
                     .fontWeight(.bold)
                     .aspectRatio(contentMode: .fill)
@@ -32,9 +35,6 @@ struct TrueButton: View {
                 // tab events are not triggered 0 opacity views
                 Rectangle()
                     .foregroundColor(Color.orange.opacity(0.00000001))
-            }
-            .onAppear() {
-                self.trueButtonWidth = geo.frame(in: .local).size.width
             }
             .gesture(tapGesture)
         }

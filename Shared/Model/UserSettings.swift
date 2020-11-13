@@ -11,4 +11,5 @@ import Foundation
 class UserSettings: ObservableObject {
     @Published var title = "Truth-O-Meter"
     @Published var question = "Is that true?"
+    @Published var width: CGFloat = 100.0
 }
