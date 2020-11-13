@@ -23,6 +23,7 @@ struct DisplayBackground: View {
                 .clipped()
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .stroke(C.Colors.frameColor, lineWidth: 4)
+            Image(systemName: "microphone")
         }
     }
 }

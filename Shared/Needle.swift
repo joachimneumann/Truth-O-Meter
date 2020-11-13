@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct Needle: View {
-    @EnvironmentObject var truthModel: TruthModel
+    @ObservedObject var current = TruthModel.shared.current
     var body: some View {
-        TheNeedle(v: truthModel.currentValue())
+        TheNeedle(v: current.value)
             .stroke(C.Colors.bullshitRed,
                 style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
     }
 }
-
 
 struct TheNeedle: Shape {
     var v: Double
@@ -26,7 +25,6 @@ struct TheNeedle: Shape {
         let a = temp.currentPoint!
         path.move(to: C.displayCenter(rect: rect))
         path.addLine(to: a)
-
         return path
     }
 }
@@ -35,6 +33,5 @@ struct Needle_Previews: PreviewProvider {
     static var previews: some View {
         Needle()
             .aspectRatio(1.9, contentMode: .fit)
-            .environmentObject(TruthModel())
     }
 }

@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import AudioToolbox// <AudioToolbox/AudioToolbox.h>
+import AVFoundation
 
 struct TrueButton: View {
-    @EnvironmentObject var truthModel: TruthModel
     @EnvironmentObject var userSettings: UserSettings
     
     var body: some View {
@@ -16,23 +17,26 @@ struct TrueButton: View {
             var relativeTap: Double = Double($0.startLocation.x / userSettings.width)
             if relativeTap < 0.0 { relativeTap = 0.0 }
             if relativeTap > 1.0 { relativeTap = 1.0 }
-            print("\($0.startLocation.x) in \(userSettings.width) --> \(relativeTap)")
-            
-            truthModel.newTruth(updateTo: 1.0)//relativeTap)
+            // print("\($0.startLocation.x) in \(userSettings.width) --> \(relativeTap)")
+            TruthModel.shared.newTruthValue(updateTo: relativeTap)
         })
         GeometryReader { geo in
             ZStack{
+                // This hack allows me to set userSettings.width after the
+                // view has been layed out and after every resize on the Mac
                 Path { path in
-                    let w = geo.size.width
-                    print("xx \(w)")
+                    if abs(userSettings.width - geo.size.width) > 1.0 {
+                        userSettings.width = geo.size.width
+                    }
                 }
-                Text("userSettings.question")
+                Text(userSettings.question)
                     .font(.system(size: 24, design: .monospaced))
                     .fontWeight(.bold)
                     .aspectRatio(contentMode: .fill)
                     .foregroundColor(.white)
-                // tab events are not triggered in GeometryReader
-                // tab events are not triggered 0 opacity views
+                // Hack needed here because
+                // - Tab events are not triggered in GeometryReader
+                // - Tab events are not triggered views with opacity zero
                 Rectangle()
                     .foregroundColor(Color.orange.opacity(0.00000001))
             }
@@ -42,9 +46,6 @@ struct TrueButton: View {
         .cornerRadius(15)
     }
     
-    func taphandler(p: CGPoint, r: CGRect) {
-        truthModel.newTruth(updateTo: Double(p.x / r.size.width))
-    }
 }
 
 

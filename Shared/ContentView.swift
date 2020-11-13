@@ -10,20 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userSettings: UserSettings
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            GeometryReader { geometry in
-                Path { path in
-                    let w = geometry.size.width
-                    // test if the value is equal
-                    // Assiging the equal value results in an endless loop,
-                    // because it forces to redraw ContentView
-//                    if (userSettings.width != w) {
-//                        userSettings.width = w
-//                    }
-                    print(w)
-                }
-            }
             Settings()
                 .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
             VStack {
@@ -32,8 +21,7 @@ struct ContentView: View {
                 Spacer()
                 TrueButton()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
-                    .padding (.all, 100)
-//                    .padding(.bottom, 20)
+                    .padding (.all, 20)
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -67,9 +55,7 @@ struct Settings: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-
         ContentView()
-            .environmentObject(TruthModel())
             .environmentObject(UserSettings())
     }
 }

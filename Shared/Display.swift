@@ -27,7 +27,6 @@ struct Display: View {
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         Display()
-            .environmentObject(TruthModel())
             .environmentObject(UserSettings())
     }
 }

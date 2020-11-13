@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA0A51C6255E9EC4008DF1CE /* Truth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A51C5255E9EC4008DF1CE /* Truth.swift */; };
-		AA0A51C7255E9EC4008DF1CE /* Truth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A51C5255E9EC4008DF1CE /* Truth.swift */; };
 		AA12FB34255D2D7C00F3067F /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12FB33255D2D7C00F3067F /* UserSettings.swift */; };
 		AA12FB35255D2D7C00F3067F /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12FB33255D2D7C00F3067F /* UserSettings.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
@@ -34,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA0A51C5255E9EC4008DF1CE /* Truth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth.swift; sourceTree = "<group>"; };
 		AA12FB33255D2D7C00F3067F /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3533255AA99300AD0B14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,7 +124,6 @@
 		AACB1ECA255BCAC500BA34B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AA0A51C5255E9EC4008DF1CE /* Truth.swift */,
 				AA7FF68A255D1BA100A65D87 /* TruthModel.swift */,
 				AA12FB33255D2D7C00F3067F /* UserSettings.swift */,
 			);
@@ -237,7 +233,6 @@
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AA12FB34255D2D7C00F3067F /* UserSettings.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
-				AA0A51C6255E9EC4008DF1CE /* Truth.swift in Sources */,
 				AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */,
 				AA7FF68B255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
@@ -255,7 +250,6 @@
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
 				AA12FB35255D2D7C00F3067F /* UserSettings.swift in Sources */,
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
-				AA0A51C7255E9EC4008DF1CE /* Truth.swift in Sources */,
 				AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */,
 				AA7FF68C255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,

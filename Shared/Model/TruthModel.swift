@@ -5,28 +5,29 @@
 //  Created by Joachim Neumann on 11/12/20.
 //
 
-import Foundation
-
-import Foundation
+import SwiftUI
 import GameplayKit
 
-class TruthModel: ObservableObject {
-    @Published var current = 0.5
-    private var noisy: Double = 0.5
-    private var target: Double = 0.5 {
-        didSet {
-            print("target didSet \(target.format(f: ".3"))")
-        }
-    }
-    private var times = [1.0, 2.0, 3.0]
+class Current: ObservableObject {
+    @Published var value = 0.5
+}
 
+class TruthModel {
+    
+    static let shared = TruthModel()
+    var current = Current()
+    
+    private var noisy: Double = 0.5
+    private var target: Double = 0.5
+//    {
+//        didSet {
+//            print("target didSet \(target.format(f: ".3"))")
+//        }
+//    }
+    private var times = [1.0, 2.0, 3.0]
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
-    func currentValue() -> Double {
-        return current
-    }
-
-    func newTruth(updateTo: Double) {
+    func newTruthValue(updateTo: Double) {
         let inversed = 1.0 - updateTo
         self.target = self.target + 0.2*(inversed-self.target)
         DispatchQueue.main.asyncAfter(deadline: .now() + times[0]) {
@@ -40,7 +41,7 @@ class TruthModel: ObservableObject {
         }
     }
 
-    init() {
+    private init() {
         noiseTimer.fire()
         lowpassTimer.fire()
     }
@@ -55,10 +56,10 @@ class TruthModel: ObservableObject {
     // smoothing
     private lazy var lowpassTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
         let f_fast = 0.97
-        self.current = f_fast * self.current + (1-f_fast)*self.noisy
-        if self.current < -0.02 { self.current = -0.02 }
-        if self.current > 1.02 { self.current = 1.02 }
-
+        var newCurrentValue  = f_fast * self.current.value + (1-f_fast)*self.noisy
+        if newCurrentValue < -0.02 { newCurrentValue = -0.02 }
+        if newCurrentValue >  1.02 { newCurrentValue = 1.02 }
+        self.current.value = newCurrentValue
     }
     
 }
