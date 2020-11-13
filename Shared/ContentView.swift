@@ -20,6 +20,7 @@ struct ContentView: View {
                     .padding(.top, 10)
                 Spacer()
                 RecordButton()
+                Spacer()
                 TrueButton()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
                     .padding (.all, 20)

@@ -7,42 +7,48 @@
 
 import SwiftUI
 
-
-
 struct RecordButton: View {
-    @State private var progress = 0.0
-    private var progressDuration = 2.0
+    @State var progressBarValue:CGFloat = 0
+    @State var running = false
+    private var progressDuration = 6.0
     var body: some View {
+        
+        let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({_ in
+            print("progress \(progressBarValue)")
+            running = true
+        })
+        
         let size: CGFloat = 100
         ZStack {
-            OuterRing()
-                .stroke(C.Colors.lightGray, lineWidth: 3)
-                .frame(width: size, height: size, alignment: .center)
-            Rectangle()
-                .frame(width: size*0.45, height: size*0.45, alignment: .center)
-                .cornerRadius(10)
-                .foregroundColor(.red)
             Circle()
-                .frame(width: size*0.9, height: size*0.9, alignment: .center)
-                .foregroundColor(.red)
-                .hidden()
+                .stroke(C.Colors.lightGray, lineWidth:5)
+                .frame(width: size, height: size)
+            if running {
+                Rectangle()
+                    .frame(width: size*0.35, height: size*0.35)
+                    .cornerRadius(10)
+                    .foregroundColor(.red)
+                CircularProgressBar(value: $progressBarValue)
+                .onAppear {
+                    let timeInterval = 0.0020
+                    Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
+                        self.progressBarValue += CGFloat(timeInterval / progressDuration)
+                        if (self.progressBarValue >= 1.0) {
+                            timer.invalidate()
+                            running = false
+                            progressBarValue = 0.0
+                        }
+                    }
+                }
+            } else {
+                Circle()
+                    .frame(width: size*0.85, height: size*0.85)
+                    .foregroundColor(.red)
+                    .gesture(tapGesture)
+            }
         }
     }
-
-    private lazy var noiseTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { _ in
-        progress += 0.01
-    }
-
-    private lazy var progressTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fire), userInfo: nil, repeats: true)
-    }
-
-    @objc func fire() {
-    }
-    init() {
-        self.noiseTimer.fire()
-    }
 }
-
 
 
 
