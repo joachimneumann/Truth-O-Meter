@@ -18,8 +18,9 @@ struct ContentView: View {
                     .padding(.top, 10)
                 Spacer()
                 TrueButton()
-                .padding (.all, 15)
-                .padding(.bottom, 20)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+                    .padding (.all, 15)
+                    .padding(.bottom, 20)
             }
         }
         .edgesIgnoringSafeArea(.all)
