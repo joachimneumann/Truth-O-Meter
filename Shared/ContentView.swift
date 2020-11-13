@@ -16,9 +16,10 @@ struct ContentView: View {
             Settings()
                 .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
             VStack {
-                Display()
+                Display(isGrayedOut: true)
                     .padding(.top, 10)
                 Spacer()
+                RecordButton()
                 TrueButton()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
                     .padding (.all, 20)

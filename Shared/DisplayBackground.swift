@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct DisplayBackground: View {
+    @State var isGrayedOut: Bool
     var body: some View {
         let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
         let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
         ZStack {
             MainArcBlack()
-                .stroke(C.Colors.gray, style: boldStrokeStyle)
+                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
             MainArcRed()
-                .stroke(C.Colors.bullshitRed, style: boldStrokeStyle)
+                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
             TopArcBlack()
-                .stroke(C.Colors.gray, style: fineStrokeStyle)
+                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
             TopArcRed()
-                .stroke(C.Colors.bullshitRed, style: fineStrokeStyle)
+                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
                 .clipped()
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .stroke(C.Colors.frameColor, lineWidth: 4)
-            Image(systemName: "microphone")
+                .stroke(C.Colors.lightGray, lineWidth: 4)
         }
     }
 }
@@ -104,7 +104,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground()
+        DisplayBackground(isGrayedOut: false)
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

@@ -25,5 +25,6 @@ struct C {
         static let frameColor = Color(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0)
         static let bullshitRed = Color(red: 255.0/255.0, green: 126.0/255.0, blue: 121.0/255.0)
         static let gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
+        static let lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
     }
 }
