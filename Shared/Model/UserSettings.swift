@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+
+// TODO better handling of global constants
 class UserSettings: ObservableObject {
     @Published var title = "Truth-O-Meter"
-    @Published var question = "Analyze..."
-    @Published var width: CGFloat = 100.0
+    @Published var question = "Analyze"
 }

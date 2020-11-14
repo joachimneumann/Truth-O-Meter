@@ -9,27 +9,37 @@ import SwiftUI
 import AudioToolbox// <AudioToolbox/AudioToolbox.h>
 import AVFoundation
 
+class TruthButtonWidth: ObservableObject {
+    @Published var value: CGFloat = 0.0
+}
+
 struct TrueButton: View {
-    @EnvironmentObject var userSettings: UserSettings
+    @ObservedObject var nextTarget: NextTarget
+    @ObservedObject var truthButtonWidth: TruthButtonWidth
+    @State var isActive: Bool
+    let title: String
     
     var body: some View {
         let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({
-            var relativeTap: Double = Double($0.startLocation.x / userSettings.width)
-            if relativeTap < 0.0 { relativeTap = 0.0 }
-            if relativeTap > 1.0 { relativeTap = 1.0 }
-            // print("\($0.startLocation.x) in \(userSettings.width) --> \(relativeTap)")
-            TruthModel.shared.newTruthValue(updateTo: relativeTap)
+            if isActive {
+                var relativeTap: Double = Double($0.startLocation.x / truthButtonWidth.value)
+                if relativeTap < 0.0 { relativeTap = 0.0 }
+                if relativeTap > 1.0 { relativeTap = 1.0 }
+                 print("\($0.startLocation.x) in \(truthButtonWidth.value) --> \(relativeTap)")
+                nextTarget.value = relativeTap
+            }
         })
         GeometryReader { geo in
             ZStack{
-                // This hack allows me to set userSettings.width after the
-                // view has been layed out and after every resize on the Mac
+                // This hack allows me to set truthButtonWidth after the view
+                // has been laid out and after every window resize (on the Mac)
                 Path { path in
-                    if abs(userSettings.width - geo.size.width) > 1.0 {
-                        userSettings.width = geo.size.width
+                    if abs(truthButtonWidth.value - geo.size.width) > 1.0 {
+                        truthButtonWidth.value = geo.size.width
+                        print("new width \(truthButtonWidth.value) \(geo.size.width)")
                     }
                 }
-                Text(userSettings.question)
+                Text(title)
                     .font(.system(size: 24, design: .monospaced))
                     .fontWeight(.bold)
                     .aspectRatio(contentMode: .fill)
@@ -42,8 +52,10 @@ struct TrueButton: View {
             }
             .gesture(tapGesture)
         }
-        .background(C.Colors.bullshitRed)
+        .background(isActive ? C.Colors.bullshitRed : C.Colors.lightGray)
         .cornerRadius(15)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+        .padding (.all, 20)
     }
     
 }
@@ -52,7 +64,6 @@ struct TrueButton: View {
 
 struct TrueButton_Previews: PreviewProvider {
     static var previews: some View {
-        TrueButton()
-            .environmentObject(UserSettings())
+        TrueButton(nextTarget: NextTarget(), truthButtonWidth: TruthButtonWidth(), isActive: true, title: "button title")
     }
 }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct Needle: View {
-    @State var isGrayedOut: Bool
-    @ObservedObject var current = TruthModel.shared.current
+    @State var isVisible: Bool
+    @ObservedObject var needlePosition = TruthModel.shared.needlePosition
     var body: some View {
-        if !isGrayedOut {
-            TheNeedle(v: current.value)
+        if isVisible {
+            TheNeedle(v: needlePosition.value)
                 .stroke(C.Colors.bullshitRed,
                     style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
@@ -34,7 +34,7 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle(isGrayedOut: true)
+        Needle(isVisible: true)
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

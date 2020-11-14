@@ -8,26 +8,29 @@
 import SwiftUI
 
 struct Display: View {
-    @State var isGrayedOut: Bool
-    @EnvironmentObject var userSettings: UserSettings
+    @State var isActive: Bool
+    let title: String
     var body: some View {
         ZStack {
-            DisplayBackground(isGrayedOut: isGrayedOut)
-            Text(userSettings.title)
+            DisplayBackground(isGrayedOut: !isActive)
+            Text(title)
                 .offset(y: 15)
-                .foregroundColor(isGrayedOut ? C.Colors.lightGray : C.Colors.gray)
+                .foregroundColor(isActive ? C.Colors.gray : C.Colors.lightGray)
                 .font(.headline)
-            Needle(isGrayedOut: isGrayedOut)
+            Needle(isVisible: isActive)
                 .clipped()
         }
         .aspectRatio(1.9, contentMode: .fit)
         .padding(30)
+        .padding(.top, 10)
     }
 }
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Display(isGrayedOut: false)
-            .environmentObject(UserSettings())
+        Group {
+            Display(isActive: true, title: "active")
+            Display(isActive: false, title: "not active")
+        }
     }
 }

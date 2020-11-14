@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA12FB34255D2D7C00F3067F /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12FB33255D2D7C00F3067F /* UserSettings.swift */; };
-		AA12FB35255D2D7C00F3067F /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA12FB33255D2D7C00F3067F /* UserSettings.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3533255AA99300AD0B14 /* ContentView.swift */; };
@@ -36,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA12FB33255D2D7C00F3067F /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3533255AA99300AD0B14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,11 +91,11 @@
 				AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */,
 				AACB1EBF255BC62800BA34B5 /* Needle.swift */,
 				AA9A4D30255C2481002F5F00 /* TrueButton.swift */,
+				AA586D5C255EF3E200229903 /* RecordButton.swift */,
+				AA586D63255F04EF00229903 /* CircularProgressBar.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
-				AA586D5C255EF3E200229903 /* RecordButton.swift */,
-				AA586D63255F04EF00229903 /* CircularProgressBar.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -133,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				AA7FF68A255D1BA100A65D87 /* TruthModel.swift */,
-				AA12FB33255D2D7C00F3067F /* UserSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,7 +235,6 @@
 				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
-				AA12FB34255D2D7C00F3067F /* UserSettings.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5D255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */,
@@ -258,7 +253,6 @@
 				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
-				AA12FB35255D2D7C00F3067F /* UserSettings.swift in Sources */,
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */,

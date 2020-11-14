@@ -10,20 +10,26 @@ import SwiftUI
 struct DisplayBackground: View {
     @State var isGrayedOut: Bool
     var body: some View {
-        let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
-        let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
         ZStack {
-            MainArcBlack()
-                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
-            MainArcRed()
-                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
-            TopArcBlack()
-                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
-            TopArcRed()
-                .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
-                .clipped()
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .stroke(C.Colors.lightGray, lineWidth: 4)
+            let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
+            let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
+            ZStack {
+                MainArcBlack()
+                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
+                    .clipped()
+                MainArcRed()
+                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
+                    .clipped()
+                TopArcBlack()
+                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
+                    .clipped()
+                TopArcRed()
+                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
+                    .clipped()
+                // border (not clipped)
+                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                    .stroke(C.Colors.lightGray, lineWidth: 4)
+            }
         }
     }
 }
@@ -104,7 +110,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(isGrayedOut: false)
+        DisplayBackground(isGrayedOut: true)
             .aspectRatio(1.9, contentMode: .fit)
     }
 }
