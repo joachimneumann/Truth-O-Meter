@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct Needle: View {
-    @State var isVisible: Bool
+    @EnvironmentObject var guiState: GuiState
     @ObservedObject var needlePosition = TruthModel.shared.needlePosition
+    var isVisible: Bool {
+        get {
+            if guiState.state == .showingResult { return true }
+            if guiState.state == .analysing { return true }
+            return false
+        }
+    }
     var body: some View {
         if isVisible {
             TheNeedle(v: needlePosition.value)
@@ -34,7 +41,8 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle(isVisible: true)
+        Needle()
+            .environmentObject(GuiState())
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

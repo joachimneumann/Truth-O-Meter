@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct Display: View {
-    @State var isActive: Bool
+    @EnvironmentObject var guiState: GuiState
     let title: String
+
     var body: some View {
         ZStack {
-            DisplayBackground(isGrayedOut: !isActive)
+            DisplayBackground()
             Text(title)
                 .offset(y: 15)
-                .foregroundColor(isActive ? C.Colors.gray : C.Colors.lightGray)
+                .foregroundColor(guiState.state == .analysing ? C.Colors.gray : C.Colors.lightGray)
                 .font(.headline)
-            Needle(isVisible: isActive)
+            Needle()
                 .clipped()
         }
         .aspectRatio(1.9, contentMode: .fit)
@@ -28,9 +29,7 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            Display(isActive: true, title: "active")
-            Display(isActive: false, title: "not active")
-        }
+        Display(title: "active")
+            .environmentObject(GuiState())
     }
 }

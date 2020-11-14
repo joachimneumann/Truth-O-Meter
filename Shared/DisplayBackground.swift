@@ -8,23 +8,30 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-    @State var isGrayedOut: Bool
+    @EnvironmentObject var guiState: GuiState
+    var grayedOut: Bool {
+        get {
+            if guiState.state == .showingResult { return false }
+            if guiState.state == .analysing { return false }
+            return true
+        }
+    }
     var body: some View {
         ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
             ZStack {
                 MainArcBlack()
-                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
+                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
                     .clipped()
                 MainArcRed()
-                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
+                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
                     .clipped()
                 TopArcBlack()
-                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
+                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
                     .clipped()
                 TopArcRed()
-                    .stroke(isGrayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
+                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
                     .clipped()
                 // border (not clipped)
                 RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -110,7 +117,8 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(isGrayedOut: true)
+        DisplayBackground()
+            .environmentObject(GuiState())
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

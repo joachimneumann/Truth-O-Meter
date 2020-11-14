@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-enum GuiState {
-    case waiting, doneListening, analysing, showingResult
-}
 
 struct ContentView: View {
+    @EnvironmentObject var guiState: GuiState
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Settings()
                 .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
             VStack {
-                Display(isActive: true, title: "Truth-O-Meter")
                 Spacer()
-                RecordButton(isActive: false)
+                Display(title: "Truth-O-Meter")
                 Spacer()
-                TrueButton(nextTarget: TruthModel.shared.nextTarget, truthButtonWidth: TruthButtonWidth(), isActive: true, title: "Analyse")
+                RecordButton()
+                Spacer()
+                TrueButton(nextTarget: TruthModel.shared.nextTarget, truthButtonWidth: TruthButtonWidth(), title: "Analyse")
+                Spacer()
             }
         }
         .edgesIgnoringSafeArea(.all)
@@ -56,5 +56,7 @@ struct Settings: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(GuiState())
+
     }
 }

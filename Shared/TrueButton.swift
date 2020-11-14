@@ -14,19 +14,20 @@ class TruthButtonWidth: ObservableObject {
 }
 
 struct TrueButton: View {
+    @EnvironmentObject var guiState: GuiState
     @ObservedObject var nextTarget: NextTarget
     @ObservedObject var truthButtonWidth: TruthButtonWidth
-    @State var isActive: Bool
     let title: String
     
     var body: some View {
         let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({
-            if isActive {
+            if guiState.state == .doneListening {
                 var relativeTap: Double = Double($0.startLocation.x / truthButtonWidth.value)
                 if relativeTap < 0.0 { relativeTap = 0.0 }
                 if relativeTap > 1.0 { relativeTap = 1.0 }
                  print("\($0.startLocation.x) in \(truthButtonWidth.value) --> \(relativeTap)")
                 nextTarget.value = relativeTap
+                guiState.newState(state: GuiStateEnum.showingResult)
             }
         })
         GeometryReader { geo in
@@ -52,7 +53,7 @@ struct TrueButton: View {
             }
             .gesture(tapGesture)
         }
-        .background(isActive ? C.Colors.bullshitRed : C.Colors.lightGray)
+        .background(guiState.state == .doneListening ? C.Colors.bullshitRed : C.Colors.lightGray)
         .cornerRadius(15)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
         .padding (.all, 20)
@@ -64,6 +65,7 @@ struct TrueButton: View {
 
 struct TrueButton_Previews: PreviewProvider {
     static var previews: some View {
-        TrueButton(nextTarget: NextTarget(), truthButtonWidth: TruthButtonWidth(), isActive: true, title: "button title")
+        TrueButton(nextTarget: NextTarget(), truthButtonWidth: TruthButtonWidth(), title: "button title")
+            .environmentObject(GuiState())
     }
 }

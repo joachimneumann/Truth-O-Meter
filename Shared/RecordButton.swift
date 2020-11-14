@@ -7,9 +7,10 @@
 
 
 import SwiftUI
+import Combine
 
 struct RecordButton: View {
-    @State var isActive: Bool
+    @EnvironmentObject var guiState: GuiState
     @State var progressBarValue:CGFloat = 0
     @State var running = false
     var progressDuration = 2.0
@@ -17,7 +18,7 @@ struct RecordButton: View {
 
     var body: some View {
         let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({_ in
-            if isActive {
+            if guiState.state == .waiting {
                 print("progress started at value \(progressBarValue)")
                 running = true
             }
@@ -42,13 +43,14 @@ struct RecordButton: View {
                             timer.invalidate()
                             running = false
                             progressBarValue = 0.0
+                            self.guiState.newState(state: GuiStateEnum.doneListening)
                         }
                     }
                 }
             } else {
                 Circle()
                     .frame(width: size*0.8, height: size*0.8)
-                    .foregroundColor(isActive ? .red : C.Colors.lightGray)
+                    .foregroundColor(guiState.state == .waiting ? .red : C.Colors.lightGray)
                     .gesture(tapGesture)
                     // TODO not only ignore the tabgesture, but not not have one if not active
             }
@@ -74,6 +76,7 @@ struct OuterRing: Shape {
 
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
-        RecordButton(isActive: true)
+        RecordButton()
+            .environmentObject(GuiState())
     }
 }

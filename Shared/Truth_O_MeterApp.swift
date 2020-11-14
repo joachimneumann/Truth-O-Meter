@@ -11,8 +11,9 @@ import SwiftUI
 struct Truth_O_MeterApp: App {
 
     var body: some Scene {
+        let guiState = GuiState()
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(guiState)
         }
     }
 }

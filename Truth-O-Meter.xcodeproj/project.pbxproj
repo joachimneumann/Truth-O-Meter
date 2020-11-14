@@ -31,6 +31,8 @@
 		AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* Display.swift */; };
 		AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
 		AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
+		AACDCDA6255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
+		AACDCDA7255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,7 @@
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AACB1EBF255BC62800BA34B5 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
+		AACDCDA5255FCEE100A43728 /* GuiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuiState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				AA7FF68A255D1BA100A65D87 /* TruthModel.swift */,
+				AACDCDA5255FCEE100A43728 /* GuiState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -234,6 +238,7 @@
 				AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
+				AACDCDA6255FCEE100A43728 /* GuiState.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5D255EF3E200229903 /* RecordButton.swift in Sources */,
@@ -252,6 +257,7 @@
 				AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
+				AACDCDA7255FCEE100A43728 /* GuiState.swift in Sources */,
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */,
