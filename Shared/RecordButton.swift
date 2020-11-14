@@ -18,9 +18,10 @@ struct RecordButton: View {
 
     var body: some View {
         let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({_ in
-            if guiState.state == .waiting {
+            if guiState.state == .waiting || guiState.state == .showingResult {
                 print("progress started at value \(progressBarValue)")
                 running = true
+                guiState.newState(state: .listening)
             }
         })
 
@@ -50,26 +51,11 @@ struct RecordButton: View {
             } else {
                 Circle()
                     .frame(width: size*0.8, height: size*0.8)
-                    .foregroundColor(guiState.state == .waiting ? .red : C.Colors.lightGray)
+                    .foregroundColor(guiState.state == .waiting || guiState.state == .showingResult ? .red : C.Colors.lightGray)
                     .gesture(tapGesture)
                     // TODO not only ignore the tabgesture, but not not have one if not active
             }
         }
-    }
-}
-
-
-
-struct OuterRing: Shape {
-    var progress = 0.0
-    func path(in rect: CGRect) -> Path {
-        var end = progress * .pi*2
-        if end > .pi*2 {
-            end = .pi*2
-        }
-        var path = Path()
-        path.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: 50, startAngle: Angle(radians: 0), endAngle: Angle(radians: end), clockwise: false)
-        return path
     }
 }
 

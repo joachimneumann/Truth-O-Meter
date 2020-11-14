@@ -27,7 +27,7 @@ struct TrueButton: View {
                 if relativeTap > 1.0 { relativeTap = 1.0 }
                  print("\($0.startLocation.x) in \(truthButtonWidth.value) --> \(relativeTap)")
                 nextTarget.value = relativeTap
-                guiState.newState(state: GuiStateEnum.showingResult)
+                guiState.newState(state: GuiStateEnum.analysing)
             }
         })
         GeometryReader { geo in

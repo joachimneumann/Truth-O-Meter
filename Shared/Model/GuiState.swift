@@ -9,7 +9,7 @@ import Foundation
 
 
 enum GuiStateEnum {
-    case waiting, doneListening, analysing, showingResult
+    case waiting, listening, doneListening, analysing, showingResult
 }
 
 class GuiState: ObservableObject {
