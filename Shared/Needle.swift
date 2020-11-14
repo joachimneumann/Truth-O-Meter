@@ -10,17 +10,21 @@ import SwiftUI
 struct Needle: View {
     @EnvironmentObject var guiState: GuiState
     @ObservedObject var needlePosition = TruthModel.shared.needlePosition
-    var isVisible: Bool {
+    var isLive: Bool {
         get {
-            if guiState.state == .showingResult { return true }
-            if guiState.state == .analysing { return true }
+            if guiState.state == .show { return true }
+            if guiState.state == .analyse { return true }
             return false
         }
     }
     var body: some View {
-        if isVisible {
-            TheNeedle(v: needlePosition.value)
-                .stroke(C.Colors.bullshitRed,
+        if isLive {
+        TheNeedle(v: needlePosition.needlePositionValue)
+            .stroke(C.Colors.bullshitRed,
+                style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+        } else {
+            TheNeedle(v: 0.5)
+                .stroke(C.Colors.lightGray,
                     style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
     }
@@ -42,7 +46,7 @@ struct TheNeedle: Shape {
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
         Needle()
-            .environmentObject(GuiState())
+            .environmentObject(GuiState(state: .show))
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

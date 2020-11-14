@@ -9,7 +9,7 @@ import SwiftUI
 import GameplayKit
 
 class NeedlePosition: ObservableObject {
-    @Published var value = 0.5
+    @Published var needlePositionValue = 0.5
 }
 
 protocol NextTargetDelegate {
@@ -97,10 +97,10 @@ class TruthModel: NextTargetDelegate {
     // smoothing
     private lazy var lowpassTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
         let f_fast = 0.97
-        var newCurrentValue  = f_fast * self.needlePosition.value + (1-f_fast)*self.noisy
+        var newCurrentValue  = f_fast * self.needlePosition.needlePositionValue + (1-f_fast)*self.noisy
         if newCurrentValue < -0.02 { newCurrentValue = -0.02 }
         if newCurrentValue >  1.02 { newCurrentValue = 1.02 }
-        self.needlePosition.value = newCurrentValue
+        self.needlePosition.needlePositionValue = newCurrentValue
     }
     
 }

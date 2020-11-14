@@ -12,8 +12,8 @@ struct ContentView: View {
     @EnvironmentObject var guiState: GuiState
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Settings()
-                .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
+//            Settings()
+//                .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
             VStack {
                 Spacer()
                 Display(title: "Truth-O-Meter")
@@ -28,17 +28,17 @@ struct ContentView: View {
     }
 }
 
-struct Settings: View {
-    var body: some View {
-        NavigationLink (destination: SettingsView()){
-            Image("vertical_ellipsis")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 25.0)
-                .cornerRadius(5)
-                .padding(.trailing, 5)
-                .padding(.top, 10)
-        }
+//struct Settings: View {
+//    var body: some View {
+//        NavigationLink (destination: SettingsView()){
+//            Image("vertical_ellipsis")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: 25.0)
+//                .cornerRadius(5)
+//                .padding(.trailing, 5)
+//                .padding(.top, 10)
+//        }
 //
 //
 //        NavigationView {
@@ -50,13 +50,13 @@ struct Settings: View {
 //                    NavigationLink(destination: SettingsView())
 //            )
 //        }
-    }
-}
+//    }
+//}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(GuiState())
+            .environmentObject(GuiState(state: .show))
 
     }
 }

@@ -9,11 +9,14 @@ import Foundation
 
 
 enum GuiStateEnum {
-    case waiting, listening, doneListening, analysing, showingResult
+    case wait, listen, analyse, show
 }
 
 class GuiState: ObservableObject {
-    @Published var state: GuiStateEnum = .waiting
+    @Published var state: GuiStateEnum = .wait
+    init(state: GuiStateEnum) {
+        self.state = state
+    }
     func newState(state: GuiStateEnum) {
         self.state = state
         print("GuiState -> \(state)")

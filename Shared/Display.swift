@@ -10,20 +10,27 @@ import SwiftUI
 struct Display: View {
     @EnvironmentObject var guiState: GuiState
     let title: String
-
+    var isActive: Bool {
+        get {
+            return guiState.state == .analyse || guiState.state == .show
+        }
+    }
     var body: some View {
         VStack {
             ZStack {
                 DisplayBackground()
                 Text(title)
                     .offset(y: 15)
-                    .foregroundColor(guiState.state == .analysing ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(isActive ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
                 Needle()
                     .clipped()
             }
-            if guiState.state == .analysing || guiState.state == .showingResult {
+            if isActive {
                 AnalysisProgressView(guiState: guiState)
+            } else {
+                AnalysisProgressView(guiState: guiState)
+                    .hidden()
             }
             
         }
@@ -49,12 +56,6 @@ struct CustomLinearProgressViewStyle1: ProgressViewStyle {
     
 }
 
-struct Display_Previews: PreviewProvider {
-    static var previews: some View {
-        Display(title: "active")
-            .environmentObject(GuiState())
-    }
-}
 
 struct AnalysisProgressView: View {
     var guiState: GuiState
@@ -71,10 +72,18 @@ struct AnalysisProgressView: View {
                 } else {
                     self.progress = 100
                     timer.upstream.connect().cancel()
-                    if self.guiState.state == .analysing {
-                        self.guiState.newState(state: GuiStateEnum.showingResult)
+                    if self.guiState.state == .analyse {
+                        self.guiState.newState(state: GuiStateEnum.show)
                     }
                 }
             }
+    }
+}
+
+
+struct Display_Previews: PreviewProvider {
+    static var previews: some View {
+        Display(title: "active")
+            .environmentObject(GuiState(state: .show))
     }
 }

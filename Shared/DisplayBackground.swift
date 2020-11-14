@@ -11,8 +11,8 @@ struct DisplayBackground: View {
     @EnvironmentObject var guiState: GuiState
     var grayedOut: Bool {
         get {
-            if guiState.state == .showingResult { return false }
-            if guiState.state == .analysing { return false }
+            if guiState.state == .show { return false }
+            if guiState.state == .analyse { return false }
             return true
         }
     }
@@ -20,22 +20,24 @@ struct DisplayBackground: View {
         ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
-            ZStack {
-                MainArcBlack()
-                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
-                    .clipped()
-                MainArcRed()
-                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
-                    .clipped()
-                TopArcBlack()
-                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
-                    .clipped()
-                TopArcRed()
-                    .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
-                    .clipped()
-                // border (not clipped)
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .stroke(C.Colors.lightGray, lineWidth: 4)
+            withAnimation {
+                ZStack {
+                    MainArcBlack()
+                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
+                        .clipped()
+                    MainArcRed()
+                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
+                        .clipped()
+                    TopArcBlack()
+                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
+                        .clipped()
+                    TopArcRed()
+                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
+                        .clipped()
+                    // border (not clipped)
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .stroke(C.Colors.lightGray, lineWidth: 4)
+                }
             }
         }
     }
@@ -118,7 +120,7 @@ struct TopArcRed: Shape {
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         DisplayBackground()
-            .environmentObject(GuiState())
+            .environmentObject(GuiState(state: .wait))
             .aspectRatio(1.9, contentMode: .fit)
     }
 }
