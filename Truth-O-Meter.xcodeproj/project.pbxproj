@@ -33,6 +33,8 @@
 		AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
 		AACDCDA6255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
 		AACDCDA7255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
+		AACDCDAF255FFEB300A43728 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDAE255FFEB300A43728 /* AnimateView.swift */; };
+		AACDCDB0255FFEB300A43728 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDAE255FFEB300A43728 /* AnimateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,7 @@
 		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AACB1EBF255BC62800BA34B5 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AACDCDA5255FCEE100A43728 /* GuiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuiState.swift; sourceTree = "<group>"; };
+		AACDCDAE255FFEB300A43728 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,7 @@
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
+				AACDCDAE255FFEB300A43728 /* AnimateView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -247,6 +251,7 @@
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */,
+				AACDCDAF255FFEB300A43728 /* AnimateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +271,7 @@
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */,
+				AACDCDB0255FFEB300A43728 /* AnimateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

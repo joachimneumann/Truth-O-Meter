@@ -53,7 +53,9 @@ struct RecordButton: View {
                                 timer.invalidate()
                                 running = false
                                 progressBarValue = 0.0
-                                self.guiState.newState(state: GuiStateEnum.analyse)
+                                withAnimation(.easeInOut(duration: 0.5)) {
+                                    self.guiState.newState(state: GuiStateEnum.analyse)
+                                }
                             }
                         }
                     }
@@ -68,6 +70,6 @@ struct RecordButton: View {
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
         RecordButton()
-            .environmentObject(GuiState(state: .analyse))
+            .environmentObject(GuiState(state: .listen))
     }
 }

@@ -73,7 +73,9 @@ struct AnalysisProgressView: View {
                     self.progress = 100
                     timer.upstream.connect().cancel()
                     if self.guiState.state == .analyse {
-                        self.guiState.newState(state: GuiStateEnum.show)
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            self.guiState.newState(state: GuiStateEnum.show)
+                        }
                     }
                 }
             }

@@ -93,6 +93,8 @@ class TruthModel: NextTargetDelegate {
         let noise = 0.001 * Double(n)
         self.noisy = self.target + noise
     }
+    
+    
 
     // smoothing
     private lazy var lowpassTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in

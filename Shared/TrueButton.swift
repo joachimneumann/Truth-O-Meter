@@ -34,38 +34,38 @@ struct TrueButton: View {
                 if relativeTap > 1.0 { relativeTap = 1.0 }
                  print("\($0.startLocation.x) in \(truthButtonWidth.value) --> \(relativeTap)")
                 nextTarget.value = relativeTap
-                guiState.newState(state: GuiStateEnum.listen)
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    guiState.newState(state: GuiStateEnum.listen)
+                }
             }
         })
-        withAnimation(.linear(duration: 5)) {
-            GeometryReader { geo in
-                ZStack{
-                    // This hack allows me to set truthButtonWidth after the view
-                    // has been laid out and after every window resize (on the Mac)
-                    Path { path in
-                        if abs(truthButtonWidth.value - geo.size.width) > 1.0 {
-                            truthButtonWidth.value = geo.size.width
-                            print("new width \(truthButtonWidth.value) \(geo.size.width)")
-                        }
+        GeometryReader { geo in
+            ZStack{
+                // This hack allows me to set truthButtonWidth after the view
+                // has been laid out and after every window resize (on the Mac)
+                Path { path in
+                    if abs(truthButtonWidth.value - geo.size.width) > 1.0 {
+                        truthButtonWidth.value = geo.size.width
+                        print("new width \(truthButtonWidth.value) \(geo.size.width)")
                     }
-                    Text(title)
-                        .font(.system(size: 24, design: .monospaced))
-                        .fontWeight(.bold)
-                        .aspectRatio(contentMode: .fill)
-                        .foregroundColor(.white)
-                    // Hack needed here because
-                    // - Tab events are not triggered in GeometryReader
-                    // - Tab events are not triggered views with opacity zero
-                    Rectangle()
-                        .foregroundColor(Color.orange.opacity(0.00000001))
                 }
-                .gesture(tapGesture)
+                Text(title)
+                    .font(.system(size: 24, design: .monospaced))
+                    .fontWeight(.bold)
+                    .aspectRatio(contentMode: .fill)
+                    .foregroundColor(.white)
+                // Hack needed here because
+                // - Tab events are not triggered in GeometryReader
+                // - Tab events are not triggered views with opacity zero
+                Rectangle()
+                    .foregroundColor(Color.orange.opacity(0.00000001))
             }
-            .background(isActive ? C.Colors.bullshitRed : C.Colors.lightGray)
-            .cornerRadius(15)
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
-            .padding (.all, 20)
+            .gesture(tapGesture)
         }
+        .background(isActive ? C.Colors.bullshitRed : C.Colors.lightGray)
+        .cornerRadius(15)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+        .padding (.all, 20)
     }
     
 }
