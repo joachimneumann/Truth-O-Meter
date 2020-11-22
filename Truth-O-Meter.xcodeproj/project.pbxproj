@@ -19,10 +19,12 @@
 		AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D5C255EF3E200229903 /* RecordButton.swift */; };
 		AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
 		AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
+		AA61F3472561A29600873171 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3462561A29500873171 /* Model.swift */; };
+		AA61F3482561A29600873171 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3462561A29500873171 /* Model.swift */; };
+		AA61F3522561AB0300873171 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3512561AB0300873171 /* ViewModel.swift */; };
+		AA61F3532561AB0300873171 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3512561AB0300873171 /* ViewModel.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
-		AA7FF68B255D1BA100A65D87 /* TruthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7FF68A255D1BA100A65D87 /* TruthModel.swift */; };
-		AA7FF68C255D1BA100A65D87 /* TruthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7FF68A255D1BA100A65D87 /* TruthModel.swift */; };
 		AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
 		AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A4D30255C2481002F5F00 /* TrueButton.swift */; };
 		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
@@ -33,8 +35,6 @@
 		AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBF255BC62800BA34B5 /* Needle.swift */; };
 		AACDCDA6255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
 		AACDCDA7255FCEE100A43728 /* GuiState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* GuiState.swift */; };
-		AACDCDAF255FFEB300A43728 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDAE255FFEB300A43728 /* AnimateView.swift */; };
-		AACDCDB0255FFEB300A43728 /* AnimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDAE255FFEB300A43728 /* AnimateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,14 +49,14 @@
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
 		AA586D5C255EF3E200229903 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		AA586D63255F04EF00229903 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		AA61F3462561A29500873171 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AA61F3512561AB0300873171 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AA7FF68A255D1BA100A65D87 /* TruthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruthModel.swift; sourceTree = "<group>"; };
 		AA9A4D30255C2481002F5F00 /* TrueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueButton.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AACB1EBF255BC62800BA34B5 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AACDCDA5255FCEE100A43728 /* GuiState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuiState.swift; sourceTree = "<group>"; };
-		AACDCDAE255FFEB300A43728 /* AnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,6 @@
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
-				AACDCDAE255FFEB300A43728 /* AnimateView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -136,8 +135,9 @@
 		AACB1ECA255BCAC500BA34B5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AA7FF68A255D1BA100A65D87 /* TruthModel.swift */,
 				AACDCDA5255FCEE100A43728 /* GuiState.swift */,
+				AA61F3462561A29500873171 /* Model.swift */,
+				AA61F3512561AB0300873171 /* ViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -186,7 +186,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					AA2B3538255AA99400AD0B14 = {
 						CreatedOnToolsVersion = 12.2;
@@ -247,11 +247,11 @@
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5D255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC0255BC62800BA34B5 /* Needle.swift in Sources */,
-				AA7FF68B255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
+				AA61F3522561AB0300873171 /* ViewModel.swift in Sources */,
+				AA61F3472561A29600873171 /* Model.swift in Sources */,
 				AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */,
-				AACDCDAF255FFEB300A43728 /* AnimateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,11 +267,11 @@
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC1255BC62800BA34B5 /* Needle.swift in Sources */,
-				AA7FF68C255D1BA100A65D87 /* TruthModel.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
+				AA61F3532561AB0300873171 /* ViewModel.swift in Sources */,
+				AA61F3482561A29600873171 /* Model.swift in Sources */,
 				AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */,
-				AACDCDB0255FFEB300A43728 /* AnimateView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8A4DL788W9;
@@ -464,6 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8A4DL788W9;

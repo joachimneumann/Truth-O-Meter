@@ -20,7 +20,7 @@ struct ContentView: View {
                 Spacer()
                 RecordButton()
                 Spacer()
-                TrueButton(nextTarget: TruthModel.shared.nextTarget, truthButtonWidth: TruthButtonWidth(), title: "Analyse")
+//                TrueButton(nextTarget: TruthModel.shared.nextTarget, truthButtonWidth: TruthButtonWidth(), title: "Analyse")
                 Spacer()
             }
         }
@@ -31,7 +31,7 @@ struct ContentView: View {
 //struct Settings: View {
 //    var body: some View {
 //        NavigationLink (destination: SettingsView()){
-//            Image("vertical_ellipsis")
+//            Image("settings")
 //                .resizable()
 //                .scaledToFit()
 //                .frame(width: 25.0)
@@ -42,7 +42,7 @@ struct ContentView: View {
 //
 //
 //        NavigationView {
-//        Image("vertical_ellipsis")
+//        Image("settings")
 //            .resizable()
 //            .frame(width: 30, height: 30, alignment: .center)
 //            .gesture(TapGesture()

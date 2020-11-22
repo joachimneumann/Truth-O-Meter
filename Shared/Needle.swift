@@ -8,24 +8,22 @@
 import SwiftUI
 
 struct Needle: View {
-    @EnvironmentObject var guiState: GuiState
-    @ObservedObject var needlePosition = TruthModel.shared.needlePosition
-    var isLive: Bool {
-        get {
-            if guiState.state == .show { return true }
-            if guiState.state == .analyse { return true }
-            return false
-        }
-    }
+    @ObservedObject var viewModel: ViewModel
+
     var body: some View {
-        if isLive {
-        TheNeedle(v: needlePosition.needlePositionValue)
-            .stroke(C.Colors.bullshitRed,
-                style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
-        } else {
-            TheNeedle(v: 0.5)
-                .stroke(C.Colors.lightGray,
-                    style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+        return VStack {
+            Button("move", action: {
+                viewModel.isMoving = !viewModel.isMoving
+            })
+            if viewModel.isMoving {
+                TheNeedle(v: viewModel.needlePosition)
+                    .stroke(C.Colors.bullshitRed,
+                        style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+            } else {
+                TheNeedle(v: viewModel.needlePosition)
+                    .stroke(C.Colors.lightGray,
+                        style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+            }
         }
     }
 }
@@ -45,8 +43,7 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle()
-            .environmentObject(GuiState(state: .show))
+        Needle(viewModel: ViewModel())
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

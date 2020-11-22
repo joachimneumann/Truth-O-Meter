@@ -16,14 +16,15 @@ struct Display: View {
         }
     }
     var body: some View {
-        VStack {
+        print("redrawing Display")
+        return VStack {
             ZStack {
                 DisplayBackground()
                 Text(title)
                     .offset(y: 15)
                     .foregroundColor(isActive ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                Needle()
+                Needle(viewModel: ViewModel())
                     .clipped()
             }
             if isActive {
