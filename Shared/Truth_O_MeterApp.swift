@@ -11,10 +11,11 @@ import SwiftUI
 struct Truth_O_MeterApp: App {
 
     var body: some Scene {
-        let guiState = GuiState(state: .wait)
+//        let guiState = GuiState(state: .wait)
         WindowGroup {
-            Display(title: "x")
-                .environmentObject(guiState)
+            ContentView()
+//            Display(active: false, title: "active")
+//                .environmentObject(guiState)
         }
     }
 }

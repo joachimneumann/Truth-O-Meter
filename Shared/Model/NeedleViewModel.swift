@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  NeedleViewModel.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 16/11/2020.
@@ -7,50 +7,43 @@
 
 import SwiftUI
 
-//class xNeedleViewModel: ObservableObject, TruthObserver {
-//    @Published private var needlePosition: Double
-//    private var model: Truth
-//    func hasChanged() {
-//        needlePosition = model.movingTruth
-//    }
-//    init(model: Truth) {
-//        self.model = model
-//        needlePosition = model.movingTruth
-//    }
-//}
-class ViewModel: ObservableObject {
-    private let model: Model
-    @Published var needlePosition: Double = 0
+
+class NeedleViewModel: ObservableObject {
+    @Published private var needle: Needle
+    var position: Double = 0
 //    private var timer1 : DispatchSourceTimer?
 //    private var timer2 : DispatchSourceTimer?
 //    private var timer3 : DispatchSourceTimer?
 //    private var times = [1.0, 2.0, 3.0]
 
-    
     func update(value: Double) {
-        needlePosition = value
+        position = value
         objectWillChange.send()
     }
     
-    private var _isMoving = false
+    @objc func newTarget(_ notification: NSNotification){
+        if let target = notification.object as? Double {
+            needle.setTarget(target)
+        }
+    }
+    
     var isMoving: Bool {
         get {
-            _isMoving
+            needle.isNoisy
         }
         set {
-            print("ViewModel: newValue for isMoving: \(newValue). model.isNoisy = \(model.isNoisy)")
-
-            if _isMoving != newValue {
-                _isMoving = newValue
-                model.isNoisy = newValue
-                print("ViewModel: model.isNoisy -> \(newValue). model.isNoisy = \(model.isNoisy)")
-                update(value: needlePosition)
+            print("ViewModel: newValue for isMoving: \(newValue). model.isNoisy = \(needle.isNoisy)")
+            if newValue != needle.isNoisy {
+                needle.isNoisy = newValue
+                print("ViewModel: model.isNoisy -> \(newValue). model.isNoisy = \(needle.isNoisy)")
+                objectWillChange.send()
             }
         }
     }
     init() {
-        model = Model()
-        model.truthCallback = update
+        needle = Needle() // TODO: why can't I use update as paramter in Model?
+        needle.truthCallback = update
+        NotificationCenter.default.addObserver(self, selector: #selector(self.newTarget(_:)), name: Notification.Name(rawValue: "newTarget"), object: nil)
     }
 
     // MARK: - user Intents

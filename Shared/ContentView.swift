@@ -9,16 +9,15 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @EnvironmentObject var guiState: GuiState
     var body: some View {
         ZStack(alignment: .topTrailing) {
 //            Settings()
 //                .brightness(/*@START_MENU_TOKEN@*/0.60/*@END_MENU_TOKEN@*/)
             VStack {
                 Spacer()
-                Display(title: "Truth-O-Meter")
+                Display(active: true, title: "Truth")
                 Spacer()
-                RecordButton()
+//                RecordButton()
                 Spacer()
 //                TrueButton(nextTarget: TruthModel.shared.nextTarget, truthButtonWidth: TruthButtonWidth(), title: "Analyse")
                 Spacer()
@@ -56,7 +55,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(GuiState(state: .show))
-
     }
 }

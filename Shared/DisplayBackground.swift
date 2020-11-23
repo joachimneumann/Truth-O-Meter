@@ -8,14 +8,8 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-    @EnvironmentObject var guiState: GuiState
-    var grayedOut: Bool {
-        get {
-            if guiState.state == .show { return false }
-            if guiState.state == .analyse { return false }
-            return true
-        }
-    }
+    var grayedOut: Bool
+
     var body: some View {
         ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
@@ -119,7 +113,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground()
+        DisplayBackground(grayedOut: false)
             .environmentObject(GuiState(state: .wait))
             .aspectRatio(1.9, contentMode: .fit)
     }

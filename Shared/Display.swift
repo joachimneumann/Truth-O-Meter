@@ -8,32 +8,34 @@
 import SwiftUI
 
 struct Display: View {
-    @EnvironmentObject var guiState: GuiState
+    var active: Bool
+
     let title: String
-    var isActive: Bool {
-        get {
-            return guiState.state == .analyse || guiState.state == .show
-        }
-    }
+
     var body: some View {
         print("redrawing Display")
+        if active {
+            needleViewModel.isMoving = true
+        } else {
+            needleViewModel.isMoving = false
+        }
         return VStack {
             ZStack {
-                DisplayBackground()
+                DisplayBackground(grayedOut: !active)
                 Text(title)
                     .offset(y: 15)
-                    .foregroundColor(isActive ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(active ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                Needle(viewModel: ViewModel())
+                NeedleView()
                     .clipped()
             }
-            if isActive {
-                AnalysisProgressView(guiState: guiState)
+            if active {
+                AnalysisProgressView()
             } else {
-                AnalysisProgressView(guiState: guiState)
+                AnalysisProgressView()
                     .hidden()
             }
-            
+
         }
         .aspectRatio(1.9, contentMode: .fit)
         .padding(30)
@@ -47,19 +49,18 @@ struct CustomLinearProgressViewStyle1: ProgressViewStyle {
     var successColour: Color = .green
     var progress: CGFloat
     var total: CGFloat
-    
+
     func makeBody(configuration: Configuration) -> some View {
         ProgressView(configuration)
             .foregroundColor(progress >= total ? successColour : progressColour)
             .accentColor(progress >= total ? successColour : progressColour)
             .animation(Animation.linear(duration: 1))
     }
-    
+
 }
 
 
 struct AnalysisProgressView: View {
-    var guiState: GuiState
     @State private var progress: CGFloat = 0
     var total: CGFloat = 100
     let timer = Timer.publish(every: 0.25, on: .main, in: .default).autoconnect()
@@ -73,11 +74,11 @@ struct AnalysisProgressView: View {
                 } else {
                     self.progress = 100
                     timer.upstream.connect().cancel()
-                    if self.guiState.state == .analyse {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            self.guiState.newState(state: GuiStateEnum.show)
-                        }
-                    }
+//                    if self.guiState.state == .analyse {
+//                        withAnimation(.easeInOut(duration: 0.5)) {
+//                            self.guiState.newState(state: GuiStateEnum.show)
+//                        }
+//                    }
                 }
             }
     }
@@ -86,7 +87,6 @@ struct AnalysisProgressView: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Display(title: "active")
-            .environmentObject(GuiState(state: .show))
+        Display(active: true, title: "active")
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import GameKit
 
-class Model {
+class Needle {
     // set the truth
     func setTarget(_ value: Double) { target = value }
     
@@ -60,7 +60,7 @@ class Model {
     }
 
     @objc private func smooth() {
-//        print("smooth()")
+        print("smooth()")
         let f_fast = 0.97
         var newCurrentValue  = f_fast * self.currentTruth + (1-f_fast)*self.noisyTarget
         if newCurrentValue < -0.02 { newCurrentValue = -0.02 }

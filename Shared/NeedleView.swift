@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct Needle: View {
-    @ObservedObject var viewModel: ViewModel
-
+struct NeedleView: View {
+    @ObservedObject var needleViewModel = NeedleViewModel()
     var body: some View {
         return VStack {
             Button("move", action: {
-                viewModel.isMoving = !viewModel.isMoving
+                needleViewModel.isMoving = !needleViewModel.isMoving
             })
-            if viewModel.isMoving {
-                TheNeedle(v: viewModel.needlePosition)
+            if needleViewModel.isMoving {
+                TheNeedle(v: needleViewModel.position)
                     .stroke(C.Colors.bullshitRed,
                         style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
             } else {
-                TheNeedle(v: viewModel.needlePosition)
+                TheNeedle(v: needleViewModel.position)
                     .stroke(C.Colors.lightGray,
                         style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
             }
         }
+        .aspectRatio(1.9, contentMode: .fit)
     }
 }
 
@@ -43,7 +43,7 @@ struct TheNeedle: Shape {
 
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
-        Needle(viewModel: ViewModel())
+        NeedleView()
             .aspectRatio(1.9, contentMode: .fit)
     }
 }
