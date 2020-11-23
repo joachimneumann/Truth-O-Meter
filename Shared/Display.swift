@@ -13,12 +13,7 @@ struct Display: View {
     let title: String
 
     var body: some View {
-        print("redrawing Display")
-        if active {
-            needleViewModel.isMoving = true
-        } else {
-            needleViewModel.isMoving = false
-        }
+        print("redrawing Display, active = \(active)")
         return VStack {
             ZStack {
                 DisplayBackground(grayedOut: !active)
@@ -40,6 +35,10 @@ struct Display: View {
         .aspectRatio(1.9, contentMode: .fit)
         .padding(30)
         .padding(.top, 10)
+        .onAppear() {
+            // after the needle is created: does it move or not?
+            NotificationCenter.default.post(name: Notification.Name("needleIsMoving"), object: active)
+        }
     }
 }
 
@@ -87,6 +86,7 @@ struct AnalysisProgressView: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Display(active: true, title: "active")
+        let active = true
+        return Display(active: active, title: "active")
     }
 }

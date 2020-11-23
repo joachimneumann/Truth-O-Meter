@@ -19,3 +19,9 @@ struct Truth_O_MeterApp: App {
         }
     }
 }
+
+struct Truth_O_MeterApp_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}

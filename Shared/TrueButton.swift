@@ -14,19 +14,12 @@ class TruthButtonWidth: ObservableObject {
 }
 
 struct TrueButton: View {
-    @EnvironmentObject var guiState: GuiState
+//    @EnvironmentObject var guiState: GuiState
 //    @ObservedObject var nextTarget: NextTarget
-    @ObservedObject var truthButtonWidth: TruthButtonWidth
-    var isActive: Bool {
-        get {
-            if guiState.state == .wait { return true }
-            if guiState.state == .show { return true }
-            return false
-        }
-    }
+//    @ObservedObject var truthButtonWidth: TruthButtonWidth
+    var isActive: Bool
     let title: String
     
-
     var body: some View {
         return SwiftUI.GeometryReader { geometry in
             self.makeView(geometry: geometry)
@@ -36,6 +29,10 @@ struct TrueButton: View {
     func makeView(geometry: GeometryProxy) -> some View {
 //        let tapGesture = DragGesture(minimumDistance: 0, coordinateSpace: .local).onEnded({
 //            if isActive {
+//let nc = NotificationCenter.default
+//let x = 0.9
+//nc.post(name: Notification.Name("newTarget"), object: x)
+
 //                var relativeTap: Double = Double($0.startLocation.x / truthButtonWidth.value)
 //                if relativeTap < 0.0 { relativeTap = 0.0 }
 //                if relativeTap > 1.0 { relativeTap = 1.0 }

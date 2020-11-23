@@ -26,7 +26,12 @@ class NeedleViewModel: ObservableObject {
             needle.setTarget(target)
         }
     }
-    
+    @objc func needleIsMoving(_ notification: NSNotification){
+        if let isNoisy = notification.object as? Bool {
+            needle.isNoisy = isNoisy
+        }
+    }
+
     var isMoving: Bool {
         get {
             needle.isNoisy
@@ -44,6 +49,7 @@ class NeedleViewModel: ObservableObject {
         needle = Needle() // TODO: why can't I use update as paramter in Model?
         needle.truthCallback = update
         NotificationCenter.default.addObserver(self, selector: #selector(self.newTarget(_:)), name: Notification.Name(rawValue: "newTarget"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.needleIsMoving(_:)), name: Notification.Name(rawValue: "needleIsMoving"), object: nil)
     }
 
     // MARK: - user Intents
