@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CircularProgressBar: View {
     let ringWidth:CGFloat
-    @Binding var value:CGFloat
+    let color: Color
+    var value:CGFloat
     var body: some View {
         ZStack {
             Circle()
                 .trim(from: 0, to: value)
-                .stroke(Color.red, lineWidth:ringWidth)
-                .frame(width:100)
+                .stroke(color, lineWidth:ringWidth)
                 .rotationEffect(Angle(degrees:-90))
         }
     }
@@ -28,6 +28,7 @@ struct CircularProgressBar: View {
 
 struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        CircularProgressBar(ringWidth: 10, value: .constant(0.8))
+        CircularProgressBar(ringWidth: 10, color: Color.red, value: 0.8)
+            .frame(width:100)
     }
 }

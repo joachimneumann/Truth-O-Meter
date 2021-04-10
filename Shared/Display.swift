@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Display: View {
     var active: Bool
-
     let title: String
 
     var body: some View {

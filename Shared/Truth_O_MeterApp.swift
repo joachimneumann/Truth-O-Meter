@@ -10,18 +10,18 @@ import SwiftUI
 @main
 struct Truth_O_MeterApp: App {
 
+    let viewModel = ViewModel()
     var body: some Scene {
-//        let guiState = GuiState(state: .wait)
         WindowGroup {
-            ContentView()
+            RecordButton(viewModel: viewModel)
 //            Display(active: false, title: "active")
-//                .environmentObject(guiState)
+//                .environmentObject(viewModel)
         }
     }
 }
 
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RecordButton(viewModel: ViewModel())
     }
 }

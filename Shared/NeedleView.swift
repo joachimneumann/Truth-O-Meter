@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct NeedleView: View {
     @ObservedObject var needleViewModel = NeedleViewModel()

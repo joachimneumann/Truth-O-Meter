@@ -114,7 +114,7 @@ struct TopArcRed: Shape {
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         DisplayBackground(grayedOut: false)
-            .environmentObject(GuiState(state: .wait))
+//            .environmentObject(Model())
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

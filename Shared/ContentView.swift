@@ -20,12 +20,13 @@ struct ContentView: View {
                 Spacer()
                 Display(active: false, title: "Truth-O-Meter")
                 Spacer()
-                TrueButton(truthButtonWidth: CGFloat(100.0), title: "xx")
+                TrueButton(isActive: true, title: "xx")
+//                TrueButton(truthButtonWidth: CGFloat(100.0), title: "xx")
                 Spacer()
             }
 //            .background(Color.blue)
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
+//            .navigationBarTitle("")
+//            .navigationBarHidden(true)
         }
     }
 }

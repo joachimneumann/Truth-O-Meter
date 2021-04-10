@@ -21,10 +21,16 @@ struct C {
     static func displayCenter(rect: CGRect) -> CGPoint {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
+    struct Sounds {
+        static let startRecording:UInt32 = 1113
+        static let stopRecording:UInt32 = 1114
+        // source: https://github.com/TUNER88/iOSSystemSoundsLibrary
+    }
     struct Colors {
         static let frameColor = Color(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0)
         static let bullshitRed = Color(red: 255.0/255.0, green: 126.0/255.0, blue: 121.0/255.0)
         static let gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
         static let lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
+        static let green = Color(red:  0/255.0, green: 189/255.0, blue: 0/255.0)
     }
 }

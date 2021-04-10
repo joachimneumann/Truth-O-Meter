@@ -1,74 +1,145 @@
-////
-////  RecordButton.swift
-////  Truth-O-Meter
-////
-////  Created by Joachim Neumann on 14/11/2020.
-////
 //
+//  RecordButton.swift
+//  Truth-O-Meter
 //
-//import SwiftUI
-//import Combine
+//  Created by Joachim Neumann on 14/11/2020.
 //
-//struct RecordButton: View {
-//    @State var progressBarValue:CGFloat = 0
-//    @State var running = false
-//    var progressDuration = 2.0
-//    let ringWidth: CGFloat = 6
-//
-//    var isListening: Bool {
-//        get {
-//            if guiState.state == .listen { return true }
-//            return false
-//        }
-//    }
-////    var buttonIsHidden: Bool {
-////        get {
-////            if guiState.state == .analyse { return true }
-////            if guiState.state == .show { return true }
-////            return false
-////        }
-////    }
+
+
+import SwiftUI
+import Combine
+
+let ringWidth:CGFloat = 0.05
+let innerRadius:CGFloat = 0.88
+let innerRect:CGFloat = 0.4
+var progressDuration = 2.0
+
+struct ListenView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        GeometryReader { (geometry) in
+            let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            ZStack{
+                Rectangle()
+                    .foregroundColor(C.Colors.bullshitRed)
+                    .frame(width: r*innerRect, height: r*innerRect)
+                    .cornerRadius(10)
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: CGFloat( viewModel.progressBarValue))
+            }
+        }
+    }
+}
+
+struct WaitView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        GeometryReader { (geometry) in
+            let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            ZStack{
+                Circle()
+                    .fill(C.Colors.bullshitRed)
+                    .frame(width: r*innerRadius, height: r*innerRadius)
+                    .onTapGesture {
+                        viewModel.intentListenToNewQuestion()
+                    }
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
+            }
+        }
+    }
+}
+
+struct AnalyseView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        GeometryReader { (geometry) in
+            let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            ZStack{
+                CircularProgressBar(ringWidth: r, color: C.Colors.green, value: 1.0)
+            }
+        }
+    }
+}
+
+struct ShowView: View {
+    var body: some View {
+        Circle()
+    }
+}
+
+class LoadingTimer {
+
+    let publisher = Timer.publish(every: 0.025, on: .main, in: .default)
+    private var timerCancellable: Cancellable?
+
+    func start() {
+        self.timerCancellable = publisher.connect()
+    }
+
+    func cancel() {
+        self.timerCancellable?.cancel()
+    }
+}
+
+struct RecordButton: View {
+    @ObservedObject var viewModel: ViewModel
+    @State var index = 0
+    
+    let images = (0...105).map {
+        UIImage(named: String(format: "x%03i.png", $0))!
+    }
+    var timer = LoadingTimer()
+
+    var body: some View {
+        return Image(uiImage: images[index])
+            .resizable()
+            .frame(width: 500, height: 500, alignment: .center)
+            .onReceive(
+                timer.publisher,
+                perform: { _ in
+                    self.index = self.index + 1
+                    if self.index > 105 { self.index = 0 }
+                }
+            )
+            .onAppear { self.timer.start() }
+            .onDisappear { self.timer.cancel() }
+    }
+    
 //    var body: some View {
-//        let size: CGFloat = 100
-//        ZStack {
-//            if buttonIsHidden {
-//                CircularProgressBar(ringWidth: ringWidth, value: $progressBarValue)
-//                .hidden()
+//        HStack {
+//            if viewModel.animatedImage != nil {
+//                Image(uiImage: viewModel.animatedImage!)
 //            } else {
-//                Circle()
-//                    .stroke(C.Colors.lightGray, lineWidth:ringWidth)
-//                    .frame(width: size, height: size)
-//                Rectangle()
-//                    .frame(width: size*0.35, height: size*0.35)
-//                    .cornerRadius(10)
-//                    .foregroundColor(isListening ? .red : C.Colors.lightGray)
-//                if isListening {
-//                    CircularProgressBar(ringWidth: ringWidth, value: $progressBarValue)
-//                    .onAppear {
-//                        let timeInterval = 0.0020
-//                        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
-//                            self.progressBarValue += CGFloat(timeInterval / progressDuration)
-//                            if (self.progressBarValue >= 1.0) {
-//                                timer.invalidate()
-//                                running = false
-//                                progressBarValue = 0.0
-//                                withAnimation(.easeInOut(duration: 0.5)) {
-//                                    self.guiState.newState(state: GuiStateEnum.analyse)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+//                Image(uiImage: UIImage(imageLiteralResourceName: "infinity.gif"))
 //            }
+//                
+//    //            Spacer()
+//    //            Text(viewModel.currentState())
+//    //            Spacer()
+//    //            switch(viewModel.model.value) {
+//    //            case .wait:
+//    //                WaitView(viewModel: viewModel)
+//    //            case .listen:
+//    //                ListenView(viewModel: viewModel)
+//    //            case .analyse:
+//    //                AnalyseView(viewModel: viewModel)
+//    //            case .show:
+//    //                ShowView()
+//    //            }
+//    //            Spacer()
 //        }
-//        .frame(width: size, height: size)
 //    }
-//}
-//
-//
-//struct RecordButton_Previews : PreviewProvider {
-//    static var previews: some View {
-//        RecordButton()
-//            .environmentObject(GuiState(state: .listen))
-//    }
-//}
+}
+
+
+struct RecordButton_Previews : PreviewProvider {
+
+    static var previews: some View {
+        VStack {
+            RecordButton(viewModel: ViewModel())
+//            RecordButton(viewModel: ViewModel(.wait))
+//            RecordButton(viewModel: ViewModel(.listen))
+//            RecordButton(viewModel: ViewModel(.analyse))
+//            RecordButton(viewModel: ViewModel(.show))
+        }
+    }
+}
