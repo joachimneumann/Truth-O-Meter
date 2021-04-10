@@ -91,8 +91,6 @@ struct RecordButton: View {
 
     var body: some View {
         return Image(uiImage: images[index])
-            .resizable()
-            .frame(width: 500, height: 500, alignment: .center)
             .onReceive(
                 timer.publisher,
                 perform: { _ in
