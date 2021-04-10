@@ -12,9 +12,9 @@ struct NeedleView: View {
     @ObservedObject var needleViewModel = NeedleViewModel()
     var body: some View {
         return VStack {
-            Button("move", action: {
-                needleViewModel.isMoving = !needleViewModel.isMoving
-            })
+//            Button("move", action: {
+//                needleViewModel.isMoving = !needleViewModel.isMoving
+//            })
             if needleViewModel.isMoving {
                 TheNeedle(v: needleViewModel.position)
                     .stroke(C.Colors.bullshitRed,

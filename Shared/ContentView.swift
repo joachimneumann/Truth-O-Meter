@@ -20,8 +20,7 @@ struct ContentView: View {
                 Spacer()
                 Display(active: false, title: "Truth-O-Meter")
                 Spacer()
-                TrueButton(isActive: true, title: "xx")
-//                TrueButton(truthButtonWidth: CGFloat(100.0), title: "xx")
+                RecordButton(viewModel: ViewModel())
                 Spacer()
             }
 //            .background(Color.blue)

@@ -89,55 +89,35 @@ struct RecordButton: View {
     }
     var timer = LoadingTimer()
 
-    var body: some View {
-        return Image(uiImage: images[index])
-            .onReceive(
-                timer.publisher,
-                perform: { _ in
-                    self.index = self.index + 1
-                    if self.index > 105 { self.index = 0 }
-                }
-            )
-            .onAppear { self.timer.start() }
-            .onDisappear { self.timer.cancel() }
-    }
     
-//    var body: some View {
-//        HStack {
-//            if viewModel.animatedImage != nil {
-//                Image(uiImage: viewModel.animatedImage!)
-//            } else {
-//                Image(uiImage: UIImage(imageLiteralResourceName: "infinity.gif"))
-//            }
-//                
-//    //            Spacer()
-//    //            Text(viewModel.currentState())
-//    //            Spacer()
-//    //            switch(viewModel.model.value) {
-//    //            case .wait:
-//    //                WaitView(viewModel: viewModel)
-//    //            case .listen:
-//    //                ListenView(viewModel: viewModel)
-//    //            case .analyse:
-//    //                AnalyseView(viewModel: viewModel)
-//    //            case .show:
-//    //                ShowView()
-//    //            }
-//    //            Spacer()
-//        }
-//    }
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(viewModel.currentState())
+            Spacer()
+            switch(viewModel.model.value) {
+            case .wait:
+                WaitView(viewModel: viewModel)
+            case .listen:
+                ListenView(viewModel: viewModel)
+            case .analyse:
+                ThinkingGif()
+            case .show:
+                WaitView(viewModel: viewModel)
+            }
+            Spacer()
+        }
+    }
 }
 
 
 struct RecordButton_Previews : PreviewProvider {
-
     static var previews: some View {
         VStack {
-            RecordButton(viewModel: ViewModel())
-//            RecordButton(viewModel: ViewModel(.wait))
-//            RecordButton(viewModel: ViewModel(.listen))
-//            RecordButton(viewModel: ViewModel(.analyse))
-//            RecordButton(viewModel: ViewModel(.show))
+            RecordButton(viewModel: ViewModel(.wait))
+            RecordButton(viewModel: ViewModel(.listen))
+            RecordButton(viewModel: ViewModel(.analyse))
+            RecordButton(viewModel: ViewModel(.show))
         }
     }
 }
