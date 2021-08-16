@@ -6,28 +6,59 @@
 //
 
 import SwiftUI
+import AVFoundation // for sounds
 
 class ViewModel: ObservableObject {
-    private(set) var model: Model
-
+    private var model: Model
     @Published var progressBarValue = 1.0
+    @Published var modelValue: Model.StateEnum?
     @Published var animatedImage: UIImage? = nil
+    
     
     func currentState() -> String {
         return model.value.description()
     }
+    
+    func displayActive() -> Bool {
+        switch model.value {
+            case .wait:
+                return false
+            case .listen:
+                return true
+            case .analyse:
+                return true
+            case .show:
+                return false
+        }
+    }
+    
+    func displayTitle() -> String {
+        return "Truth-O-Meter"
+    }
 
     // MARK: intents
     func intentListenToNewQuestion() {
+//        model.value = .analyse
+        AudioServicesPlaySystemSound(C.Sounds.startRecording)
         model.value = .listen
-        let timeInterval = 0.0020
+        modelValue = .listen
         self.progressBarValue = 0.0
+        let timeInterval = 0.005
         Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { timer in
-            self.progressBarValue += timeInterval / progressDuration
+            // recording sound (fake, of course)
+            self.progressBarValue += timeInterval / C.Timing.listening
             print(self.progressBarValue)
             if (self.progressBarValue >= 1.0) {
+                AudioServicesPlaySystemSound(C.Sounds.stopRecording)
                 timer.invalidate()
                 self.model.value = .analyse
+                self.modelValue = .analyse
+                // Analysing (fake, of course)
+                DispatchQueue.main.asyncAfter(deadline: .now() + C.Timing.analyse) {
+                    // Analysing Done (fake, of course)
+                    print("analyse done -> show")
+                    self.model.value = .show
+                }
             }
         }
     }
@@ -35,12 +66,8 @@ class ViewModel: ObservableObject {
     
     init() {
         model = Model()
-//        let loading_1 = UIImage(named: "x000.png")!
-//        let loading_2 = UIImage(named: "x050.png")!
-//        let loading_3 = UIImage(named: "x100.png")!
-//        let images = [loading_1, loading_2, loading_3]
-//        animatedImage = UIImage.animatedImage(with: images, duration: 0.1)
     }
+
     init(_ s: Model.StateEnum) {
         model = Model()
         model.value = s

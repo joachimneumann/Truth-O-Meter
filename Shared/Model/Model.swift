@@ -29,13 +29,13 @@ class Model {
         didSet {
             switch value {
             case .wait:
-                print("wait")
+                print("Model -> wait")
             case .listen:
-                print( "listen")
+                print( "Model -> listen")
             case .analyse:
-                print( "analyse")
+                print( "Model -> analyse")
             case .show:
-                print( "show")
+                print( "Model -> show")
             }
         }
     }

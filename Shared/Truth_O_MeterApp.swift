@@ -13,15 +13,17 @@ struct Truth_O_MeterApp: App {
     let viewModel = ViewModel()
     var body: some Scene {
         WindowGroup {
-            RecordButton(viewModel: viewModel)
-//            Display(active: false, title: "active")
-//                .environmentObject(viewModel)
+            ContentView()
+                .environmentObject(ViewModel())
+                .environmentObject(NeedleViewModel())
         }
     }
 }
 
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
-        RecordButton(viewModel: ViewModel())
+        ContentView()
+            .environmentObject(ViewModel())
+            .environmentObject(NeedleViewModel())
     }
 }

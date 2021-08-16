@@ -21,6 +21,10 @@ struct C {
     static func displayCenter(rect: CGRect) -> CGPoint {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
+    struct Timing {
+        static let listening = 2.0
+        static let analyse = 2.0
+    }
     struct Sounds {
         static let startRecording:UInt32 = 1113
         static let stopRecording:UInt32 = 1114

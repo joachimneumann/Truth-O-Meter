@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class NeedleViewModel: ObservableObject {
     @Published private var needle: Needle
     var position: Double = 0
@@ -34,20 +33,23 @@ class NeedleViewModel: ObservableObject {
 
     var isMoving: Bool {
         get {
-            needle.isNoisy
+//            print("NeedleViewModel: get isMoving: model.isNoisy = \(needle.isNoisy)")
+            return needle.isNoisy
         }
         set {
-            print("ViewModel: newValue for isMoving: \(newValue). model.isNoisy = \(needle.isNoisy)")
+//            print("NeedleViewModel: newValue for isMoving: \(newValue). model.isNoisy = \(needle.isNoisy)")
             if newValue != needle.isNoisy {
                 needle.isNoisy = newValue
-                print("ViewModel: model.isNoisy -> \(newValue). model.isNoisy = \(needle.isNoisy)")
+//                print("NeedleViewModel: model.isNoisy -> \(newValue). model.isNoisy = \(needle.isNoisy)")
                 objectWillChange.send()
             }
         }
     }
+    
     init() {
         needle = Needle() // TODO: why can't I use update as paramter in Model?
         needle.truthCallback = update
+        isMoving = true
         NotificationCenter.default.addObserver(self, selector: #selector(self.newTarget(_:)), name: Notification.Name(rawValue: "newTarget"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.needleIsMoving(_:)), name: Notification.Name(rawValue: "needleIsMoving"), object: nil)
     }

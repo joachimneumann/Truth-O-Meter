@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct Display: View {
-    var active: Bool
-    let title: String
-
+    @EnvironmentObject var viewModel: ViewModel
+    
     var body: some View {
-        print("redrawing Display, active = \(active)")
+        print("redrawing Display, active = \(viewModel.displayActive())")
+        // I do not want to see this massage very often.
+        // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(grayedOut: !active)
-                Text(title)
+                DisplayBackground(grayedOut: !viewModel.displayActive())
+                Text(viewModel.displayTitle())
                     .offset(y: 15)
-                    .foregroundColor(active ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(viewModel.displayActive() ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
                 NeedleView()
                     .clipped()
             }
-            if active {
+            if viewModel.displayActive() {
                 AnalysisProgressView()
             } else {
                 AnalysisProgressView()
@@ -34,10 +35,6 @@ struct Display: View {
         .aspectRatio(1.9, contentMode: .fit)
         .padding(30)
         .padding(.top, 10)
-        .onAppear() {
-            // after the needle is created: does it move or not?
-            NotificationCenter.default.post(name: Notification.Name("needleIsMoving"), object: active)
-        }
     }
 }
 
@@ -85,7 +82,8 @@ struct AnalysisProgressView: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let active = true
-        return Display(active: active, title: "active")
+        Display()
+            .environmentObject(ViewModel())
+            .environmentObject(NeedleViewModel())
     }
 }

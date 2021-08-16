@@ -12,26 +12,9 @@ import Combine
 let ringWidth:CGFloat = 0.05
 let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
-var progressDuration = 2.0
-
-struct ListenView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
-                Rectangle()
-                    .foregroundColor(C.Colors.bullshitRed)
-                    .frame(width: r*innerRect, height: r*innerRect)
-                    .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: CGFloat( viewModel.progressBarValue))
-            }
-        }
-    }
-}
 
 struct WaitView: View {
-    @ObservedObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -48,8 +31,26 @@ struct WaitView: View {
     }
 }
 
+struct ListenView: View {
+    @EnvironmentObject var viewModel: ViewModel
+    var body: some View {
+        GeometryReader { (geometry) in
+            let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            ZStack{
+                Rectangle()
+                    .foregroundColor(C.Colors.bullshitRed)
+                    .frame(width: r*innerRect, height: r*innerRect)
+                    .cornerRadius(10)
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: CGFloat( viewModel.progressBarValue))
+            }
+        }
+    }
+}
+
+
+
 struct AnalyseView: View {
-    @ObservedObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -61,6 +62,7 @@ struct AnalyseView: View {
 }
 
 struct ShowView: View {
+    @EnvironmentObject var viewModel: ViewModel
     var body: some View {
         Circle()
     }
@@ -81,29 +83,23 @@ class LoadingTimer {
 }
 
 struct RecordButton: View {
-    @ObservedObject var viewModel: ViewModel
-    @State var index = 0
-    
-    let images = (0...105).map {
-        UIImage(named: String(format: "x%03i.png", $0))!
-    }
-    var timer = LoadingTimer()
-
-    
+    @EnvironmentObject var viewModel: ViewModel
     var body: some View {
         HStack {
             Spacer()
             Text(viewModel.currentState())
             Spacer()
-            switch(viewModel.model.value) {
+            switch(viewModel.modelValue) {
             case .wait:
-                WaitView(viewModel: viewModel)
+                WaitView()
             case .listen:
-                ListenView(viewModel: viewModel)
+                ListenView()
             case .analyse:
                 ThinkingGif()
             case .show:
-                WaitView(viewModel: viewModel)
+                WaitView()
+            case .none:
+                WaitView()
             }
             Spacer()
         }
@@ -114,10 +110,8 @@ struct RecordButton: View {
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
         VStack {
-            RecordButton(viewModel: ViewModel(.wait))
-            RecordButton(viewModel: ViewModel(.listen))
-            RecordButton(viewModel: ViewModel(.analyse))
-            RecordButton(viewModel: ViewModel(.show))
+            RecordButton()
+                .environmentObject(ViewModel(.show))
         }
     }
 }

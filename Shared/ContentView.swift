@@ -18,9 +18,9 @@ struct ContentView: View {
                 }
 //                .background(Color.yellow)
                 Spacer()
-                Display(active: false, title: "Truth-O-Meter")
+                Display()
                 Spacer()
-                RecordButton(viewModel: ViewModel())
+                RecordButton()
                 Spacer()
             }
 //            .background(Color.blue)
@@ -30,11 +30,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 
 struct SettingsIcon: View {
     var body: some View {
@@ -45,5 +40,13 @@ struct SettingsIcon: View {
                     .frame(width: 30.0)
                     .padding()
             }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(ViewModel())
+            .environmentObject(NeedleViewModel())
     }
 }

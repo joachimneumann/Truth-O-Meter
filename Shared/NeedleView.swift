@@ -9,21 +9,12 @@ import SwiftUI
 import AVFoundation
 
 struct NeedleView: View {
-    @ObservedObject var needleViewModel = NeedleViewModel()
+    @EnvironmentObject var needleViewModel: NeedleViewModel
     var body: some View {
         return VStack {
-//            Button("move", action: {
-//                needleViewModel.isMoving = !needleViewModel.isMoving
-//            })
-            if needleViewModel.isMoving {
-                TheNeedle(v: needleViewModel.position)
-                    .stroke(C.Colors.bullshitRed,
-                        style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
-            } else {
-                TheNeedle(v: needleViewModel.position)
-                    .stroke(C.Colors.lightGray,
-                        style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
-            }
+            TheNeedle(v: needleViewModel.position)
+                .stroke(needleViewModel.isMoving ? C.Colors.bullshitRed : C.Colors.lightGray,
+                    style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
         .aspectRatio(1.9, contentMode: .fit)
     }
@@ -45,6 +36,7 @@ struct TheNeedle: Shape {
 struct Needle_Previews: PreviewProvider {
     static var previews: some View {
         NeedleView()
+            .environmentObject(NeedleViewModel())
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

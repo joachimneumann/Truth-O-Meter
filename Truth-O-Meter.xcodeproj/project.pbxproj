@@ -112,13 +112,13 @@
 				AACB1EBA255BC5BF00BA34B5 /* Display.swift */,
 				AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */,
 				AACB1EBF255BC62800BA34B5 /* NeedleView.swift */,
-				AA9A4D30255C2481002F5F00 /* TrueButton.swift */,
 				AA586D5C255EF3E200229903 /* RecordButton.swift */,
 				AACD2ED926219D2900017852 /* ThinkingGif.swift */,
 				AA586D63255F04EF00229903 /* CircularProgressBar.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
+				AA9A4D30255C2481002F5F00 /* TrueButton.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -154,8 +154,8 @@
 			children = (
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
 				AA61F3462561A29500873171 /* Needle.swift */,
-				AA61F3512561AB0300873171 /* NeedleViewModel.swift */,
 				AAA30D18261A0B3900AC14ED /* ViewModel.swift */,
+				AA61F3512561AB0300873171 /* NeedleViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
