@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         NavigationView {
             VStack {
@@ -18,7 +19,7 @@ struct ContentView: View {
                 }
 //                .background(Color.yellow)
                 Spacer()
-                Display()
+                Display(truthViewModel: truthViewModel)
                 Spacer()
                 RecordButton()
                 Spacer()
@@ -45,8 +46,7 @@ struct SettingsIcon: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(ViewModel())
-            .environmentObject(NeedleViewModel())
+        let truthViewModel = TruthViewModel()
+        ContentView(truthViewModel: truthViewModel)
     }
 }

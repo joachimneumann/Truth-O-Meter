@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct Display: View {
-    @EnvironmentObject var viewModel: ViewModel
-    
+    @ObservedObject var truthViewModel: TruthViewModel
+
     var body: some View {
-        print("redrawing Display, active = \(viewModel.displayActive())")
-        // I do not want to see this massage very often.
+        // print("redrawing Display, active = \(String(truthViewModel.activeDisplay))")
+        // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(grayedOut: !viewModel.displayActive())
-                Text(viewModel.displayTitle())
+                DisplayBackground(grayedOut: !truthViewModel.activeDisplay)
+                Text(truthViewModel.displayTitle)
                     .offset(y: 15)
-                    .foregroundColor(viewModel.displayActive() ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(truthViewModel.activeDisplay ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                NeedleView()
+                TruthView(truthViewModel: truthViewModel)
                     .clipped()
             }
-            if viewModel.displayActive() {
+            if truthViewModel.activeDisplay {
                 AnalysisProgressView()
             } else {
                 AnalysisProgressView()
@@ -82,8 +82,10 @@ struct AnalysisProgressView: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        Display()
-            .environmentObject(ViewModel())
-            .environmentObject(NeedleViewModel())
+        let truthViewModel = TruthViewModel()
+        VStack {
+            ModelDebugView(truthViewModel: truthViewModel)
+            Display(truthViewModel: truthViewModel)
+        }
     }
 }

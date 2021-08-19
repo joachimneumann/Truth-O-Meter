@@ -11,7 +11,8 @@ struct DisplayBackground: View {
     var grayedOut: Bool
 
     var body: some View {
-        ZStack {
+        print("redrawing DisplayBackground")
+        return ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
             withAnimation {
@@ -113,8 +114,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(grayedOut: false)
-//            .environmentObject(Model())
+        DisplayBackground(grayedOut: true)
             .aspectRatio(1.9, contentMode: .fit)
     }
 }

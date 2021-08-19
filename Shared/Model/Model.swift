@@ -8,40 +8,27 @@
 import Foundation
 
 
-class Model {
-    enum StateEnum {
+struct Model {
+    enum State {
         case wait, listen, analyse, show
-        func description() -> String {
-            switch self {
-            case .wait:
-                return "wait"
-            case .listen:
-                return "listen"
-            case .analyse:
-                return "analyse"
-            case .show:
-                return "show"
-            }
-        }
     }
+
+    private(set) var displayTitle = "Truth-O-Meter"
+    private(set) var displayActive: Bool = false
+    private(set) var state: State
+    private(set) var truth = 0.5
     
-    var value:StateEnum {
-        didSet {
-            switch value {
-            case .wait:
-                print("Model -> wait")
-            case .listen:
-                print( "Model -> listen")
-            case .analyse:
-                print( "Model -> analyse")
-            case .show:
-                print( "Model -> show")
-            }
+    mutating func setState(_ s: State) {
+        state = s
+        if (state == .wait || state == .listen) {
+            displayActive = false
+        } else {
+            displayActive = true
         }
     }
     
     init() {
-        self.value = .wait
+        self.state = .wait
     }
 }
 

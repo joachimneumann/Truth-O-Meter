@@ -87,7 +87,7 @@ struct RecordButton: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(viewModel.currentState())
+//            Text(viewModel.currentState())
             Spacer()
             switch(viewModel.modelValue) {
             case .wait:

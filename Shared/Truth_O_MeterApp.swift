@@ -9,21 +9,19 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
-
-    let viewModel = ViewModel()
     var body: some Scene {
+        let truthViewModel = TruthViewModel()
         WindowGroup {
-            ContentView()
-                .environmentObject(ViewModel())
-                .environmentObject(NeedleViewModel())
+            VStack {
+                ModelDebugView(truthViewModel: truthViewModel)
+                Display(truthViewModel: truthViewModel)
+            }
         }
     }
 }
 
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(ViewModel())
-            .environmentObject(NeedleViewModel())
+        TruthView(truthViewModel: TruthViewModel())
     }
 }
