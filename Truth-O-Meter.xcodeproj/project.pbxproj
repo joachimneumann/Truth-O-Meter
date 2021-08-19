@@ -21,10 +21,6 @@
 		AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D5C255EF3E200229903 /* RecordButton.swift */; };
 		AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
 		AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
-		AA61F3472561A29600873171 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3462561A29500873171 /* Needle.swift */; };
-		AA61F3482561A29600873171 /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3462561A29500873171 /* Needle.swift */; };
-		AA61F3522561AB0300873171 /* NeedleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3512561AB0300873171 /* NeedleViewModel.swift */; };
-		AA61F3532561AB0300873171 /* NeedleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61F3512561AB0300873171 /* NeedleViewModel.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA9014CF26CA626000B4EA2C /* TruthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014CE26CA626000B4EA2C /* TruthViewModel.swift */; };
@@ -61,8 +57,6 @@
 		AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDebugView.swift; sourceTree = "<group>"; };
 		AA586D5C255EF3E200229903 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		AA586D63255F04EF00229903 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		AA61F3462561A29500873171 /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
-		AA61F3512561AB0300873171 /* NeedleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleViewModel.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA9014CE26CA626000B4EA2C /* TruthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TruthViewModel.swift; path = Shared/TruthViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AA9014D126CA62BD00B4EA2C /* TruthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruthView.swift; sourceTree = "<group>"; };
@@ -162,8 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
-				AA61F3462561A29500873171 /* Needle.swift */,
-				AA61F3512561AB0300873171 /* NeedleViewModel.swift */,
 				AAA30D18261A0B3900AC14ED /* ViewModel.swift */,
 				AA9014CE26CA626000B4EA2C /* TruthViewModel.swift */,
 				AA9014D126CA62BD00B4EA2C /* TruthView.swift */,
@@ -286,8 +278,6 @@
 				AA586D5D255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC0255BC62800BA34B5 /* NeedleView.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA61F3522561AB0300873171 /* NeedleViewModel.swift in Sources */,
-				AA61F3472561A29600873171 /* Needle.swift in Sources */,
 				AA9A4D31255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */,
 				AA9014CF26CA626000B4EA2C /* TruthViewModel.swift in Sources */,
@@ -311,8 +301,6 @@
 				AA586D5E255EF3E200229903 /* RecordButton.swift in Sources */,
 				AACB1EC1255BC62800BA34B5 /* NeedleView.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA61F3532561AB0300873171 /* NeedleViewModel.swift in Sources */,
-				AA61F3482561A29600873171 /* Needle.swift in Sources */,
 				AA9A4D32255C2481002F5F00 /* TrueButton.swift in Sources */,
 				AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */,
 				AA9014D026CA626000B4EA2C /* TruthViewModel.swift in Sources */,

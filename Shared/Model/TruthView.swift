@@ -13,7 +13,7 @@ struct TruthView: View {
     var body: some View {
         // print("redrawing TruthView")
         return VStack {
-            TruthNeedle(v: truthViewModel.currentValue)
+            Needle(v: truthViewModel.currentValue)
                 .stroke(truthViewModel.activeDisplay ? C.Colors.bullshitRed : C.Colors.lightGray,
                         style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
@@ -21,14 +21,7 @@ struct TruthView: View {
     }
 }
 
-struct needleText: View {
-    @ObservedObject var truthViewModel: TruthViewModel
-    var body: some View {
-        return Text("red needle: \(String(truthViewModel.activeDisplay))")
-    }
-    
-}
-struct TruthNeedle: Shape {
+struct Needle: Shape {
     var v: Double
     func path(in rect: CGRect) -> Path {
         var temp = Path()

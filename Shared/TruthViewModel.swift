@@ -16,7 +16,8 @@ class TruthViewModel: ObservableObject {
     private var smoothTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
-    var currentValue: Double = 0.5
+    var recordButtonValue: CGFloat = 1.0
+    var currentValue = 0.5
     var activeDisplay: Bool { model.displayActive }
     var displayTitle: String { model.displayTitle }
     var stateName: String { // for ModelDebugView
@@ -32,6 +33,14 @@ class TruthViewModel: ObservableObject {
         }
     }
 
+    func intentListenToNewQuestion() {
+        
+    }
+    
+    var state: Model.State {
+        return model.state
+    }
+    
     func setState(_ s: Model.State) {
         model.setState(s)
         updateTimer()

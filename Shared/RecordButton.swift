@@ -14,7 +14,7 @@ let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
 
 struct WaitView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -23,7 +23,7 @@ struct WaitView: View {
                     .fill(C.Colors.bullshitRed)
                     .frame(width: r*innerRadius, height: r*innerRadius)
                     .onTapGesture {
-                        viewModel.intentListenToNewQuestion()
+                        truthViewModel.intentListenToNewQuestion()
                     }
                 CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
             }
@@ -32,7 +32,7 @@ struct WaitView: View {
 }
 
 struct ListenView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -41,7 +41,7 @@ struct ListenView: View {
                     .foregroundColor(C.Colors.bullshitRed)
                     .frame(width: r*innerRect, height: r*innerRect)
                     .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: CGFloat( viewModel.progressBarValue))
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  truthViewModel.recordButtonValue)
             }
         }
     }
@@ -50,7 +50,7 @@ struct ListenView: View {
 
 
 struct AnalyseView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -62,7 +62,7 @@ struct AnalyseView: View {
 }
 
 struct ShowView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         Circle()
     }
@@ -83,23 +83,21 @@ class LoadingTimer {
 }
 
 struct RecordButton: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @ObservedObject var truthViewModel: TruthViewModel
     var body: some View {
         HStack {
             Spacer()
 //            Text(viewModel.currentState())
             Spacer()
-            switch(viewModel.modelValue) {
+            switch(truthViewModel.state) {
             case .wait:
-                WaitView()
+                WaitView(truthViewModel: truthViewModel)
             case .listen:
-                ListenView()
+                ListenView(truthViewModel: truthViewModel)
             case .analyse:
                 ThinkingGif()
             case .show:
-                WaitView()
-            case .none:
-                WaitView()
+                WaitView(truthViewModel: truthViewModel)
             }
             Spacer()
         }
@@ -110,8 +108,11 @@ struct RecordButton: View {
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
         VStack {
-            RecordButton()
-                .environmentObject(ViewModel(.show))
+            let truthViewModel = TruthViewModel()
+            VStack {
+                ModelDebugView(truthViewModel: truthViewModel)
+                RecordButton(truthViewModel: truthViewModel)
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ struct ContentView: View {
                 Spacer()
                 Display(truthViewModel: truthViewModel)
                 Spacer()
-                RecordButton()
+                RecordButton(truthViewModel: truthViewModel)
                 Spacer()
             }
 //            .background(Color.blue)
