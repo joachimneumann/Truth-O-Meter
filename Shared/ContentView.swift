@@ -7,28 +7,23 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        NavigationView {
-            VStack {
-                Display(viewModel: viewModel)
-//                    .background(Color.green)
-                    .padding(20)
-                Spacer()
-                ControlView(viewModel: viewModel)
-                    .padding(20)
-                Spacer()
-                HStack {
-                    Spacer()
-                    SettingsIcon()
-                }
-            }
-//            .background(Color.blue)
-            .navigationBarHidden(true)
-            .ignoresSafeArea()
-        }
+        
+        #if os(macOS)
+        let w : CGFloat = 375
+        let h : CGFloat = 667
+        ExtractedView(viewModel: viewModel)
+            .frame(minWidth: w, minHeight: h)
+            .frame(maxWidth: w, maxHeight: h)
+//            .background(Color.white)
+        #endif
+
+        #if os(iOS)
+        ExtractedView(viewModel: viewModel)
+        #endif
+        
     }
 }
 
@@ -39,7 +34,7 @@ struct SettingsIcon: View {
                 Image("settings")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 30.0)
+                    .frame(width: 30.0, height: 30.0)
                     .padding()
             }
     }
@@ -49,5 +44,24 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         ContentView(viewModel: viewModel)
+    }
+}
+
+struct ExtractedView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                SettingsIcon()
+            }
+            .background(Color.yellow)
+            Display(viewModel: viewModel)
+                .padding(20)
+            Spacer()
+            ControlView(viewModel: viewModel)
+//                .padding(20)
+//            Spacer()
+        }
     }
 }
