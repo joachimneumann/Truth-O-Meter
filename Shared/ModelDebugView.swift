@@ -21,6 +21,7 @@ struct ModelDebugView: View {
             .pickerStyle(SegmentedPickerStyle())
             Text("state \(viewModel.stateName) move=\(String(viewModel.activeDisplay))")
         }
+        .padding(.bottom, 20)
     }
 }
 

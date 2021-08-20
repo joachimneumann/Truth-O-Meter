@@ -13,8 +13,7 @@ struct Truth_O_MeterApp: App {
         let viewModel = ViewModel()
         WindowGroup {
             VStack {
-                ModelDebugView(viewModel: viewModel)
-                ControlView(viewModel: viewModel)
+                ContentView(viewModel: viewModel)
             }
         }
     }

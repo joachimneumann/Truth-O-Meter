@@ -26,8 +26,6 @@ struct Display: View {
             }
         }
         .aspectRatio(1.9, contentMode: .fit)
-        .padding(30)
-        .padding(.top, 10)
     }
 }
 
@@ -37,6 +35,7 @@ struct Display_Previews: PreviewProvider {
         VStack {
             ModelDebugView(viewModel: viewModel)
             Display(viewModel: viewModel)
+                .padding()
         }
     }
 }

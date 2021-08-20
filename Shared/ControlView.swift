@@ -66,7 +66,7 @@ struct AnalyseView: View {
 
 struct ShowView: View {
     var body: some View {
-        Circle()
+        Text("Bullshit")
     }
 }
 
@@ -83,7 +83,7 @@ struct ControlView: View {
             case .analyse:
                 AnalyseView(viewModel: viewModel)
             case .show:
-                WaitView(viewModel: viewModel)
+                ShowView()
             }
         }
         .padding()

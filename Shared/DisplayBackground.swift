@@ -31,7 +31,7 @@ struct DisplayBackground: View {
                         .clipped()
                     // border (not clipped)
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .stroke(C.Colors.lightGray, lineWidth: 4)
+                        .stroke(C.Colors.lightGray, lineWidth: 2)
                 }
             }
         }
@@ -116,5 +116,6 @@ struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         DisplayBackground(grayedOut: true)
             .aspectRatio(1.9, contentMode: .fit)
+            .padding()
     }
 }

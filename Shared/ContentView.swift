@@ -13,20 +13,21 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Display(viewModel: viewModel)
+//                    .background(Color.green)
+                    .padding(20)
+                Spacer()
+                ControlView(viewModel: viewModel)
+                    .padding(20)
+                Spacer()
                 HStack {
                     Spacer()
                     SettingsIcon()
                 }
-//                .background(Color.yellow)
-                Spacer()
-                Display(viewModel: viewModel)
-                Spacer()
-                ControlView(viewModel: viewModel)
-                Spacer()
             }
 //            .background(Color.blue)
-//            .navigationBarTitle("")
-//            .navigationBarHidden(true)
+            .navigationBarHidden(true)
+            .ignoresSafeArea()
         }
     }
 }
