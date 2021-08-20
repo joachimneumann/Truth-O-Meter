@@ -14,6 +14,9 @@ struct CircularProgressBar: View {
     var body: some View {
         ZStack {
             Circle()
+                .trim(from: 0, to: 1)
+                .stroke(C.Colors.lightGray, lineWidth:ringWidth)
+            Circle()
                 .trim(from: 0, to: value)
                 .stroke(color, lineWidth:ringWidth)
                 .rotationEffect(Angle(degrees:-90))

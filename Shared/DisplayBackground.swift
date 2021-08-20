@@ -11,7 +11,6 @@ struct DisplayBackground: View {
     var grayedOut: Bool
 
     var body: some View {
-        print("redrawing DisplayBackground")
         return ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)

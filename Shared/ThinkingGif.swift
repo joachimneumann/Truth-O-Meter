@@ -27,11 +27,11 @@ struct ThinkingGif: View {
     var body: some View {
         
         #if os(macOS)
-        return Image(nsImage: ThinkingGif.images[viewModel.imageIndex]!)
+        return Image(nsImage: ThinkingGif.images[viewModel.imageIndex]!).resizable()
         #endif
         
         #if os(iOS)
-        return Image(uiImage: ThinkingGif.images[viewModel.imageIndex])
+        return Image(uiImage: ThinkingGif.images[viewModel.imageIndex]).resizable()
         #endif
 
     }

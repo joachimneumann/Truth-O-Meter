@@ -41,8 +41,7 @@ struct ListenView: View {
                     .foregroundColor(C.Colors.bullshitRed)
                     .frame(width: r*innerRect, height: r*innerRect)
                     .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  1.0)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.ringProgress)
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.listeningProgress)
             }
         }
     }
@@ -55,8 +54,11 @@ struct AnalyseView: View {
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
             ZStack{
                 ThinkingGif(viewModel: viewModel)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  1.0)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.ringProgress)
+                    .background(Color.green)
+                    .frame(width: r, height: r/2, alignment: .center)
+                HorizontalProgressBar(color: C.Colors.bullshitRed, value:  viewModel.analyseProgress)
+                    .frame(width: r, height: 6, alignment: .center)
+                    .padding(.top, r/2+20)
             }
         }
     }

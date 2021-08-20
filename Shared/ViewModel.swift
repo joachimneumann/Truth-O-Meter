@@ -11,11 +11,13 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published private var model = Model()
-    @Published var ringProgress: CGFloat = 0.0
+    @Published var listeningProgress: CGFloat = 0.0
+    @Published var analyseProgress: CGFloat = 0.0
     @Published var imageIndex = 0
     
     private var needleNoiseTimer: Timer?
     private var listenTimer: Timer?
+    private var analyseTimer: Timer?
     private var nextImageTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
@@ -74,9 +76,13 @@ class ViewModel: ObservableObject {
 
     func setState(_ s: Model.State) {
         model.setState(s)
-        if state == .listen || state == .analyse {
-            ringProgress = 0.0
-            listenTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(advanceListenProgress), userInfo: nil, repeats: true)
+        if state == .listen {
+            listeningProgress = 0.0
+            listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
+        }
+        if state == .analyse {
+            analyseProgress = 0.0
+            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
         }
         if state == .analyse {
             nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
@@ -97,18 +103,25 @@ class ViewModel: ObservableObject {
         if self.imageIndex > 105 { self.imageIndex = 0 }
     }
     
-    @objc private func advanceListenProgress() {
+    @objc private func incrementListeningProgress() {
         DispatchQueue.main.async {
-            self.ringProgress += 0.001
+            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/C.Timing.listeningTimeFast)
         }
-        if ringProgress >= 1.0 {
+        if listeningProgress >= 1.0 {
             listenTimer?.invalidate()
             listenTimer = nil
-            if state == .listen {
-                setState(.analyse)
-            } else if state == .analyse {
-                setState(.show)
-            }
+            setState(.analyse)
+        }
+    }
+
+    @objc private func incrementAnalyseProgress() {
+        DispatchQueue.main.async {
+            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/C.Timing.analyseTimeFast)
+        }
+        if analyseProgress >= 1.0 {
+            analyseTimer?.invalidate()
+            analyseTimer = nil
+            setState(.show)
         }
     }
     
