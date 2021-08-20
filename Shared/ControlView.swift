@@ -86,7 +86,7 @@ struct ControlView: View {
                 ShowView()
             }
         }
-        .padding()
+        .padding(60)
     }
 }
 

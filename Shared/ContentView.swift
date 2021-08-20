@@ -17,7 +17,7 @@ struct ContentView: View {
         ExtractedView(viewModel: viewModel)
             .frame(minWidth: w, minHeight: h)
             .frame(maxWidth: w, maxHeight: h)
-//            .background(Color.white)
+            .background(Color.white)
         #endif
 
         #if os(iOS)
@@ -30,13 +30,11 @@ struct ContentView: View {
 
 struct SettingsIcon: View {
     var body: some View {
-            NavigationLink (destination: SettingsView()){
-                Image("settings")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 30.0, height: 30.0)
-                    .padding()
-            }
+        Image("settings")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 30.0, height: 30.0)
+            .padding()
     }
 }
 
@@ -51,17 +49,18 @@ struct ExtractedView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         VStack {
+            Display(viewModel: viewModel)
+                .padding(20)
+            Spacer()
+            ControlView(viewModel: viewModel)
+                .padding(20)
+            Spacer()
+            Spacer()
             HStack {
                 Spacer()
                 SettingsIcon()
             }
             .background(Color.yellow)
-            Display(viewModel: viewModel)
-                .padding(20)
-            Spacer()
-            ControlView(viewModel: viewModel)
-//                .padding(20)
-//            Spacer()
         }
     }
 }

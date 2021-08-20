@@ -14,21 +14,17 @@ struct Model {
     }
 
     private(set) var displayTitle = "Truth-O-Meter"
-    private(set) var displayActive: Bool = false
-    private(set) var state: State
+    private(set) var displayActive: Bool = true
+    private(set) var state: State = .show
     private(set) var truth = 0.5
     
     mutating func setState(_ s: State) {
         state = s
-        if (state == .wait || state == .listen) {
-            displayActive = false
+        if (state == .wait) {
+            displayActive = true
         } else {
             displayActive = true
         }
-    }
-    
-    init() {
-        self.state = .wait
     }
 }
 
