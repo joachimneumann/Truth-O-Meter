@@ -11,7 +11,7 @@ import SwiftUI
 
 class ViewModel: ObservableObject {
     @Published private var model = Model()
-    @Published var ringProgress: CGFloat = 1.0
+    @Published var ringProgress: CGFloat = 0.0
     @Published var imageIndex = 0
     
     private var needleNoiseTimer: Timer?
@@ -69,19 +69,16 @@ class ViewModel: ObservableObject {
     }
     
     init() {
-        self.setState(state)
-        start()
+        setState(state)
     }
 
     func setState(_ s: Model.State) {
         model.setState(s)
-        if state == .listen {
+        if state == .listen || state == .analyse {
             ringProgress = 0.0
             listenTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(advanceListenProgress), userInfo: nil, repeats: true)
         }
         if state == .analyse {
-            ringProgress = 0.0
-            listenTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(advanceListenProgress), userInfo: nil, repeats: true)
             nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
         }
         if (model.displayActive) {
@@ -101,7 +98,9 @@ class ViewModel: ObservableObject {
     }
     
     @objc private func advanceListenProgress() {
-        ringProgress += 0.0031
+        DispatchQueue.main.async {
+            self.ringProgress += 0.001
+        }
         if ringProgress >= 1.0 {
             listenTimer?.invalidate()
             listenTimer = nil
@@ -112,27 +111,6 @@ class ViewModel: ObservableObject {
             }
         }
     }
-    
-    let p1 = CGPoint(x: 50, y: 50)
-    let p2 = CGPoint(x: 100, y: 25)
-    var pointTimer: Timer?
-    @Published var isP1 = true
-    
-    func p() -> CGPoint {
-        if isP1 { return p1 } else { return p2 }
-    }
-    
-    func start() {
-        pointTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(changePoint), userInfo: nil, repeats: true)
-    }
-    
-    @objc func changePoint() {
-        withAnimation(.default) {
-            isP1 = !isP1
-        }
-        print("p1: \(String(isP1))")
-    }
-
     
     @objc private func addNoise() {
         let n = self.distribution.nextInt()

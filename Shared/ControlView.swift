@@ -48,8 +48,6 @@ struct ListenView: View {
     }
 }
 
-
-
 struct AnalyseView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
@@ -98,12 +96,9 @@ struct RecordButton_Previews : PreviewProvider {
             Spacer()
             ModelDebugView(viewModel: viewModel)
             Spacer()
-            ZStack {
-                Rectangle()
-                ControlView(viewModel: viewModel)
-            }
-            .aspectRatio(1.0, contentMode: .fit)
-            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+            ControlView(viewModel: viewModel)
+                .aspectRatio(1.0, contentMode: .fit)
+                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             Spacer()
         }
     }
