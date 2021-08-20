@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
     private var nextImageTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
-    var currentValue = 0.5
+    @Published var currentValue = 0.5
     var activeDisplay: Bool { model.displayActive }
     var displayTitle: String { model.displayTitle }
     var stateName: String { // for ModelDebugView
@@ -83,7 +83,7 @@ class ViewModel: ObservableObject {
         }
         if (model.displayActive) {
             if (needleNoiseTimer == nil) {
-                needleNoiseTimer = Timer.scheduledTimer(timeInterval: 1.0/*0.15*/, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
+                needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
             }
         } else {
             needleNoiseTimer?.invalidate()
@@ -114,10 +114,9 @@ class ViewModel: ObservableObject {
     
     @objc private func addNoise() {
         let n = self.distribution.nextInt()
-        let noise = 0.005 * Double(n)
+        let noise = 0.001 * Double(n)
         withAnimation(.default) {
             self.currentValue = self.model.truth + noise
-            objectWillChange.send()
         }
     }
 
