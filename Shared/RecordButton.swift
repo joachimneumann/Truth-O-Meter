@@ -14,7 +14,7 @@ let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
 
 struct WaitView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -23,7 +23,7 @@ struct WaitView: View {
                     .fill(C.Colors.bullshitRed)
                     .frame(width: r*innerRadius, height: r*innerRadius)
                     .onTapGesture {
-                        truthViewModel.intentListenToNewQuestion()
+                        truthViewModel.setState(.listen)
                     }
                 CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
             }
@@ -32,7 +32,7 @@ struct WaitView: View {
 }
 
 struct ListenView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -41,7 +41,8 @@ struct ListenView: View {
                     .foregroundColor(C.Colors.bullshitRed)
                     .frame(width: r*innerRect, height: r*innerRect)
                     .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  truthViewModel.recordButtonValue)
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  1.0)
+                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  truthViewModel.listenProgress)
             }
         }
     }
@@ -50,7 +51,7 @@ struct ListenView: View {
 
 
 struct AnalyseView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
@@ -62,14 +63,13 @@ struct AnalyseView: View {
 }
 
 struct ShowView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         Circle()
     }
 }
 
 class LoadingTimer {
-
     let publisher = Timer.publish(every: 0.025, on: .main, in: .default)
     private var timerCancellable: Cancellable?
 
@@ -83,12 +83,9 @@ class LoadingTimer {
 }
 
 struct RecordButton: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         HStack {
-            Spacer()
-//            Text(viewModel.currentState())
-            Spacer()
             switch(truthViewModel.state) {
             case .wait:
                 WaitView(truthViewModel: truthViewModel)
@@ -99,8 +96,8 @@ struct RecordButton: View {
             case .show:
                 WaitView(truthViewModel: truthViewModel)
             }
-            Spacer()
         }
+        .padding()
     }
 }
 
@@ -108,7 +105,7 @@ struct RecordButton: View {
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
         VStack {
-            let truthViewModel = TruthViewModel()
+            let truthViewModel = ViewModel()
             VStack {
                 ModelDebugView(truthViewModel: truthViewModel)
                 RecordButton(truthViewModel: truthViewModel)

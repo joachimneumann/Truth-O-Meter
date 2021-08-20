@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Display: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
 
     var body: some View {
         // print("redrawing Display, active = \(String(truthViewModel.activeDisplay))")
@@ -21,7 +21,7 @@ struct Display: View {
                     .offset(y: 15)
                     .foregroundColor(truthViewModel.activeDisplay ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                TruthView(truthViewModel: truthViewModel)
+                NeedleView(truthViewModel: truthViewModel)
                     .clipped()
             }
         }
@@ -33,7 +33,7 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = TruthViewModel()
+        let truthViewModel = ViewModel()
         VStack {
             ModelDebugView(truthViewModel: truthViewModel)
             Display(truthViewModel: truthViewModel)

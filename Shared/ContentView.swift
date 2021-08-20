@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+    @ObservedObject var truthViewModel: ViewModel
     var body: some View {
         NavigationView {
             VStack {
@@ -46,7 +46,7 @@ struct SettingsIcon: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = TruthViewModel()
+        let truthViewModel = ViewModel()
         ContentView(truthViewModel: truthViewModel)
     }
 }

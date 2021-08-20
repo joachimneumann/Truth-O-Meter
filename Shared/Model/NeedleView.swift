@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct TruthView: View {
-    @ObservedObject var truthViewModel: TruthViewModel
+struct NeedleView: View {
+    @ObservedObject var truthViewModel: ViewModel
     
     var body: some View {
         // print("redrawing TruthView")
@@ -37,10 +37,10 @@ struct Needle: Shape {
 
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = TruthViewModel()
+        let truthViewModel = ViewModel()
         VStack {
             ModelDebugView(truthViewModel: truthViewModel)
-            TruthView(truthViewModel: truthViewModel)
+            NeedleView(truthViewModel: truthViewModel)
         }
     }
 }
