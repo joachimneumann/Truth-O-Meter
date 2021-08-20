@@ -10,32 +10,37 @@ import SwiftUI
 import Combine
 
 struct ThinkingGif: View {
-    @State var index = 0
-    
+    @ObservedObject var viewModel: ViewModel
+
+    #if os(macOS)
+    static let images = (0...105).map {
+        NSImage( contentsOfFile: Bundle.main.path( forResource: String(format: "x%03i", $0), ofType: "png" )! )
+    }
+    #endif
+
+    #if os(iOS)
     static let images = (0...105).map {
         UIImage(named: String(format: "x%03i.png", $0))!
     }
-
-    var timer = LoadingTimer()
+    #endif
 
     var body: some View {
-        return Image(uiImage: ThinkingGif.images[index])
-            .onReceive(
-                timer.publisher,
-                perform: { _ in
-                    self.index = self.index + 1
-                    if self.index > 105 { self.index = 0 }
-                }
-            )
-            .onAppear { self.timer.start() }
-            .onDisappear { self.timer.cancel() }
+        
+        #if os(macOS)
+        return Image(nsImage: ThinkingGif.images[viewModel.imageIndex]!)
+        #endif
+        
+        #if os(iOS)
+        return Image(uiImage: ThinkingGif.images[viewModel.imageIndex])
+        #endif
+
     }
 }
 
 struct ThinkingGif_Previews : PreviewProvider {
     static var previews: some View {
         VStack {
-            ThinkingGif()
+            ThinkingGif(viewModel: ViewModel())
         }
     }
 }

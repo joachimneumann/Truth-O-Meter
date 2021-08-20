@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct ModelDebugView: View {
-    @ObservedObject var truthViewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
     var body: some View {
         VStack {
-            Picker("", selection: $truthViewModel.stateIndex) {
+            Picker("", selection: $viewModel.stateIndex) {
                 Text("wait").tag(0)
                 Text("listen").tag(1)
                 Text("analyse").tag(2)
                 Text("show").tag(3)
             }
             .pickerStyle(SegmentedPickerStyle())
-            Text("state \(truthViewModel.stateName) move=\(String(truthViewModel.activeDisplay))")
+            Text("state \(viewModel.stateName) move=\(String(viewModel.activeDisplay))")
         }
     }
 }
 
 struct ModelDebugView_Previews: PreviewProvider {
     static var previews: some View {
-        ModelDebugView(truthViewModel: ViewModel())
+        ModelDebugView(viewModel: ViewModel())
     }
 }

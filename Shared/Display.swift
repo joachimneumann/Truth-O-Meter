@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct Display: View {
-    @ObservedObject var truthViewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        // print("redrawing Display, active = \(String(truthViewModel.activeDisplay))")
+        // print("redrawing Display, active = \(String(viewModel.activeDisplay))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(grayedOut: !truthViewModel.activeDisplay)
-                Text(truthViewModel.displayTitle)
+                DisplayBackground(grayedOut: !viewModel.activeDisplay)
+                Text(viewModel.displayTitle)
                     .offset(y: 15)
-                    .foregroundColor(truthViewModel.activeDisplay ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(viewModel.activeDisplay ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                NeedleView(truthViewModel: truthViewModel)
+                NeedleView(viewModel: viewModel)
                     .clipped()
             }
         }
@@ -33,10 +33,10 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = ViewModel()
+        let viewModel = ViewModel()
         VStack {
-            ModelDebugView(truthViewModel: truthViewModel)
-            Display(truthViewModel: truthViewModel)
+            ModelDebugView(viewModel: viewModel)
+            Display(viewModel: viewModel)
         }
     }
 }

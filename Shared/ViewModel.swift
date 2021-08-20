@@ -1,5 +1,5 @@
 //
-//  TruthViewModel.swift
+//  ViewModel.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 16/08/2021.
@@ -10,12 +10,14 @@ import GameKit // for GKGaussianDistribution
 
 class ViewModel: ObservableObject {
     @Published private var model = Model()
-    @Published var listenProgress: CGFloat = 1.0
-
+    @Published var ringProgress: CGFloat = 1.0
+    @Published var imageIndex = 0
+    
     private var noisyTruth = 0.0
     private var needleNoiseTimer: Timer?
     private var needleSmoothTimer: Timer?
     private var listenTimer: Timer?
+    private var nextImageTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
     var currentValue = 0.5
@@ -70,13 +72,14 @@ class ViewModel: ObservableObject {
     func setState(_ s: Model.State) {
         model.setState(s)
         if state == .listen {
-            listenProgress = 0.0
+            ringProgress = 0.0
             listenTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(advanceListenProgress), userInfo: nil, repeats: true)
         }
-        updateNeedleTimer()
-    }
-
-    func updateNeedleTimer() {
+        if state == .analyse {
+            ringProgress = 0.0
+            listenTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(advanceListenProgress), userInfo: nil, repeats: true)
+            nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
+        }
         if (model.displayActive) {
             if (needleNoiseTimer == nil) {
                 needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
@@ -92,12 +95,21 @@ class ViewModel: ObservableObject {
         }
     }
     
+    @objc func nextImage() {
+        self.imageIndex += 1
+        if self.imageIndex > 105 { self.imageIndex = 0 }
+    }
+    
     @objc private func advanceListenProgress() {
-        listenProgress += 0.003
-        if listenProgress >= 1.0 {
+        ringProgress += 0.0031
+        if ringProgress >= 1.0 {
             listenTimer?.invalidate()
             listenTimer = nil
-            model.setState(.analyse)
+            if state == .listen {
+                setState(.analyse)
+            } else if state == .analyse {
+                setState(.show)
+            }
         }
     }
     
@@ -117,5 +129,4 @@ class ViewModel: ObservableObject {
         self.currentValue = newCurrentValue
         objectWillChange.send()
     }
-
 }

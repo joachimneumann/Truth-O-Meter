@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var truthViewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
         NavigationView {
             VStack {
@@ -19,9 +19,9 @@ struct ContentView: View {
                 }
 //                .background(Color.yellow)
                 Spacer()
-                Display(truthViewModel: truthViewModel)
+                Display(viewModel: viewModel)
                 Spacer()
-                RecordButton(truthViewModel: truthViewModel)
+                ControlView(viewModel: viewModel)
                 Spacer()
             }
 //            .background(Color.blue)
@@ -46,7 +46,7 @@ struct SettingsIcon: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = ViewModel()
-        ContentView(truthViewModel: truthViewModel)
+        let viewModel = ViewModel()
+        ContentView(viewModel: viewModel)
     }
 }

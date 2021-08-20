@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct Truth_O_MeterApp: App {
     var body: some Scene {
-        let truthViewModel = ViewModel()
+        let viewModel = ViewModel()
         WindowGroup {
             VStack {
-                ModelDebugView(truthViewModel: truthViewModel)
-                RecordButton(truthViewModel: truthViewModel)
+                ModelDebugView(viewModel: viewModel)
+                ControlView(viewModel: viewModel)
             }
         }
     }
@@ -22,6 +22,6 @@ struct Truth_O_MeterApp: App {
 
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
-        NeedleView(truthViewModel: ViewModel())
+        NeedleView(viewModel: ViewModel())
     }
 }

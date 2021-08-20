@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct NeedleView: View {
-    @ObservedObject var truthViewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         // print("redrawing TruthView")
         return VStack {
-            Needle(v: truthViewModel.currentValue)
-                .stroke(truthViewModel.activeDisplay ? C.Colors.bullshitRed : C.Colors.lightGray,
+            Needle(v: viewModel.currentValue)
+                .stroke(viewModel.activeDisplay ? C.Colors.bullshitRed : C.Colors.lightGray,
                         style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
         }
         .aspectRatio(1.9, contentMode: .fit)
@@ -37,10 +37,10 @@ struct Needle: Shape {
 
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
-        let truthViewModel = ViewModel()
+        let viewModel = ViewModel()
         VStack {
-            ModelDebugView(truthViewModel: truthViewModel)
-            NeedleView(truthViewModel: truthViewModel)
+            ModelDebugView(viewModel: viewModel)
+            NeedleView(viewModel: viewModel)
         }
     }
 }
