@@ -17,7 +17,7 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var imageIndex = 0
-
+    
     private var needleNoiseTimer: Timer?
     private var listenTimer: Timer?
     private var analyseTimer: Timer?
@@ -25,6 +25,7 @@ class ViewModel: ObservableObject {
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
 
     @Published var currentValue = 0.5
+    
     var activeDisplay: Bool { model.displayActive }
     var displayTitle: String { model.displayTitle }
     var stateName: String { // for ModelDebugView
@@ -66,7 +67,15 @@ class ViewModel: ObservableObject {
                 setState(.wait)
             }
         }
-            
+    }
+
+    func setTruth(_ t: Double) {
+        // a little manipulation to make it easier to hit the extremes (center and edge
+        var t2 = t - 0.1
+        if t2 < 0 { t2 = 0 }
+        t2 *= 1.2
+        if t2 > 1.0 { t2 = 1.0 }
+        model.setTruth(t2)
     }
 
     var state: Model.State {

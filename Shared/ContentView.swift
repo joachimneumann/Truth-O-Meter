@@ -51,6 +51,7 @@ struct TheContentView: View {
         VStack {
             Display(viewModel: viewModel)
                 .padding(20)
+                .padding(.top, 20.0)
             Spacer()
             ControlView(viewModel: viewModel)
                 .padding(20)

@@ -11,19 +11,17 @@ struct StampText: View {
     var line1: String
     var line2: String?
     var body: some View {
-        print("StampText line1 = \(line1)")
-        print("StampText line2 = \(line2)")
-        if line2 == nil {
-            return AnyView(OneLine(text: line1))
+        if let l2 = line2 {
+            return AnyView(TwoLines(text1: line1, text2: l2))
         } else {
-            return AnyView(TwoLines(text1: line1, text2: line2!))
+            return AnyView(OneLine(text: line1))
         }
     }
 }
 
 struct Mask: View {
     var body: some View {
-        Image(uiImage: UIImage(named: "mask")!)
+        Image(cpImage: CPImage(named: "mask")!)
             .resizable()
             .scaledToFill()
     }
@@ -54,7 +52,6 @@ struct TwoLines: View {
 struct OneLine: View {
     var text: String
     var body: some View {
-        print("OneLine \(text)")
         return Text(text)
             .padding(15)
             .font(.system(size: 500, weight: .bold))
@@ -73,7 +70,7 @@ struct StampText_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            StampText(line1: "Bullshit", line2: "Xxx")
+            StampText(line1: "Bullshit Bullshit", line2: "Line 2")
             Spacer()
         }
     }

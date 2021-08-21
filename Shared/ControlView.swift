@@ -18,11 +18,16 @@ struct WaitView: View {
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            let circleRadius = r*innerRadius*0.5
             ZStack{
                 Circle()
                     .fill(C.Colors.bullshitRed)
-                    .frame(width: r*innerRadius, height: r*innerRadius)
-                    .onTapGesture {
+                    .frame(width: circleRadius*2, height: circleRadius*2)
+                    .onClickGesture { point in
+                        let distanceFromCenter = sqrt(
+                            (point.x - circleRadius) * (point.x - circleRadius) +
+                            (point.y - circleRadius) * (point.y - circleRadius) ) / (circleRadius)
+                        viewModel.setTruth(Double(distanceFromCenter))
                         viewModel.setState(.listen)
                     }
                 CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
@@ -68,7 +73,6 @@ struct ShowView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
             VStack {
                 StampText(line1: "Bullshit", line2: "xxxx")
             }
@@ -110,5 +114,63 @@ struct RecordButton_Previews : PreviewProvider {
 //                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             Spacer()
         }
+    }
+}
+
+struct ClickGesture: Gesture {
+    let count: Int
+    let coordinateSpace: CoordinateSpace
+    
+    typealias Value = SimultaneousGesture<TapGesture, DragGesture>.Value
+    
+    init(count: Int = 1, coordinateSpace: CoordinateSpace = .local) {
+        precondition(count > 0, "Count must be greater than or equal to 1.")
+        self.count = count
+        self.coordinateSpace = coordinateSpace
+    }
+    
+    var body: SimultaneousGesture<TapGesture, DragGesture> {
+        SimultaneousGesture(
+            TapGesture(count: count),
+            DragGesture(minimumDistance: 0, coordinateSpace: coordinateSpace)
+        )
+    }
+    
+    func onEnded(perform action: @escaping (CGPoint) -> Void) -> _EndedGesture<ClickGesture> {
+        self.onEnded { (value: Value) -> Void in
+            guard value.first != nil else { return }
+            guard let location = value.second?.startLocation else { return }
+            guard let endLocation = value.second?.location else { return }
+            guard ((location.x-1)...(location.x+1)).contains(endLocation.x),
+                  ((location.y-1)...(location.y+1)).contains(endLocation.y) else {
+                return
+            }
+            action(location)
+        }
+    }
+}
+
+extension View {
+    func onClickGesture(
+        count: Int,
+        coordinateSpace: CoordinateSpace = .local,
+        perform action: @escaping (CGPoint) -> Void
+    ) -> some View {
+        gesture(ClickGesture(count: count, coordinateSpace: coordinateSpace)
+            .onEnded(perform: action)
+        )
+    }
+    
+    func onClickGesture(
+        count: Int,
+        perform action: @escaping (CGPoint) -> Void
+    ) -> some View {
+        onClickGesture(count: count, coordinateSpace: .local, perform: action)
+    }
+    
+    func onClickGesture(
+        perform action: @escaping (CGPoint) -> Void
+    ) -> some View {
+        onClickGesture(count: 1, coordinateSpace: .local, perform: action)
     }
 }

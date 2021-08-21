@@ -18,6 +18,11 @@ struct Model {
     private(set) var state: State = .wait
     private(set) var truth = 0.5
     
+
+    mutating func setTruth(_ t: Double) {
+        truth = t
+    }
+    
     mutating func setState(_ s: State) {
         state = s
         if (state == .wait) {

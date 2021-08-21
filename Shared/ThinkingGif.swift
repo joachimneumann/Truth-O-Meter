@@ -12,28 +12,12 @@ import Combine
 struct ThinkingGif: View {
     @ObservedObject var viewModel: ViewModel
 
-    #if os(macOS)
     static let images = (0...105).map {
-        NSImage( contentsOfFile: Bundle.main.path( forResource: String(format: "x%03i", $0), ofType: "png" )! )
+        CPImage(named: String(format: "x%03i", $0))
     }
-    #endif
-
-    #if os(iOS)
-    static let images = (0...105).map {
-        UIImage(named: String(format: "x%03i.png", $0))!
-    }
-    #endif
 
     var body: some View {
-        
-        #if os(macOS)
-        return Image(nsImage: ThinkingGif.images[viewModel.imageIndex]!).resizable()
-        #endif
-        
-        #if os(iOS)
-        return Image(uiImage: ThinkingGif.images[viewModel.imageIndex]).resizable()
-        #endif
-
+        return Image(cpImage: ThinkingGif.images[viewModel.imageIndex]!).resizable()
     }
 }
 
