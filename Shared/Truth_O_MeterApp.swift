@@ -11,8 +11,10 @@ import SwiftUI
 struct Truth_O_MeterApp: App {
     var body: some Scene {
         let viewModel = ViewModel()
-        WindowGroup {
+        viewModel.setState(.show)
+        return WindowGroup {
             VStack {
+//                ModelDebugView(viewModel: viewModel)
                 ContentView(viewModel: viewModel)
             }
         }

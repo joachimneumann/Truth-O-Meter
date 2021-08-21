@@ -65,8 +65,21 @@ struct AnalyseView: View {
 }
 
 struct ShowView: View {
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
-        Text("Bullshit")
+        GeometryReader { (geometry) in
+            let r:CGFloat = min(geometry.size.width, geometry.size.height)
+            VStack {
+                if let stampImage = viewModel.stamp {
+                    Image(cpImage: stampImage)
+                        .resizable()
+                        .frame(width: r, height: r)
+                } else {
+                    Text("missing stamp")
+                        .frame(width: r, height: r, alignment: .center)
+                }
+            }
+        }
     }
 }
 
@@ -83,7 +96,7 @@ struct ControlView: View {
             case .analyse:
                 AnalyseView(viewModel: viewModel)
             case .show:
-                ShowView()
+                ShowView(viewModel: viewModel)
             }
         }
         .padding(60)
@@ -94,13 +107,14 @@ struct ControlView: View {
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        VStack {
+        viewModel.setState(.show)
+        return VStack {
             Spacer()
             ModelDebugView(viewModel: viewModel)
             Spacer()
             ControlView(viewModel: viewModel)
                 .aspectRatio(1.0, contentMode: .fit)
-                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+//                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             Spacer()
         }
     }

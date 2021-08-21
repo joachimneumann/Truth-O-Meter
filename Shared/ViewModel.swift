@@ -9,7 +9,7 @@ import Foundation
 import GameKit // for GKGaussianDistribution
 import SwiftUI
 #if os(macOS)
-import AVFoundation
+import AVFoundation // for sound
 #endif
 
 class ViewModel: ObservableObject {
@@ -17,7 +17,9 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var imageIndex = 0
-    
+    @Published var stamp: CPImage?
+    @Published var mask: CPImage
+
     private var needleNoiseTimer: Timer?
     private var listenTimer: Timer?
     private var analyseTimer: Timer?
@@ -69,36 +71,43 @@ class ViewModel: ObservableObject {
             
     }
 
-    var state: Model.State {
-        return model.state
+    init() {
+        mask = CPImage(named: "mask")!
     }
     
-    init() {
-        setState(state)
+    var state: Model.State {
+        get { model.state}
+        set { setState(newValue) }
     }
-
+    
     func setState(_ s: Model.State) {
         model.setState(s)
-        if state == .listen {
+        
+        nextImageTimer?.invalidate()
+        nextImageTimer = nil
+        needleNoiseTimer?.invalidate()
+        needleNoiseTimer = nil
+        listenTimer?.invalidate()
+        listenTimer = nil
+
+        switch model.state {
+        case .wait:
+            break
+        case .listen:
             AudioServicesPlaySystemSound(C.Sounds.startRecording)
             listeningProgress = 0.0
             listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
-        }
-        if state == .analyse {
+        case .analyse:
             AudioServicesPlaySystemSound(C.Sounds.stopRecording)
             analyseProgress = 0.0
-            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
-        }
-        if state == .analyse {
             nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
+            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
+        case .show:
+            stamp = mask.text("xx")
+            break
         }
         if (model.displayActive) {
-            if (needleNoiseTimer == nil) {
-                needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
-            }
-        } else {
-            needleNoiseTimer?.invalidate()
-            needleNoiseTimer = nil
+            needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
         }
     }
     
@@ -113,9 +122,8 @@ class ViewModel: ObservableObject {
             self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/C.Timing.listeningTimeMedium)
         }
         if listeningProgress >= 1.0 {
-            listenTimer?.invalidate()
-            listenTimer = nil
             setState(.analyse)
+            listenTimer?.invalidate()
         }
     }
 
@@ -124,9 +132,9 @@ class ViewModel: ObservableObject {
             self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/C.Timing.analyseTimeFast)
         }
         if analyseProgress >= 1.0 {
-            analyseTimer?.invalidate()
-            analyseTimer = nil
             setState(.show)
+            analyseTimer?.invalidate()
+            nextImageTimer?.invalidate()
         }
     }
     

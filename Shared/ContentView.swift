@@ -14,14 +14,14 @@ struct ContentView: View {
         #if os(macOS)
         let w : CGFloat = 375
         let h : CGFloat = 667
-        ExtractedView(viewModel: viewModel)
+        TheContentView(viewModel: viewModel)
             .frame(minWidth: w, minHeight: h)
             .frame(maxWidth: w, maxHeight: h)
             .background(Color.white)
         #endif
 
         #if os(iOS)
-        ExtractedView(viewModel: viewModel)
+        TheContentView(viewModel: viewModel)
         #endif
         
     }
@@ -45,7 +45,7 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ExtractedView: View {
+struct TheContentView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         VStack {
