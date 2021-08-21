@@ -8,6 +8,9 @@
 import Foundation
 import GameKit // for GKGaussianDistribution
 import SwiftUI
+#if os(macOS)
+import AVFoundation
+#endif
 
 class ViewModel: ObservableObject {
     @Published private var model = Model()
@@ -77,10 +80,12 @@ class ViewModel: ObservableObject {
     func setState(_ s: Model.State) {
         model.setState(s)
         if state == .listen {
+            AudioServicesPlaySystemSound(C.Sounds.startRecording)
             listeningProgress = 0.0
             listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
         }
         if state == .analyse {
+            AudioServicesPlaySystemSound(C.Sounds.stopRecording)
             analyseProgress = 0.0
             analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
         }
@@ -105,7 +110,7 @@ class ViewModel: ObservableObject {
     
     @objc private func incrementListeningProgress() {
         DispatchQueue.main.async {
-            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/C.Timing.listeningTimeFast)
+            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/C.Timing.listeningTimeMedium)
         }
         if listeningProgress >= 1.0 {
             listenTimer?.invalidate()
