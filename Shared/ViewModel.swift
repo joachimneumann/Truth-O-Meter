@@ -69,13 +69,56 @@ class ViewModel: ObservableObject {
         }
     }
 
+    var times = [2.0, 3.0, 4.0, 6.0]
+//    let responseTime = 1
+//    switch responseTime {
+//        case 0: // fast
+//            times = [0.5, 1.0, 1.5, 2.0]
+//        case 1: // medium
+//            times = [1.0, 2.0, 3.0, 4.0]
+//        case 2: // slow
+//            times = [2.0, 3.0, 4.0, 6.0]
+//        default: times = [2.0, 3.0, 4.0, 6.0]
+//    }
+
+    
     func setTruth(_ t: Double) {
         // a little manipulation to make it easier to hit the extremes (center and edge
-        var t2 = t - 0.1
-        if t2 < 0 { t2 = 0 }
-        t2 *= 1.2
-        if t2 > 1.0 { t2 = 1.0 }
-        model.setTruth(t2)
+        var truth = t - 0.1
+        if truth < 0 { truth = 0 }
+        truth *= 1.2
+        if truth > 1.0 { truth = 1.0 }
+        
+        currentValue = 0.5 - 0.2 * (truth-0.5)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[0]) {
+            self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[1]) {
+            self.model.setTruth(self.model.truth + 0.6 * (truth - self.model.truth))
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + times[2]) {
+            self.model.setTruth(truth)
+//            var text1: String = ""
+//            var text2: String = ""
+//            if truthIndex < 0.2 {
+//                text1 = Model.shared.theme().farRightText1
+//                text2 = Model.shared.theme().farRightText2
+//            } else if truthIndex < 0.4 {
+//                text1 = Model.shared.theme().rightText1
+//                text2 = Model.shared.theme().rightText2
+//            } else if truthIndex < 0.6 {
+//                text1 = Model.shared.theme().centerText1
+//                text2 = Model.shared.theme().centerText2
+//            } else if truthIndex < 0.8 {
+//                text1 = Model.shared.theme().leftText1
+//                text2 = Model.shared.theme().leftText2
+//            } else {
+//                text1 = Model.shared.theme().farLeftText1
+//                text2 = Model.shared.theme().farLeftText2
+//            }
+//            self.rubberstamp.setTextArray(texts: [text1, text2])
+        }
     }
 
     var state: Model.State {
