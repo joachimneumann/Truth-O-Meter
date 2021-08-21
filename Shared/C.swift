@@ -43,8 +43,5 @@ struct C {
         static let lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         static let green = Color(red:  0/255.0, green: 189/255.0, blue: 0/255.0)
     }
-    struct Fonts {
-        static let singleLineFont = Font.system(size: 80)
-    }
 
 }

@@ -17,8 +17,6 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var imageIndex = 0
-    @Published var stamp: CPImage?
-    @Published var mask: CPImage
 
     private var needleNoiseTimer: Timer?
     private var listenTimer: Timer?
@@ -71,10 +69,6 @@ class ViewModel: ObservableObject {
             
     }
 
-    init() {
-        mask = CPImage(named: "mask")!
-    }
-    
     var state: Model.State {
         get { model.state}
         set { setState(newValue) }
@@ -103,7 +97,6 @@ class ViewModel: ObservableObject {
             nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
             analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
         case .show:
-            stamp = mask.text("xx")
             break
         }
         if (model.displayActive) {

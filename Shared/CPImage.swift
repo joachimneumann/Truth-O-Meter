@@ -34,10 +34,9 @@ extension CPImage {
         return ciImage
         #endif
     }
+    
     func text(_ s: String) -> CPImage {
-        
         return self
-        
     }
 }
 

@@ -70,14 +70,7 @@ struct ShowView: View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
             VStack {
-                if let stampImage = viewModel.stamp {
-                    Image(cpImage: stampImage)
-                        .resizable()
-                        .frame(width: r, height: r)
-                } else {
-                    Text("missing stamp")
-                        .frame(width: r, height: r, alignment: .center)
-                }
+                StampText(line1: "Bullshit", line2: "xxxx")
             }
         }
     }
