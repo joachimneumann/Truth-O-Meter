@@ -69,7 +69,6 @@ class ViewModel: ObservableObject {
         }
     }
 
-    var times = [2.0, 3.0, 4.0, 6.0]
 //    let responseTime = 1
 //    switch responseTime {
 //        case 0: // fast
@@ -91,13 +90,16 @@ class ViewModel: ObservableObject {
         
         currentValue = 0.5 - 0.2 * (truth-0.5)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + times[0]) {
+        var delay = 0.25 * model.listenAndAnalysisTime
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + times[1]) {
+        delay = 0.5 * model.listenAndAnalysisTime
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.6 * (truth - self.model.truth))
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + times[2]) {
+        delay = 0.95 * model.listenAndAnalysisTime
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(truth)
 //            var text1: String = ""
 //            var text2: String = ""
