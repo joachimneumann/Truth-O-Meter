@@ -14,7 +14,6 @@ struct DisplayBackground: View {
         return ZStack {
             let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
-            withAnimation {
                 ZStack {
                     MainArcBlack()
                         .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
@@ -28,11 +27,9 @@ struct DisplayBackground: View {
                     TopArcRed()
                         .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
                         .clipped()
-                    // border (not clipped)
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .stroke(C.Colors.lightGray, lineWidth: 2)
                 }
-            }
         }
     }
 }

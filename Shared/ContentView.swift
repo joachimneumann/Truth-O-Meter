@@ -17,6 +17,7 @@ struct ContentView: View {
         TheContentView(viewModel: viewModel)
             .frame(minWidth: w, minHeight: h)
             .frame(maxWidth: w, maxHeight: h)
+            .background(Color.white)
         #endif
 
         #if os(iOS)
@@ -28,37 +29,46 @@ struct ContentView: View {
 
 
 struct SettingsIcon: View {
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
-        Image("settings")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 30.0, height: 30.0)
-            .padding()
+        if viewModel.state == .wait {
+            Image("settings")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30.0, height: 30.0)
+                .padding()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        ContentView(viewModel: viewModel)
+        VStack {
+            ModelDebugView(viewModel: viewModel)
+            ContentView(viewModel: viewModel)
+        }
     }
 }
 
 struct TheContentView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        VStack {
-            Display(viewModel: viewModel)
-                .padding(20)
-                .padding(.top, 20.0)
-            Spacer()
-            ControlView(viewModel: viewModel)
-                .padding(20)
-            Spacer()
-            Spacer()
-            HStack {
+        ZStack {
+            VStack {
+                Display(viewModel: viewModel)
+                    .padding(.top, 30)
+                    .padding()
                 Spacer()
-                SettingsIcon()
+                ControlView(viewModel: viewModel)
+                Spacer()
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    SettingsIcon(viewModel: viewModel)
+                }
             }
         }
     }

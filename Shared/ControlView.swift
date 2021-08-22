@@ -9,29 +9,24 @@
 import SwiftUI
 import Combine
 
-let ringWidth:CGFloat = 0.05
 let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
 
 struct WaitView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            let circleRadius = r*innerRadius*0.5
-            ZStack{
-                Circle()
-                    .fill(C.Colors.bullshitRed)
-                    .frame(width: circleRadius*2, height: circleRadius*2)
-                    .onClickGesture { point in
-                        let distanceFromCenter = sqrt(
-                            (point.x - circleRadius) * (point.x - circleRadius) +
-                            (point.y - circleRadius) * (point.y - circleRadius) ) / (circleRadius)
-                        viewModel.setTruthDynamic(Double(distanceFromCenter))
+        GeometryReader { (geo) in
+            let circleRadius:CGFloat = geo.size.height / 2
+            RecordButton(viewModel: viewModel)
+                .onClickGesture { point in
+                    let distanceFromCenter = sqrt(
+                        (point.x - circleRadius) * (point.x - circleRadius) +
+                        (point.y - circleRadius) * (point.y - circleRadius) ) / (circleRadius)
+                    viewModel.setTruthDynamic(Double(distanceFromCenter))
+                    withAnimation {
                         viewModel.setState(.listen)
                     }
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
-            }
+                }
         }
     }
 }
@@ -39,55 +34,41 @@ struct WaitView: View {
 struct ListenView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
-                Rectangle()
-                    .foregroundColor(C.Colors.bullshitRed)
-                    .frame(width: r*innerRect, height: r*innerRect)
-                    .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.listeningProgress)
-            }
-        }
+        RecordButton(viewModel: viewModel)
     }
 }
 
 struct AnalyseView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            HStack {
-                Spacer()
-                ZStack{
-                    ThinkingGif(viewModel: viewModel)
-                        .frame(width: r, height: r/2, alignment: .center)
-                    VStack {
-                        HorizontalProgressBar(color: C.Colors.bullshitRed, value:  viewModel.analyseProgress)
-                            .frame(width: r, height: 6, alignment: .center)
-                            .padding(.top, r/2+20)
-                            Text("Analysing...")
-                                .font(.headline)
-                    }
-                }
-                Spacer()
-            }
+        VStack {
+            Spacer()
+            ThinkingGif(viewModel: viewModel)
+                .aspectRatio(2.0, contentMode: .fit)
+            HorizontalProgressBar(value:  viewModel.analyseProgress)
+            Text("Analysing...")
+                .font(.headline)
+            Spacer()
         }
+        .aspectRatio(1.0, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+        .padding()
     }
 }
 
 struct ShowView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geometry) in
-            VStack {
-                Stamp(texts: viewModel.stampTexts)
-            }
+        VStack {
+            Spacer()
+            Stamp(texts: viewModel.stampTexts)
+                .onTapGesture {
+                    withAnimation {
+                        viewModel.setState(.wait)
+                    }
+                }
+            Spacer()
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            viewModel.setState(.wait)
-        }
+        .aspectRatio(1.0, contentMode: .fill)
     }
 }
 
@@ -95,21 +76,24 @@ struct ShowView: View {
 struct ControlView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        HStack {
-            switch(viewModel.state) {
-            case .wait:
-                WaitView(viewModel: viewModel)
-                    .padding(60)
-            case .listen:
-                ListenView(viewModel: viewModel)
-                    .padding(60)
-            case .analyse:
-                AnalyseView(viewModel: viewModel)
-                    .padding(20)
-            case .show:
-                ShowView(viewModel: viewModel)
-                    .padding(.top, 20)
+        GeometryReader { (geo) in
+            ZStack {
+                switch(viewModel.state) {
+                case .wait:
+                    WaitView(viewModel: viewModel)
+                        .padding(geo.size.width * 0.25)
+                case .listen:
+                    ListenView(viewModel: viewModel)
+                        .padding(geo.size.width * 0.25)
+                case .analyse:
+                    AnalyseView(viewModel: viewModel)
+                        .padding(geo.size.width * 0.1)
+                case .show:
+                    ShowView(viewModel: viewModel)
+                        .padding(geo.size.width * 0.0)
+                }
             }
+            .aspectRatio(contentMode: .fit)
         }
     }
 }
@@ -124,7 +108,6 @@ struct RecordButton_Previews : PreviewProvider {
             ModelDebugView(viewModel: viewModel)
             Spacer()
             ControlView(viewModel: viewModel)
-                .aspectRatio(1.0, contentMode: .fit)
             Spacer()
         }
     }

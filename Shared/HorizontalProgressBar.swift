@@ -9,32 +9,24 @@ import Foundation
 import SwiftUI
 
 struct HorizontalProgressBar: View {
-    let color: Color
     var value:CGFloat
     var body: some View {
-        ZStack (alignment: Alignment(horizontal: .leading, vertical: .center), content: {
+        ZStack { //(alignment: .leading) {
             GeometryReader { (geo) in
                 Rectangle()
-                    .frame(width:geo.size.width, height: geo.size.height)
                     .foregroundColor(C.Colors.lightGray)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 0)
                 Rectangle()
+                    .foregroundColor(C.Colors.bullshitRed)
                     .frame(width:geo.size.width*value, height: geo.size.height)
-                    .foregroundColor(color)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 0)
             }
-        })
-    }
-    
-    func getPercentage(_ value:CGFloat) -> String {
-        let intValue = Int(ceil(value * 100))
-        return "\(intValue) %"
+        }
+        .aspectRatio(20.0, contentMode: .fit)
     }
 }
 
 struct HorizontalProgressbar_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalProgressBar(color: C.Colors.bullshitRed, value: 0.8)
-            .frame(width: 200, height: 25, alignment: .center)
+        HorizontalProgressBar(value: 0.8)
+            .padding()
     }
 }

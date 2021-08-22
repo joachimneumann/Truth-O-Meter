@@ -7,31 +7,47 @@
 
 import SwiftUI
 
-struct CircularProgressBar: View {
-    let ringWidth:CGFloat
-    let color: Color
-    var value:CGFloat
+struct RecordButton: View {
+    @ObservedObject var viewModel: ViewModel
+
     var body: some View {
-        ZStack {
-            Circle()
-                .trim(from: 0, to: 1)
-                .stroke(C.Colors.lightGray, lineWidth:ringWidth)
-            Circle()
-                .trim(from: 0, to: value)
-                .stroke(color, lineWidth:ringWidth)
-                .rotationEffect(Angle(degrees:-90))
+        var value:CGFloat = 0.0
+        if viewModel.state == .listen {
+            value = viewModel.listeningProgress
         }
-    }
-    
-    func getPercentage(_ value:CGFloat) -> String {
-        let intValue = Int(ceil(value * 100))
-        return "\(intValue) %"
+        return GeometryReader { (geometry) in
+            let radius:CGFloat = min(geometry.size.width, geometry.size.height)
+            let ringWidth = radius * 0.05
+            ZStack {
+                if viewModel.state == .wait {
+                    Circle()
+                        .fill(C.Colors.bullshitRed)
+                        .padding()
+                }
+                if viewModel.state == .listen {
+                    Rectangle()
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .cornerRadius(radius*0.1)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(radius*0.25)
+                }
+                Circle()
+                    .trim(from: 0, to: 1)
+                    .stroke(C.Colors.lightGray, lineWidth:ringWidth)
+                Circle()
+                    .trim(from: 0, to: value)
+                    .stroke(C.Colors.bullshitRed, lineWidth:ringWidth)
+                    .rotationEffect(Angle(degrees:-90))
+            }
+        }
     }
 }
 
 struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        CircularProgressBar(ringWidth: 10, color: Color.red, value: 0.8)
-            .frame(width:100)
+        let viewModel = ViewModel()
+        viewModel.setState(.listen)
+        return RecordButton(viewModel: viewModel)
+            .padding()
     }
 }
