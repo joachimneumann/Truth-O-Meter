@@ -28,7 +28,9 @@ class ViewModel: ObservableObject {
     
     var activeDisplay: Bool { model.displayActive }
     var displayTitle: String { model.theme.displayText }
-    var stateName: String { // for ModelDebugView
+    
+    // used in ModelDebugView
+    var stateName: String {
         switch model.state {
         case .wait:
             return "wait"
@@ -40,6 +42,7 @@ class ViewModel: ObservableObject {
             return "show"
         }
     }
+    
     var stateIndex: Int { // for ModelDebugView
         get {
             switch model.state {
@@ -96,8 +99,7 @@ class ViewModel: ObservableObject {
     var stampTexts: StampTexts = StampTexts("top", "bottom")
     
     var state: Model.State {
-        get { model.state}
-        set { setState(newValue) }
+        get { model.state }
     }
     
     func setState(_ s: Model.State) {

@@ -17,7 +17,6 @@ struct ContentView: View {
         TheContentView(viewModel: viewModel)
             .frame(minWidth: w, minHeight: h)
             .frame(maxWidth: w, maxHeight: h)
-            .background(Color.white)
         #endif
 
         #if os(iOS)
@@ -61,7 +60,6 @@ struct TheContentView: View {
                 Spacer()
                 SettingsIcon()
             }
-            .background(Color.yellow)
         }
     }
 }

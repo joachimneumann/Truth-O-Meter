@@ -57,13 +57,20 @@ struct AnalyseView: View {
     var body: some View {
         GeometryReader { (geometry) in
             let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
-                ThinkingGif(viewModel: viewModel)
-                    .background(Color.green)
-                    .frame(width: r, height: r/2, alignment: .center)
-                HorizontalProgressBar(color: C.Colors.bullshitRed, value:  viewModel.analyseProgress)
-                    .frame(width: r, height: 6, alignment: .center)
-                    .padding(.top, r/2+20)
+            HStack {
+                Spacer()
+                ZStack{
+                    ThinkingGif(viewModel: viewModel)
+                        .frame(width: r, height: r/2, alignment: .center)
+                    VStack {
+                        HorizontalProgressBar(color: C.Colors.bullshitRed, value:  viewModel.analyseProgress)
+                            .frame(width: r, height: 6, alignment: .center)
+                            .padding(.top, r/2+20)
+                            Text("Analysing...")
+                                .font(.headline)
+                    }
+                }
+                Spacer()
             }
         }
     }
@@ -92,15 +99,18 @@ struct ControlView: View {
             switch(viewModel.state) {
             case .wait:
                 WaitView(viewModel: viewModel)
+                    .padding(60)
             case .listen:
                 ListenView(viewModel: viewModel)
+                    .padding(60)
             case .analyse:
                 AnalyseView(viewModel: viewModel)
+                    .padding(20)
             case .show:
                 ShowView(viewModel: viewModel)
+                    .padding(.top, 20)
             }
         }
-        .padding(60)
     }
 }
 
@@ -115,7 +125,6 @@ struct RecordButton_Previews : PreviewProvider {
             Spacer()
             ControlView(viewModel: viewModel)
                 .aspectRatio(1.0, contentMode: .fit)
-//                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
             Spacer()
         }
     }
