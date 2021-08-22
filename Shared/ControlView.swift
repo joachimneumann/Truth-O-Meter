@@ -27,7 +27,7 @@ struct WaitView: View {
                         let distanceFromCenter = sqrt(
                             (point.x - circleRadius) * (point.x - circleRadius) +
                             (point.y - circleRadius) * (point.y - circleRadius) ) / (circleRadius)
-                        viewModel.setTruth(Double(distanceFromCenter))
+                        viewModel.setTruthDynamic(Double(distanceFromCenter))
                         viewModel.setState(.listen)
                     }
                 CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
@@ -74,8 +74,12 @@ struct ShowView: View {
     var body: some View {
         GeometryReader { (geometry) in
             VStack {
-                StampText(line1: "Bullshit", line2: "xxxx")
+                Stamp(texts: viewModel.stampTexts)
             }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            viewModel.setState(.wait)
         }
     }
 }

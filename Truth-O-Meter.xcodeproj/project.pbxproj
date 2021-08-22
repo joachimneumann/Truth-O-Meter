@@ -15,8 +15,8 @@
 		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
-		AA4565E326D0C4C6003CC57E /* StampText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* StampText.swift */; };
-		AA4565E426D0C4C6003CC57E /* StampText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* StampText.swift */; };
+		AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
+		AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
 		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA5847CA26CA8DC300EB6D6D /* ModelDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */; };
@@ -33,6 +33,8 @@
 		AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014CE26CA626000B4EA2C /* ViewModel.swift */; };
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
 		AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
+		AA97067626D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
+		AA97067726D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
 		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EB5255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* Display.swift */; };
@@ -266,7 +268,7 @@
 		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
-		AA4565E226D0C4C6003CC57E /* StampText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampText.swift; sourceTree = "<group>"; };
+		AA4565E226D0C4C6003CC57E /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
 		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDebugView.swift; sourceTree = "<group>"; };
 		AA586D5C255EF3E200229903 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA9014CE26CA626000B4EA2C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = Shared/ViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
+		AA97067526D202B40090FA67 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		AACD2ED926219D2900017852 /* ThinkingGif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingGif.swift; sourceTree = "<group>"; };
@@ -429,6 +432,7 @@
 			children = (
 				AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */,
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
+				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA9014CE26CA626000B4EA2C /* ViewModel.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
@@ -438,7 +442,7 @@
 				AA586D63255F04EF00229903 /* CircularProgressBar.swift */,
 				AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */,
 				AACD2ED926219D2900017852 /* ThinkingGif.swift */,
-				AA4565E226D0C4C6003CC57E /* StampText.swift */,
+				AA4565E226D0C4C6003CC57E /* Stamp.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AA2B3533255AA99300AD0B14 /* ContentView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
@@ -905,7 +909,7 @@
 				AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
-				AA4565E326D0C4C6003CC57E /* StampText.swift in Sources */,
+				AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA6255FCEE100A43728 /* Model.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
@@ -917,6 +921,7 @@
 				AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */,
+				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,7 +933,7 @@
 				AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
-				AA4565E426D0C4C6003CC57E /* StampText.swift in Sources */,
+				AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA7255FCEE100A43728 /* Model.swift in Sources */,
 				AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */,
@@ -940,6 +945,7 @@
 				AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */,
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */,
+				AA97067726D202B40090FA67 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

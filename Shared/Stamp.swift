@@ -1,5 +1,5 @@
 //
-//  StampText.swift
+//  Stamp.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 21/08/2021.
@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct StampText: View {
-    var line1: String
-    var line2: String?
+struct Stamp: View {
+    var texts: StampTexts
     var body: some View {
-        if let l2 = line2 {
-            return AnyView(TwoLines(text1: line1, text2: l2))
+        if let bottom = texts.bottom {
+            return AnyView(TwoLines(texts.top+"\n"+bottom))
         } else {
-            return AnyView(OneLine(text: line1))
+            return AnyView(OneLine(texts.top))
         }
     }
 }
@@ -28,10 +27,8 @@ struct Mask: View {
 }
 
 struct TwoLines: View {
-    var text1: String
-    var text2: String
+    var text: String
     var body: some View {
-        let text = text1+"\n"+text2
         return Text(text)
             .padding(10)
             .font(.system(size: 500, weight: .bold))
@@ -47,6 +44,7 @@ struct TwoLines: View {
             .mask(Mask())
             .rotationEffect(Angle(degrees: -18))
     }
+    init(_ t: String) { text = t }
 }
 
 struct OneLine: View {
@@ -64,13 +62,14 @@ struct OneLine: View {
             .mask(Mask())
             .rotationEffect(Angle(degrees: -25))
     }
+    init(_ t: String) { text = t }
 }
 
 struct StampText_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            StampText(line1: "Bullshit Bullshit", line2: "Line 2")
+            Stamp(texts: StampTexts("Bullshit Bullshit", "Line 2"))
             Spacer()
         }
     }

@@ -27,7 +27,7 @@ class ViewModel: ObservableObject {
     @Published var currentValue = 0.5
     
     var activeDisplay: Bool { model.displayActive }
-    var displayTitle: String { model.displayTitle }
+    var displayTitle: String { model.theme.displayText }
     var stateName: String { // for ModelDebugView
         switch model.state {
         case .wait:
@@ -68,28 +68,17 @@ class ViewModel: ObservableObject {
             }
         }
     }
-
-//    let responseTime = 1
-//    switch responseTime {
-//        case 0: // fast
-//            times = [0.5, 1.0, 1.5, 2.0]
-//        case 1: // medium
-//            times = [1.0, 2.0, 3.0, 4.0]
-//        case 2: // slow
-//            times = [2.0, 3.0, 4.0, 6.0]
-//        default: times = [2.0, 3.0, 4.0, 6.0]
-//    }
-
     
-    func setTruth(_ t: Double) {
+    func setTruthHard(_ t: Double) {
+        self.model.setTruth(t)
+    }
+    func setTruthDynamic(_ t: Double) {
         // a little manipulation to make it easier to hit the extremes (center and edge
         var truth = t - 0.1
         if truth < 0 { truth = 0 }
         truth *= 1.2
         if truth > 1.0 { truth = 1.0 }
         
-        currentValue = 0.5 - 0.2 * (truth-0.5)
-
         var delay = 0.25 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
@@ -101,28 +90,11 @@ class ViewModel: ObservableObject {
         delay = 0.95 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(truth)
-//            var text1: String = ""
-//            var text2: String = ""
-//            if truthIndex < 0.2 {
-//                text1 = Model.shared.theme().farRightText1
-//                text2 = Model.shared.theme().farRightText2
-//            } else if truthIndex < 0.4 {
-//                text1 = Model.shared.theme().rightText1
-//                text2 = Model.shared.theme().rightText2
-//            } else if truthIndex < 0.6 {
-//                text1 = Model.shared.theme().centerText1
-//                text2 = Model.shared.theme().centerText2
-//            } else if truthIndex < 0.8 {
-//                text1 = Model.shared.theme().leftText1
-//                text2 = Model.shared.theme().leftText2
-//            } else {
-//                text1 = Model.shared.theme().farLeftText1
-//                text2 = Model.shared.theme().farLeftText2
-//            }
-//            self.rubberstamp.setTextArray(texts: [text1, text2])
         }
     }
 
+    var stampTexts: StampTexts = StampTexts("top", "bottom")
+    
     var state: Model.State {
         get { model.state}
         set { setState(newValue) }
@@ -140,6 +112,8 @@ class ViewModel: ObservableObject {
 
         switch model.state {
         case .wait:
+            setTruthHard(0.5);
+            currentValue = 0.5
             break
         case .listen:
             AudioServicesPlaySystemSound(C.Sounds.startRecording)
@@ -151,6 +125,17 @@ class ViewModel: ObservableObject {
             nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
             analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
         case .show:
+            if model.truth < 0.2 {
+                stampTexts = model.theme.farLeft
+            } else if model.truth < 0.4 {
+                stampTexts = model.theme.left
+            } else if model.truth < 0.6 {
+                stampTexts = model.theme.center
+            } else if model.truth < 0.8 {
+                stampTexts = model.theme.right
+            } else {
+                stampTexts = model.theme.farRight
+            }
             break
         }
         if (model.displayActive) {
@@ -187,7 +172,9 @@ class ViewModel: ObservableObject {
     
     @objc private func addNoise() {
         let n = self.distribution.nextInt()
-        let noise = 0.001 * Double(n)
+        var noiseLevel = 0.001
+        if model.state == .listen { noiseLevel *= 3 }
+        let noise = noiseLevel * Double(n)
         withAnimation(.default) {
             self.currentValue = self.model.truth + noise
         }
