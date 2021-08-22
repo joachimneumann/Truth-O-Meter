@@ -22,14 +22,8 @@ struct C {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
     struct Timing {
-        static let listeningTimeSlow   = 10.0
-        static let listeningTimeMedium = 6.0
-        static let listeningTimeFast   = 2.0
-        static let listeningTimeIncrement = 0.05
-        static let analyseTimeSlow   = 10.0
-        static let analyseTimeMedium = 6.0
-        static let analyseTimeFast   = 2.0
-        static let analyseTimeIncrement = 0.05
+        static let listeningTimeIncrement = 0.02
+        static let analyseTimeIncrement = 0.02
     }
     struct Sounds {
         static let startRecording:UInt32 = 1113

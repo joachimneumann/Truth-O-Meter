@@ -18,6 +18,40 @@ struct Model {
     private(set) var state: State = .wait
     private(set) var truth = 0.5
     
+    private enum TimingEnum {
+        case fast, medium, slow
+    }
+    
+    private var listenTiming: TimingEnum = .medium
+    private var analysisTiming: TimingEnum = .medium
+
+    var listenTime: Double {
+        get {
+            switch listenTiming {
+            case .fast:
+                return 10.0
+            case .medium:
+                return 6.0
+            case .slow:
+                return 2.0
+            }
+        }
+    }
+    var analysisTime: Double {
+        get {
+            switch analysisTiming {
+            case .fast:
+                return 10.0
+            case .medium:
+                return 6.0
+            case .slow:
+                return 2.0
+            }
+        }
+    }
+    var listenAndAnalysisTime: Double {
+        get { listenTime + analysisTime }
+    }
 
     mutating func setTruth(_ t: Double) {
         truth = t
@@ -26,12 +60,14 @@ struct Model {
     mutating func setState(_ s: State) {
         state = s
         if (state == .wait) {
-            displayActive = false
+            displayActive = true
         } else {
             displayActive = true
         }
     }
+
 }
+
 
 /*
 

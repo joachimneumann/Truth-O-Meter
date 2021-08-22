@@ -164,7 +164,7 @@ class ViewModel: ObservableObject {
     
     @objc private func incrementListeningProgress() {
         DispatchQueue.main.async {
-            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/C.Timing.listeningTimeMedium)
+            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/self.model.listenTime)
         }
         if listeningProgress >= 1.0 {
             setState(.analyse)
@@ -174,7 +174,7 @@ class ViewModel: ObservableObject {
 
     @objc private func incrementAnalyseProgress() {
         DispatchQueue.main.async {
-            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/C.Timing.analyseTimeFast)
+            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/self.model.analysisTime)
         }
         if analyseProgress >= 1.0 {
             setState(.show)
