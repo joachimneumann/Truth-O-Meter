@@ -61,6 +61,7 @@ struct TheContentView: View {
                     .padding()
                 Spacer()
                 ControlView(viewModel: viewModel)
+                    .aspectRatio(contentMode: .fit)
                 Spacer()
             }
             VStack {

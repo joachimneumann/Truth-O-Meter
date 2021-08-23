@@ -28,11 +28,11 @@ struct Model {
     
     private let bullshitTheme = Theme(
         displayText: "Bullshit-O-Meter",
-        farRight: StampTexts("Absolute", "Bullshit"),
-        right:    StampTexts("Bullshit", nil),
-        center:   StampTexts("undecided", nil),
-        left:     StampTexts("Mostly", "True"),
-        farLeft:  StampTexts("True", nil))
+        farRight: Result("Absolute", "Bullshit"),
+        right:    Result("Bullshit", nil),
+        center:   Result("undecided", nil),
+        left:     Result("Mostly", "True"),
+        farLeft:  Result("True", nil))
         
     var listenTime: Double {
         get {

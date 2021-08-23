@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Stamp: View {
-    var texts: StampTexts
+    var texts: Result
     var body: some View {
         if let bottom = texts.bottom {
             return AnyView(TwoLines(texts.top+"\n"+bottom))
@@ -69,7 +69,7 @@ struct StampText_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Stamp(texts: StampTexts("Bullshit Bullshit", "Line 2"))
+            Stamp(texts: Result("Bullshit Bullshit", "Line 2"))
             Spacer()
         }
     }

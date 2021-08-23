@@ -96,7 +96,7 @@ class ViewModel: ObservableObject {
         }
     }
 
-    var stampTexts: StampTexts = StampTexts("top", "bottom")
+    var stampTexts: Result = Result("top", "bottom")
     
     var state: Model.State {
         get { model.state }
