@@ -9,25 +9,25 @@ import SwiftUI
 
 struct ThemeDetailView: View {
     @ObservedObject var viewModel: ViewModel
-    var displayViewModel = ViewModel()
-    var recordButtonViewModel = ViewModel()
+    var settingsViewModel = ViewModel()
     var theme: Theme
-    var body: some View {
-        displayViewModel.setState(.show)
 
+    var body: some View {
+        settingsViewModel.setState(.settings)
+        settingsViewModel.theme = theme
         return VStack {
-            Display(viewModel: displayViewModel)
-                .padding(.top, 30)
+            Display(viewModel: settingsViewModel)
                 .padding()
             Spacer()
-            Stamp(texts: Result("absolute", "Bullshit"))
+            Stamp(texts: Result(theme.bullsEye.top, theme.bullsEye.bottom))
             Spacer()
-            RecordButton(viewModel: recordButtonViewModel)
-                .aspectRatio(contentMode: .fit)
+            RecordButton(viewModel: settingsViewModel)
+//                .aspectRatio(contentMode: .fit)
                 .allowsHitTesting(false)
             Spacer()
         }
-        .padding(.bottom, 20)
+        .background(Color.yellow)
+        .navigationBarTitle("", displayMode: .inline)
     }
 }
 

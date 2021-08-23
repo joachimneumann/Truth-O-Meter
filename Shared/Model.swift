@@ -10,7 +10,7 @@ import Foundation
 
 struct Model {
     enum State {
-        case wait, listen, analyse, show
+        case wait, listen, analyse, show, settings
     }
 
     private(set) var displayActive: Bool = true

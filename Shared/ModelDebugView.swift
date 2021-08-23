@@ -17,6 +17,7 @@ struct ModelDebugView: View {
                 Text("listen").tag(1)
                 Text("analyse").tag(2)
                 Text("show").tag(3)
+                Text("settings").tag(4)
             }
             .pickerStyle(SegmentedPickerStyle())
             Text("state \(viewModel.stateName) move=\(String(viewModel.activeDisplay))")

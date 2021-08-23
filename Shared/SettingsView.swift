@@ -12,9 +12,15 @@ struct ThemeCell: View {
     var theme: Theme
     var body: some View {
         HStack {
-            NavigationLink(destination: ThemeDetailView(viewModel: ViewModel(), theme: theme)) {
-                Text(theme.displayText)
+            NavigationLink(destination: ThemeDetailView(viewModel: viewModel, theme: theme)) {
+                HStack {
+                    Text(theme.displayText)
+                    Spacer()
+                }
             }
+//            .simultaneousGesture(TapGesture().onEnded{
+//                viewModel.setState(.settings)
+//            })
         }
     }
 }
@@ -22,10 +28,9 @@ struct ThemeCell: View {
 struct SettingsView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var favoriteColor = 0
-
     var body: some View {
         let themes: [Theme] = viewModel.themes
-        VStack {
+        return VStack {
             HStack {
                 Text("Response time")
                 Picker(selection: $favoriteColor, label: Text("What is your favorite color?")) {

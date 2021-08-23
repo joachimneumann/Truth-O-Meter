@@ -40,6 +40,8 @@ class ViewModel: ObservableObject {
             return "analyse"
         case .show:
             return "show"
+        case .settings:
+            return "settings"
         }
     }
     
@@ -54,6 +56,8 @@ class ViewModel: ObservableObject {
                 return 2
             case .show:
                 return 3
+            case .settings:
+                return 4
             }
         }
         set{
@@ -66,6 +70,8 @@ class ViewModel: ObservableObject {
                 setState(.analyse)
             case 3:
                 setState(.show)
+            case 4:
+                setState(.settings)
             default:
                 setState(.wait)
             }
@@ -106,7 +112,10 @@ class ViewModel: ObservableObject {
         [model.bullshitTheme, model.truthTheme, model.singingTheme]
     }
     
-
+    var theme: Theme {
+        get { model.theme }
+        set { model.theme = newValue }
+    }
     
     func setState(_ s: Model.State) {
         model.setState(s)
@@ -144,6 +153,8 @@ class ViewModel: ObservableObject {
             } else {
                 stampTexts = model.theme.outside
             }
+            break
+        case .settings:
             break
         }
         if (model.displayActive) {

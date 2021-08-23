@@ -17,7 +17,7 @@ struct RecordButton: View {
                 Circle()
                     .trim(from: 0, to: 1)
                     .stroke(C.Colors.lightGray, lineWidth:ringWidth)
-                if viewModel.state == .wait {
+                if viewModel.state == .wait || viewModel.state == .settings {
                     Circle()
                         .fill(C.Colors.bullshitRed)
                         .padding(radius*0.07)

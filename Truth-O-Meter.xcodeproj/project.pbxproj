@@ -447,12 +447,12 @@
 				AACD2ED926219D2900017852 /* ThinkingGif.swift */,
 				AA4565E226D0C4C6003CC57E /* Stamp.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
+				AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */,
 				AA2B3533255AA99300AD0B14 /* ContentView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
 				AADA548926CF6AD40014C930 /* Infinity */,
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
-				AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

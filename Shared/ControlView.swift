@@ -91,6 +91,12 @@ struct ControlView: View {
                 case .show:
                     ShowView(viewModel: viewModel)
                         .padding(geo.size.width * 0.0)
+                case .settings:
+                    HStack {
+                        Spacer()
+                        Text("Settings (not displayed)")
+                        Spacer()
+                    }
                 }
             }
             .aspectRatio(contentMode: .fit)
