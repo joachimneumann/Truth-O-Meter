@@ -25,15 +25,29 @@ struct Model {
     private var analysisTiming: TimingEnum = .fast
 
     var theme:Theme
-    
-    private let bullshitTheme = Theme(
+
+    let bullshitTheme = Theme(
         displayText: "Bullshit-O-Meter",
-        farRight: Result("Absolute", "Bullshit"),
-        right:    Result("Bullshit", nil),
-        center:   Result("undecided", nil),
-        left:     Result("Mostly", "True"),
-        farLeft:  Result("True", nil))
-        
+        bullsEye: Result("True", nil),
+        innerRing:    Result("Mostly", "True"),
+        middleRing:   Result("undecided", nil),
+        outerRing:     Result("Bullshit", nil),
+        outside:  Result("Absolute", "Bullshit"))
+    let truthTheme = Theme(
+        displayText: "Truth-O-Meter",
+        bullsEye: Result("Absolute", "Bullshit"),
+        innerRing:    Result("Bullshit", nil),
+        middleRing:   Result("undecided", nil),
+        outerRing:     Result("Mostly", "True"),
+        outside:  Result("True", nil))
+    let singingTheme = Theme(
+        displayText: "Voice-O-Meter",
+        bullsEye: Result("flimsy", nil),
+        innerRing:    Result("could be", "better"),
+        middleRing:   Result("good", nil),
+        outerRing:     Result("impressive", nil),
+        outside:  Result("Sexy", nil))
+    
     var listenTime: Double {
         get {
             switch listenTiming {
@@ -119,4 +133,67 @@ struct Model {
  button round, red
  next state --> listen
  
+ 
+ 
+ #if swift(>=5.8)
+ print("Hello, Swift 5.8")
+
+ #elseif swift(>=5.7)
+ print("Hello, Swift 5.7")
+
+ #elseif swift(>=5.6)
+ print("Hello, Swift 5.6")
+
+ #elseif swift(>=5.5)
+ print("Hello, Swift 5.5")
+
+ #elseif swift(>=5.4)
+ print("Hello, Swift 5.4")
+
+ #elseif swift(>=5.3)
+ print("Hello, Swift 5.3")
+
+ #elseif swift(>=5.2)
+ print("Hello, Swift 5.2")
+
+ #elseif swift(>=5.1)
+ print("Hello, Swift 5.1")
+
+ #elseif swift(>=5.0)
+ print("Hello, Swift 5.0")
+
+ #elseif swift(>=4.2)
+ print("Hello, Swift 4.2")
+
+ #elseif swift(>=4.1)
+ print("Hello, Swift 4.1")
+
+ #elseif swift(>=4.0)
+ print("Hello, Swift 4.0")
+
+ #elseif swift(>=3.2)
+ print("Hello, Swift 3.2")
+
+ #elseif swift(>=3.0)
+ print("Hello, Swift 3.0")
+
+ #elseif swift(>=2.2)
+ print("Hello, Swift 2.2")
+
+ #elseif swift(>=2.1)
+ print("Hello, Swift 2.1")
+
+ #elseif swift(>=2.0)
+ print("Hello, Swift 2.0")
+
+ #elseif swift(>=1.2)
+ print("Hello, Swift 1.2")
+
+ #elseif swift(>=1.1)
+ print("Hello, Swift 1.1")
+
+ #elseif swift(>=1.0)
+ print("Hello, Swift 1.0")
+
+ #endif
 */

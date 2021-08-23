@@ -15,6 +15,8 @@
 		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
+		AA30E3AD26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */; };
+		AA30E3AE26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */; };
 		AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
 		AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
 		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
@@ -23,8 +25,8 @@
 		AA5847CB26CA8DC300EB6D6D /* ModelDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */; };
 		AA586D5D255EF3E200229903 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D5C255EF3E200229903 /* ControlView.swift */; };
 		AA586D5E255EF3E200229903 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D5C255EF3E200229903 /* ControlView.swift */; };
-		AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
-		AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* CircularProgressBar.swift */; };
+		AA586D64255F04EF00229903 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* RecordButton.swift */; };
+		AA586D65255F04EF00229903 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* RecordButton.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
@@ -268,11 +270,12 @@
 		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
+		AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDetailView.swift; sourceTree = "<group>"; };
 		AA4565E226D0C4C6003CC57E /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
 		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDebugView.swift; sourceTree = "<group>"; };
 		AA586D5C255EF3E200229903 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
-		AA586D63255F04EF00229903 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		AA586D63255F04EF00229903 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA9014CE26CA626000B4EA2C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = Shared/ViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -439,7 +442,7 @@
 				AACB1EBA255BC5BF00BA34B5 /* Display.swift */,
 				AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */,
 				AA586D5C255EF3E200229903 /* ControlView.swift */,
-				AA586D63255F04EF00229903 /* CircularProgressBar.swift */,
+				AA586D63255F04EF00229903 /* RecordButton.swift */,
 				AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */,
 				AACD2ED926219D2900017852 /* ThinkingGif.swift */,
 				AA4565E226D0C4C6003CC57E /* Stamp.swift */,
@@ -449,6 +452,7 @@
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
 				AADA548926CF6AD40014C930 /* Infinity */,
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
+				AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -918,7 +922,8 @@
 				AACD2EDA26219D2900017852 /* ThinkingGif.swift in Sources */,
 				AA586D5D255EF3E200229903 /* ControlView.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA586D64255F04EF00229903 /* CircularProgressBar.swift in Sources */,
+				AA30E3AD26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */,
+				AA586D64255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
@@ -942,7 +947,8 @@
 				AACD2EDB26219D2900017852 /* ThinkingGif.swift in Sources */,
 				AA586D5E255EF3E200229903 /* ControlView.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA586D65255F04EF00229903 /* CircularProgressBar.swift in Sources */,
+				AA30E3AE26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */,
+				AA586D65255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067726D202B40090FA67 /* Theme.swift in Sources */,

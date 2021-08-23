@@ -19,7 +19,7 @@ struct ContentView: View {
             .frame(maxWidth: w, maxHeight: h)
             .background(Color.white)
         #endif
-
+        
         #if os(iOS)
         TheContentView(viewModel: viewModel)
         #endif
@@ -44,33 +44,40 @@ struct SettingsIcon: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        VStack {
-            ModelDebugView(viewModel: viewModel)
-            ContentView(viewModel: viewModel)
-        }
+        //        VStack {
+        //            ModelDebugView(viewModel: viewModel)
+        //            ContentView(viewModel: viewModel)
+        //        }
+        ContentView(viewModel: viewModel)
     }
 }
 
 struct TheContentView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        ZStack {
-            VStack {
-                Display(viewModel: viewModel)
-                    .padding(.top, 30)
-                    .padding()
-                Spacer()
-                ControlView(viewModel: viewModel)
-                    .aspectRatio(contentMode: .fit)
-                Spacer()
-            }
-            VStack {
-                Spacer()
-                HStack {
+        NavigationView {
+            ZStack {
+                VStack {
+                    Display(viewModel: viewModel)
+                        .padding(.top, 30)
+                        .padding()
                     Spacer()
-                    SettingsIcon(viewModel: viewModel)
+                    ControlView(viewModel: viewModel)
+                        .aspectRatio(contentMode: .fit)
+                    Spacer()
+                }
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: SettingsView(viewModel: viewModel)) {
+                            SettingsIcon(viewModel: viewModel)
+                        }
+                        .navigationBarHidden(true)
+                    }
                 }
             }
         }
+        .accentColor(C.Colors.gray)
     }
 }

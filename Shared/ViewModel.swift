@@ -102,6 +102,12 @@ class ViewModel: ObservableObject {
         get { model.state }
     }
     
+    var themes: [Theme] {
+        [model.bullshitTheme, model.truthTheme, model.singingTheme]
+    }
+    
+
+    
     func setState(_ s: Model.State) {
         model.setState(s)
         
@@ -128,15 +134,15 @@ class ViewModel: ObservableObject {
             analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
         case .show:
             if model.truth < 0.2 {
-                stampTexts = model.theme.farLeft
+                stampTexts = model.theme.bullsEye
             } else if model.truth < 0.4 {
-                stampTexts = model.theme.left
+                stampTexts = model.theme.innerRing
             } else if model.truth < 0.6 {
-                stampTexts = model.theme.center
+                stampTexts = model.theme.middleRing
             } else if model.truth < 0.8 {
-                stampTexts = model.theme.right
+                stampTexts = model.theme.outerRing
             } else {
-                stampTexts = model.theme.farRight
+                stampTexts = model.theme.outside
             }
             break
         }

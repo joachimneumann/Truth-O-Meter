@@ -7,14 +7,50 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct ThemeCell: View {
+    @ObservedObject var viewModel: ViewModel
+    var theme: Theme
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            NavigationLink(destination: ThemeDetailView(viewModel: ViewModel(), theme: theme)) {
+                Text(theme.displayText)
+            }
+        }
+    }
+}
+
+struct SettingsView: View {
+    @ObservedObject var viewModel: ViewModel
+    @State private var favoriteColor = 0
+
+    var body: some View {
+        let themes: [Theme] = viewModel.themes
+        VStack {
+            HStack {
+                Text("Response time")
+                Picker(selection: $favoriteColor, label: Text("What is your favorite color?")) {
+                                Text("2 sec").tag(0)
+                                Text("4 sec").tag(1)
+                                Text("10 sec").tag(2)
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+            }
+            .padding()
+            .padding(.top, 20)
+            .padding(.bottom, 20)
+            List {
+                Section(header: Text("Theme")) {
+                    ForEach(themes) { theme in
+                        ThemeCell(viewModel: viewModel, theme: theme)
+                    }
+                }
+            }
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(viewModel: ViewModel())
     }
 }

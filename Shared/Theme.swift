@@ -12,11 +12,13 @@ struct Result {
     let bottom: String?
     init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
 }
-struct Theme {
+
+struct Theme: Identifiable {
+    var id = UUID()
     let displayText: String
-    let farRight: Result
-    let right:    Result
-    let center:   Result
-    let left:     Result
-    let farLeft:  Result
+    let bullsEye:   Result
+    let innerRing:  Result
+    let middleRing: Result
+    let outerRing:  Result
+    let outside:    Result
 }

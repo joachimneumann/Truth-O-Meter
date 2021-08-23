@@ -5,106 +5,43 @@
 //  Created by Joachim Neumann on 14/11/2020.
 //
 
-
 import SwiftUI
-import Combine
 
-let ringWidth:CGFloat = 0.05
-let innerRadius:CGFloat = 0.88
-let innerRect:CGFloat = 0.4
-
-struct WaitView: View {
+struct RecordButton: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
+        return GeometryReader { (geometry) in
+            let radius:CGFloat = min(geometry.size.width, geometry.size.height)
+            let ringWidth = radius * 0.05
+            ZStack {
                 Circle()
-                    .fill(C.Colors.bullshitRed)
-                    .frame(width: r*innerRadius, height: r*innerRadius)
-                    .onTapGesture {
-                        viewModel.setState(.listen)
-                    }
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value: 1.0)
+                    .trim(from: 0, to: 1)
+                    .stroke(C.Colors.lightGray, lineWidth:ringWidth)
+                if viewModel.state == .wait {
+                    Circle()
+                        .fill(C.Colors.bullshitRed)
+                        .padding(radius*0.07)
+                } else if viewModel.state == .listen {
+                    Rectangle()
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .cornerRadius(radius*0.1)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(radius*0.25)
+                    Circle()
+                        .trim(from: 0, to: viewModel.listeningProgress)
+                        .stroke(C.Colors.bullshitRed, lineWidth:ringWidth)
+                        .rotationEffect(Angle(degrees:-90))
+                }
             }
         }
     }
 }
 
-struct ListenView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
-                Rectangle()
-                    .foregroundColor(C.Colors.bullshitRed)
-                    .frame(width: r*innerRect, height: r*innerRect)
-                    .cornerRadius(10)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  1.0)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.ringProgress)
-            }
-        }
-    }
-}
-
-
-
-struct AnalyseView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        GeometryReader { (geometry) in
-            let r:CGFloat = min(geometry.size.width, geometry.size.height)
-            ZStack{
-                ThinkingGif(viewModel: viewModel)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.lightGray, value:  1.0)
-                CircularProgressBar(ringWidth: r*ringWidth, color: C.Colors.bullshitRed, value:  viewModel.ringProgress)
-            }
-        }
-    }
-}
-
-struct ShowView: View {
-    var body: some View {
-        Circle()
-    }
-}
-
-
-struct ControlView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        HStack {
-            switch(viewModel.state) {
-            case .wait:
-                WaitView(viewModel: viewModel)
-            case .listen:
-                ListenView(viewModel: viewModel)
-            case .analyse:
-                AnalyseView(viewModel: viewModel)
-            case .show:
-                WaitView(viewModel: viewModel)
-            }
-        }
-        .padding()
-    }
-}
-
-
-struct RecordButton_Previews : PreviewProvider {
+struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        VStack {
-            Spacer()
-            ModelDebugView(viewModel: viewModel)
-            Spacer()
-            ZStack {
-                Rectangle()
-                ControlView(viewModel: viewModel)
-            }
-            .aspectRatio(1.0, contentMode: .fit)
-            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-            Spacer()
-        }
+        viewModel.setState(.wait)
+        return RecordButton(viewModel: viewModel)
+            .padding(30)
     }
 }
