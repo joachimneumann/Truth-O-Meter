@@ -27,7 +27,7 @@ class ViewModel: ObservableObject {
     @Published var currentValue = 0.5
     
     var activeDisplay: Bool { model.displayActive }
-    var displayTitle: String { model.theme.displayText }
+    var displayTitle: String { model.currentTheme.displayText }
     
     // used in ModelDebugView
     var stateName: String {
@@ -81,13 +81,7 @@ class ViewModel: ObservableObject {
     func setTruthHard(_ t: Double) {
         self.model.setTruth(t)
     }
-    func setTruthDynamic(_ t: Double) {
-        // a little manipulation to make it easier to hit the extremes (center and edge
-        var truth = t - 0.1
-        if truth < 0 { truth = 0 }
-        truth *= 1.2
-        if truth > 1.0 { truth = 1.0 }
-        
+    func setTruthDynamic(_ truth: Double) {
         var delay = 0.25 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
@@ -107,14 +101,22 @@ class ViewModel: ObservableObject {
     var state: Model.State {
         get { model.state }
     }
-    
-    var themes: [Theme] {
-        [model.bullshitTheme, model.truthTheme, model.singingTheme]
+        
+    func tabWithPrecision(_ p: Model.TapPrecision) {
+        if let r = model.currentTheme.results[p] {
+            stampTexts = r
+        } else {
+            stampTexts = Result("top", "bottom")
+        }
     }
     
-    var theme: Theme {
-        get { model.theme }
-        set { model.theme = newValue }
+    var themes: [Theme] {
+        model.themes
+    }
+    
+    var currentTheme: Theme {
+        get { model.currentTheme }
+        set { model.currentTheme = newValue }
     }
     
     
@@ -130,17 +132,6 @@ class ViewModel: ObservableObject {
         case .analyse:
             break
         case .show:
-            if model.truth < 0.2 {
-                stampTexts = model.theme.bullsEye
-            } else if model.truth < 0.4 {
-                stampTexts = model.theme.innerRing
-            } else if model.truth < 0.6 {
-                stampTexts = model.theme.middleRing
-            } else if model.truth < 0.8 {
-                stampTexts = model.theme.outerRing
-            } else {
-                stampTexts = model.theme.outside
-            }
             break
         case .settings:
             break

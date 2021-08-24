@@ -38,7 +38,7 @@ struct C {
         static let gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
         static let lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         static let paleLightGray = Color(red:  210.0/255.0, green: 210.0/255.0, blue: 210.0/255.0)
-        static let green = Color(red:  0/255.0, green: 189/255.0, blue: 0/255.0)
+        static let lightGreen = Color(red:  212/255.0, green: 251/255.0, blue: 121/255.0)
     }
 
 }

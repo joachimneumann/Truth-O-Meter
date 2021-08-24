@@ -29,7 +29,6 @@ struct SettingsView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var favoriteColor = 0
     var body: some View {
-        let themes: [Theme] = viewModel.themes
         return VStack {
             HStack {
                 Text("Response time")
@@ -45,7 +44,7 @@ struct SettingsView: View {
             .padding(.bottom, 20)
             List {
                 Section(header: Text("Theme")) {
-                    ForEach(themes) { theme in
+                    ForEach(viewModel.themes) { theme in
                         ThemeCell(viewModel: viewModel, theme: theme)
                     }
                 }

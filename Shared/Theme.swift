@@ -16,9 +16,5 @@ struct Result {
 struct Theme: Identifiable {
     var id = UUID()
     let displayText: String
-    let bullsEye:   Result
-    let innerRing:  Result
-    let middleRing: Result
-    let outerRing:  Result
-    let outside:    Result
+    let results: [Model.TapPrecision:Result]
 }

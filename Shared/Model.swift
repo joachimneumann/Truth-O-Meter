@@ -13,6 +13,10 @@ struct Model {
         case wait, listen, analyse, show, settings
     }
 
+    enum TapPrecision {
+        case bullsEye, inner, middle, outer, outside
+    }
+
     private(set) var displayActive: Bool = true
     private(set) var state: State = .wait
     private(set) var truth = 0.5
@@ -24,30 +28,42 @@ struct Model {
     private var listenTiming: TimingEnum = .fast
     private var analysisTiming: TimingEnum = .fast
 
-    var theme:Theme
 
     let bullshitTheme = Theme(
         displayText: "Bullshit-O-Meter",
-        bullsEye: Result("True", nil),
-        innerRing:    Result("Mostly", "True"),
-        middleRing:   Result("undecided", nil),
-        outerRing:     Result("Bullshit", nil),
-        outside:  Result("Absolute", "Bullshit"))
+        results: [
+            TapPrecision.bullsEye:      Result("True", nil),
+            Model.TapPrecision.inner:   Result("Mostly", "True"),
+            Model.TapPrecision.middle:  Result("undecided", nil),
+            Model.TapPrecision.outer:   Result("Bullshit", nil),
+            Model.TapPrecision.outside: Result("Absolute", "Bullshit")
+        ])
+    
     let truthTheme = Theme(
         displayText: "Truth-O-Meter",
-        bullsEye: Result("Absolute", "Bullshit"),
-        innerRing:    Result("Bullshit", nil),
-        middleRing:   Result("undecided", nil),
-        outerRing:     Result("Mostly", "True"),
-        outside:  Result("True", nil))
+        results: [
+            TapPrecision.bullsEye:      Result("Absolute", "Bullshit"),
+            Model.TapPrecision.inner:   Result("Bullshit", nil),
+            Model.TapPrecision.middle:  Result("undecided", nil),
+            Model.TapPrecision.outer:   Result("Mostly", "True"),
+            Model.TapPrecision.outside: Result("True", nil)
+        ])
+
     let singingTheme = Theme(
         displayText: "Voice-O-Meter",
-        bullsEye: Result("flimsy", nil),
-        innerRing:    Result("could be", "better"),
-        middleRing:   Result("good", nil),
-        outerRing:     Result("impressive", nil),
-        outside:  Result("Sexy", nil))
+        results: [
+            TapPrecision.bullsEye:      Result("Sexy", nil),
+            Model.TapPrecision.inner:   Result("impressive", nil),
+            Model.TapPrecision.middle:  Result("good", nil),
+            Model.TapPrecision.outer:   Result("could be", "better"),
+            Model.TapPrecision.outside: Result("flimsy", nil)
+        ])
     
+    var themes: [Theme] {
+        [bullshitTheme, truthTheme, singingTheme]
+    }
+    var currentTheme:Theme
+
     var listenTime: Double {
         get {
             switch listenTiming {
@@ -91,7 +107,7 @@ struct Model {
     }
     
     init() {
-        theme = bullshitTheme
+        currentTheme = bullshitTheme
     }
 
 }

@@ -14,19 +14,18 @@ struct ThemeDetailView: View {
 
     var body: some View {
         settingsViewModel.setState(.settings)
-        settingsViewModel.theme = theme
-        return VStack {
+        settingsViewModel.currentTheme = theme
+        return VStack (alignment: .center) {
             Display(viewModel: settingsViewModel)
-                .padding()
             Spacer()
-            Stamp(texts: Result(theme.bullsEye.top, theme.bullsEye.bottom))
+            Stamp(texts: viewModel.currentTheme.results[Model.TapPrecision.bullsEye]!, rotated: false)
             Spacer()
             RecordButton(viewModel: settingsViewModel)
-//                .aspectRatio(contentMode: .fit)
                 .allowsHitTesting(false)
             Spacer()
         }
-        .background(Color.yellow)
+        .padding(.bottom, 20)
+        .padding(.top, 20)
         .navigationBarTitle("", displayMode: .inline)
     }
 }
@@ -34,6 +33,6 @@ struct ThemeDetailView: View {
 struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        ThemeDetailView(viewModel: viewModel, theme: viewModel.themes[0])
+        ThemeDetailView(viewModel: viewModel, theme: viewModel.currentTheme)
     }
 }

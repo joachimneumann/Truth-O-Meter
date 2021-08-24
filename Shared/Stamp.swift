@@ -9,11 +9,12 @@ import SwiftUI
 
 struct Stamp: View {
     var texts: Result
+    var rotated = false
     var body: some View {
         if let bottom = texts.bottom {
-            return AnyView(TwoLines(texts.top+"\n"+bottom))
+            return AnyView(TwoLines(texts.top+"\n"+bottom, rotated ? -18.0 : 0.0))
         } else {
-            return AnyView(OneLine(texts.top))
+            return AnyView(OneLine(texts.top, rotated ? -25.0 : 0.0))
         }
     }
 }
@@ -28,6 +29,7 @@ struct Mask: View {
 
 struct TwoLines: View {
     var text: String
+    var rotationAngle:Double
     var body: some View {
         return Text(text)
             .padding(10)
@@ -42,13 +44,14 @@ struct TwoLines: View {
                 .stroke(C.Colors.bullshitRed, lineWidth: 6))
             .padding(25)
             .mask(Mask())
-            .rotationEffect(Angle(degrees: -18))
+            .rotationEffect(Angle(degrees: rotationAngle))
     }
-    init(_ t: String) { text = t }
+    init(_ t: String, _ angle: Double) { text = t; rotationAngle = angle }
 }
 
 struct OneLine: View {
     var text: String
+    var rotationAngle: Double
     var body: some View {
         return Text(text)
             .padding(15)
@@ -60,9 +63,9 @@ struct OneLine: View {
                 .stroke(C.Colors.bullshitRed, lineWidth: 6))
             .padding(10)
             .mask(Mask())
-            .rotationEffect(Angle(degrees: -25))
+            .rotationEffect(Angle(degrees: rotationAngle))
     }
-    init(_ t: String) { text = t }
+    init(_ t: String, _ angle: Double) { text = t; rotationAngle = angle }
 }
 
 struct StampText_Previews: PreviewProvider {
