@@ -63,17 +63,17 @@ class ViewModel: ObservableObject {
         set{
             switch newValue {
             case 0:
-                setState(.wait)
+                setStateWithoutTimer(.wait)
             case 1:
-                setState(.listen)
+                setStateWithoutTimer(.listen)
             case 2:
-                setState(.analyse)
+                setStateWithoutTimer(.analyse)
             case 3:
-                setState(.show)
+                setStateWithoutTimer(.show)
             case 4:
-                setState(.settings)
+                setStateWithoutTimer(.settings)
             default:
-                setState(.wait)
+                setStateWithoutTimer(.wait)
             }
         }
     }
@@ -117,30 +117,18 @@ class ViewModel: ObservableObject {
         set { model.theme = newValue }
     }
     
-    func setState(_ s: Model.State) {
+    
+    func setStateWithoutTimer(_ s: Model.State) {
         model.setState(s)
-        
-        nextImageTimer?.invalidate()
-        nextImageTimer = nil
-        needleNoiseTimer?.invalidate()
-        needleNoiseTimer = nil
-        listenTimer?.invalidate()
-        listenTimer = nil
-
         switch model.state {
         case .wait:
             setTruthHard(0.5);
             currentValue = 0.5
             break
         case .listen:
-            AudioServicesPlaySystemSound(C.Sounds.startRecording)
-            listeningProgress = 0.0
-            listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
+            break
         case .analyse:
-            AudioServicesPlaySystemSound(C.Sounds.stopRecording)
-            analyseProgress = 0.0
-            nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
-            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
+            break
         case .show:
             if model.truth < 0.2 {
                 stampTexts = model.theme.bullsEye
@@ -153,6 +141,35 @@ class ViewModel: ObservableObject {
             } else {
                 stampTexts = model.theme.outside
             }
+            break
+        case .settings:
+            break
+        }
+    }
+
+    func setState(_ s: Model.State) {
+        setStateWithoutTimer(s)
+        
+        nextImageTimer?.invalidate()
+        nextImageTimer = nil
+        needleNoiseTimer?.invalidate()
+        needleNoiseTimer = nil
+        listenTimer?.invalidate()
+        listenTimer = nil
+
+        switch model.state {
+        case .wait:
+            break
+        case .listen:
+            AudioServicesPlaySystemSound(C.Sounds.startRecording)
+            listeningProgress = 0.0
+            listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
+        case .analyse:
+            AudioServicesPlaySystemSound(C.Sounds.stopRecording)
+            analyseProgress = 0.0
+            nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
+            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
+        case .show:
             break
         case .settings:
             break
