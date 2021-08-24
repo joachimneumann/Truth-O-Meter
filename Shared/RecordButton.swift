@@ -40,10 +40,14 @@ struct CircleMeasures {
         filledCirclePadding = d * 0.07
         cornerRadius        = d * 0.05
         rectanglePadding    = radius * 0.5
-        tapBullsEye         = 0.2
-        tapInner            = 0.4
-        tapMiddle           = 0.6
-        tapOuter            = 0.8
+        
+        // Instead of 0, 0.2, 0.4, 0.6, 0.8, 1.0
+        // I make the bulls eye and the out ring a bit larger
+        // This makes the edge results easier to hit.
+        tapBullsEye         = 0.2 + 0.05
+        tapInner            = 0.4 + 0.0125
+        tapMiddle           = 0.6 - 0.0125
+        tapOuter            = 0.8 - 0.05
         tapEdge             = 1.0
 
         filledCircleRadius = radius - filledCirclePadding
