@@ -31,8 +31,6 @@ struct AnalyseView: View {
     var body: some View {
         VStack {
             Spacer()
-            ThinkingGif(viewModel: viewModel)
-                .aspectRatio(2.0, contentMode: .fit)
             HorizontalProgressBar(value:  viewModel.analyseProgress)
             Text("Analysing...")
                 .font(.headline)
@@ -93,7 +91,7 @@ struct ControlView: View {
 
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = ViewModel(Needle())
         viewModel.setState(.show)
         return VStack {
             Spacer()

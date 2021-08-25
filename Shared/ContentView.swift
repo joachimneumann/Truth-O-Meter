@@ -79,7 +79,7 @@ struct TheContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = ViewModel(Needle())
 //                VStack {
 //                    ModelDebugView(viewModel: viewModel)
 //                    ContentView(viewModel: viewModel)

@@ -12,18 +12,18 @@ let p2 = CGPoint(x: 100, y: 25)
 let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
-    @ObservedObject var viewModel: ViewModel
-    
+    @EnvironmentObject var needle: Needle
+
     var body: some View {
         ZStack {
             GeometryReader { (geometry) in
                 let rect = geometry.frame(in: .local)
                 var temp = Path()
-                let _ = temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: viewModel.currentValue), clockwise: true)
+                let _ = temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: needle.noisyValue), clockwise: true)
                 let a = temp.currentPoint!
                 let b = C.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
-                    .stroke(viewModel.activeDisplay ? C.Colors.bullshitRed : C.Colors.lightGray,
+                    .stroke(needle.grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed,
                             style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
             }
         }
@@ -57,10 +57,12 @@ struct AnimatedPath: Shape {
 
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let needle = Needle()
+        let viewModel = ViewModel(needle)
         VStack {
             ModelDebugView(viewModel: viewModel)
-            NeedleView(viewModel: viewModel)
+            NeedleView()
+                .environmentObject(needle)
         }
     }
 }

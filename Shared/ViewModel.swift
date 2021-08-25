@@ -6,29 +6,21 @@
 //
 
 import Foundation
-import GameKit // for GKGaussianDistribution
+import GameKit // for Audio
 import SwiftUI
 #if os(macOS)
 import AVFoundation // for sound
 #endif
 
 class ViewModel: ObservableObject {
+    var needle: Needle
     private var model = Model()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
-    @Published var imageIndex = 0
-    @Published var displayActive: Bool = false
-    @Published var truth: Double = 0.5
-    
-    private var needleNoiseTimer: Timer?
+    @Published var displayBackgroundColorful = false
     private var listenTimer: Timer?
     private var analyseTimer: Timer?
-    private var nextImageTimer: Timer?
-    private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
-
-    @Published var currentValue = 0.5
     
-    var activeDisplay: Bool { model.displayActive }
     var displayTitle: String { model.currentTheme.displayText }
     
     // used in ModelDebugView
@@ -80,28 +72,10 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func setTruthImmediately(_ t: Double) {
-        self.model.setTruth(t)
-        truth = model.truth
+    init(_ needle_: Needle) {
+        needle = needle_
     }
-    func setTruthInSteps(_ truth: Double) {
-        var delay = 0.25 * model.listenAndAnalysisTime
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
-            self.truth = self.model.truth
-        }
-        delay = 0.5 * model.listenAndAnalysisTime
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.model.setTruth(self.model.truth + 0.6 * (truth - self.model.truth))
-            self.truth = self.model.truth
-        }
-        delay = 0.95 * model.listenAndAnalysisTime
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.model.setTruth(truth)
-            self.truth = self.model.truth
-        }
-    }
-
+    
     var stampTexts: Result = Result("top", "bottom")
     
     var state: Model.State {
@@ -113,28 +87,28 @@ class ViewModel: ObservableObject {
             setState(.listen)
             switch ring {
             case .bullsEye:
-                setTruthInSteps(0)
+                needle.setValueInSteps(0.00, totalTime: model.listenAndAnalysisTime)
             case .inner:
-                setTruthInSteps(0.25)
+                needle.setValueInSteps(0.25, totalTime: model.listenAndAnalysisTime)
             case .middle:
-                setTruthInSteps(0.5)
+                needle.setValueInSteps(0.50, totalTime: model.listenAndAnalysisTime)
             case .outer:
-                setTruthInSteps(0.75)
+                needle.setValueInSteps(0.75, totalTime: model.listenAndAnalysisTime)
             case .edge:
-                setTruthInSteps(1.0)
+                needle.setValueInSteps(1.00, totalTime: model.listenAndAnalysisTime)
             }
         } else if state == .settings {
             switch ring {
             case .bullsEye:
-                setTruthImmediately(0)
+                needle.setValue(0.00)
             case .inner:
-                setTruthImmediately(0.25)
+                needle.setValue(0.25)
             case .middle:
-                setTruthImmediately(0.5)
+                needle.setValue(0.50)
             case .outer:
-                setTruthImmediately(0.75)
+                needle.setValue(0.75)
             case .edge:
-                setTruthImmediately(1.0)
+                needle.setValue(1.00)
             }
         }
         if let r = model.currentTheme.results[ring] {
@@ -142,7 +116,6 @@ class ViewModel: ObservableObject {
         } else {
             stampTexts = Result("top", "bottom")
         }
-        displayActive = model.displayActive
     }
     
     var themes: [Theme] {
@@ -155,58 +128,71 @@ class ViewModel: ObservableObject {
     }
     
     
-    func setStateWithoutTimer(_ s: Model.State) {
-        model.setState(s)
-        switch model.state {
+    func setStateWithoutTimer(_ newState: Model.State) {
+
+        // needle
+        switch newState {
         case .wait:
-            setTruthImmediately(0.5);
-            currentValue = 0.5
-            break
+            displayBackgroundColorful = true
+            needle.active(true, strongNoise: false)
+            needle.setValue(0.5)
         case .listen:
-            break
+            displayBackgroundColorful = true
+            needle.active(true, strongNoise: true)
         case .analyse:
-            break
+            displayBackgroundColorful = true
+            needle.active(true, strongNoise: false)
         case .show:
-            break
+            displayBackgroundColorful = true
+            needle.active(true, strongNoise: false)
         case .settings:
-            break
+            displayBackgroundColorful = true
+            needle.active(true, strongNoise: false)
         }
+
+        model.setState(newState)
+
     }
 
-    func setState(_ s: Model.State) {
-        setStateWithoutTimer(s)
-        
-        nextImageTimer?.invalidate();   nextImageTimer = nil
-        needleNoiseTimer?.invalidate(); needleNoiseTimer = nil
-        listenTimer?.invalidate();      listenTimer = nil
-        analyseTimer?.invalidate();     analyseTimer = nil
+    func setState(_ newState: Model.State) {
 
-        switch model.state {
+        // Timer
+        switch newState {
         case .wait:
-            break
+            listenTimer?.invalidate();      listenTimer = nil
+            analyseTimer?.invalidate();     analyseTimer = nil
+        case .listen:
+            if listenTimer == nil {
+                listeningProgress = 0.0
+                listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
+                listenTimer?.tolerance = 0.1
+            }
+            analyseTimer?.invalidate();     analyseTimer = nil
+        case .analyse:
+            listenTimer?.invalidate();      listenTimer = nil
+            if analyseTimer == nil {
+                analyseProgress = 0.0
+                analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
+            }
+        case .show:
+            listenTimer?.invalidate();      listenTimer = nil
+            analyseTimer?.invalidate();     analyseTimer = nil
+        case .settings:
+            listenTimer?.invalidate();      listenTimer = nil
+            analyseTimer?.invalidate();     analyseTimer = nil
+        }
+
+        // sounds
+        switch newState {
         case .listen:
             AudioServicesPlaySystemSound(C.Sounds.startRecording)
-            listeningProgress = 0.0
-            listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
         case .analyse:
             AudioServicesPlaySystemSound(C.Sounds.stopRecording)
-            analyseProgress = 0.0
-            nextImageTimer = Timer.scheduledTimer(timeInterval: 0.025, target: self, selector: #selector(nextImage), userInfo: nil, repeats: true)
-            analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
-        case .show:
-            break
-        case .settings:
+        default:
             break
         }
-        if (model.displayActive) {
-            needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
-        }
-    }
-    
-    
-    @objc func nextImage() {
-        self.imageIndex += 1
-        if self.imageIndex > 105 { self.imageIndex = 0 }
+
+        setStateWithoutTimer(newState)
     }
     
     @objc private func incrementListeningProgress() {
@@ -226,17 +212,6 @@ class ViewModel: ObservableObject {
         if analyseProgress >= 1.0 {
             setState(.show)
             analyseTimer?.invalidate();   analyseTimer = nil
-            nextImageTimer?.invalidate(); nextImageTimer = nil
-        }
-    }
-
-    @objc private func addNoise() {
-        let n = self.distribution.nextInt()
-        var noiseLevel = 0.001
-        if model.state == .listen { noiseLevel *= 3 }
-        let noise = noiseLevel * Double(n)
-        withAnimation(.default) {
-            self.currentValue = self.model.truth + noise
         }
     }
 

@@ -11,17 +11,17 @@ struct Display: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        print("redrawing Display, active = \(String(viewModel.activeDisplay))")
+        print("redrawing Display, colorful = \(String(viewModel.displayBackgroundColorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(grayedOut: !viewModel.activeDisplay)
+                DisplayBackground(colorfull: viewModel.displayBackgroundColorful)
                 Text(viewModel.displayTitle)
                     .offset(y: 15)
-                    .foregroundColor(viewModel.activeDisplay ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(viewModel.displayBackgroundColorful ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
-                NeedleView(viewModel: viewModel)
+                NeedleView()
                     .clipped()
             }
         }
@@ -31,7 +31,7 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = ViewModel(Needle())
         VStack {
             ModelDebugView(viewModel: viewModel)
             Display(viewModel: viewModel)

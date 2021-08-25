@@ -17,9 +17,7 @@ struct Model {
         case bullsEye, inner, middle, outer, edge
     }
 
-    private(set) var displayActive: Bool = true
     private(set) var state: State = .wait
-    private(set) var truth = 0.5
     
     private enum TimingEnum {
         case fast, medium, slow
@@ -92,18 +90,9 @@ struct Model {
     var listenAndAnalysisTime: Double {
         get { listenTime + analysisTime }
     }
-
-    mutating func setTruth(_ t: Double) {
-        truth = t
-    }
     
     mutating func setState(_ s: State) {
         state = s
-        if (state == .wait) {
-            displayActive = false
-        } else {
-            displayActive = true
-        }
     }
     
     init() {

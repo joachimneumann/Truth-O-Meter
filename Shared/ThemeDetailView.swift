@@ -39,7 +39,7 @@ struct ThemeDetailView: View {
 
 struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = ViewModel(Needle())
         ThemeDetailView(viewModel: viewModel, theme: viewModel.currentTheme)
     }
 }

@@ -164,7 +164,7 @@ struct RecordButton: View {
 
 struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = ViewModel(Needle())
         viewModel.setStateWithoutTimer(.settings)
         return VStack {
             ModelDebugView(viewModel: viewModel)

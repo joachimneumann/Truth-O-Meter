@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-    var grayedOut: Bool
+    var colorfull: Bool
 
     var body: some View {
         return ZStack {
@@ -16,16 +16,16 @@ struct DisplayBackground: View {
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
-                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: boldStrokeStyle)
+                        .stroke(colorfull ? C.Colors.gray : C.Colors.lightGray, style: boldStrokeStyle)
                         .clipped()
                     MainArcRed()
-                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: boldStrokeStyle)
+                        .stroke(colorfull ? C.Colors.bullshitRed : C.Colors.lightGray, style: boldStrokeStyle)
                         .clipped()
                     TopArcBlack()
-                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.gray, style: fineStrokeStyle)
+                        .stroke(colorfull ? C.Colors.gray : C.Colors.lightGray, style: fineStrokeStyle)
                         .clipped()
                     TopArcRed()
-                        .stroke(grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed, style: fineStrokeStyle)
+                        .stroke(colorfull ? C.Colors.bullshitRed : C.Colors.lightGray, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .stroke(C.Colors.lightGray, lineWidth: 2)
@@ -110,7 +110,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(grayedOut: true)
+        DisplayBackground(colorfull: true)
             .aspectRatio(1.9, contentMode: .fit)
             .padding()
     }
