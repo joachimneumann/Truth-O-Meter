@@ -83,7 +83,8 @@ struct ConcentricCircles: View {
     var isSettings: Bool
     var measures: CircleMeasures
     var body: some View {
-        ZStack {
+        print("ConcentricCircles: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
+        return ZStack {
             Circle()
                 .stroke(C.Colors.paleLightGray, lineWidth: measures.outerRingWidth)
             Circle()
@@ -93,31 +94,31 @@ struct ConcentricCircles: View {
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.edgePadding)
                 .onTapGesture {
-                    viewModel.tap(Model.TapPrecision.edge)
+                    viewModel.tap(TapPrecision.edge)
                 }
             Circle()
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.outerPadding)
                 .onTapGesture {
-                    viewModel.tap(Model.TapPrecision.outer)
+                    viewModel.tap(TapPrecision.outer)
                 }
             Circle()
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.middlePadding)
                 .onTapGesture {
-                    viewModel.tap(Model.TapPrecision.middle)
+                    viewModel.tap(TapPrecision.middle)
                 }
             Circle()
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.innerPadding)
                 .onTapGesture {
-                    viewModel.tap(Model.TapPrecision.inner)
+                    viewModel.tap(TapPrecision.inner)
                 }
             Circle()
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.bullsEyePadding)
                 .onTapGesture {
-                    viewModel.tap(Model.TapPrecision.bullsEye)
+                    viewModel.tap(TapPrecision.bullsEye)
                 }
             if isSettings {
                 Circle()
@@ -141,7 +142,8 @@ struct ConcentricCircles: View {
 struct RecordButton: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { (geo) in
+        print("RecordButton: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
+        return GeometryReader { (geo) in
             let circleMeasures = CircleMeasures(min(geo.size.width, geo.size.height))
             ZStack {
                 switch(viewModel.state) {
@@ -164,7 +166,7 @@ struct RecordButton: View {
 
 struct CircularProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel(Needle())
+        let viewModel = ViewModel()
         viewModel.setStateWithoutTimer(.settings)
         return VStack {
             ModelDebugView(viewModel: viewModel)

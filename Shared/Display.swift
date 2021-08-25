@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct Display: View {
-    @ObservedObject var viewModel: ViewModel
+    var colorful: Bool
+    var title: String
 
     var body: some View {
-        print("redrawing Display, colorful = \(String(viewModel.displayBackgroundColorful))")
+        print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(colorfull: viewModel.displayBackgroundColorful)
-                Text(viewModel.displayTitle)
+                DisplayBackground(colorfull: colorful)
+                Text(title)
                     .offset(y: 15)
-                    .foregroundColor(viewModel.displayBackgroundColorful ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(colorful ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
                 NeedleView()
                     .clipped()
@@ -31,10 +32,10 @@ struct Display: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel(Needle())
+        let viewModel = ViewModel()
         VStack {
             ModelDebugView(viewModel: viewModel)
-            Display(viewModel: viewModel)
+            Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
                 .padding()
         }
     }

@@ -29,6 +29,6 @@ struct ModelDebugView: View {
 
 struct ModelDebugView_Previews: PreviewProvider {
     static var previews: some View {
-        ModelDebugView(viewModel: ViewModel(Needle()))
+        ModelDebugView(viewModel: ViewModel())
     }
 }

@@ -49,7 +49,7 @@ struct TheContentView: View {
         return NavigationView {
             ZStack {
                 VStack {
-                    Display(viewModel: viewModel)
+                    Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
                         .padding(.top, 30)
                         .padding()
                     Spacer()
@@ -79,7 +79,7 @@ struct TheContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel(Needle())
+        let viewModel = ViewModel()
 //                VStack {
 //                    ModelDebugView(viewModel: viewModel)
 //                    ContentView(viewModel: viewModel)

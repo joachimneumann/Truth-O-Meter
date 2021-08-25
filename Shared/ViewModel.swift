@@ -13,16 +13,18 @@ import AVFoundation // for sound
 #endif
 
 class ViewModel: ObservableObject {
-    var needle: Needle
+    
+    var needle = Needle()
+    
     private var model = Model()
+
+    @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
     private var listenTimer: Timer?
     private var analyseTimer: Timer?
-    
-    var displayTitle: String { model.currentTheme.displayText }
-    
+        
     // used in ModelDebugView
     var stateName: String {
         switch model.state {
@@ -71,31 +73,26 @@ class ViewModel: ObservableObject {
             }
         }
     }
-    
-    init(_ needle_: Needle) {
-        needle = needle_
-    }
-    
-    var stampTexts: Result = Result("top", "bottom")
-    
+        
     var state: Model.State {
         get { model.state }
     }
     
-    func tap(_ ring: Model.TapPrecision) {
+    func tap(_ ring: TapPrecision) {
+        print("tap(ring = \(ring))")
         if state == .wait {
             setState(.listen)
             switch ring {
             case .bullsEye:
-                needle.setValueInSteps(0.00, totalTime: model.listenAndAnalysisTime)
+                needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
             case .inner:
-                needle.setValueInSteps(0.25, totalTime: model.listenAndAnalysisTime)
+                needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
             case .middle:
-                needle.setValueInSteps(0.50, totalTime: model.listenAndAnalysisTime)
+                needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
             case .outer:
-                needle.setValueInSteps(0.75, totalTime: model.listenAndAnalysisTime)
+                needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
             case .edge:
-                needle.setValueInSteps(1.00, totalTime: model.listenAndAnalysisTime)
+                needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
             }
         } else if state == .settings {
             switch ring {
@@ -111,22 +108,14 @@ class ViewModel: ObservableObject {
                 needle.setValue(1.00)
             }
         }
-        if let r = model.currentTheme.results[ring] {
-            stampTexts = r
+        if let r = settings.currentTheme.results[ring] {
+            settings.currentTheme.stampTexts = r
         } else {
-            stampTexts = Result("top", "bottom")
+            settings.currentTheme.stampTexts = Result("top", "bottom")
         }
+        print("settings.currentTheme.stampTexts = \(settings.currentTheme.stampTexts.top)")
+        self.objectWillChange.send()
     }
-    
-    var themes: [Theme] {
-        model.themes
-    }
-    
-    var currentTheme: Theme {
-        get { model.currentTheme }
-        set { model.currentTheme = newValue }
-    }
-    
     
     func setStateWithoutTimer(_ newState: Model.State) {
 
@@ -198,7 +187,7 @@ class ViewModel: ObservableObject {
     
     @objc private func incrementListeningProgress() {
         DispatchQueue.main.async {
-            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/self.model.listenTime)
+            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/self.settings.listenTime)
         }
         if listeningProgress >= 1.0 {
             setState(.analyse)
@@ -208,7 +197,7 @@ class ViewModel: ObservableObject {
 
     @objc private func incrementAnalyseProgress() {
         DispatchQueue.main.async {
-            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/self.model.analysisTime)
+            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/self.settings.analysisTime)
         }
         if analyseProgress >= 1.0 {
             setState(.show)

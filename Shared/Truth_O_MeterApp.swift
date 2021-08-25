@@ -10,14 +10,13 @@ import SwiftUI
 @main
 struct Truth_O_MeterApp: App {
     var body: some Scene {
-        let needle = Needle()
-        let viewModel = ViewModel(needle)
+        let viewModel = ViewModel()
         viewModel.setState(.wait)
         return WindowGroup {
             VStack {
 //                ModelDebugView(viewModel: viewModel)
                 ContentView(viewModel: viewModel)
-                    .environmentObject(needle)
+                    .environmentObject(viewModel.needle)
             }
         }
     }
@@ -26,7 +25,7 @@ struct Truth_O_MeterApp: App {
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
         let needle = Needle()
-        ContentView(viewModel: ViewModel(needle))
+        ContentView(viewModel: ViewModel())
             .environmentObject(needle)
     }
 }

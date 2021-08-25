@@ -13,92 +13,12 @@ struct Model {
         case wait, listen, analyse, show, settings
     }
 
-    enum TapPrecision {
-        case bullsEye, inner, middle, outer, edge
-    }
-
     private(set) var state: State = .wait
-    
-    private enum TimingEnum {
-        case fast, medium, slow
-    }
-    
-    private var listenTiming: TimingEnum = .fast
-    private var analysisTiming: TimingEnum = .fast
-
-
-    let bullshitTheme = Theme(
-        displayText: "Bullshit-O-Meter",
-        results: [
-            TapPrecision.bullsEye:      Result("True", nil),
-            Model.TapPrecision.inner:   Result("Mostly", "True"),
-            Model.TapPrecision.middle:  Result("undecided", nil),
-            Model.TapPrecision.outer:   Result("Bullshit", nil),
-            Model.TapPrecision.edge:    Result("Absolute", "Bullshit")
-        ])
-    
-    let truthTheme = Theme(
-        displayText: "Truth-O-Meter",
-        results: [
-            TapPrecision.bullsEye:      Result("Absolute", "Bullshit"),
-            Model.TapPrecision.inner:   Result("Bullshit", nil),
-            Model.TapPrecision.middle:  Result("undecided", nil),
-            Model.TapPrecision.outer:   Result("Mostly", "True"),
-            Model.TapPrecision.edge:    Result("True", nil)
-        ])
-
-    let singingTheme = Theme(
-        displayText: "Voice-O-Meter",
-        results: [
-            TapPrecision.bullsEye:      Result("Sexy", nil),
-            Model.TapPrecision.inner:   Result("impressive", nil),
-            Model.TapPrecision.middle:  Result("good", nil),
-            Model.TapPrecision.outer:   Result("could be", "better"),
-            Model.TapPrecision.edge:    Result("flimsy", nil)
-        ])
-    
-    var themes: [Theme] {
-        [bullshitTheme, truthTheme, singingTheme]
-    }
-    var currentTheme:Theme
-
-    var listenTime: Double {
-        get {
-            switch listenTiming {
-            case .slow:
-                return 10.0
-            case .medium:
-                return 6.0
-            case .fast:
-                return 2.0
-            }
-        }
-    }
-    
-    var analysisTime: Double {
-        get {
-            switch analysisTiming {
-            case .slow:
-                return 10.0
-            case .medium:
-                return 6.0
-            case .fast:
-                return 2.0
-            }
-        }
-    }
-    var listenAndAnalysisTime: Double {
-        get { listenTime + analysisTime }
-    }
     
     mutating func setState(_ s: State) {
         state = s
     }
     
-    init() {
-        currentTheme = bullshitTheme
-    }
-
 }
 
 

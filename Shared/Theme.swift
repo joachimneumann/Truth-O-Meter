@@ -13,8 +13,17 @@ struct Result {
     init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
 }
 
-struct Theme: Identifiable {
+class Theme: Identifiable {
     var id = UUID()
-    let displayText: String
-    let results: [Model.TapPrecision:Result]
+    let title: String
+    let results: [TapPrecision:Result]
+    var stampTexts: Result = Result("top", "bottom")
+
+    init(title: String, results: [TapPrecision:Result]) {
+        self.title = title
+        self.results = results
+        stampTexts = results[TapPrecision.bullsEye]!
+    }
+    
+
 }

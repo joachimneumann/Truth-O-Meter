@@ -10,18 +10,19 @@ import SwiftUI
 struct ThemeDetailView: View {
     @ObservedObject var viewModel: ViewModel
     var theme: Theme
-    
     var body: some View {
-        GeometryReader { geo in
+        viewModel.settings.currentTheme = theme
+        print("ThemeDetailView: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
+        return GeometryReader { geo in
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
-                    Display(viewModel: viewModel)
+                    Display(colorful:true, title: viewModel.settings.currentTheme.title)
                         .frame(height: geo.size.height * 0.2)
                     Spacer()
-                    Text(viewModel.stampTexts.top)
+                    Text(viewModel.settings.currentTheme.stampTexts.top)
                         .font(.system(size: 20, weight: .bold))
-                    Text(viewModel.stampTexts.bottom ?? " ")
+                    Text(viewModel.settings.currentTheme.stampTexts.bottom ?? " ")
                         .font(.system(size: 20, weight: .bold))
                     Spacer()
                     RecordButton(viewModel: viewModel)
@@ -39,7 +40,7 @@ struct ThemeDetailView: View {
 
 struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel(Needle())
-        ThemeDetailView(viewModel: viewModel, theme: viewModel.currentTheme)
+        let viewModel = ViewModel()
+        ThemeDetailView(viewModel: viewModel, theme: viewModel.settings.currentTheme)
     }
 }

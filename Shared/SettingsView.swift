@@ -15,7 +15,7 @@ struct ThemeCell: View {
         return HStack {
             NavigationLink(destination: ThemeDetailView(viewModel: viewModel, theme: theme)) {
                 HStack {
-                    Text(theme.displayText)
+                    Text(theme.title)
                     Spacer()
                 }
             }
@@ -42,7 +42,7 @@ struct SettingsView: View {
             .padding(.bottom, 20)
             List {
                 Section(header: Text("Theme")) {
-                    ForEach(viewModel.themes) { theme in
+                    ForEach(viewModel.settings.themes) { theme in
                         ThemeCell(viewModel: viewModel, theme: theme)
                     }
                 }
@@ -53,6 +53,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(viewModel: ViewModel(Needle()))
+        SettingsView(viewModel: ViewModel())
     }
 }

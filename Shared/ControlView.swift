@@ -47,7 +47,7 @@ struct ShowView: View {
     var body: some View {
         VStack {
             Spacer()
-            Stamp(texts: viewModel.stampTexts)
+            Stamp(texts: viewModel.settings.currentTheme.stampTexts)
                 .onTapGesture {
                     viewModel.setState(.wait)
                 }
@@ -92,7 +92,7 @@ struct ControlView: View {
 
 struct RecordButton_Previews : PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel(Needle())
+        let viewModel = ViewModel()
         viewModel.setState(.show)
         return VStack {
             Spacer()
