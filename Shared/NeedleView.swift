@@ -23,7 +23,7 @@ struct NeedleView: View {
                 let a = temp.currentPoint!
                 let b = C.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
-                    .stroke(needle.grayedOut ? C.Colors.lightGray : C.Colors.bullshitRed,
+                    .stroke(needle.colorfull ? C.Colors.bullshitRed : C.Colors.lightGray,
                             style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
             }
         }

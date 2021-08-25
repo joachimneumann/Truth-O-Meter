@@ -34,6 +34,7 @@ struct AnalyseView: View {
             HorizontalProgressBar(value:  viewModel.analyseProgress)
             Text("Analysing...")
                 .font(.headline)
+                .foregroundColor(C.Colors.gray)
             Spacer()
         }
         .aspectRatio(1.0, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)

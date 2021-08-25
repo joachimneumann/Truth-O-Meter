@@ -21,7 +21,7 @@ struct ModelDebugView: View {
                 Text("settings").tag(4)
             }
             .pickerStyle(SegmentedPickerStyle())
-            Text("state \(viewModel.stateName) grayedOut=\(String(needle.grayedOut))")
+            Text("state \(viewModel.stateName) colorfull=\(String(needle.colorfull))")
         }
         .padding(.bottom, 20)
     }

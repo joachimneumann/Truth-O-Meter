@@ -130,11 +130,13 @@ class ViewModel: ObservableObject {
     
     func setStateWithoutTimer(_ newState: Model.State) {
 
+        model.setState(newState)
+
         // needle
         switch newState {
         case .wait:
-            displayBackgroundColorful = true
-            needle.active(true, strongNoise: false)
+            displayBackgroundColorful = false
+            needle.active(false, strongNoise: false)
             needle.setValue(0.5)
         case .listen:
             displayBackgroundColorful = true
@@ -149,12 +151,11 @@ class ViewModel: ObservableObject {
             displayBackgroundColorful = true
             needle.active(true, strongNoise: false)
         }
-
-        model.setState(newState)
-
     }
 
     func setState(_ newState: Model.State) {
+
+        model.setState(newState)
 
         // Timer
         switch newState {
