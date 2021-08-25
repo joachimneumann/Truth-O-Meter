@@ -11,7 +11,7 @@ struct Display: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        // print("redrawing Display, active = \(String(viewModel.activeDisplay))")
+        print("redrawing Display, active = \(String(viewModel.activeDisplay))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {

@@ -50,9 +50,7 @@ struct ShowView: View {
             Spacer()
             Stamp(texts: viewModel.stampTexts)
                 .onTapGesture {
-                    withAnimation {
-                        viewModel.setState(.wait)
-                    }
+                    viewModel.setState(.wait)
                 }
             Spacer()
         }

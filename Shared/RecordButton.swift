@@ -14,23 +14,11 @@ struct CircleMeasures {
     let filledCirclePadding: CGFloat
     let cornerRadius:        CGFloat
     let rectanglePadding:    CGFloat
-    let tapBullsEye:         CGFloat
-    let tapInner:            CGFloat
-    let tapMiddle:           CGFloat
-    let tapOuter:            CGFloat
-    let tapEdge:             CGFloat
 
-    let filledCircleRadius:  CGFloat
-    
-    let edgeLineWidth:       CGFloat
     let edgePadding:         CGFloat
-    let outerLineWidth:      CGFloat
     let outerPadding:        CGFloat
-    let middleLineWidth:     CGFloat
     let middlePadding:       CGFloat
-    let innerLineWidth:      CGFloat
     let innerPadding:        CGFloat
-    let bullsEyeLineWidth:   CGFloat
     let bullsEyePadding:     CGFloat
 
     init(_ d: CGFloat) {
@@ -44,23 +32,18 @@ struct CircleMeasures {
         // Instead of 0, 0.2, 0.4, 0.6, 0.8, 1.0
         // I make the bulls eye and the out ring a bit larger
         // This makes the edge results easier to hit.
-        tapBullsEye         = 0.2 + 0.05
-        tapInner            = 0.4 + 0.0125
-        tapMiddle           = 0.6 - 0.0125
-        tapOuter            = 0.8 - 0.05
-        tapEdge             = 1.0
+        let tapBullsEye:CGFloat = 0.2 + 0.05
+        let tapInner:CGFloat    = 0.4 + 0.0125
+        let tapMiddle:CGFloat   = 0.6 - 0.0125
+        let tapOuter:CGFloat    = 0.8 - 0.05
+        let tapEdge:CGFloat     = 1.0
 
-        filledCircleRadius = radius - filledCirclePadding
-        edgeLineWidth     = filledCircleRadius * (1.0 - tapOuter)
-        edgePadding       = filledCircleRadius  * (1.0 - (1.0+tapOuter)/2) + filledCirclePadding
-        outerLineWidth    = filledCircleRadius * (tapOuter - tapMiddle)
-        outerPadding      = filledCircleRadius  * (1.0 - (tapOuter+tapMiddle)/2) + filledCirclePadding
-        middleLineWidth   = filledCircleRadius * (tapMiddle - tapInner)
-        middlePadding     = filledCircleRadius  * (1.0 - (tapMiddle+tapInner)/2) + filledCirclePadding
-        innerLineWidth    = filledCircleRadius * (tapInner - tapBullsEye)
-        innerPadding      = filledCircleRadius  * (1.0 - (tapInner+tapBullsEye)/2) + filledCirclePadding
-        bullsEyeLineWidth = filledCircleRadius * (tapBullsEye)
-        bullsEyePadding   = filledCircleRadius - bullsEyeLineWidth/2 + filledCirclePadding
+        let filledCircleRadius = radius - filledCirclePadding
+        edgePadding     = filledCirclePadding + filledCircleRadius * (1.0 - tapEdge)
+        outerPadding    = filledCirclePadding + filledCircleRadius * (1.0 - tapOuter)
+        middlePadding   = filledCirclePadding + filledCircleRadius * (1.0 - tapMiddle)
+        innerPadding    = filledCirclePadding + filledCircleRadius * (1.0 - tapInner)
+        bullsEyePadding = filledCirclePadding + filledCircleRadius * (1.0 - tapBullsEye)
     }
 }
 
@@ -74,21 +57,6 @@ struct WaitRecordButton: View {
             Circle()
                 .fill(C.Colors.bullshitRed)
                 .padding(measures.filledCirclePadding)
-        }
-        .onClickGesture { point in
-            let distanceFromCenter = sqrt(
-                pow((point.x - measures.filledCircleRadius), 2) +
-                pow((point.y - measures.filledCircleRadius), 2))
-            let normalisedDistanceFromCenter = distanceFromCenter / measures.filledCircleRadius
-            var tapPrecision = Model.TapPrecision.bullsEye
-            if normalisedDistanceFromCenter > measures.tapBullsEye { tapPrecision = Model.TapPrecision.inner   }
-            if normalisedDistanceFromCenter > measures.tapInner    { tapPrecision = Model.TapPrecision.middle  }
-            if normalisedDistanceFromCenter > measures.tapMiddle   { tapPrecision = Model.TapPrecision.outer   }
-            if normalisedDistanceFromCenter > measures.tapOuter    { tapPrecision = Model.TapPrecision.outside }
-            self.viewModel.tabWithPrecision(tapPrecision)
-            withAnimation {
-                self.viewModel.setState(.listen)
-            }
         }
     }
 }
@@ -110,29 +78,62 @@ struct ListenRecordButton: View {
     }
 }
 
-struct SettingsRecordButton: View {
+struct ConcentricCircles: View {
+    @ObservedObject var viewModel: ViewModel
+    var isSettings: Bool
     var measures: CircleMeasures
     var body: some View {
-        Circle()
-            .stroke(C.Colors.paleLightGray, lineWidth: measures.outerRingWidth)
-        Circle()
-            .fill(C.Colors.paleBullshitRed)
-            .padding(measures.filledCirclePadding)
-        Circle()
-            .stroke(C.Colors.bullshitRed, lineWidth: measures.edgeLineWidth)
-            .padding(measures.edgePadding)
-        Circle()
-            .stroke(C.Colors.bullshitRed, lineWidth: measures.outerLineWidth)
-            .padding(measures.outerPadding)
-        Circle()
-            .stroke(C.Colors.bullshitRed, lineWidth: measures.middleLineWidth)
-            .padding(measures.middlePadding)
-        Circle()
-            .stroke(C.Colors.bullshitRed, lineWidth: measures.innerLineWidth)
-            .padding(measures.innerPadding)
-        Circle()
-            .stroke(C.Colors.bullshitRed, lineWidth: measures.bullsEyeLineWidth)
-            .padding(measures.bullsEyePadding)
+        ZStack {
+            Circle()
+                .stroke(C.Colors.paleLightGray, lineWidth: measures.outerRingWidth)
+            Circle()
+                .fill(C.Colors.paleBullshitRed)
+                .padding(measures.filledCirclePadding)
+            Circle()
+                .fill(C.Colors.bullshitRed)
+                .padding(measures.edgePadding)
+                .onTapGesture {
+                    viewModel.tap(Model.TapPrecision.edge)
+                }
+            Circle()
+                .fill(C.Colors.bullshitRed)
+                .padding(measures.outerPadding)
+                .onTapGesture {
+                    viewModel.tap(Model.TapPrecision.outer)
+                }
+            Circle()
+                .fill(C.Colors.bullshitRed)
+                .padding(measures.middlePadding)
+                .onTapGesture {
+                    viewModel.tap(Model.TapPrecision.middle)
+                }
+            Circle()
+                .fill(C.Colors.bullshitRed)
+                .padding(measures.innerPadding)
+                .onTapGesture {
+                    viewModel.tap(Model.TapPrecision.inner)
+                }
+            Circle()
+                .fill(C.Colors.bullshitRed)
+                .padding(measures.bullsEyePadding)
+                .onTapGesture {
+                    viewModel.tap(Model.TapPrecision.bullsEye)
+                }
+            if isSettings {
+                Circle()
+                    .stroke(C.Colors.lightGray, lineWidth: 1)
+                    .padding(measures.outerPadding)
+                Circle()
+                    .stroke(C.Colors.lightGray, lineWidth: 1)
+                    .padding(measures.middlePadding)
+                Circle()
+                    .stroke(C.Colors.lightGray, lineWidth: 1)
+                    .padding(measures.innerPadding)
+                Circle()
+                    .stroke(C.Colors.lightGray, lineWidth: 1)
+                    .padding(measures.bullsEyePadding)
+            }
+        }
     }
 }
 
@@ -145,7 +146,7 @@ struct RecordButton: View {
             ZStack {
                 switch(viewModel.state) {
                 case .wait:
-                    WaitRecordButton(viewModel: viewModel, measures: circleMeasures)
+                    ConcentricCircles(viewModel: viewModel, isSettings: false, measures: circleMeasures)
                 case .listen:
                     ListenRecordButton(viewModel: viewModel, measures: circleMeasures)
                 case .analyse:
@@ -153,7 +154,7 @@ struct RecordButton: View {
                 case .show:
                     Text("show")
                 case .settings:
-                    SettingsRecordButton(measures: circleMeasures)
+                    ConcentricCircles(viewModel: viewModel, isSettings: true, measures: circleMeasures)
                 }
             }
         }
@@ -171,63 +172,5 @@ struct CircularProgressBar_Previews: PreviewProvider {
                 .padding(30)
             Spacer()
         }
-    }
-}
-
-struct ClickGesture: Gesture {
-    let count: Int
-    let coordinateSpace: CoordinateSpace
-    
-    typealias Value = SimultaneousGesture<TapGesture, DragGesture>.Value
-    
-    init(count: Int = 1, coordinateSpace: CoordinateSpace = .local) {
-        precondition(count > 0, "Count must be greater than or equal to 1.")
-        self.count = count
-        self.coordinateSpace = coordinateSpace
-    }
-    
-    var body: SimultaneousGesture<TapGesture, DragGesture> {
-        SimultaneousGesture(
-            TapGesture(count: count),
-            DragGesture(minimumDistance: 0, coordinateSpace: coordinateSpace)
-        )
-    }
-    
-    func onEnded(perform action: @escaping (CGPoint) -> Void) -> _EndedGesture<ClickGesture> {
-        self.onEnded { (value: Value) -> Void in
-            guard value.first != nil else { return }
-            guard let location = value.second?.startLocation else { return }
-            guard let endLocation = value.second?.location else { return }
-            guard ((location.x-1)...(location.x+1)).contains(endLocation.x),
-                  ((location.y-1)...(location.y+1)).contains(endLocation.y) else {
-                return
-            }
-            action(location)
-        }
-    }
-}
-
-extension View {
-    func onClickGesture(
-        count: Int,
-        coordinateSpace: CoordinateSpace = .local,
-        perform action: @escaping (CGPoint) -> Void
-    ) -> some View {
-        gesture(ClickGesture(count: count, coordinateSpace: coordinateSpace)
-            .onEnded(perform: action)
-        )
-    }
-    
-    func onClickGesture(
-        count: Int,
-        perform action: @escaping (CGPoint) -> Void
-    ) -> some View {
-        onClickGesture(count: count, coordinateSpace: .local, perform: action)
-    }
-    
-    func onClickGesture(
-        perform action: @escaping (CGPoint) -> Void
-    ) -> some View {
-        onClickGesture(count: 1, coordinateSpace: .local, perform: action)
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Stamp: View {
     var texts: Result
-    var rotated = false
+    var rotated = true
     var body: some View {
         if let bottom = texts.bottom {
             return AnyView(TwoLines(texts.top+"\n"+bottom, rotated ? -18.0 : 0.0))
@@ -72,7 +72,8 @@ struct StampText_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Stamp(texts: Result("Bullshit Bullshit", "Line 2"))
+            Stamp(texts: Result("Absolute", "Bullshit"))
+                .background(Color.yellow)
             Spacer()
         }
     }

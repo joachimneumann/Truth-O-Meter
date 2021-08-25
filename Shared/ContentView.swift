@@ -41,21 +41,12 @@ struct SettingsIcon: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = ViewModel()
-        //        VStack {
-        //            ModelDebugView(viewModel: viewModel)
-        //            ContentView(viewModel: viewModel)
-        //        }
-        ContentView(viewModel: viewModel)
-    }
-}
 
 struct TheContentView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        NavigationView {
+        print("redrawing TheContentView")
+        return NavigationView {
             ZStack {
                 VStack {
                     Display(viewModel: viewModel)
@@ -74,10 +65,25 @@ struct TheContentView: View {
                             SettingsIcon(viewModel: viewModel)
                         }
                         .navigationBarHidden(true)
+                        .simultaneousGesture(TapGesture().onEnded {
+                            viewModel.setState(.settings)
+                        })
                     }
                 }
             }
         }
         .accentColor(C.Colors.gray)
+    }
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = ViewModel()
+//                VStack {
+//                    ModelDebugView(viewModel: viewModel)
+//                    ContentView(viewModel: viewModel)
+//                }
+        ContentView(viewModel: viewModel)
     }
 }

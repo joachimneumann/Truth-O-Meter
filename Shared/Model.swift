@@ -14,7 +14,7 @@ struct Model {
     }
 
     enum TapPrecision {
-        case bullsEye, inner, middle, outer, outside
+        case bullsEye, inner, middle, outer, edge
     }
 
     private(set) var displayActive: Bool = true
@@ -36,7 +36,7 @@ struct Model {
             Model.TapPrecision.inner:   Result("Mostly", "True"),
             Model.TapPrecision.middle:  Result("undecided", nil),
             Model.TapPrecision.outer:   Result("Bullshit", nil),
-            Model.TapPrecision.outside: Result("Absolute", "Bullshit")
+            Model.TapPrecision.edge:    Result("Absolute", "Bullshit")
         ])
     
     let truthTheme = Theme(
@@ -46,7 +46,7 @@ struct Model {
             Model.TapPrecision.inner:   Result("Bullshit", nil),
             Model.TapPrecision.middle:  Result("undecided", nil),
             Model.TapPrecision.outer:   Result("Mostly", "True"),
-            Model.TapPrecision.outside: Result("True", nil)
+            Model.TapPrecision.edge:    Result("True", nil)
         ])
 
     let singingTheme = Theme(
@@ -56,7 +56,7 @@ struct Model {
             Model.TapPrecision.inner:   Result("impressive", nil),
             Model.TapPrecision.middle:  Result("good", nil),
             Model.TapPrecision.outer:   Result("could be", "better"),
-            Model.TapPrecision.outside: Result("flimsy", nil)
+            Model.TapPrecision.edge:    Result("flimsy", nil)
         ])
     
     var themes: [Theme] {

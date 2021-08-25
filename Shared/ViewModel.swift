@@ -13,10 +13,12 @@ import AVFoundation // for sound
 #endif
 
 class ViewModel: ObservableObject {
-    @Published private var model = Model()
+    private var model = Model()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var imageIndex = 0
+    @Published var displayActive: Bool = false
+    @Published var truth: Double = 0.5
     
     private var needleNoiseTimer: Timer?
     private var listenTimer: Timer?
@@ -78,21 +80,25 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func setTruthHard(_ t: Double) {
+    func setTruthImmediately(_ t: Double) {
         self.model.setTruth(t)
+        truth = model.truth
     }
-    func setTruthDynamic(_ truth: Double) {
+    func setTruthInSteps(_ truth: Double) {
         var delay = 0.25 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.3 * (truth - self.model.truth))
+            self.truth = self.model.truth
         }
         delay = 0.5 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(self.model.truth + 0.6 * (truth - self.model.truth))
+            self.truth = self.model.truth
         }
         delay = 0.95 * model.listenAndAnalysisTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.model.setTruth(truth)
+            self.truth = self.model.truth
         }
     }
 
@@ -101,13 +107,42 @@ class ViewModel: ObservableObject {
     var state: Model.State {
         get { model.state }
     }
-        
-    func tabWithPrecision(_ p: Model.TapPrecision) {
-        if let r = model.currentTheme.results[p] {
+    
+    func tap(_ ring: Model.TapPrecision) {
+        if state == .wait {
+            setState(.listen)
+            switch ring {
+            case .bullsEye:
+                setTruthInSteps(0)
+            case .inner:
+                setTruthInSteps(0.25)
+            case .middle:
+                setTruthInSteps(0.5)
+            case .outer:
+                setTruthInSteps(0.75)
+            case .edge:
+                setTruthInSteps(1.0)
+            }
+        } else if state == .settings {
+            switch ring {
+            case .bullsEye:
+                setTruthImmediately(0)
+            case .inner:
+                setTruthImmediately(0.25)
+            case .middle:
+                setTruthImmediately(0.5)
+            case .outer:
+                setTruthImmediately(0.75)
+            case .edge:
+                setTruthImmediately(1.0)
+            }
+        }
+        if let r = model.currentTheme.results[ring] {
             stampTexts = r
         } else {
             stampTexts = Result("top", "bottom")
         }
+        displayActive = model.displayActive
     }
     
     var themes: [Theme] {
@@ -124,7 +159,7 @@ class ViewModel: ObservableObject {
         model.setState(s)
         switch model.state {
         case .wait:
-            setTruthHard(0.5);
+            setTruthImmediately(0.5);
             currentValue = 0.5
             break
         case .listen:
@@ -141,12 +176,10 @@ class ViewModel: ObservableObject {
     func setState(_ s: Model.State) {
         setStateWithoutTimer(s)
         
-        nextImageTimer?.invalidate()
-        nextImageTimer = nil
-        needleNoiseTimer?.invalidate()
-        needleNoiseTimer = nil
-        listenTimer?.invalidate()
-        listenTimer = nil
+        nextImageTimer?.invalidate();   nextImageTimer = nil
+        needleNoiseTimer?.invalidate(); needleNoiseTimer = nil
+        listenTimer?.invalidate();      listenTimer = nil
+        analyseTimer?.invalidate();     analyseTimer = nil
 
         switch model.state {
         case .wait:
@@ -182,7 +215,7 @@ class ViewModel: ObservableObject {
         }
         if listeningProgress >= 1.0 {
             setState(.analyse)
-            listenTimer?.invalidate()
+            listenTimer?.invalidate(); listenTimer = nil
         }
     }
 
@@ -192,11 +225,11 @@ class ViewModel: ObservableObject {
         }
         if analyseProgress >= 1.0 {
             setState(.show)
-            analyseTimer?.invalidate()
-            nextImageTimer?.invalidate()
+            analyseTimer?.invalidate();   analyseTimer = nil
+            nextImageTimer?.invalidate(); nextImageTimer = nil
         }
     }
-    
+
     @objc private func addNoise() {
         let n = self.distribution.nextInt()
         var noiseLevel = 0.001

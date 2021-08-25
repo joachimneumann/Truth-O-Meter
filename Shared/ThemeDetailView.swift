@@ -9,24 +9,31 @@ import SwiftUI
 
 struct ThemeDetailView: View {
     @ObservedObject var viewModel: ViewModel
-    var settingsViewModel = ViewModel()
     var theme: Theme
-
+    
     var body: some View {
-        settingsViewModel.setState(.settings)
-        settingsViewModel.currentTheme = theme
-        return VStack (alignment: .center) {
-            Display(viewModel: settingsViewModel)
-            Spacer()
-            Stamp(texts: viewModel.currentTheme.results[Model.TapPrecision.bullsEye]!, rotated: false)
-            Spacer()
-            RecordButton(viewModel: settingsViewModel)
-                .allowsHitTesting(false)
-            Spacer()
+        GeometryReader { geo in
+            HStack {
+                Spacer()
+                VStack (alignment: .center) {
+                    Display(viewModel: viewModel)
+                        .frame(height: geo.size.height * 0.2)
+                    Spacer()
+                    Text(viewModel.stampTexts.top)
+                        .font(.system(size: 20, weight: .bold))
+                    Text(viewModel.stampTexts.bottom ?? " ")
+                        .font(.system(size: 20, weight: .bold))
+                    Spacer()
+                    RecordButton(viewModel: viewModel)
+                        .frame(height: geo.size.height * 0.39)
+                        .background(Color.green)
+                }
+                .background(Color.yellow)
+                .padding()
+                .navigationBarTitle("", displayMode: .inline)
+                Spacer()
+            }
         }
-        .padding(.bottom, 20)
-        .padding(.top, 20)
-        .navigationBarTitle("", displayMode: .inline)
     }
 }
 
