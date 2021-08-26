@@ -86,7 +86,7 @@ struct RecordButton: View {
 struct RecordButton_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        viewModel.setStateWithoutTimer(.listen)
+        viewModel.setState(.listen)
         return VStack {
             ModelDebugView(viewModel: viewModel)
             RecordButton(viewModel: viewModel)

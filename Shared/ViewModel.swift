@@ -21,7 +21,6 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
-    private var analyseTimer: Timer?
         
     // used in ModelDebugView
     var stateName: String {
@@ -57,17 +56,17 @@ class ViewModel: ObservableObject {
         set{
             switch newValue {
             case 0:
-                setStateWithoutTimer(.wait)
+                setState(.wait)
             case 1:
-                setStateWithoutTimer(.listen)
+                setState(.listen)
             case 2:
-                setStateWithoutTimer(.analyse)
+                setState(.analyse)
             case 3:
-                setStateWithoutTimer(.show)
+                setState(.show)
             case 4:
-                setStateWithoutTimer(.settings)
+                setState(.settings)
             default:
-                setStateWithoutTimer(.wait)
+                setState(.wait)
             }
         }
     }
@@ -115,8 +114,7 @@ class ViewModel: ObservableObject {
         self.objectWillChange.send()
     }
     
-    func setStateWithoutTimer(_ newState: Model.State) {
-
+    func setState(_ newState: Model.State) {
         model.setState(newState)
 
         // needle
@@ -139,48 +137,5 @@ class ViewModel: ObservableObject {
             needle.active(true, strongNoise: false)
         }
     }
-
-    func setState(_ newState: Model.State) {
-
-        model.setState(newState)
-
-        // Timer
-        switch newState {
-        case .wait:
-            analyseTimer?.invalidate();     analyseTimer = nil
-        case .listen:
-            analyseTimer?.invalidate();     analyseTimer = nil
-        case .analyse:
-            if analyseTimer == nil {
-                analyseProgress = 0.0
-                analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
-            }
-        case .show:
-            analyseTimer?.invalidate();     analyseTimer = nil
-        case .settings:
-            analyseTimer?.invalidate();     analyseTimer = nil
-        }
-
-        setStateWithoutTimer(newState)
-    }
     
-    @objc private func incrementListeningProgress() {
-        DispatchQueue.main.async {
-            self.listeningProgress += CGFloat(C.Timing.listeningTimeIncrement/self.settings.listenTime)
-        }
-        if listeningProgress >= 1.0 {
-            setState(.analyse)
-        }
-    }
-
-    @objc private func incrementAnalyseProgress() {
-        DispatchQueue.main.async {
-            self.analyseProgress += CGFloat(C.Timing.analyseTimeIncrement/self.settings.analysisTime)
-        }
-        if analyseProgress >= 1.0 {
-            setState(.show)
-            analyseTimer?.invalidate();   analyseTimer = nil
-        }
-    }
-
 }

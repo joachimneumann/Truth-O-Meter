@@ -12,26 +12,23 @@ import Combine
 let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
 
-struct WaitView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        RecordButton(viewModel: viewModel)
-    }
-}
-
-struct ListenView: View {
-    @ObservedObject var viewModel: ViewModel
-    var body: some View {
-        RecordButton(viewModel: viewModel)
-    }
-}
 
 struct AnalyseView: View {
-    @ObservedObject var viewModel: ViewModel
+    var viewModel: ViewModel
+
+    @State private var value: CGFloat = 0.0
+    private let timer = Timer.publish(every: C.Timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
+
     var body: some View {
         VStack {
             Spacer()
-            HorizontalProgressBar(value:  viewModel.analyseProgress)
+            HorizontalProgressBar(value: value)
+                .onReceive(timer) { input in
+                    value += CGFloat(C.Timing.analyseTimeIncrement/viewModel.settings.analysisTime)
+                    if value >= 1.0 {
+                        viewModel.setState(.show)
+                    }
+                }
             Text("Analysing...")
                 .font(.headline)
                 .foregroundColor(C.Colors.gray)
@@ -65,10 +62,10 @@ struct ControlView: View {
             ZStack {
                 switch(viewModel.state) {
                 case .wait:
-                    WaitView(viewModel: viewModel)
+                    RecordButton(viewModel: viewModel)
                         .padding(geo.size.width * 0.25)
                 case .listen:
-                    ListenView(viewModel: viewModel)
+                    RecordButton(viewModel: viewModel)
                         .padding(geo.size.width * 0.25)
                 case .analyse:
                     AnalyseView(viewModel: viewModel)
