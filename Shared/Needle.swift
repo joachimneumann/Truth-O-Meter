@@ -41,12 +41,12 @@ class Needle: ObservableObject {
     }
 
     func active(_ onOff: Bool, strongNoise: Bool) {
+        self.strongNoise = strongNoise
         if onOff {
             colorfull = true
             if needleNoiseTimer == nil {
                 needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
                 needleNoiseTimer?.tolerance = 0.1
-                self.strongNoise = strongNoise
             }
         } else {
             colorfull = false
@@ -56,7 +56,6 @@ class Needle: ObservableObject {
             }
         }
     }
-    
     
     
     @objc private func addNoise() {
