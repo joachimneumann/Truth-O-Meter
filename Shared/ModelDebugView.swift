@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ModelDebugView: View {
     @ObservedObject var viewModel: ViewModel
-    @EnvironmentObject var needle: Needle
 
     var body: some View {
         VStack {
@@ -21,7 +20,7 @@ struct ModelDebugView: View {
                 Text("settings").tag(4)
             }
             .pickerStyle(SegmentedPickerStyle())
-            Text("state \(viewModel.stateName) colorfull=\(String(needle.colorfull))")
+            Text("state = \(viewModel.stateName)")
         }
         .padding(.bottom, 20)
     }

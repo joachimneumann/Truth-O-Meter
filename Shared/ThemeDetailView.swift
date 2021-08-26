@@ -11,7 +11,6 @@ struct ThemeDetailView: View {
     @ObservedObject var viewModel: ViewModel
     var theme: Theme
     var body: some View {
-        viewModel.settings.currentTheme = theme
         print("ThemeDetailView: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
         return GeometryReader { geo in
             HStack {

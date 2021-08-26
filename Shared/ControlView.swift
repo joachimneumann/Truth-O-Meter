@@ -90,7 +90,7 @@ struct ControlView: View {
 }
 
 
-struct RecordButton_Previews : PreviewProvider {
+struct ControlView_Previews : PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         viewModel.setState(.show)

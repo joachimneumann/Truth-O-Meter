@@ -16,32 +16,28 @@ class Settings {
     private var analysisTiming: TimingEnum = .fast
 
     var listenTime: Double {
-        get {
-            switch listenTiming {
-            case .slow:
-                return 10.0
-            case .medium:
-                return 6.0
-            case .fast:
-                return 2.0
-            }
+        switch listenTiming {
+        case .slow:
+            return 10.0
+        case .medium:
+            return 6.0
+        case .fast:
+            return 2.0
         }
     }
     
     var analysisTime: Double {
-        get {
-            switch analysisTiming {
-            case .slow:
-                return 10.0
-            case .medium:
-                return 6.0
-            case .fast:
-                return 2.0
-            }
+        switch analysisTiming {
+        case .slow:
+            return 10.0
+        case .medium:
+            return 6.0
+        case .fast:
+            return 2.0
         }
     }
     
-    let bullshitTheme = Theme(
+    private let bullshitTheme = Theme(
         title: "Bullshit-O-Meter",
         results: [
             TapPrecision.bullsEye:      Result("True", nil),
@@ -51,7 +47,7 @@ class Settings {
             TapPrecision.edge:    Result("Absolute", "Bullshit")
         ])
     
-    let truthTheme = Theme(
+    private let truthTheme = Theme(
         title: "Truth-O-Meter",
         results: [
             TapPrecision.bullsEye:      Result("Absolute", "Bullshit"),
@@ -61,7 +57,7 @@ class Settings {
             TapPrecision.edge:    Result("True", nil)
         ])
 
-    let singingTheme = Theme(
+    private let singingTheme = Theme(
         title: "Voice-O-Meter",
         results: [
             TapPrecision.bullsEye:      Result("Sexy", nil),
@@ -74,7 +70,7 @@ class Settings {
     var themes: [Theme] {
         [bullshitTheme, truthTheme, singingTheme]
     }
-    var currentTheme:Theme
+    private(set) var currentTheme:Theme
 
     
     var listenAndAnalysisTime: Double {
