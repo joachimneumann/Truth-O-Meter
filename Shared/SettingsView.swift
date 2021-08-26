@@ -11,10 +11,10 @@ struct SettingsView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         print("SettingsView")
-        return VStack {
-            HStack {
-                Spacer()
+        return VStack(alignment: .leading) {
+            HStack  {
                 Text("Listening time")
+                    .frame(width:150, alignment: .leading)
                 Picker(selection: $viewModel.listenTimingIndex, label: Text("")) {
                     Text("2 sec").tag(0)
                     Text("4 sec").tag(1)
@@ -22,15 +22,11 @@ struct SettingsView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
-                .padding(.leading)
             }
             .padding(.leading)
-            .padding(.trailing)
-            .padding(.top, 0)
-            .padding(.bottom, 0)
             HStack {
-                Spacer()
                 Text("Analysis time")
+                    .frame(width:150, alignment: .leading)
                 Picker(selection: $viewModel.analysisTimingIndex, label: Text("")) {
                     Text("2 sec").tag(0)
                     Text("4 sec").tag(1)
@@ -38,11 +34,9 @@ struct SettingsView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
-                .padding(.leading)
+                Spacer()
             }
             .padding(.leading)
-            .padding(.trailing)
-            .padding(.top, 0)
             .padding(.bottom, 30)
             VStack {
                 ForEach(viewModel.settings.themes) { theme in
@@ -58,9 +52,10 @@ struct SettingsView: View {
                         } else {
                             HStack {
                                 Text(theme.title)
-                                    .font(Font.headline)
+//                                    .font(Font.headline)
                                 Spacer()
                             }
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 viewModel.setCurrentTheme(theme)
                             }
@@ -73,7 +68,7 @@ struct SettingsView: View {
                     Rectangle().fill(C.Colors.lightGray).frame(width: .infinity, height: 0.5, alignment: .center)//.offset(y: -10)
                 }
             }
-            Spacer(minLength: 10)
+            Spacer(minLength: 30)
         }
     }
 }
@@ -81,5 +76,13 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewModel: ViewModel())
+            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
+            .previewDisplayName("iPhone 12")
+
+        SettingsView(viewModel: ViewModel())
+            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+            .previewDisplayName("iPad Pro (12.9-inch)")
+                .padding(.top, 70)
+//                .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
     }
 }
