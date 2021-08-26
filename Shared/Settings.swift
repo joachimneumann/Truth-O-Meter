@@ -70,8 +70,12 @@ struct Settings {
     var themes: [Theme] {
         [bullshitTheme, truthTheme, singingTheme]
     }
+    
     private(set) var currentTheme:Theme
 
+    mutating func setCurrentTheme(_ newTheme: Theme) {
+        currentTheme = newTheme
+    }
     
     var listenAndAnalysisTime: Double {
         get { listenTime + analysisTime }

@@ -65,7 +65,7 @@ struct TheContentView: View {
                             SettingsIcon(viewModel: viewModel)
                         }
                         .navigationBarHidden(true)
-                        .simultaneousGesture(TapGesture().onEnded {
+                        .gesture(TapGesture().onEnded {
                             viewModel.setState(.settings)
                         })
                     }

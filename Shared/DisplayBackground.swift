@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-    var colorfull: Bool
+    var colorful: Bool
 
     var body: some View {
         return ZStack {
@@ -16,16 +16,16 @@ struct DisplayBackground: View {
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
-                        .stroke(colorfull ? C.Colors.gray : C.Colors.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? C.Colors.gray : C.Colors.lightGray, style: boldStrokeStyle)
                         .clipped()
                     MainArcRed()
-                        .stroke(colorfull ? C.Colors.bullshitRed : C.Colors.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? C.Colors.bullshitRed : C.Colors.lightGray, style: boldStrokeStyle)
                         .clipped()
                     TopArcBlack()
-                        .stroke(colorfull ? C.Colors.gray : C.Colors.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? C.Colors.gray : C.Colors.lightGray, style: fineStrokeStyle)
                         .clipped()
                     TopArcRed()
-                        .stroke(colorfull ? C.Colors.bullshitRed : C.Colors.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? C.Colors.bullshitRed : C.Colors.lightGray, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .stroke(C.Colors.lightGray, lineWidth: 2)
@@ -110,7 +110,7 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(colorfull: true)
+        DisplayBackground(colorful: true)
             .aspectRatio(1.9, contentMode: .fit)
             .padding()
     }

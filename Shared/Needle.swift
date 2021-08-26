@@ -11,7 +11,7 @@ import SwiftUI
 
 class Needle: ObservableObject {
     @Published var noisyValue: Double = 0
-    @Published private(set) var colorfull = false
+    @Published private(set) var colorful = false
     
     private var value: Double = 0
     private var needleNoiseTimer: Timer?
@@ -43,13 +43,13 @@ class Needle: ObservableObject {
     func active(_ onOff: Bool, strongNoise: Bool) {
         self.strongNoise = strongNoise
         if onOff {
-            colorfull = true
+            colorful = true
             if needleNoiseTimer == nil {
                 needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
                 needleNoiseTimer?.tolerance = 0.1
             }
         } else {
-            colorfull = false
+            colorful = false
             if needleNoiseTimer != nil {
                 needleNoiseTimer!.invalidate()
                 needleNoiseTimer = nil

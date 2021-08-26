@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ThemeDetailView: View {
     @ObservedObject var viewModel: ViewModel
-    var theme: Theme
     var body: some View {
-        print("ThemeDetailView: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
+        print("ThemeDetailView")
         return GeometryReader { geo in
             HStack {
                 Spacer()
@@ -40,6 +39,6 @@ struct ThemeDetailView: View {
 struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        ThemeDetailView(viewModel: viewModel, theme: viewModel.settings.currentTheme)
+        ThemeDetailView(viewModel: viewModel)
     }
 }

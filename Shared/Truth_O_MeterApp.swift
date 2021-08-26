@@ -24,8 +24,8 @@ struct Truth_O_MeterApp: App {
 
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
-        let needle = Needle()
-        ContentView(viewModel: ViewModel())
-            .environmentObject(needle)
+        let viewModel = ViewModel()
+        ContentView(viewModel: viewModel)
+            .environmentObject(viewModel.needle)
     }
 }

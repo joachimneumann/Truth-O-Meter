@@ -38,8 +38,37 @@ class ViewModel: ObservableObject {
         }
     }
     
+    var listenTimingIndex: Int {
+        get {
+//            print("listenTimingIndex getter")
+            if UserDefaults.standard.object(forKey: "listenTimingIndex") == nil {
+                UserDefaults.standard.set(0, forKey: "listenTimingIndex")
+            }
+            return UserDefaults.standard.integer(forKey: "listenTimingIndex")
+        }
+        set {
+//            print("listenTimingIndex setter")
+            UserDefaults.standard.set(newValue, forKey: "listenTimingIndex")
+        }
+    }
+    
+    var analysisTimingIndex: Int {
+        get {
+//            print("analysisTimingIndex getter")
+            if UserDefaults.standard.object(forKey: "analysisTimingIndex") == nil {
+                UserDefaults.standard.set(0, forKey: "analysisTimingIndex")
+            }
+            return UserDefaults.standard.integer(forKey: "analysisTimingIndex")
+        }
+        set {
+//            print("analysisTimingIndex setter")
+            UserDefaults.standard.set(newValue, forKey: "analysisTimingIndex")
+        }
+    }
+    
     var stateIndex: Int { // for ModelDebugView
         get {
+//            print("stateIndex getter")
             switch model.state {
             case .wait:
                 return 0
@@ -54,6 +83,7 @@ class ViewModel: ObservableObject {
             }
         }
         set{
+//            print("stateIndex setter")
             switch newValue {
             case 0:
                 setState(.wait)
@@ -112,6 +142,10 @@ class ViewModel: ObservableObject {
         }
         print("settings.currentTheme.stampTexts = \(settings.currentTheme.stampTexts.top)")
         self.objectWillChange.send()
+    }
+    
+    func setCurrentTheme(_ newTheme: Theme) {
+        settings.setCurrentTheme(newTheme)
     }
     
     func setState(_ newState: Model.State) {

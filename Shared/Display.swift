@@ -17,7 +17,7 @@ struct Display: View {
         // Specifically, it should not appear every time, the needle is redrawn
         return VStack {
             ZStack {
-                DisplayBackground(colorfull: colorful)
+                DisplayBackground(colorful: colorful)
                 Text(title)
                     .offset(y: 15)
                     .foregroundColor(colorful ? C.Colors.gray : C.Colors.lightGray)

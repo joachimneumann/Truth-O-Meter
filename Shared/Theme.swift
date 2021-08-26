@@ -13,7 +13,7 @@ struct Result {
     init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
 }
 
-class Theme: Identifiable {
+class Theme: Identifiable, Equatable {
     var id = UUID()
     let title: String
     let results: [TapPrecision:Result]
@@ -25,5 +25,8 @@ class Theme: Identifiable {
         stampTexts = results[TapPrecision.bullsEye]!
     }
     
-
+    static func == (lhs: Theme, rhs: Theme) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
 }
