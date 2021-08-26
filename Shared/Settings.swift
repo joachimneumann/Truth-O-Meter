@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Settings {
+struct Settings {
     private enum TimingEnum {
         case fast, medium, slow
     }
@@ -40,31 +40,31 @@ class Settings {
     private let bullshitTheme = Theme(
         title: "Bullshit-O-Meter",
         results: [
-            TapPrecision.bullsEye:      Result("True", nil),
-            TapPrecision.inner:   Result("Mostly", "True"),
-            TapPrecision.middle:  Result("undecided", nil),
-            TapPrecision.outer:   Result("Bullshit", nil),
-            TapPrecision.edge:    Result("Absolute", "Bullshit")
+            TapPrecision.bullsEye: Result("True", nil),
+            TapPrecision.inner:    Result("Mostly", "True"),
+            TapPrecision.middle:   Result("undecided", nil),
+            TapPrecision.outer:    Result("Bullshit", nil),
+            TapPrecision.edge:     Result("Absolute", "Bullshit")
         ])
     
     private let truthTheme = Theme(
         title: "Truth-O-Meter",
         results: [
-            TapPrecision.bullsEye:      Result("Absolute", "Bullshit"),
-            TapPrecision.inner:   Result("Bullshit", nil),
-            TapPrecision.middle:  Result("undecided", nil),
-            TapPrecision.outer:   Result("Mostly", "True"),
-            TapPrecision.edge:    Result("True", nil)
+            TapPrecision.bullsEye: Result("Absolute", "Bullshit"),
+            TapPrecision.inner:    Result("Bullshit", nil),
+            TapPrecision.middle:   Result("undecided", nil),
+            TapPrecision.outer:    Result("Mostly", "True"),
+            TapPrecision.edge:     Result("True", nil)
         ])
 
     private let singingTheme = Theme(
         title: "Voice-O-Meter",
         results: [
-            TapPrecision.bullsEye:      Result("Sexy", nil),
-            TapPrecision.inner:   Result("impressive", nil),
-            TapPrecision.middle:  Result("good", nil),
-            TapPrecision.outer:   Result("could be", "better"),
-            TapPrecision.edge:    Result("flimsy", nil)
+            TapPrecision.bullsEye: Result("Sexy", nil),
+            TapPrecision.inner:    Result("impressive", nil),
+            TapPrecision.middle:   Result("good", nil),
+            TapPrecision.outer:    Result("could be", "better"),
+            TapPrecision.edge:     Result("flimsy", nil)
         ])
     
     var themes: [Theme] {
