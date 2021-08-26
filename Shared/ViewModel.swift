@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GameKit // for Audio
 import SwiftUI
 #if os(macOS)
 import AVFoundation // for sound
@@ -22,7 +21,6 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
-    private var listenTimer: Timer?
     private var analyseTimer: Timer?
         
     // used in ModelDebugView
@@ -149,37 +147,18 @@ class ViewModel: ObservableObject {
         // Timer
         switch newState {
         case .wait:
-            listenTimer?.invalidate();      listenTimer = nil
             analyseTimer?.invalidate();     analyseTimer = nil
         case .listen:
-            if listenTimer == nil {
-                listeningProgress = 0.0
-                listenTimer = Timer.scheduledTimer(timeInterval: C.Timing.listeningTimeIncrement, target: self, selector: #selector(incrementListeningProgress), userInfo: nil, repeats: true)
-                listenTimer?.tolerance = 0.1
-            }
             analyseTimer?.invalidate();     analyseTimer = nil
         case .analyse:
-            listenTimer?.invalidate();      listenTimer = nil
             if analyseTimer == nil {
                 analyseProgress = 0.0
                 analyseTimer = Timer.scheduledTimer(timeInterval: C.Timing.analyseTimeIncrement, target: self, selector: #selector(incrementAnalyseProgress), userInfo: nil, repeats: true)
             }
         case .show:
-            listenTimer?.invalidate();      listenTimer = nil
             analyseTimer?.invalidate();     analyseTimer = nil
         case .settings:
-            listenTimer?.invalidate();      listenTimer = nil
             analyseTimer?.invalidate();     analyseTimer = nil
-        }
-
-        // sounds
-        switch newState {
-        case .listen:
-            AudioServicesPlaySystemSound(C.Sounds.startRecording)
-        case .analyse:
-            AudioServicesPlaySystemSound(C.Sounds.stopRecording)
-        default:
-            break
         }
 
         setStateWithoutTimer(newState)
@@ -191,7 +170,6 @@ class ViewModel: ObservableObject {
         }
         if listeningProgress >= 1.0 {
             setState(.analyse)
-            listenTimer?.invalidate(); listenTimer = nil
         }
     }
 
