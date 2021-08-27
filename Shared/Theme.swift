@@ -17,12 +17,10 @@ class Theme: Identifiable, Equatable {
     var id = UUID()
     let title: String
     let results: [TapPrecision:Result]
-    var stampTexts: Result = Result("top", "bottom")
 
     init(title: String, results: [TapPrecision:Result]) {
         self.title = title
         self.results = results
-        stampTexts = results[TapPrecision.bullsEye]!
     }
     
     static func == (lhs: Theme, rhs: Theme) -> Bool {

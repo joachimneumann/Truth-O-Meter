@@ -17,17 +17,22 @@ struct ThemeDetailView: View {
                 VStack (alignment: .center) {
                     Display(colorful:true, title: viewModel.settings.currentTheme.title)
                         .frame(height: geo.size.height * 0.2)
-                    Spacer()
-                    Text(viewModel.settings.currentTheme.stampTexts.top)
-                        .font(.system(size: 20, weight: .bold))
-                    Text(viewModel.settings.currentTheme.stampTexts.bottom ?? " ")
-                        .font(.system(size: 20, weight: .bold))
-                    Spacer()
+                    Text(viewModel.stampTexts.top)
+                        .font(.system(size: 50, weight: .bold))
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .mask(Mask())
+                        .padding(.top, 30)
+                        .padding(.bottom, 10)
+                    Text(viewModel.stampTexts.bottom ?? " ")
+                        .font(.system(size: 50, weight: .bold))
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .mask(Mask())
+                        .padding(.bottom, 30)
                     RecordButton(viewModel: viewModel)
                         .frame(height: geo.size.height * 0.39)
-                        .background(Color.green)
+//                        .background(Color.green)
                 }
-                .background(Color.yellow)
+//                .background(Color.yellow)
                 .padding()
                 .navigationBarTitle("", displayMode: .inline)
                 Spacer()
@@ -39,6 +44,8 @@ struct ThemeDetailView: View {
 struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        ThemeDetailView(viewModel: viewModel)
+        viewModel.setState(.settings)
+        return ThemeDetailView(viewModel: viewModel)
+            .environmentObject(viewModel.needle)
     }
 }

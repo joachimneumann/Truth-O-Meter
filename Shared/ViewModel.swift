@@ -21,6 +21,8 @@ class ViewModel: ObservableObject {
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
+    
+    var stampTexts: Result = Result("top", "bottom")
         
     // used in ModelDebugView
     var stateName: String {
@@ -105,10 +107,26 @@ class ViewModel: ObservableObject {
         get { model.state }
     }
     
+    func setStampTexts(precision: TapPrecision) {
+        if let r = settings.currentTheme.results[precision] {
+            stampTexts = r
+        } else {
+            stampTexts = Result("top", "bottom")
+        }
+    }
+    
     func tap(_ ring: TapPrecision) {
         print("tap(ring = \(ring))")
+        
+        self.objectWillChange.send()
+
         if state == .wait {
             setState(.listen)
+        }
+
+        setStampTexts(precision: ring)
+
+        if state == .wait {
             switch ring {
             case .bullsEye:
                 needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
@@ -135,13 +153,6 @@ class ViewModel: ObservableObject {
                 needle.setValue(1.00)
             }
         }
-        if let r = settings.currentTheme.results[ring] {
-            settings.currentTheme.stampTexts = r
-        } else {
-            settings.currentTheme.stampTexts = Result("top", "bottom")
-        }
-        print("settings.currentTheme.stampTexts = \(settings.currentTheme.stampTexts.top)")
-        self.objectWillChange.send()
     }
     
     func setCurrentTheme(_ newTheme: Theme) {

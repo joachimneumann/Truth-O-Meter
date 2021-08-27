@@ -60,11 +60,11 @@ struct Settings {
     private let singingTheme = Theme(
         title: "Voice-O-Meter",
         results: [
-            TapPrecision.bullsEye: Result("Sexy", nil),
-            TapPrecision.inner:    Result("impressive", nil),
+            TapPrecision.bullsEye: Result("flimsy", nil),
+            TapPrecision.inner:    Result("could be", "better"),
             TapPrecision.middle:   Result("good", nil),
-            TapPrecision.outer:    Result("could be", "better"),
-            TapPrecision.edge:     Result("flimsy", nil)
+            TapPrecision.outer:    Result("impressive", nil),
+            TapPrecision.edge:     Result("Sexy", nil)
         ])
     
     var themes: [Theme] {

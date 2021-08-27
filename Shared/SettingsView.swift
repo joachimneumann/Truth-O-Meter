@@ -77,12 +77,11 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewModel: ViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
-            .previewDisplayName("iPhone 12")
-
-        SettingsView(viewModel: ViewModel())
-            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-            .previewDisplayName("iPad Pro (12.9-inch)")
-                .padding(.top, 70)
-//                .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+            .padding(.top, 70)
+//            .previewDisplayName("iPhone 12")
+//
+//        SettingsView(viewModel: ViewModel())
+//            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
+//            .previewDisplayName("iPad Pro (12.9-inch)")
     }
 }

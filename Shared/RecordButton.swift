@@ -60,7 +60,7 @@ struct RecordButton: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        print("RecordButton: stampTexts.top = \(viewModel.settings.currentTheme.stampTexts.top)")
+        print("RecordButton: stampTexts.top = \(viewModel.stampTexts.top)")
         return GeometryReader { (geo) in
             let measures = Measures(min(geo.size.width, geo.size.height))
             ZStack {

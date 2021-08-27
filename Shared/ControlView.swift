@@ -44,7 +44,7 @@ struct ShowView: View {
     var body: some View {
         VStack {
             Spacer()
-            Stamp(texts: viewModel.settings.currentTheme.stampTexts)
+            Stamp(texts: viewModel.stampTexts)
                 .onTapGesture {
                     viewModel.setState(.wait)
                 }

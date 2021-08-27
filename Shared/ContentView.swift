@@ -64,10 +64,13 @@ struct TheContentView: View {
                         NavigationLink(destination: SettingsView(viewModel: viewModel)) {
                             SettingsIcon(viewModel: viewModel)
                         }
+                        .simultaneousGesture(
+                            TapGesture()
+                                .onEnded { _ in
+                                    viewModel.setState(.settings)
+                                }
+                        )
                         .navigationBarHidden(true)
-                        .gesture(TapGesture().onEnded {
-                            viewModel.setState(.settings)
-                        })
                     }
                 }
             }
@@ -80,10 +83,10 @@ struct TheContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-//                VStack {
-//                    ModelDebugView(viewModel: viewModel)
-//                    ContentView(viewModel: viewModel)
-//                }
+        //                VStack {
+        //                    ModelDebugView(viewModel: viewModel)
+        //                    ContentView(viewModel: viewModel)
+        //                }
         ContentView(viewModel: viewModel)
     }
 }
