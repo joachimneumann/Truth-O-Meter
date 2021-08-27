@@ -8,16 +8,20 @@
 import Foundation
 
 struct Result {
-    let top: String
-    let bottom: String?
+    var top: String
+    var bottom: String?
     init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
 }
 
-class Theme: Identifiable, Equatable {
-    var id = UUID()
-    let title: String
+struct Theme: Identifiable, Equatable {
+    private(set) var id = UUID()
+    private(set) var title: String
     let results: [TapPrecision:Result]
 
+    mutating func setTitle(_ newTitle: String) {
+        title = newTitle
+    }
+    
     init(title: String, results: [TapPrecision:Result]) {
         self.title = title
         self.results = results

@@ -18,14 +18,14 @@ struct TheMainView: View {
                         switch(viewModel.state) {
                         case .analyse:
                             VStack {
-                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                                Display(viewModel: viewModel)
                                 AnalyseView(viewModel: viewModel)
                                     .padding(.leading, 20)
                                     .padding(.trailing, 20)
                             }
                         default:
                             VStack {
-                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                                Display(viewModel: viewModel)
                             }
                         }
                     }

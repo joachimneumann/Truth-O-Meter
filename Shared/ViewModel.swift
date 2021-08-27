@@ -13,7 +13,7 @@ class ViewModel: ObservableObject {
 
     private      var model = Model()
     private(set) var needle = Needle()
-    private(set) var stampTexts: Result = Result("top", "bottom")
+    var stampTexts: Result = Result("top", "bottom")
     private(set) var settingsPrecision: TapPrecision = TapPrecision.middle
     
     @Published var settings = Settings()
@@ -93,6 +93,10 @@ class ViewModel: ObservableObject {
         } else {
             stampTexts = Result("top", "bottom")
         }
+    }
+    
+    func setTitle(_ newTitle: String) {
+        settings.setTitle(newTitle)
     }
     
     func settingsConfigutation(_ ring: TapPrecision) {

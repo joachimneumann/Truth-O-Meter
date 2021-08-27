@@ -49,26 +49,29 @@ struct ThemesList: View {
                 HStack {
                     if theme == viewModel.settings.currentTheme {
                         Text(theme.title)
-                        Image(systemName: "info.circle")
-                            .foregroundColor(C.Colors.bullshitRed)
-                            .onTapGesture {
-                                viewModel.setView(.detail)
+                        Group {
+                            if viewModel.settings.isCustomTheme {
+                                Text("Edit")
+                                    .padding(.leading, 10)
+                            } else {
+                                Image(systemName: "info.circle")
                             }
-//                            .font(Font.headline.weight(.bold))
+                        }
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .onTapGesture {
+                            viewModel.setView(.detail)
+                        }
                         Spacer()
                         Image(systemName: "checkmark")
-//                            .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.blue)
                     } else {
                         HStack {
                             Text(theme.title)
-//                                    .font(Font.headline)
                             Spacer()
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
                             viewModel.setCurrentTheme(theme)
-                            viewModel.tap(viewModel.settingsPrecision)
                         }
                     }
                 }
@@ -78,6 +81,7 @@ struct ThemesList: View {
                 .padding(.trailing)
                 Rectangle().fill(C.Colors.lightGray)
                     .frame(width: .infinity, height: 0.5)
+                    .padding(.leading)
             }
         }
         Spacer(minLength: 30)
@@ -90,6 +94,9 @@ struct SettingsView: View {
         ZStack (alignment: .topLeading) {
             VStack(alignment: .leading) {
                 TimePicker(viewModel: viewModel)
+                Rectangle().fill(C.Colors.lightGray)
+                    .frame(width: .infinity, height: 0.5)
+                    .padding(.leading)
                 ThemesList(viewModel: viewModel)
             }
             .padding(.top, 40)

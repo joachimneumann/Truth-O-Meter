@@ -8,17 +8,34 @@
 import SwiftUI
 
 struct Display: View {
-    var colorful: Bool
-    var title: String
-
+    var viewModel: ViewModel
+    var editTitle = false
+    @State private var titleState = ""
     var body: some View {
-        print("redrawing Display, colorful = \(String(colorful))")
+        let colorful = viewModel.displayBackgroundColorful
+        //        print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
-        return VStack {
-            ZStack {
+        ZStack {
+            if editTitle {
                 DisplayBackground(colorful: colorful)
-                Text(title)
+                    .opacity(0.5)
+                NeedleView()
+                    .clipped()
+                    .opacity(0.5)
+                TextField("title", text: $titleState, onEditingChanged: { (changed) in
+                    if changed { viewModel.setTitle(titleState) }
+                })
+                .padding(6)
+                .background(Color.green.opacity(0.3))
+                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .cornerRadius(5.0)
+                .font(.headline)
+                .offset(y: 15)
+            } else {
+                DisplayBackground(colorful: colorful)
+                Text(viewModel.settings.currentTheme.title)
                     .offset(y: 15)
                     .foregroundColor(colorful ? C.Colors.gray : C.Colors.lightGray)
                     .font(.headline)
@@ -29,14 +46,16 @@ struct Display: View {
         .aspectRatio(1.9, contentMode: .fit)
     }
 }
-
+    
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        VStack {
+        viewModel.setCurrentTheme(viewModel.settings.themes[3])
+        return VStack {
             ModelDebugView(viewModel: viewModel)
-            Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+            Display(viewModel: viewModel, editTitle: true)
                 .padding()
+                .environmentObject(viewModel.needle)
         }
     }
 }

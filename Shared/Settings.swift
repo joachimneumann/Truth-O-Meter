@@ -57,7 +57,7 @@ struct Settings {
         return .slow
     }
     
-    private let bullshitTheme = Theme(
+    private let bullshit = Theme(
         title: "Bullshit-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("True", nil),
@@ -67,7 +67,7 @@ struct Settings {
             TapPrecision.edge:     Result("Absolute", "Bullshit")
         ])
     
-    private let truthTheme = Theme(
+    private let truth = Theme(
         title: "Truth-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("Absolute", "Bullshit"),
@@ -77,7 +77,7 @@ struct Settings {
             TapPrecision.edge:     Result("True", nil)
         ])
 
-    private let singingTheme = Theme(
+    private let singing = Theme(
         title: "Voice-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("flimsy", nil),
@@ -86,9 +86,27 @@ struct Settings {
             TapPrecision.outer:    Result("impressive", nil),
             TapPrecision.edge:     Result("Sexy", nil)
         ])
+
+    private let custom = Theme(
+        title: "Custom",
+        results: [
+            TapPrecision.bullsEye: Result("", ""),
+            TapPrecision.inner:    Result("", ""),
+            TapPrecision.middle:   Result("", ""),
+            TapPrecision.outer:    Result("", ""),
+            TapPrecision.edge:     Result("", "")
+        ])
+
+    mutating func setTitle(_ newTitle: String) {
+        currentTheme.setTitle(newTitle)
+    }
     
     var themes: [Theme] {
-        [bullshitTheme, truthTheme, singingTheme]
+        [bullshit, truth, singing, custom]
+    }
+    
+    var isCustomTheme: Bool {
+        currentTheme == custom
     }
     
     private(set) var currentTheme:Theme
@@ -102,6 +120,6 @@ struct Settings {
     }
     
     init() {
-        currentTheme = bullshitTheme
+        currentTheme = bullshit
     }
 }

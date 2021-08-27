@@ -30,18 +30,27 @@ struct DetailView: View {
 struct TheDetailView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        GeometryReader { geo in
+        return GeometryReader { geo in
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
-                    Display(colorful:true, title: viewModel.settings.currentTheme.title)
+                    Display(viewModel: viewModel, editTitle: viewModel.settings.isCustomTheme)
                         .frame(height: geo.size.height * 0.2)
-                    Text(viewModel.stampTexts.top)
-                        .font(.system(size: 50, weight: .bold))
-                        .foregroundColor(C.Colors.bullshitRed)
-                        .mask(Mask())
-                        .padding(.top, 30)
-                        .padding(.bottom, 10)
+                    ZStack {
+                        if viewModel.settings.isCustomTheme {
+                            TextField("line 1", text: $viewModel.stampTexts.top)
+                                .font(.system(size: 50, weight: .bold))
+                                .foregroundColor(C.Colors.bullshitRed)
+                                .mask(Mask())
+                                .padding(.top, 30)
+                        } else {
+                            Text(viewModel.stampTexts.top)
+                                .font(.system(size: 50, weight: .bold))
+                                .foregroundColor(C.Colors.bullshitRed)
+                                .mask(Mask())
+                                .padding(.top, 30)
+                        }
+                    }
                     if let b = viewModel.stampTexts.bottom {
                         Text(b)
                             .font(.system(size: 50, weight: .bold))
@@ -71,6 +80,7 @@ struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         viewModel.setState(.settings)
+        viewModel.setCurrentTheme(viewModel.settings.themes[3])
         return DetailView(viewModel: viewModel)
             .environmentObject(viewModel.needle)
     }
