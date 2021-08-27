@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct TimePicker: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        print("SettingsView")
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             HStack  {
                 Text("Listening time")
                     .frame(width:150, alignment: .leading)
@@ -38,38 +37,68 @@ struct SettingsView: View {
             }
             .padding(.leading)
             .padding(.bottom, 30)
-            VStack {
-                ForEach(viewModel.settings.themes) { theme in
-                    HStack {
-                        if theme == viewModel.settings.currentTheme {
-                            Text(theme.title)
-                                .font(Font.headline.weight(.bold))
-                            Spacer()
-                            NavigationLink(destination: DetailView(viewModel: viewModel)) {
-                                Image(systemName: "info.circle")
-                                    .foregroundColor(C.Colors.bullshitRed)
-                            }
-                        } else {
-                            HStack {
-                                Text(theme.title)
-//                                    .font(Font.headline)
-                                Spacer()
-                            }
-                            .contentShape(Rectangle())
+        }
+    }
+}
+
+struct ThemesList: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        VStack {
+            ForEach(viewModel.settings.themes) { theme in
+                HStack {
+                    if theme == viewModel.settings.currentTheme {
+                        Text(theme.title)
+                            .font(Font.headline.weight(.bold))
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .foregroundColor(C.Colors.bullshitRed)
                             .onTapGesture {
-                                viewModel.setCurrentTheme(theme)
-                                viewModel.tap(viewModel.settingsPrecision)
+                                viewModel.setView(.detail)
                             }
+                    } else {
+                        HStack {
+                            Text(theme.title)
+//                                    .font(Font.headline)
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.setCurrentTheme(theme)
+                            viewModel.tap(viewModel.settingsPrecision)
                         }
                     }
-                    .padding(.top, 5)
-                    .padding(.bottom, 5)
-                    .padding(.leading)
-                    .padding(.trailing)
-                    Rectangle().fill(C.Colors.lightGray).frame(width: .infinity, height: 0.5, alignment: .center)//.offset(y: -10)
                 }
+                .padding(.top, 5)
+                .padding(.bottom, 5)
+                .padding(.leading)
+                .padding(.trailing)
+                Rectangle().fill(C.Colors.lightGray)
+                    .frame(width: .infinity, height: 0.5)
             }
-            Spacer(minLength: 30)
+        }
+        Spacer(minLength: 30)
+    }
+}
+
+struct SettingsView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        ZStack (alignment: .topLeading) {
+            VStack(alignment: .leading) {
+                TimePicker(viewModel: viewModel)
+                ThemesList(viewModel: viewModel)
+            }
+            .padding(.top, 40)
+            HStack(spacing: 0) {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 20))
+                Text("Back")
+            }
+            .padding(.leading)
+            .onTapGesture {
+                viewModel.setView(.main)
+            }
         }
     }
 }
@@ -79,10 +108,5 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView(viewModel: ViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
             .padding(.top, 70)
-//            .previewDisplayName("iPhone 12")
-//
-//        SettingsView(viewModel: ViewModel())
-//            .previewDevice(PreviewDevice(rawValue: "iPad Air (4th generation)"))
-//            .previewDisplayName("iPad Pro (12.9-inch)")
     }
 }

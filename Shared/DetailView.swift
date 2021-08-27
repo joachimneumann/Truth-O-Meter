@@ -10,8 +10,27 @@ import SwiftUI
 struct DetailView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        print("DetailView")
-        return GeometryReader { geo in
+        ZStack (alignment: .topLeading) {
+            TheDetailView(viewModel: viewModel)
+            .padding(.top, 40)
+            HStack(spacing: 0) {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 20))
+                Text("Back")
+            }
+            .padding(.leading)
+            .onTapGesture {
+                viewModel.setView(.settings)
+            }
+        }
+    }
+}
+
+
+struct TheDetailView: View {
+    @ObservedObject var viewModel: ViewModel
+    var body: some View {
+        GeometryReader { geo in
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
@@ -33,16 +52,15 @@ struct DetailView: View {
                         Text("no second line")
                             .font(.system(size: 50, weight: .ultraLight))
                             .foregroundColor(C.Colors.lightGray)
-//                            .mask(Mask())
+                            //                            .mask(Mask())
                             .padding(.bottom, 30)
                     }
                     RecordButton(viewModel: viewModel)
                         .frame(height: geo.size.height * 0.39)
-//                        .background(Color.green)
+                    //                        .background(Color.green)
                 }
-//                .background(Color.yellow)
+                //                .background(Color.yellow)
                 .padding()
-                .navigationBarTitle("", displayMode: .inline)
                 Spacer()
             }
         }

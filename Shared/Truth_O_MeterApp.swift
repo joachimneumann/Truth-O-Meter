@@ -14,9 +14,18 @@ struct Truth_O_MeterApp: App {
         viewModel.setState(.wait)
         return WindowGroup {
             VStack {
-//                ModelDebugView(viewModel: viewModel)
-                ContentView(viewModel: viewModel)
+                #if os(macOS)
+                let w : CGFloat = 375
+                let h : CGFloat = 667
+                MainView(viewModel: viewModel)
                     .environmentObject(viewModel.needle)
+                    .frame(minWidth: w, minHeight: h)
+                    .frame(maxWidth: w, maxHeight: h)
+                    .background(Color.white)
+                #else
+                MainView(viewModel: viewModel)
+                    .environmentObject(viewModel.needle)
+                #endif
             }
         }
     }
@@ -25,7 +34,7 @@ struct Truth_O_MeterApp: App {
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        ContentView(viewModel: viewModel)
+        MainView(viewModel: viewModel)
             .environmentObject(viewModel.needle)
     }
 }

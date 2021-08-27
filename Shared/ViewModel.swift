@@ -21,6 +21,8 @@ class ViewModel: ObservableObject {
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
         
+    @Published var view: MainView.ViewEnum = .main
+
     var isShowingSettings: Bool = false {
         didSet {
             if isShowingSettings {
@@ -80,6 +82,10 @@ class ViewModel: ObservableObject {
                 setState(.wait)
             }
         }
+    }
+    
+    func setView(_ newView: MainView.ViewEnum) {
+        view = newView
     }
         
     var state: Model.State {
