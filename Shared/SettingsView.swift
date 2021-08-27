@@ -49,13 +49,16 @@ struct ThemesList: View {
                 HStack {
                     if theme == viewModel.settings.currentTheme {
                         Text(theme.title)
-                            .font(Font.headline.weight(.bold))
-                        Spacer()
                         Image(systemName: "info.circle")
                             .foregroundColor(C.Colors.bullshitRed)
                             .onTapGesture {
                                 viewModel.setView(.detail)
                             }
+//                            .font(Font.headline.weight(.bold))
+                        Spacer()
+                        Image(systemName: "checkmark")
+//                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.blue)
                     } else {
                         HStack {
                             Text(theme.title)

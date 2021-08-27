@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
-		AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3533255AA99300AD0B14 /* ContentView.swift */; };
-		AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3533255AA99300AD0B14 /* ContentView.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
@@ -58,7 +56,6 @@
 /* Begin PBXFileReference section */
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
-		AA2B3533255AA99300AD0B14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2B353C255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +133,7 @@
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA9014CE26CA626000B4EA2C /* ViewModel.swift */,
+				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
 				AACB1EBA255BC5BF00BA34B5 /* Display.swift */,
@@ -146,10 +144,8 @@
 				AA4565E226D0C4C6003CC57E /* Stamp.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */,
-				AA2B3533255AA99300AD0B14 /* ContentView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
-				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -284,7 +280,6 @@
 				AA5847CA26CA8DC300EB6D6D /* ModelDebugView.swift in Sources */,
 				AACB1EBB255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
-				AA2B3547255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* TapPrecision.swift in Sources */,
@@ -313,7 +308,6 @@
 				AA5847CB26CA8DC300EB6D6D /* ModelDebugView.swift in Sources */,
 				AACB1EBC255BC5BF00BA34B5 /* Display.swift in Sources */,
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
-				AA2B3548255AA99400AD0B14 /* ContentView.swift in Sources */,
 				AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA40FD6226D611C9006DBFD8 /* TapPrecision.swift in Sources */,

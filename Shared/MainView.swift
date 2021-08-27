@@ -20,6 +20,8 @@ struct TheMainView: View {
                             VStack {
                                 Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
                                 AnalyseView(viewModel: viewModel)
+                                    .padding(.leading, 20)
+                                    .padding(.trailing, 20)
                             }
                         default:
                             VStack {
@@ -37,6 +39,7 @@ struct TheMainView: View {
                 SettingsIcon(viewModel: viewModel)
             }
         }
+        .ignoresSafeArea()
         .accentColor(C.Colors.gray)
     }
 }
@@ -91,10 +94,13 @@ struct MainView: View {
         switch viewModel.view {
         case .main:
             TheMainView(viewModel: viewModel)
+                .padding(.top, 0)
         case .settings:
             SettingsView(viewModel: viewModel)
+                .padding(.top, 20)
         case .detail:
             DetailView(viewModel: viewModel)
+                .padding(.top, 20)
         }
     }
 }

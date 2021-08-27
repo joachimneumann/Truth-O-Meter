@@ -43,8 +43,6 @@ struct ControlView: View {
                         .padding(geo.size.width * 0.25)
                 case .analyse:
                     EmptyView()
-//                    AnalyseView(viewModel: viewModel)
-//                        .padding(geo.size.width * 0.1)
                 case .show:
                     ShowView(viewModel: viewModel)
                         .padding(geo.size.width * 0.0)

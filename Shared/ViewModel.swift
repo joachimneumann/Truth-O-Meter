@@ -23,16 +23,6 @@ class ViewModel: ObservableObject {
         
     @Published var view: MainView.ViewEnum = .main
 
-    var isShowingSettings: Bool = false {
-        didSet {
-            if isShowingSettings {
-                settingsConfigutation(.outer)
-            } else {
-                setState(.wait)
-            }
-        }
-    }
-    
     // used in ModelDebugView
     var stateName: String {
         switch model.state {
@@ -85,6 +75,11 @@ class ViewModel: ObservableObject {
     }
     
     func setView(_ newView: MainView.ViewEnum) {
+        if newView == .settings || newView == .detail {
+            setState(.settings)
+        } else {
+            setState(.wait)
+        }
         view = newView
     }
         
