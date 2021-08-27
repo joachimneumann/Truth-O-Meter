@@ -20,7 +20,6 @@ struct HorizontalProgressBar: View {
                     .frame(width:geo.size.width*value, height: geo.size.height)
             }
         }
-        .aspectRatio(20.0, contentMode: .fit)
     }
 }
 

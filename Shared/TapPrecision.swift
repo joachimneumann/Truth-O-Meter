@@ -8,5 +8,5 @@
 import Foundation
 
 enum TapPrecision {
-    case bullsEye, inner, middle, outer, edge
+    case edge, outer, middle, inner, bullsEye
 }

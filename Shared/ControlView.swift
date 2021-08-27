@@ -13,32 +13,6 @@ let innerRadius:CGFloat = 0.88
 let innerRect:CGFloat = 0.4
 
 
-struct AnalyseView: View {
-    var viewModel: ViewModel
-
-    @State private var value: CGFloat = 0.0
-    private let timer = Timer.publish(every: C.Timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
-
-    var body: some View {
-        VStack {
-            Spacer()
-            HorizontalProgressBar(value: value)
-                .onReceive(timer) { input in
-                    value += CGFloat(C.Timing.analyseTimeIncrement/viewModel.settings.analysisTime)
-                    if value >= 1.0 {
-                        viewModel.setState(.show)
-                    }
-                }
-            Text("Analysing...")
-                .font(.headline)
-                .foregroundColor(C.Colors.gray)
-            Spacer()
-        }
-        .aspectRatio(1.0, contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-        .padding()
-    }
-}
-
 struct ShowView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
@@ -68,8 +42,9 @@ struct ControlView: View {
                     RecordButton(viewModel: viewModel)
                         .padding(geo.size.width * 0.25)
                 case .analyse:
-                    AnalyseView(viewModel: viewModel)
-                        .padding(geo.size.width * 0.1)
+                    EmptyView()
+//                    AnalyseView(viewModel: viewModel)
+//                        .padding(geo.size.width * 0.1)
                 case .show:
                     ShowView(viewModel: viewModel)
                         .padding(geo.size.width * 0.0)
@@ -81,6 +56,7 @@ struct ControlView: View {
                     }
                 }
             }
+            .background(Color.yellow)
             .aspectRatio(contentMode: .fit)
         }
     }

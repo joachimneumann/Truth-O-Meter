@@ -15,10 +15,10 @@ struct SettingsView: View {
             HStack  {
                 Text("Listening time")
                     .frame(width:150, alignment: .leading)
-                Picker(selection: $viewModel.listenTimingIndex, label: Text("")) {
-                    Text("2 sec").tag(0)
-                    Text("4 sec").tag(1)
-                    Text("10 sec").tag(2)
+                Picker(selection: $viewModel.settings.listenTimingIndex, label: Text("")) {
+                    Text("\(Int(Settings.TimingEnum.fast.time())) sec").tag(0)
+                    Text("\(Int(Settings.TimingEnum.medium.time())) sec").tag(1)
+                    Text("\(Int(Settings.TimingEnum.slow.time())) sec").tag(2)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
@@ -27,10 +27,10 @@ struct SettingsView: View {
             HStack {
                 Text("Analysis time")
                     .frame(width:150, alignment: .leading)
-                Picker(selection: $viewModel.analysisTimingIndex, label: Text("")) {
-                    Text("2 sec").tag(0)
-                    Text("4 sec").tag(1)
-                    Text("10 sec").tag(2)
+                Picker(selection: $viewModel.settings.analysisTimingIndex, label: Text("")) {
+                    Text("\(Int(Settings.TimingEnum.fast.time())) sec").tag(0)
+                    Text("\(Int(Settings.TimingEnum.medium.time())) sec").tag(1)
+                    Text("\(Int(Settings.TimingEnum.slow.time())) sec").tag(2)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
@@ -45,7 +45,7 @@ struct SettingsView: View {
                             Text(theme.title)
                                 .font(Font.headline.weight(.bold))
                             Spacer()
-                            NavigationLink(destination: ThemeDetailView(viewModel: viewModel)) {
+                            NavigationLink(destination: DetailView(viewModel: viewModel)) {
                                 Image(systemName: "info.circle")
                                     .foregroundColor(C.Colors.bullshitRed)
                             }
@@ -58,6 +58,7 @@ struct SettingsView: View {
                             .contentShape(Rectangle())
                             .onTapGesture {
                                 viewModel.setCurrentTheme(theme)
+                                viewModel.tap(viewModel.settingsPrecision)
                             }
                         }
                     }

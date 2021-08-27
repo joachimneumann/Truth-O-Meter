@@ -8,33 +8,53 @@
 import Foundation
 
 struct Settings {
-    private enum TimingEnum {
+    enum TimingEnum {
         case fast, medium, slow
+        func time() -> Double {
+            switch self {
+            case .fast:
+                return 2.0
+            case .medium:
+                return 6.0
+            case .slow:
+                return 10.0
+            }
+        }
     }
 
-    private var listenTiming: TimingEnum = .fast
-    private var analysisTiming: TimingEnum = .fast
-
-    var listenTime: Double {
-        switch listenTiming {
-        case .slow:
-            return 10.0
-        case .medium:
-            return 6.0
-        case .fast:
-            return 2.0
+    var listenTimingIndex: Int {
+        get {
+            if UserDefaults.standard.object(forKey: "listenTimingIndex") == nil {
+                UserDefaults.standard.set(1, forKey: "listenTimingIndex")
+            }
+            return UserDefaults.standard.integer(forKey: "listenTimingIndex")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "listenTimingIndex")
         }
     }
     
-    var analysisTime: Double {
-        switch analysisTiming {
-        case .slow:
-            return 10.0
-        case .medium:
-            return 6.0
-        case .fast:
-            return 2.0
+    var analysisTimingIndex: Int {
+        get {
+            if UserDefaults.standard.object(forKey: "analysisTimingIndex") == nil {
+                UserDefaults.standard.set(1, forKey: "analysisTimingIndex")
+            }
+            return UserDefaults.standard.integer(forKey: "analysisTimingIndex")
         }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "analysisTimingIndex")
+        }
+    }
+
+    var listenTiming: TimingEnum {
+        if listenTimingIndex == 0 { return .fast }
+        if listenTimingIndex == 1 { return .medium }
+        return .slow
+    }
+    var analysisTiming: TimingEnum {
+        if analysisTimingIndex == 0 { return .fast }
+        if analysisTimingIndex == 1 { return .medium }
+        return .slow
     }
     
     private let bullshitTheme = Theme(
@@ -78,7 +98,7 @@ struct Settings {
     }
     
     var listenAndAnalysisTime: Double {
-        get { listenTime + analysisTime }
+        get { listenTiming.time() + analysisTiming.time() }
     }
     
     init() {

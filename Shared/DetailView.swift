@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
-        print("ThemeDetailView")
+        print("DetailView")
         return GeometryReader { geo in
             HStack {
                 Spacer()
@@ -23,11 +23,19 @@ struct DetailView: View {
                         .mask(Mask())
                         .padding(.top, 30)
                         .padding(.bottom, 10)
-                    Text(viewModel.stampTexts.bottom ?? " ")
-                        .font(.system(size: 50, weight: .bold))
-                        .foregroundColor(C.Colors.bullshitRed)
-                        .mask(Mask())
-                        .padding(.bottom, 30)
+                    if let b = viewModel.stampTexts.bottom {
+                        Text(b)
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(C.Colors.bullshitRed)
+                            .mask(Mask())
+                            .padding(.bottom, 30)
+                    } else {
+                        Text("no second line")
+                            .font(.system(size: 50, weight: .ultraLight))
+                            .foregroundColor(C.Colors.lightGray)
+//                            .mask(Mask())
+                            .padding(.bottom, 30)
+                    }
                     RecordButton(viewModel: viewModel)
                         .frame(height: geo.size.height * 0.39)
 //                        .background(Color.green)

@@ -27,7 +27,7 @@ struct RecordButton: View {
                     .stroke(C.Colors.bullshitRed, lineWidth:measures.outerRingWidth)
                     .rotationEffect(Angle(degrees:-90))
                     .onReceive(timer) { input in
-                        value += CGFloat(C.Timing.listeningTimeIncrement/viewModel.settings.listenTime)
+                        value += CGFloat(C.Timing.listeningTimeIncrement/viewModel.settings.listenTiming.time())
                         if value >= 1.0 {
                             AudioServicesPlaySystemSound(C.Sounds.stopRecording)
                             viewModel.setState(.analyse)

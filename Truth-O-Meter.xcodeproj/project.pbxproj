@@ -15,8 +15,8 @@
 		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
-		AA30E3AD26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */; };
-		AA30E3AE26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */; };
+		AA30E3AD26D3BE1900BC5F20 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */; };
+		AA30E3AE26D3BE1900BC5F20 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */; };
 		AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F77D926D5DF2500AC1D3E /* Needle.swift */; };
 		AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F77D926D5DF2500AC1D3E /* Needle.swift */; };
 		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
@@ -64,7 +64,7 @@
 		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
-		AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDetailView.swift; sourceTree = "<group>"; };
+		AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		AA3F77D926D5DF2500AC1D3E /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPrecision.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */,
 				AA4565E226D0C4C6003CC57E /* Stamp.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
-				AA30E3AC26D3BE1900BC5F20 /* ThemeDetailView.swift */,
+				AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */,
 				AA2B3533255AA99300AD0B14 /* ContentView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
@@ -291,7 +291,7 @@
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5D255EF3E200229903 /* ControlView.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA30E3AD26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */,
+				AA30E3AD26D3BE1900BC5F20 /* DetailView.swift in Sources */,
 				AA586D64255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA6063F726D730D400EDD38F /* Rings.swift in Sources */,
@@ -319,7 +319,7 @@
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA586D5E255EF3E200229903 /* ControlView.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AA30E3AE26D3BE1900BC5F20 /* ThemeDetailView.swift in Sources */,
+				AA30E3AE26D3BE1900BC5F20 /* DetailView.swift in Sources */,
 				AA586D65255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA6063F826D730D400EDD38F /* Rings.swift in Sources */,

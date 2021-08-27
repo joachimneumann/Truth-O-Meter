@@ -13,17 +13,27 @@ import AVFoundation // for sound
 
 class ViewModel: ObservableObject {
     
-    var needle = Needle()
-    
-    private var model = Model()
 
+    private      var model = Model()
+    private(set) var needle = Needle()
+    private(set) var stampTexts: Result = Result("top", "bottom")
+    private(set) var settingsPrecision: TapPrecision = TapPrecision.middle
+    
     @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
-    
-    var stampTexts: Result = Result("top", "bottom")
         
+    var isShowingSettings: Bool = false {
+        didSet {
+            if isShowingSettings {
+                settingsConfigutation(.outer)
+            } else {
+                setState(.wait)
+            }
+        }
+    }
+    
     // used in ModelDebugView
     var stateName: String {
         switch model.state {
@@ -39,35 +49,7 @@ class ViewModel: ObservableObject {
             return "settings"
         }
     }
-    
-    var listenTimingIndex: Int {
-        get {
-//            print("listenTimingIndex getter")
-            if UserDefaults.standard.object(forKey: "listenTimingIndex") == nil {
-                UserDefaults.standard.set(0, forKey: "listenTimingIndex")
-            }
-            return UserDefaults.standard.integer(forKey: "listenTimingIndex")
-        }
-        set {
-//            print("listenTimingIndex setter")
-            UserDefaults.standard.set(newValue, forKey: "listenTimingIndex")
-        }
-    }
-    
-    var analysisTimingIndex: Int {
-        get {
-//            print("analysisTimingIndex getter")
-            if UserDefaults.standard.object(forKey: "analysisTimingIndex") == nil {
-                UserDefaults.standard.set(0, forKey: "analysisTimingIndex")
-            }
-            return UserDefaults.standard.integer(forKey: "analysisTimingIndex")
-        }
-        set {
-//            print("analysisTimingIndex setter")
-            UserDefaults.standard.set(newValue, forKey: "analysisTimingIndex")
-        }
-    }
-    
+        
     var stateIndex: Int { // for ModelDebugView
         get {
 //            print("stateIndex getter")
@@ -115,18 +97,32 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func settingsConfigutation(_ ring: TapPrecision) {
+        setState(.settings)
+        setStampTexts(precision: ring)
+        settingsPrecision = ring
+        switch ring {
+        case .bullsEye:
+            needle.setValue(0.00)
+        case .inner:
+            needle.setValue(0.25)
+        case .middle:
+            needle.setValue(0.50)
+        case .outer:
+            needle.setValue(0.75)
+        case .edge:
+            needle.setValue(1.00)
+        }
+    }
+
     func tap(_ ring: TapPrecision) {
         print("tap(ring = \(ring))")
         
-        self.objectWillChange.send()
-
-        if state == .wait {
-            setState(.listen)
-        }
-
         setStampTexts(precision: ring)
 
         if state == .wait {
+            setState(.listen)
+
             switch ring {
             case .bullsEye:
                 needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
@@ -140,18 +136,7 @@ class ViewModel: ObservableObject {
                 needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
             }
         } else if state == .settings {
-            switch ring {
-            case .bullsEye:
-                needle.setValue(0.00)
-            case .inner:
-                needle.setValue(0.25)
-            case .middle:
-                needle.setValue(0.50)
-            case .outer:
-                needle.setValue(0.75)
-            case .edge:
-                needle.setValue(1.00)
-            }
+            settingsConfigutation(ring)
         }
     }
     

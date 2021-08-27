@@ -41,15 +41,55 @@ struct SettingsIcon: View {
     }
 }
 
+struct AnalyseView: View {
+    var viewModel: ViewModel
+
+    @State private var value: CGFloat = 0.0
+    private let timer = Timer.publish(every: C.Timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        VStack{
+            HorizontalProgressBar(value: value)
+                .frame(height: 5)
+                    .onReceive(timer) { input in
+                        value += CGFloat(C.Timing.analyseTimeIncrement/viewModel.settings.analysisTiming.time())
+                        if value >= 1.0 {
+                            viewModel.setState(.show)
+                        }
+                    }
+                .padding(.top, 10)
+            Text("Analysing...")
+                .font(.headline)
+                .foregroundColor(C.Colors.gray)
+        }
+    }
+}
 
 struct TheContentView: View {
     @ObservedObject var viewModel: ViewModel
+    @State private var isShowingDetailView = false {
+        didSet {
+            viewModel.settingsConfigutation(.outer)
+        }
+    }
     var body: some View {
         print("redrawing TheContentView")
         return NavigationView {
             ZStack {
                 VStack {
-                    Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                    VStack {
+                        switch(viewModel.state) {
+                        case .analyse:
+                            VStack {
+                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                                AnalyseView(viewModel: viewModel)
+                            }
+                        default:
+                            VStack {
+                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                            }
+                        }
+                    }
                         .padding(.top, 30)
                         .padding()
                     Spacer()
@@ -61,15 +101,11 @@ struct TheContentView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        NavigationLink(destination: SettingsView(viewModel: viewModel)) {
+                        NavigationLink(
+                            destination: SettingsView(viewModel: viewModel),
+                            isActive: $viewModel.isShowingSettings) {
                             SettingsIcon(viewModel: viewModel)
                         }
-                        .simultaneousGesture(
-                            TapGesture()
-                                .onEnded { _ in
-                                    viewModel.setState(.settings)
-                                }
-                        )
                         .navigationBarHidden(true)
                     }
                 }

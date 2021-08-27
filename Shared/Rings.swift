@@ -38,38 +38,55 @@ struct Rings: View {
     
     var body: some View {
         let drawBorders = viewModel.state == .settings
+        var edgeColor = C.Colors.bullshitRed
+        var outerColor = C.Colors.bullshitRed
+        var middleColor = C.Colors.bullshitRed
+        var innerColor = C.Colors.bullshitRed
+        var bullsEyeColor = C.Colors.bullshitRed
+        if viewModel.state == .settings {
+            switch viewModel.settingsPrecision {
+            case .edge:
+                edgeColor = C.Colors.lightGray
+            case .outer:
+                outerColor = C.Colors.lightGray
+            case .middle:
+                middleColor = C.Colors.lightGray
+            case .inner:
+                innerColor = C.Colors.lightGray
+            case .bullsEye:
+                bullsEyeColor = C.Colors.lightGray
+            }
+        }
         print("ConcentricCircles()")
         return GeometryReader { (geo) in
             let ringPadding = RingPadding(min(geo.size.width, geo.size.height))
             ZStack {
                 Circle()
-                    .fill(C.Colors.paleBullshitRed)
-                Circle()
-                    .fill(C.Colors.bullshitRed)
+                    .fill(edgeColor)
                     .padding(ringPadding.edge)
                     .onTapGesture {
                         viewModel.tap(TapPrecision.edge)
                     }
                 Circle()
-                    .fill(C.Colors.bullshitRed)
+                    .fill(outerColor)
                     .padding(ringPadding.outer)
                     .onTapGesture {
                         viewModel.tap(TapPrecision.outer)
                     }
                 Circle()
-                    .fill(C.Colors.bullshitRed)
+                    .fill(middleColor)
                     .padding(ringPadding.middle)
                     .onTapGesture {
                         viewModel.tap(TapPrecision.middle)
                     }
                 Circle()
-                    .fill(C.Colors.bullshitRed)
+                    .fill(innerColor)
                     .padding(ringPadding.inner)
                     .onTapGesture {
                         viewModel.tap(TapPrecision.inner)
                     }
                 Circle()
-                    .fill(C.Colors.bullshitRed)
+                    .fill(bullsEyeColor)
                     .padding(ringPadding.bullsEye)
                     .onTapGesture {
                         viewModel.tap(TapPrecision.bullsEye)
@@ -95,7 +112,9 @@ struct Rings: View {
 
 struct ConcentricCircles_Previews: PreviewProvider {
     static var previews: some View {
-        Rings(viewModel: ViewModel())
+        let viewModel = ViewModel()
+        viewModel.setState(.settings)
+        return Rings(viewModel: viewModel)
             .padding()
     }
 }
