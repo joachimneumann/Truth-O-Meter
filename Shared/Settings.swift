@@ -24,25 +24,25 @@ struct Settings {
 
     var listenTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: "listenTimingIndex") == nil {
-                UserDefaults.standard.set(1, forKey: "listenTimingIndex")
+            if UserDefaults.standard.object(forKey: C.UserDefaultKeys.listenTimingIndex) == nil {
+                UserDefaults.standard.set(1, forKey: C.UserDefaultKeys.listenTimingIndex)
             }
-            return UserDefaults.standard.integer(forKey: "listenTimingIndex")
+            return UserDefaults.standard.integer(forKey: C.UserDefaultKeys.listenTimingIndex)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "listenTimingIndex")
+            UserDefaults.standard.set(newValue, forKey: C.UserDefaultKeys.listenTimingIndex)
         }
     }
     
     var analysisTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: "analysisTimingIndex") == nil {
-                UserDefaults.standard.set(1, forKey: "analysisTimingIndex")
+            if UserDefaults.standard.object(forKey: C.UserDefaultKeys.analysisTimingIndex) == nil {
+                UserDefaults.standard.set(1, forKey: C.UserDefaultKeys.analysisTimingIndex)
             }
-            return UserDefaults.standard.integer(forKey: "analysisTimingIndex")
+            return UserDefaults.standard.integer(forKey: C.UserDefaultKeys.analysisTimingIndex)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "analysisTimingIndex")
+            UserDefaults.standard.set(newValue, forKey: C.UserDefaultKeys.analysisTimingIndex)
         }
     }
 
@@ -88,7 +88,7 @@ struct Settings {
         ])
 
     private let custom = Theme(
-        title: "Custom",
+        title: "",
         results: [
             TapPrecision.bullsEye: Result("", ""),
             TapPrecision.inner:    Result("", ""),
@@ -96,10 +96,6 @@ struct Settings {
             TapPrecision.outer:    Result("", ""),
             TapPrecision.edge:     Result("", "")
         ])
-
-    mutating func setTitle(_ newTitle: String) {
-        currentTheme.setTitle(newTitle)
-    }
     
     var themes: [Theme] {
         [bullshit, truth, singing, custom]
@@ -109,7 +105,7 @@ struct Settings {
         currentTheme == custom
     }
     
-    private(set) var currentTheme:Theme
+    var currentTheme:Theme
 
     mutating func setCurrentTheme(_ newTheme: Theme) {
         currentTheme = newTheme

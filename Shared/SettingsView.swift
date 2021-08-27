@@ -48,7 +48,7 @@ struct ThemesList: View {
             ForEach(viewModel.settings.themes) { theme in
                 HStack {
                     if theme == viewModel.settings.currentTheme {
-                        Text(theme.title)
+                        Text(theme.title == "" ? "Custom" :  theme.title)
                         Group {
                             if viewModel.settings.isCustomTheme {
                                 Text("Edit")
@@ -66,7 +66,7 @@ struct ThemesList: View {
                             .foregroundColor(.blue)
                     } else {
                         HStack {
-                            Text(theme.title)
+                            Text(theme.title == "" ? "Custom" :  theme.title)
                             Spacer()
                         }
                         .contentShape(Rectangle())
@@ -116,7 +116,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView(viewModel: ViewModel())
-            .previewDevice(PreviewDevice(rawValue: "iPhone 12"))
             .padding(.top, 70)
     }
 }

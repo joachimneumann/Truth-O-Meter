@@ -13,9 +13,9 @@ class ViewModel: ObservableObject {
 
     private      var model = Model()
     private(set) var needle = Needle()
-    var stampTexts: Result = Result("top", "bottom")
     private(set) var settingsPrecision: TapPrecision = TapPrecision.middle
-    
+    private(set) var precision: TapPrecision = TapPrecision.middle
+
     @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
@@ -38,7 +38,50 @@ class ViewModel: ObservableObject {
             return "settings"
         }
     }
-        
+       
+    var customTop: String {
+        get {
+            if let r = settings.currentTheme.results[settingsPrecision] {
+                return r.top
+            } else {
+                return ""
+            }
+        }
+        set {
+            if settings.currentTheme.results[settingsPrecision] != nil {
+                settings.currentTheme.results[settingsPrecision]!.top = newValue
+            }
+        }
+    }
+    
+    var customBottom: String {
+        get {
+            if let r = settings.currentTheme.results[settingsPrecision] {
+                return r.bottom == nil ? "" : r.bottom!
+            } else {
+                return ""
+            }
+        }
+        set {
+            if settings.currentTheme.results[settingsPrecision] != nil {
+                if newValue == "" {
+                    settings.currentTheme.results[settingsPrecision]!.bottom = nil
+                } else {
+                    settings.currentTheme.results[settingsPrecision]!.bottom = newValue
+                }
+            }
+        }
+    }
+    var customTitle: String {
+        get {
+            return settings.currentTheme.title
+        }
+        set {
+            settings.currentTheme.title = newValue
+        }
+    }
+
+    
     var stateIndex: Int { // for ModelDebugView
         get {
 //            print("stateIndex getter")
@@ -81,27 +124,42 @@ class ViewModel: ObservableObject {
             setState(.wait)
         }
         view = newView
+        if newView == .detail {
+            // load custom values?
+            if settings.isCustomTheme {
+                var b: String?
+                customTitle = UserDefaults.standard.string(forKey: C.UserDefaultKeys.customTitle) ?? ""
+                settings.currentTheme.results[TapPrecision.edge]!.top =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customEdgeTop) ?? ""
+                settings.currentTheme.results[TapPrecision.edge]!.bottom =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customEdgeBottom) ?? ""
+
+                settings.currentTheme.results[TapPrecision.outer]!.top =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customOuterTop) ?? ""
+                settings.currentTheme.results[TapPrecision.outer]!.bottom =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customOuterBottom) ?? ""
+                settings.currentTheme.results[TapPrecision.middle]!.top =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customMiddleTop) ?? ""
+                settings.currentTheme.results[TapPrecision.middle]!.bottom =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customMiddleBottom) ?? ""
+                settings.currentTheme.results[TapPrecision.inner]!.top =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customInnerTop) ?? ""
+                settings.currentTheme.results[TapPrecision.inner]!.bottom =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customInnerBottom) ?? ""
+                settings.currentTheme.results[TapPrecision.bullsEye]!.top =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customBullsEyeTop) ?? ""
+                settings.currentTheme.results[TapPrecision.bullsEye]!.bottom =
+                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customBullsEyeBottom) ?? ""
+            }
+        }
     }
         
     var state: Model.State {
         get { model.state }
     }
-    
-    func setStampTexts(precision: TapPrecision) {
-        if let r = settings.currentTheme.results[precision] {
-            stampTexts = r
-        } else {
-            stampTexts = Result("top", "bottom")
-        }
-    }
-    
-    func setTitle(_ newTitle: String) {
-        settings.setTitle(newTitle)
-    }
-    
+        
     func settingsConfigutation(_ ring: TapPrecision) {
         setState(.settings)
-        setStampTexts(precision: ring)
         settingsPrecision = ring
         switch ring {
         case .bullsEye:
@@ -119,9 +177,7 @@ class ViewModel: ObservableObject {
 
     func tap(_ ring: TapPrecision) {
         print("tap(ring = \(ring))")
-        
-        setStampTexts(precision: ring)
-
+        precision = ring
         if state == .wait {
             setState(.listen)
 

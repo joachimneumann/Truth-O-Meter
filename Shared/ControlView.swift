@@ -18,7 +18,7 @@ struct ShowView: View {
     var body: some View {
         VStack {
             Spacer()
-            Stamp(texts: viewModel.stampTexts)
+            Stamp(texts: viewModel.settings.currentTheme.results[viewModel.precision]!)
                 .onTapGesture {
                     viewModel.setState(.wait)
                 }
@@ -54,7 +54,6 @@ struct ControlView: View {
                     }
                 }
             }
-            .background(Color.yellow)
             .aspectRatio(contentMode: .fit)
         }
     }

@@ -15,12 +15,8 @@ struct Result {
 
 struct Theme: Identifiable, Equatable {
     private(set) var id = UUID()
-    private(set) var title: String
-    let results: [TapPrecision:Result]
-
-    mutating func setTitle(_ newTitle: String) {
-        title = newTitle
-    }
+    var title: String
+    var results: [TapPrecision:Result]
     
     init(title: String, results: [TapPrecision:Result]) {
         self.title = title
