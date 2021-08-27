@@ -10,22 +10,25 @@ import SwiftUI
 struct Display: View {
     var viewModel: ViewModel
     var editTitle = false
-    @State private var titleState = ""
+    @State private var titleState = "xx"
     var body: some View {
         let colorful = viewModel.displayBackgroundColorful
+        titleState = viewModel.settings.currentTheme.title
         //        print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
-        ZStack {
+        return ZStack {
             if editTitle {
                 DisplayBackground(colorful: colorful)
                     .opacity(0.5)
                 NeedleView()
                     .clipped()
                     .opacity(0.5)
-                TextField("title", text: $titleState, onEditingChanged: { (changed) in
-                    if changed { viewModel.setTitle(titleState) }
-                })
+                TextField("title", text: $titleState) { changed in
+                    // do nothing
+                } onCommit: {
+                    viewModel.setTitle(titleState)
+                }
                 .padding(6)
                 .background(Color.green.opacity(0.3))
                 .multilineTextAlignment(.center)
