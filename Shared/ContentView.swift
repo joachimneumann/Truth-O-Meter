@@ -74,44 +74,55 @@ struct TheContentView: View {
     }
     var body: some View {
         print("redrawing TheContentView")
-        return NavigationView {
-            ZStack {
+        let navViewContent = ZStack {
+            VStack {
                 VStack {
-                    VStack {
-                        switch(viewModel.state) {
-                        case .analyse:
-                            VStack {
-                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
-                                AnalyseView(viewModel: viewModel)
-                            }
-                        default:
-                            VStack {
-                                Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
-                            }
+                    switch(viewModel.state) {
+                    case .analyse:
+                        VStack {
+                            Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
+                            AnalyseView(viewModel: viewModel)
+                        }
+                    default:
+                        VStack {
+                            Display(colorful: viewModel.displayBackgroundColorful, title: viewModel.settings.currentTheme.title)
                         }
                     }
-                        .padding(.top, 30)
-                        .padding()
-                    Spacer()
-                    ControlView(viewModel: viewModel)
-                        .aspectRatio(contentMode: .fit)
-                    Spacer()
                 }
-                VStack {
+                    .padding(.top, 30)
+                    .padding()
+                Spacer()
+                ControlView(viewModel: viewModel)
+                    .aspectRatio(contentMode: .fit)
+                Spacer()
+            }
+            VStack {
+                Spacer()
+                HStack {
                     Spacer()
-                    HStack {
-                        Spacer()
-                        NavigationLink(
-                            destination: SettingsView(viewModel: viewModel),
-                            isActive: $viewModel.isShowingSettings) {
-                            SettingsIcon(viewModel: viewModel)
-                        }
-                        .navigationBarHidden(true)
+                    NavigationLink(
+                        destination: SettingsView(viewModel: viewModel),
+                        isActive: $viewModel.isShowingSettings) {
+                        SettingsIcon(viewModel: viewModel)
                     }
+                    .navigationBarHidden(true)
                 }
             }
         }
         .accentColor(C.Colors.gray)
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return AnyView(NavigationView {
+                EmptyView() // empty sidebar (for iPad)
+                navViewContent
+            })
+        } else{
+            return AnyView(NavigationView {
+                navViewContent
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            )
+        }
     }
 }
 
