@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ThemeDetailView: View {
+struct DetailView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         print("ThemeDetailView")
@@ -45,7 +45,7 @@ struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         viewModel.setState(.settings)
-        return ThemeDetailView(viewModel: viewModel)
+        return DetailView(viewModel: viewModel)
             .environmentObject(viewModel.needle)
     }
 }
