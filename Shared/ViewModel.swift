@@ -7,9 +7,6 @@
 
 import Foundation
 import SwiftUI
-#if os(macOS)
-import AVFoundation // for sound
-#endif
 
 class ViewModel: ObservableObject {
     
