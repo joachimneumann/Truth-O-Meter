@@ -18,10 +18,14 @@ struct ShowView: View {
     var body: some View {
         VStack {
             Spacer()
-            Stamp(texts: viewModel.settings.currentTheme.results[viewModel.precision]!)
-                .onTapGesture {
-                    viewModel.setState(.wait)
-                }
+            HStack {
+                Spacer()
+                Stamp(texts: viewModel.settings.currentTheme.results[viewModel.precision]!)
+                    .onTapGesture {
+                        viewModel.setState(.wait)
+                    }
+                Spacer()
+            }
             Spacer()
         }
         .aspectRatio(1.0, contentMode: .fill)
