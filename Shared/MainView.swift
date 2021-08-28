@@ -18,14 +18,14 @@ struct TheMainView: View {
                         switch(viewModel.state) {
                         case .analyse:
                             VStack {
-                                Display(viewModel: viewModel)
+                                DisplayView(viewModel: viewModel)
                                 AnalyseView(viewModel: viewModel)
                                     .padding(.leading, 20)
                                     .padding(.trailing, 20)
                             }
                         default:
                             VStack {
-                                Display(viewModel: viewModel)
+                                DisplayView(viewModel: viewModel)
                             }
                         }
                     }

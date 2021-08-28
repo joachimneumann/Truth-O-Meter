@@ -71,7 +71,7 @@ struct ThemesList: View {
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            viewModel.setCurrentTheme(theme)
+                            viewModel.settings.setCurrentTheme(theme)
                         }
                     }
                 }
@@ -107,7 +107,7 @@ struct SettingsView: View {
             }
             .padding(.leading)
             .onTapGesture {
-                viewModel.setView(.main)
+                viewModel.fromSettingsViewToMainView()
             }
         }
     }

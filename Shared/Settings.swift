@@ -24,25 +24,25 @@ struct Settings {
 
     var listenTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: C.UserDefaultKeys.listenTimingIndex) == nil {
-                UserDefaults.standard.set(1, forKey: C.UserDefaultKeys.listenTimingIndex)
+            if UserDefaults.standard.object(forKey: C.Key.listenTiming) == nil {
+                UserDefaults.standard.set(1, forKey: C.Key.listenTiming)
             }
-            return UserDefaults.standard.integer(forKey: C.UserDefaultKeys.listenTimingIndex)
+            return UserDefaults.standard.integer(forKey: C.Key.listenTiming)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: C.UserDefaultKeys.listenTimingIndex)
+            UserDefaults.standard.set(newValue, forKey: C.Key.listenTiming)
         }
     }
     
     var analysisTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: C.UserDefaultKeys.analysisTimingIndex) == nil {
-                UserDefaults.standard.set(1, forKey: C.UserDefaultKeys.analysisTimingIndex)
+            if UserDefaults.standard.object(forKey: C.Key.analysisTiming) == nil {
+                UserDefaults.standard.set(1, forKey: C.Key.analysisTiming)
             }
-            return UserDefaults.standard.integer(forKey: C.UserDefaultKeys.analysisTimingIndex)
+            return UserDefaults.standard.integer(forKey: C.Key.analysisTiming)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: C.UserDefaultKeys.analysisTimingIndex)
+            UserDefaults.standard.set(newValue, forKey: C.Key.analysisTiming)
         }
     }
 
@@ -58,6 +58,7 @@ struct Settings {
     }
     
     private let bullshit = Theme(
+        index: 0,
         title: "Bullshit-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("True", nil),
@@ -68,6 +69,7 @@ struct Settings {
         ])
     
     private let truth = Theme(
+        index: 1,
         title: "Truth-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("Absolute", "Bullshit"),
@@ -78,6 +80,7 @@ struct Settings {
         ])
 
     private let singing = Theme(
+        index: 2,
         title: "Voice-O-Meter",
         results: [
             TapPrecision.bullsEye: Result("flimsy", nil),
@@ -87,7 +90,8 @@ struct Settings {
             TapPrecision.edge:     Result("Sexy", nil)
         ])
 
-    private let custom = Theme(
+    private var custom = Theme(
+        index: 3,
         title: "",
         results: [
             TapPrecision.bullsEye: Result("", ""),
@@ -96,6 +100,11 @@ struct Settings {
             TapPrecision.outer:    Result("", ""),
             TapPrecision.edge:     Result("", "")
         ])
+    
+    mutating func updateCustom(t: String) {
+        custom.title = t
+    }
+    
     
     var themes: [Theme] {
         [bullshit, truth, singing, custom]
@@ -108,6 +117,7 @@ struct Settings {
     var currentTheme:Theme
 
     mutating func setCurrentTheme(_ newTheme: Theme) {
+        UserDefaults.standard.setValue(newTheme.id, forKey: C.Key.selectedTheme)
         currentTheme = newTheme
     }
     
@@ -116,6 +126,22 @@ struct Settings {
     }
     
     init() {
-        currentTheme = bullshit
+        let index: Int = UserDefaults.standard.integer(forKey: C.Key.selectedTheme)
+        // This returns 0 if invalud or not set yet.
+        // But this is what we want initially anyway (Bullshit-O-Meter)
+        
+        // currentTheme = themes[index]
+        // --> compiler error !?!
+
+        // work-around:
+        if index == 0 { currentTheme = bullshit }
+        else if index == 1 { currentTheme = truth }
+        else if index == 2 { currentTheme = singing }
+        else if index == 3 { currentTheme = custom }
+        else { currentTheme = bullshit }
+        
+        if let s = UserDefaults.standard.string(forKey: C.Key.customTitle) {
+            custom.title = s
+        }
     }
 }

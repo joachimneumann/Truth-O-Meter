@@ -127,32 +127,37 @@ class ViewModel: ObservableObject {
         if newView == .detail {
             // load custom values?
             if settings.isCustomTheme {
-                customTitle = UserDefaults.standard.string(forKey: C.UserDefaultKeys.customTitle) ?? ""
+                customTitle = UserDefaults.standard.string(forKey: C.Key.customTitle) ?? ""
                 settings.currentTheme.results[TapPrecision.edge]!.top =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customEdgeTop) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customEdgeTop) ?? ""
                 settings.currentTheme.results[TapPrecision.edge]!.bottom =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customEdgeBottom) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customEdgeBottom) ?? ""
 
                 settings.currentTheme.results[TapPrecision.outer]!.top =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customOuterTop) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customOuterTop) ?? ""
                 settings.currentTheme.results[TapPrecision.outer]!.bottom =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customOuterBottom) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customOuterBottom) ?? ""
                 settings.currentTheme.results[TapPrecision.middle]!.top =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customMiddleTop) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customMiddleTop) ?? ""
                 settings.currentTheme.results[TapPrecision.middle]!.bottom =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customMiddleBottom) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customMiddleBottom) ?? ""
                 settings.currentTheme.results[TapPrecision.inner]!.top =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customInnerTop) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customInnerTop) ?? ""
                 settings.currentTheme.results[TapPrecision.inner]!.bottom =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customInnerBottom) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customInnerBottom) ?? ""
                 settings.currentTheme.results[TapPrecision.bullsEye]!.top =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customBullsEyeTop) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customBullsEyeTop) ?? ""
                 settings.currentTheme.results[TapPrecision.bullsEye]!.bottom =
-                    UserDefaults.standard.string(forKey: C.UserDefaultKeys.customBullsEyeBottom) ?? ""
+                    UserDefaults.standard.string(forKey: C.Key.customBullsEyeBottom) ?? ""
             }
         }
     }
-    
+
+    func fromSettingsViewToMainView() {
+        // the theme has already been set inside SettingsView
+        setView(.main)
+    }
+
     func fromDetailViewToSettingsView() {
         if settings.isCustomTheme {
             saveCustom()
@@ -165,46 +170,46 @@ class ViewModel: ObservableObject {
         var b: String?
         UserDefaults.standard.set(
             customTitle,
-            forKey: C.UserDefaultKeys.customTitle)
+            forKey: C.Key.customTitle)
         UserDefaults.standard.set(
             settings.currentTheme.results[TapPrecision.edge]!.top,
-            forKey: C.UserDefaultKeys.customEdgeTop)
+            forKey: C.Key.customEdgeTop)
         b = settings.currentTheme.results[TapPrecision.edge]!.bottom
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customEdgeBottom)
+            forKey: C.Key.customEdgeBottom)
         b = settings.currentTheme.results[TapPrecision.outer]!.top
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customOuterTop)
+            forKey: C.Key.customOuterTop)
         b = settings.currentTheme.results[TapPrecision.outer]!.bottom
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customOuterBottom)
+            forKey: C.Key.customOuterBottom)
         b = settings.currentTheme.results[TapPrecision.middle]!.top
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customMiddleTop)
+            forKey: C.Key.customMiddleTop)
         b = settings.currentTheme.results[TapPrecision.middle]!.bottom
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customMiddleBottom)
+            forKey: C.Key.customMiddleBottom)
         b = settings.currentTheme.results[TapPrecision.inner]!.top
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customInnerTop)
+            forKey: C.Key.customInnerTop)
         b = settings.currentTheme.results[TapPrecision.inner]!.bottom
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customInnerBottom)
+            forKey: C.Key.customInnerBottom)
         b = settings.currentTheme.results[TapPrecision.bullsEye]!.top
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customBullsEyeTop)
+            forKey: C.Key.customBullsEyeTop)
         b = settings.currentTheme.results[TapPrecision.bullsEye]!.bottom
         UserDefaults.standard.set(
             b == "" ? nil : b,
-            forKey: C.UserDefaultKeys.customBullsEyeBottom)
+            forKey: C.Key.customBullsEyeBottom)
     }
         
     var state: Model.State {
@@ -250,11 +255,7 @@ class ViewModel: ObservableObject {
             settingsConfigutation(ring)
         }
     }
-    
-    func setCurrentTheme(_ newTheme: Theme) {
-        settings.setCurrentTheme(newTheme)
-    }
-    
+        
     func setState(_ newState: Model.State) {
         model.setState(newState)
 

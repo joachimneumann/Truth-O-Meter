@@ -44,20 +44,23 @@ struct C {
         static let lightGreen = Color(red:  212/255.0, green: 251/255.0, blue: 121/255.0)
     }
     
-    struct UserDefaultKeys {
-        static let listenTimingIndex    = "listenTimingIndex"
-        static let analysisTimingIndex  = "analysisTimingIndex"
-        static let customTitle          = "customTitle"
-        static let customEdgeTop        = "customEdgeTop"
-        static let customEdgeBottom     = "customEdgeBottom"
-        static let customOuterTop       = "customOuterTop"
-        static let customOuterBottom    = "customOuterBottom"
-        static let customMiddleTop      = "customMiddleTop"
-        static let customMiddleBottom   = "customMiddleBottom"
-        static let customInnerTop       = "customInnerTop"
-        static let customInnerBottom    = "customInnerBottom"
-        static let customBullsEyeTop    = "customBullsEyeTop"
-        static let customBullsEyeBottom = "customBullsEyeBottom"
+    struct Key {
+        // some key names might seem stange, but this is
+        // for compatibility with older app versions
+        static let listenTiming         = "fastResponseTimeKey"
+        static let analysisTiming       = "analysisTimingIndex"
+        static let selectedTheme        = "selectedThemeIndexKey"
+        static let customTitle          = "displayTextkey"
+        static let customEdgeTop        = "farLeftText1key"
+        static let customEdgeBottom     = "farLeftText2key"
+        static let customOuterTop       = "leftText1key"
+        static let customOuterBottom    = "leftText2key"
+        static let customMiddleTop      = "centerText1key"
+        static let customMiddleBottom   = "centerText2key"
+        static let customInnerTop       = "rightText1key"
+        static let customInnerBottom    = "rightText2key"
+        static let customBullsEyeTop    = "farRightText1key"
+        static let customBullsEyeBottom = "farRightText2key"
     }
 
 }

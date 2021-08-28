@@ -1,5 +1,5 @@
 //
-//  Display.swift
+//  DisplayView.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 11/11/20.
@@ -30,7 +30,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
     }
 }
 
-struct Display: View {
+struct DisplayView: View {
     @ObservedObject var viewModel: ViewModel
     @State private var editing = false
     var editTitle = false
@@ -68,10 +68,10 @@ struct Display: View {
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        viewModel.setCurrentTheme(viewModel.settings.themes[3])
+        viewModel.settings.setCurrentTheme(viewModel.settings.themes[3])
         return VStack {
             ModelDebugView(viewModel: viewModel)
-            Display(viewModel: viewModel, editTitle: true)
+            DisplayView(viewModel: viewModel, editTitle: true)
                 .padding()
                 .environmentObject(viewModel.needle)
         }

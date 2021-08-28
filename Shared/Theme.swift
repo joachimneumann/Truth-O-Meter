@@ -14,11 +14,12 @@ struct Result {
 }
 
 struct Theme: Identifiable, Equatable {
-    private(set) var id = UUID()
+    private(set) var id: Int
     var title: String
     var results: [TapPrecision:Result]
     
-    init(title: String, results: [TapPrecision:Result]) {
+    init(index: Int, title: String, results: [TapPrecision:Result]) {
+        self.id = index
         self.title = title
         self.results = results
     }

@@ -110,14 +110,12 @@ struct TheDetailView: View {
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
-                    Display(viewModel: viewModel, editTitle: viewModel.settings.isCustomTheme)
+                    DisplayView(viewModel: viewModel, editTitle: viewModel.settings.isCustomTheme)
                         .frame(height: geo.size.height * 0.2)
                     EditableStampView(viewModel: viewModel)
                     RecordButton(viewModel: viewModel)
                         .frame(height: geo.size.height * 0.39)
-                    //                        .background(Color.green)
                 }
-                //                .background(Color.yellow)
                 .padding()
                 Spacer()
             }
@@ -129,7 +127,7 @@ struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         viewModel.setState(.settings)
-        viewModel.setCurrentTheme(viewModel.settings.themes[3])
+        viewModel.settings.setCurrentTheme(viewModel.settings.themes[3])
         return DetailView(viewModel: viewModel)
             .environmentObject(viewModel.needle)
     }
