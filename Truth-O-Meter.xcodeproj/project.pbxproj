@@ -35,8 +35,8 @@
 		AA586D65255F04EF00229903 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA586D63255F04EF00229903 /* RecordButton.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
-		AA6063F726D730D400EDD38F /* Rings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6063F626D730D400EDD38F /* Rings.swift */; };
-		AA6063F826D730D400EDD38F /* Rings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6063F626D730D400EDD38F /* Rings.swift */; };
+		AA6063F726D730D400EDD38F /* RingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6063F626D730D400EDD38F /* RingsView.swift */; };
+		AA6063F826D730D400EDD38F /* RingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6063F626D730D400EDD38F /* RingsView.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014CE26CA626000B4EA2C /* ViewModel.swift */; };
@@ -74,7 +74,7 @@
 		AA586D5C255EF3E200229903 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		AA586D63255F04EF00229903 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
-		AA6063F626D730D400EDD38F /* Rings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rings.swift; sourceTree = "<group>"; };
+		AA6063F626D730D400EDD38F /* RingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingsView.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA9014CE26CA626000B4EA2C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = Shared/ViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
@@ -126,15 +126,15 @@
 			children = (
 				AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */,
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
+				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */,
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
 				AA3F77D926D5DF2500AC1D3E /* Needle.swift */,
-				AA6063F626D730D400EDD38F /* Rings.swift */,
-				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
-				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA9014CE26CA626000B4EA2C /* ViewModel.swift */,
+				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
+				AA6063F626D730D400EDD38F /* RingsView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
 				AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */,
 				AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */,
@@ -294,7 +294,7 @@
 				AA30E3AD26D3BE1900BC5F20 /* DetailView.swift in Sources */,
 				AA586D64255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
-				AA6063F726D730D400EDD38F /* Rings.swift in Sources */,
+				AA6063F726D730D400EDD38F /* RingsView.swift in Sources */,
 				AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
 				AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */,
@@ -322,7 +322,7 @@
 				AA30E3AE26D3BE1900BC5F20 /* DetailView.swift in Sources */,
 				AA586D65255F04EF00229903 /* RecordButton.swift in Sources */,
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
-				AA6063F826D730D400EDD38F /* Rings.swift in Sources */,
+				AA6063F826D730D400EDD38F /* RingsView.swift in Sources */,
 				AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067726D202B40090FA67 /* Theme.swift in Sources */,
 				AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */,

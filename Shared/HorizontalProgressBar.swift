@@ -14,9 +14,9 @@ struct HorizontalProgressBar: View {
         ZStack { //(alignment: .leading) {
             GeometryReader { (geo) in
                 Rectangle()
-                    .foregroundColor(C.Colors.lightGray)
+                    .foregroundColor(C.color.lightGray)
                 Rectangle()
-                    .foregroundColor(C.Colors.bullshitRed)
+                    .foregroundColor(C.color.bullshitRed)
                     .frame(width:geo.size.width*value, height: geo.size.height)
             }
         }

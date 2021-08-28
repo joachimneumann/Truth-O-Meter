@@ -13,8 +13,8 @@ class ViewModel: ObservableObject {
 
     private      var model = Model()
     private(set) var needle = Needle()
-    private(set) var settingsPrecision: TapPrecision = TapPrecision.middle
-    private(set) var precision: TapPrecision = TapPrecision.middle
+    private(set) var settingsPrecision: Precision = Precision.middle
+    private(set) var precision: Precision = Precision.middle
 
     @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
@@ -41,35 +41,20 @@ class ViewModel: ObservableObject {
        
     var customTop: String {
         get {
-            if let r = settings.currentTheme.results[settingsPrecision] {
-                return r.top
-            } else {
-                return ""
-            }
+            settings.currentTheme.result(precision: settingsPrecision).top
         }
         set {
-            if settings.currentTheme.results[settingsPrecision] != nil {
-                settings.currentTheme.results[settingsPrecision]!.top = newValue
-            }
+            settings.currentTheme.setTop(newValue, forPrecision: settingsPrecision)
         }
     }
     
     var customBottom: String {
         get {
-            if let r = settings.currentTheme.results[settingsPrecision] {
-                return r.bottom == nil ? "" : r.bottom!
-            } else {
-                return ""
-            }
+            settings.currentTheme.result(precision: settingsPrecision).bottom ?? ""
         }
         set {
-            if settings.currentTheme.results[settingsPrecision] != nil {
-                if newValue == "" {
-                    settings.currentTheme.results[settingsPrecision]!.bottom = nil
-                } else {
-                    settings.currentTheme.results[settingsPrecision]!.bottom = newValue
-                }
-            }
+            let s: String? = newValue == "" ? nil : newValue
+            settings.currentTheme.setBottom(s, forPrecision: settingsPrecision)
         }
     }
     var customTitle: String {
@@ -125,30 +110,31 @@ class ViewModel: ObservableObject {
         }
         view = newView
         if newView == .detail {
-            // load custom values?
+            // load custom values
             if settings.isCustomTheme {
-                customTitle = UserDefaults.standard.string(forKey: C.Key.customTitle) ?? ""
-                settings.currentTheme.results[TapPrecision.edge]!.top =
-                    UserDefaults.standard.string(forKey: C.Key.customEdgeTop) ?? ""
-                settings.currentTheme.results[TapPrecision.edge]!.bottom =
-                    UserDefaults.standard.string(forKey: C.Key.customEdgeBottom) ?? ""
+                var s: String
+                customTitle = UserDefaults.standard.string(forKey: C.key.custom.title) ?? ""
 
-                settings.currentTheme.results[TapPrecision.outer]!.top =
-                    UserDefaults.standard.string(forKey: C.Key.customOuterTop) ?? ""
-                settings.currentTheme.results[TapPrecision.outer]!.bottom =
-                    UserDefaults.standard.string(forKey: C.Key.customOuterBottom) ?? ""
-                settings.currentTheme.results[TapPrecision.middle]!.top =
-                    UserDefaults.standard.string(forKey: C.Key.customMiddleTop) ?? ""
-                settings.currentTheme.results[TapPrecision.middle]!.bottom =
-                    UserDefaults.standard.string(forKey: C.Key.customMiddleBottom) ?? ""
-                settings.currentTheme.results[TapPrecision.inner]!.top =
-                    UserDefaults.standard.string(forKey: C.Key.customInnerTop) ?? ""
-                settings.currentTheme.results[TapPrecision.inner]!.bottom =
-                    UserDefaults.standard.string(forKey: C.Key.customInnerBottom) ?? ""
-                settings.currentTheme.results[TapPrecision.bullsEye]!.top =
-                    UserDefaults.standard.string(forKey: C.Key.customBullsEyeTop) ?? ""
-                settings.currentTheme.results[TapPrecision.bullsEye]!.bottom =
-                    UserDefaults.standard.string(forKey: C.Key.customBullsEyeBottom) ?? ""
+                s = UserDefaults.standard.string(forKey: C.key.custom.edge.top) ?? ""
+                settings.currentTheme.setTop(s, forPrecision: .edge)
+                s = UserDefaults.standard.string(forKey: C.key.custom.edge.bottom) ?? ""
+                settings.currentTheme.setBottom(s, forPrecision: .edge)
+                s = UserDefaults.standard.string(forKey: C.key.custom.outer.top) ?? ""
+                settings.currentTheme.setTop(s, forPrecision: .outer)
+                s = UserDefaults.standard.string(forKey: C.key.custom.outer.bottom) ?? ""
+                settings.currentTheme.setBottom(s, forPrecision: .outer)
+                s = UserDefaults.standard.string(forKey: C.key.custom.middle.top) ?? ""
+                settings.currentTheme.setTop(s, forPrecision: .middle)
+                s = UserDefaults.standard.string(forKey: C.key.custom.middle.bottom) ?? ""
+                settings.currentTheme.setBottom(s, forPrecision: .middle)
+                s = UserDefaults.standard.string(forKey: C.key.custom.inner.top) ?? ""
+                settings.currentTheme.setTop(s, forPrecision: .inner)
+                s = UserDefaults.standard.string(forKey: C.key.custom.inner.bottom) ?? ""
+                settings.currentTheme.setBottom(s, forPrecision: .inner)
+                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? ""
+                settings.currentTheme.setTop(s, forPrecision: .bullsEye)
+                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom) ?? ""
+                settings.currentTheme.setBottom(s, forPrecision: .bullsEye)
             }
         }
     }
@@ -167,56 +153,46 @@ class ViewModel: ObservableObject {
 
     
     func saveCustom() {
-        var b: String?
         UserDefaults.standard.set(
             customTitle,
-            forKey: C.Key.customTitle)
+            forKey: C.key.custom.title)
         UserDefaults.standard.set(
-            settings.currentTheme.results[TapPrecision.edge]!.top,
-            forKey: C.Key.customEdgeTop)
-        b = settings.currentTheme.results[TapPrecision.edge]!.bottom
+            settings.currentTheme.results.edge.top,
+            forKey: C.key.custom.edge.top)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customEdgeBottom)
-        b = settings.currentTheme.results[TapPrecision.outer]!.top
+            settings.currentTheme.results.edge.bottom,
+            forKey: C.key.custom.edge.bottom)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customOuterTop)
-        b = settings.currentTheme.results[TapPrecision.outer]!.bottom
+            settings.currentTheme.results.outer.top,
+            forKey: C.key.custom.outer.top)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customOuterBottom)
-        b = settings.currentTheme.results[TapPrecision.middle]!.top
+            settings.currentTheme.results.outer.bottom,
+            forKey: C.key.custom.outer.bottom)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customMiddleTop)
-        b = settings.currentTheme.results[TapPrecision.middle]!.bottom
+            settings.currentTheme.results.middle.top,
+            forKey: C.key.custom.middle.top)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customMiddleBottom)
-        b = settings.currentTheme.results[TapPrecision.inner]!.top
+            settings.currentTheme.results.middle.bottom,
+            forKey: C.key.custom.middle.bottom)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customInnerTop)
-        b = settings.currentTheme.results[TapPrecision.inner]!.bottom
+            settings.currentTheme.results.inner.top,
+            forKey: C.key.custom.inner.top)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customInnerBottom)
-        b = settings.currentTheme.results[TapPrecision.bullsEye]!.top
+            settings.currentTheme.results.inner.bottom,
+            forKey: C.key.custom.inner.bottom)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customBullsEyeTop)
-        b = settings.currentTheme.results[TapPrecision.bullsEye]!.bottom
+            settings.currentTheme.results.bullsEye.top,
+            forKey: C.key.custom.bullsEye.top)
         UserDefaults.standard.set(
-            b == "" ? nil : b,
-            forKey: C.Key.customBullsEyeBottom)
+            settings.currentTheme.results.bullsEye.bottom,
+            forKey: C.key.custom.bullsEye.bottom)
     }
         
     var state: Model.State {
         get { model.state }
     }
         
-    func settingsConfigutation(_ ring: TapPrecision) {
+    func settingsConfigutation(_ ring: Precision) {
         setState(.settings)
         settingsPrecision = ring
         switch ring {
@@ -233,7 +209,7 @@ class ViewModel: ObservableObject {
         }
     }
 
-    func tap(_ ring: TapPrecision) {
+    func tap(_ ring: Precision) {
         print("tap(ring = \(ring))")
         precision = ring
         if state == .wait {

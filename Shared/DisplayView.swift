@@ -14,18 +14,17 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)
-            .autocapitalization(.none)
             .padding(6)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(C.Colors.bullshitRed, lineWidth: focused ? 3 : 0))
-            .background(C.Colors.bullshitRed.opacity(0.1))
-            .multilineTextAlignment(.center)
+                    .strokeBorder(C.color.bullshitRed, lineWidth: focused ? 3 : 0))
+            .background(C.color.bullshitRed.opacity(0.1))
+            .multilineTextAlignment(TextAlignment.center)
             .lineLimit(1)
             .cornerRadius(cornerRadius)
             .font(.headline)
-            .accentColor(C.Colors.gray)
-            .foregroundColor(C.Colors.gray)
+            .accentColor(C.color.gray)
+            .foregroundColor(C.color.gray)
             .offset(y: 15)
     }
 }
@@ -55,7 +54,7 @@ struct DisplayView: View {
                 DisplayBackground(colorful: colorful)
                 Text(viewModel.settings.currentTheme.title)
                     .offset(y: 15)
-                    .foregroundColor(colorful ? C.Colors.gray : C.Colors.lightGray)
+                    .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
                     .font(.headline)
                 NeedleView()
                     .clipped()

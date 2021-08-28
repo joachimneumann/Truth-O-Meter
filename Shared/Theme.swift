@@ -13,12 +13,65 @@ struct Result {
     init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
 }
 
+struct Results {
+    var edge: Result
+    var outer: Result
+    var middle: Result
+    var inner: Result
+    var bullsEye: Result
+}
+
+
 struct Theme: Identifiable, Equatable {
     private(set) var id: Int
     var title: String
-    var results: [TapPrecision:Result]
+    private(set) var results: Results
     
-    init(index: Int, title: String, results: [TapPrecision:Result]) {
+    mutating func setTop(_ newTop: String, forPrecision: Precision) {
+        switch forPrecision {
+        case .edge:
+            results.edge.top = newTop
+        case .outer:
+            results.outer.top = newTop
+        case .middle:
+            results.middle.top = newTop
+        case .inner:
+            results.inner.top = newTop
+        case .bullsEye:
+            results.bullsEye.top = newTop
+        }
+    }
+
+    mutating func setBottom(_ newBottom: String?, forPrecision: Precision) {
+        switch forPrecision {
+        case .edge:
+            results.edge.bottom = newBottom
+        case .outer:
+            results.outer.bottom = newBottom
+        case .middle:
+            results.middle.bottom = newBottom
+        case .inner:
+            results.inner.bottom = newBottom
+        case .bullsEye:
+            results.bullsEye.bottom = newBottom
+        }
+    }
+
+    func result(precision: Precision) -> Result {
+        switch precision {
+        case .edge:
+            return results.edge
+        case .outer:
+            return results.outer
+        case .middle:
+            return results.middle
+        case .inner:
+            return results.inner
+        case .bullsEye:
+            return results.bullsEye
+        }
+    }
+    init(index: Int, title: String, results: Results) {
         self.id = index
         self.title = title
         self.results = results

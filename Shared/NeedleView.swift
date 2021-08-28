@@ -23,8 +23,8 @@ struct NeedleView: View {
                 let a = temp.currentPoint!
                 let b = C.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
-                    .stroke(needle.colorful ? C.Colors.bullshitRed : C.Colors.lightGray,
-                            style: StrokeStyle(lineWidth: C.lineWidth, lineCap: .round))
+                    .stroke(needle.colorful ? C.color.bullshitRed : C.color.lightGray,
+                            style: StrokeStyle(lineWidth: C.needleLineWidth, lineCap: .round))
             }
         }
         .aspectRatio(1.9, contentMode: .fit)

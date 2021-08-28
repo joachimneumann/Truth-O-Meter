@@ -12,23 +12,23 @@ struct DisplayBackground: View {
 
     var body: some View {
         return ZStack {
-            let boldStrokeStyle = StrokeStyle(lineWidth: C.lineWidth, lineCap: .butt)
+            let boldStrokeStyle = StrokeStyle(lineWidth: C.needleLineWidth, lineCap: .butt)
             let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
-                        .stroke(colorful ? C.Colors.gray : C.Colors.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? C.color.gray : C.color.lightGray, style: boldStrokeStyle)
                         .clipped()
                     MainArcRed()
-                        .stroke(colorful ? C.Colors.bullshitRed : C.Colors.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: boldStrokeStyle)
                         .clipped()
                     TopArcBlack()
-                        .stroke(colorful ? C.Colors.gray : C.Colors.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? C.color.gray : C.color.lightGray, style: fineStrokeStyle)
                         .clipped()
                     TopArcRed()
-                        .stroke(colorful ? C.Colors.bullshitRed : C.Colors.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .stroke(C.Colors.lightGray, lineWidth: 2)
+                        .stroke(C.color.lightGray, lineWidth: 2)
                 }
         }
     }

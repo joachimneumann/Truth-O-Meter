@@ -24,25 +24,25 @@ struct Settings {
 
     var listenTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: C.Key.listenTiming) == nil {
-                UserDefaults.standard.set(1, forKey: C.Key.listenTiming)
+            if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
+                UserDefaults.standard.set(1, forKey: C.key.listenTiming)
             }
-            return UserDefaults.standard.integer(forKey: C.Key.listenTiming)
+            return UserDefaults.standard.integer(forKey: C.key.listenTiming)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: C.Key.listenTiming)
+            UserDefaults.standard.set(newValue, forKey: C.key.listenTiming)
         }
     }
     
     var analysisTimingIndex: Int {
         get {
-            if UserDefaults.standard.object(forKey: C.Key.analysisTiming) == nil {
-                UserDefaults.standard.set(1, forKey: C.Key.analysisTiming)
+            if UserDefaults.standard.object(forKey: C.key.analysisTiming) == nil {
+                UserDefaults.standard.set(1, forKey: C.key.analysisTiming)
             }
-            return UserDefaults.standard.integer(forKey: C.Key.analysisTiming)
+            return UserDefaults.standard.integer(forKey: C.key.analysisTiming)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: C.Key.analysisTiming)
+            UserDefaults.standard.set(newValue, forKey: C.key.analysisTiming)
         }
     }
 
@@ -60,47 +60,43 @@ struct Settings {
     private let bullshit = Theme(
         index: 0,
         title: "Bullshit-O-Meter",
-        results: [
-            TapPrecision.bullsEye: Result("True", nil),
-            TapPrecision.inner:    Result("Mostly", "True"),
-            TapPrecision.middle:   Result("undecided", nil),
-            TapPrecision.outer:    Result("Bullshit", nil),
-            TapPrecision.edge:     Result("Absolute", "Bullshit")
-        ])
-    
+        results: Results(
+            edge:     Result("Absolute", "Bullshit"),
+            outer:    Result("Bullshit", nil),
+            middle:   Result("undecided", nil),
+            inner:    Result("Mostly", "True"),
+            bullsEye: Result("True", nil)))
+
     private let truth = Theme(
         index: 1,
         title: "Truth-O-Meter",
-        results: [
-            TapPrecision.bullsEye: Result("Absolute", "Bullshit"),
-            TapPrecision.inner:    Result("Bullshit", nil),
-            TapPrecision.middle:   Result("undecided", nil),
-            TapPrecision.outer:    Result("Mostly", "True"),
-            TapPrecision.edge:     Result("True", nil)
-        ])
-
+        results: Results(
+            edge:     Result("True", nil),
+            outer:    Result("Mostly", "True"),
+            middle:   Result("undecided", nil),
+            inner:    Result("Bullshit", nil),
+            bullsEye: Result("Absolute", "Bullshit")))
+    
     private let singing = Theme(
         index: 2,
         title: "Voice-O-Meter",
-        results: [
-            TapPrecision.bullsEye: Result("flimsy", nil),
-            TapPrecision.inner:    Result("could be", "better"),
-            TapPrecision.middle:   Result("good", nil),
-            TapPrecision.outer:    Result("impressive", nil),
-            TapPrecision.edge:     Result("Sexy", nil)
-        ])
+        results: Results(
+            edge:     Result("Sexy", nil),
+            outer:    Result("impressive", nil),
+            middle:   Result("good", nil),
+            inner:    Result("could be", "better"),
+            bullsEye: Result("flimsy", nil)))
 
     private var custom = Theme(
         index: 3,
         title: "",
-        results: [
-            TapPrecision.bullsEye: Result("", ""),
-            TapPrecision.inner:    Result("", ""),
-            TapPrecision.middle:   Result("", ""),
-            TapPrecision.outer:    Result("", ""),
-            TapPrecision.edge:     Result("", "")
-        ])
-    
+        results: Results(
+            edge:     Result("", ""),
+            outer:    Result("", ""),
+            middle:   Result("", ""),
+            inner:    Result("", ""),
+            bullsEye: Result("", "")))
+   
     mutating func updateCustom(t: String) {
         custom.title = t
     }
@@ -117,7 +113,7 @@ struct Settings {
     var currentTheme:Theme
 
     mutating func setCurrentTheme(_ newTheme: Theme) {
-        UserDefaults.standard.setValue(newTheme.id, forKey: C.Key.selectedTheme)
+        UserDefaults.standard.setValue(newTheme.id, forKey: C.key.selectedTheme)
         currentTheme = newTheme
     }
     
@@ -126,7 +122,43 @@ struct Settings {
     }
     
     init() {
-        let index: Int = UserDefaults.standard.integer(forKey: C.Key.selectedTheme)
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.title) {
+            custom.title = s
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.edge.top) {
+            custom.setTop(s, forPrecision: .edge)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.edge.bottom) {
+            custom.setBottom(s, forPrecision: .edge)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.outer.top) {
+            custom.setTop(s, forPrecision: .outer)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.outer.bottom) {
+            custom.setBottom(s, forPrecision: .outer)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.middle.top) {
+            custom.setTop(s, forPrecision: .middle)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.middle.bottom) {
+            custom.setBottom(s, forPrecision: .middle)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.inner.top) {
+            custom.setTop(s, forPrecision: .inner)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.inner.bottom) {
+            custom.setBottom(s, forPrecision: .inner)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) {
+            custom.setTop(s, forPrecision: .bullsEye)
+        }
+        if let s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom) {
+            custom.setBottom(s, forPrecision: .bullsEye)
+        }
+
+
+        // last Step: set currentTheme
+        let index: Int = UserDefaults.standard.integer(forKey: C.key.selectedTheme)
         // This returns 0 if invalud or not set yet.
         // But this is what we want initially anyway (Bullshit-O-Meter)
         
@@ -139,9 +171,5 @@ struct Settings {
         else if index == 2 { currentTheme = singing }
         else if index == 3 { currentTheme = custom }
         else { currentTheme = bullshit }
-        
-        if let s = UserDefaults.standard.string(forKey: C.Key.customTitle) {
-            custom.title = s
-        }
     }
 }

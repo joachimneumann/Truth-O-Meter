@@ -57,7 +57,7 @@ struct ThemesList: View {
                                 Image(systemName: "info.circle")
                             }
                         }
-                        .foregroundColor(C.Colors.bullshitRed)
+                        .foregroundColor(C.color.bullshitRed)
                         .onTapGesture {
                             viewModel.setView(.detail)
                         }
@@ -79,7 +79,7 @@ struct ThemesList: View {
                 .padding(.bottom, 5)
                 .padding(.leading)
                 .padding(.trailing)
-                Rectangle().fill(C.Colors.lightGray)
+                Rectangle().fill(C.color.lightGray)
                     .frame(width: .infinity, height: 0.5)
                     .padding(.leading)
             }
@@ -94,7 +94,7 @@ struct SettingsView: View {
         ZStack (alignment: .topLeading) {
             VStack(alignment: .leading) {
                 TimePicker(viewModel: viewModel)
-                Rectangle().fill(C.Colors.lightGray)
+                Rectangle().fill(C.color.lightGray)
                     .frame(width: .infinity, height: 0.5)
                     .padding(.leading)
                 ThemesList(viewModel: viewModel)

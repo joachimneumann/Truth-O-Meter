@@ -40,7 +40,7 @@ struct TheMainView: View {
             }
         }
         .ignoresSafeArea()
-        .accentColor(C.Colors.gray)
+        .accentColor(C.color.gray)
     }
 }
 
@@ -64,14 +64,14 @@ struct AnalyseView: View {
     var viewModel: ViewModel
 
     @State private var value: CGFloat = 0.0
-    private let timer = Timer.publish(every: C.Timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: C.timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack{
             HorizontalProgressBar(value: value)
                 .frame(height: 5)
                     .onReceive(timer) { input in
-                        value += CGFloat(C.Timing.analyseTimeIncrement/viewModel.settings.analysisTiming.time())
+                        value += CGFloat(C.timing.analyseTimeIncrement/viewModel.settings.analysisTiming.time())
                         if value >= 1.0 {
                             viewModel.setState(.show)
                         }
@@ -79,7 +79,7 @@ struct AnalyseView: View {
                 .padding(.top, 10)
             Text("Analysing...")
                 .font(.headline)
-                .foregroundColor(C.Colors.gray)
+                .foregroundColor(C.color.gray)
         }
     }
 }

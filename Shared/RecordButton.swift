@@ -18,26 +18,26 @@ struct RecordButton: View {
         var measures: Measures
 
         @State private var value: CGFloat = 0.0
-        private let timer = Timer.publish(every: C.Timing.listeningTimeIncrement, on: .main, in: .common).autoconnect()
+        private let timer = Timer.publish(every: C.timing.listeningTimeIncrement, on: .main, in: .common).autoconnect()
 
         var body: some View {
-            if value == 0 { AudioServicesPlaySystemSound(C.Sounds.startRecording) }
+            if value == 0 { AudioServicesPlaySystemSound(C.sounds.startRecording) }
             return ZStack {
                 Circle()
-                    .stroke(C.Colors.lightGray, lineWidth:measures.outerRingWidth)
+                    .stroke(C.color.lightGray, lineWidth:measures.outerRingWidth)
                 Circle()
                     .trim(from: 0, to: value)
-                    .stroke(C.Colors.bullshitRed, lineWidth:measures.outerRingWidth)
+                    .stroke(C.color.bullshitRed, lineWidth:measures.outerRingWidth)
                     .rotationEffect(Angle(degrees:-90))
                     .onReceive(timer) { input in
-                        value += CGFloat(C.Timing.listeningTimeIncrement/viewModel.settings.listenTiming.time())
+                        value += CGFloat(C.timing.listeningTimeIncrement/viewModel.settings.listenTiming.time())
                         if value >= 1.0 {
-                            AudioServicesPlaySystemSound(C.Sounds.stopRecording)
+                            AudioServicesPlaySystemSound(C.sounds.stopRecording)
                             viewModel.setState(.analyse)
                         }
                     }
                 Rectangle()
-                    .foregroundColor(C.Colors.bullshitRed)
+                    .foregroundColor(C.color.bullshitRed)
                     .cornerRadius(measures.cornerRadius)
                     .padding(measures.rectanglePadding)
             }
@@ -63,18 +63,19 @@ struct RecordButton: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        print("RecordButton: stampTexts.top = \(viewModel.settings.currentTheme.results[viewModel.precision]!.top)")
+        print("RecordButton: stampTexts.top = \(viewModel.settings.currentTheme.result(precision: viewModel.precision))")
         return GeometryReader { (geo) in
             let measures = Measures(min(geo.size.width, geo.size.height))
             ZStack {
                 switch(viewModel.state) {
                 case .wait, .settings:
                     Circle()
-                        .stroke(C.Colors.lightGray, lineWidth:measures.outerRingWidth)
-                    Rings(viewModel: viewModel)
+                        .stroke(C.color.lightGray, lineWidth:measures.outerRingWidth)
+                    RingsView(viewModel: viewModel)
                         .padding(measures.ringsPadding)
                 case .listen:
                     ListenView(viewModel: viewModel, measures: measures)
+                        .animation(.easeInOut(duration: 2))
                 case .analyse:
                     EmptyView()
                 case .show:

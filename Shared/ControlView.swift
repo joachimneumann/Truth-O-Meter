@@ -20,7 +20,7 @@ struct ShowView: View {
             Spacer()
             HStack {
                 Spacer()
-                Stamp(texts: viewModel.settings.currentTheme.results[viewModel.precision]!)
+                Stamp(texts: viewModel.settings.currentTheme.result(precision: viewModel.precision))
                     .onTapGesture {
                         viewModel.setState(.wait)
                     }

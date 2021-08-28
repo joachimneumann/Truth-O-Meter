@@ -11,7 +11,7 @@ struct C {
     static let startAngle = Angle(radians: .pi*2*(0.5+0.11))
     static let endAngle = Angle(radians: .pi*2*(1.0-0.11))
     static let midAngle = Angle(degrees: startAngle.degrees+0.7*(endAngle.degrees-startAngle.degrees))
-    static let lineWidth: CGFloat = 7
+    static let needleLineWidth: CGFloat = 7
     static func proportionalAngle(proportion: Double) -> Angle {
         return C.startAngle+(C.endAngle-C.startAngle)*proportion
     }
@@ -22,20 +22,19 @@ struct C {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
     
-    struct Timing {
+    struct timing {
         static let listeningTimeIncrement = 0.02
         static let analyseTimeIncrement = 0.02
     }
     
-    struct Sounds {
+    struct sounds {
         static let startRecording:UInt32 = 1113
         static let stopRecording:UInt32 = 1114
         // source: https://github.com/TUNER88/iOSSystemSoundsLibrary
     }
     
-    struct Colors {
+    struct color {
         static let frameColor = Color(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0)
-//        static let bullshitRed = Color(red: 255.0/255.0, green: 126.0/255.0, blue: 121.0/255.0)
         static let bullshitRed = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
         static let paleBullshitRed = Color(red: 255.0/255.0, green: 220.0/255.0, blue: 218.0/255.0)
         static let gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
@@ -44,23 +43,35 @@ struct C {
         static let lightGreen = Color(red:  212/255.0, green: 251/255.0, blue: 121/255.0)
     }
     
-    struct Key {
+    struct key {
         // some key names might seem stange, but this is
         // for compatibility with older app versions
         static let listenTiming         = "fastResponseTimeKey"
         static let analysisTiming       = "analysisTimingIndex"
         static let selectedTheme        = "selectedThemeIndexKey"
-        static let customTitle          = "displayTextkey"
-        static let customEdgeTop        = "farLeftText1key"
-        static let customEdgeBottom     = "farLeftText2key"
-        static let customOuterTop       = "leftText1key"
-        static let customOuterBottom    = "leftText2key"
-        static let customMiddleTop      = "centerText1key"
-        static let customMiddleBottom   = "centerText2key"
-        static let customInnerTop       = "rightText1key"
-        static let customInnerBottom    = "rightText2key"
-        static let customBullsEyeTop    = "farRightText1key"
-        static let customBullsEyeBottom = "farRightText2key"
+        struct custom {
+            static let title          = "displayTextkey"
+            struct edge {
+                static let top        = "farLeftText1key"
+                static let bottom     = "farLeftText2key"
+            }
+            struct outer {
+                static let top       = "leftText1key"
+                static let bottom    = "leftText2key"
+            }
+            struct middle {
+                static let top      = "centerText1key"
+                static let bottom   = "centerText2key"
+            }
+            struct inner {
+                static let top       = "rightText1key"
+                static let bottom    = "rightText2key"
+            }
+            struct bullsEye {
+                static let top    = "farRightText1key"
+                static let bottom = "farRightText2key"
+            }
+        }
     }
 
 }
