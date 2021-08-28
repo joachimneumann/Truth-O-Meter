@@ -68,7 +68,7 @@ struct OneLine: View {
     init(_ t: String, _ angle: Double) { text = t; rotationAngle = angle }
 }
 
-struct StampText_Previews: PreviewProvider {
+struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()

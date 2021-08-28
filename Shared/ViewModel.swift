@@ -127,7 +127,6 @@ class ViewModel: ObservableObject {
         if newView == .detail {
             // load custom values?
             if settings.isCustomTheme {
-                var b: String?
                 customTitle = UserDefaults.standard.string(forKey: C.UserDefaultKeys.customTitle) ?? ""
                 settings.currentTheme.results[TapPrecision.edge]!.top =
                     UserDefaults.standard.string(forKey: C.UserDefaultKeys.customEdgeTop) ?? ""
@@ -152,6 +151,60 @@ class ViewModel: ObservableObject {
                     UserDefaults.standard.string(forKey: C.UserDefaultKeys.customBullsEyeBottom) ?? ""
             }
         }
+    }
+    
+    func fromDetailViewToSettingsView() {
+        if settings.isCustomTheme {
+            saveCustom()
+        }
+        setView(.settings)
+    }
+
+    
+    func saveCustom() {
+        var b: String?
+        UserDefaults.standard.set(
+            customTitle,
+            forKey: C.UserDefaultKeys.customTitle)
+        UserDefaults.standard.set(
+            settings.currentTheme.results[TapPrecision.edge]!.top,
+            forKey: C.UserDefaultKeys.customEdgeTop)
+        b = settings.currentTheme.results[TapPrecision.edge]!.bottom
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customEdgeBottom)
+        b = settings.currentTheme.results[TapPrecision.outer]!.top
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customOuterTop)
+        b = settings.currentTheme.results[TapPrecision.outer]!.bottom
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customOuterBottom)
+        b = settings.currentTheme.results[TapPrecision.middle]!.top
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customMiddleTop)
+        b = settings.currentTheme.results[TapPrecision.middle]!.bottom
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customMiddleBottom)
+        b = settings.currentTheme.results[TapPrecision.inner]!.top
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customInnerTop)
+        b = settings.currentTheme.results[TapPrecision.inner]!.bottom
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customInnerBottom)
+        b = settings.currentTheme.results[TapPrecision.bullsEye]!.top
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customBullsEyeTop)
+        b = settings.currentTheme.results[TapPrecision.bullsEye]!.bottom
+        UserDefaults.standard.set(
+            b == "" ? nil : b,
+            forKey: C.UserDefaultKeys.customBullsEyeBottom)
     }
         
     var state: Model.State {

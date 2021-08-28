@@ -7,8 +7,32 @@
 
 import SwiftUI
 
+struct CustomTitleTextFieldStyle: TextFieldStyle {
+    @Binding var focused: Bool
+    let fontsize: CGFloat = 40
+    let cornerRadius: CGFloat = 5
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
+            .padding(6)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(C.Colors.bullshitRed, lineWidth: focused ? 3 : 0))
+            .background(C.Colors.bullshitRed.opacity(0.1))
+            .multilineTextAlignment(.center)
+            .lineLimit(1)
+            .cornerRadius(cornerRadius)
+            .font(.headline)
+            .accentColor(C.Colors.gray)
+            .foregroundColor(C.Colors.gray)
+            .offset(y: 15)
+    }
+}
+
 struct Display: View {
     @ObservedObject var viewModel: ViewModel
+    @State private var editing = false
     var editTitle = false
         
     var body: some View {
@@ -23,14 +47,10 @@ struct Display: View {
                 NeedleView()
                     .clipped()
                     .opacity(0.5)
-                TextField("title", text: $viewModel.customTitle)
-                .padding(6)
-                .background(Color.green.opacity(0.3))
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .cornerRadius(5.0)
-                .font(.headline)
-                .offset(y: 15)
+                TextField("", text: $viewModel.customTitle, onEditingChanged: { edit in
+                    self.editing = edit
+                })
+                .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
             } else {
                 DisplayBackground(colorful: colorful)
                 Text(viewModel.settings.currentTheme.title)

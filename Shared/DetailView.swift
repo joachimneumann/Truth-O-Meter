@@ -12,7 +12,7 @@ struct DetailView: View {
     var body: some View {
         ZStack (alignment: .topLeading) {
             TheDetailView(viewModel: viewModel)
-            .padding(.top, 40)
+                .padding(.top, 40)
             HStack(spacing: 0) {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 20))
@@ -20,116 +20,99 @@ struct DetailView: View {
             }
             .padding(.leading)
             .onTapGesture {
-                // TODO: mode all this into a ViewModel !!!
-                var b: String?
-                UserDefaults.standard.set(
-                    viewModel.customTitle,
-                    forKey: C.UserDefaultKeys.customTitle)
-                UserDefaults.standard.set(
-                    viewModel.settings.currentTheme.results[TapPrecision.edge]!.top,
-                    forKey: C.UserDefaultKeys.customEdgeTop)
-                b = viewModel.settings.currentTheme.results[TapPrecision.edge]!.bottom
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customEdgeBottom)
-                b = viewModel.settings.currentTheme.results[TapPrecision.outer]!.top
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customOuterTop)
-                b = viewModel.settings.currentTheme.results[TapPrecision.outer]!.bottom
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customOuterBottom)
-                b = viewModel.settings.currentTheme.results[TapPrecision.middle]!.top
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customMiddleTop)
-                b = viewModel.settings.currentTheme.results[TapPrecision.middle]!.bottom
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customMiddleBottom)
-                b = viewModel.settings.currentTheme.results[TapPrecision.inner]!.top
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customInnerTop)
-                b = viewModel.settings.currentTheme.results[TapPrecision.inner]!.bottom
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customInnerBottom)
-                b = viewModel.settings.currentTheme.results[TapPrecision.bullsEye]!.top
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customBullsEyeTop)
-                b = viewModel.settings.currentTheme.results[TapPrecision.bullsEye]!.bottom
-                UserDefaults.standard.set(
-                    b == "" ? nil : b,
-                    forKey: C.UserDefaultKeys.customBullsEyeBottom)
-                viewModel.setView(.settings)
+                viewModel.fromDetailViewToSettingsView()
             }
         }
     }
 }
 
+struct CustomTextFieldStyle: TextFieldStyle {
+    @Binding var focused: Bool
+    let fontsize: CGFloat = 40
+    let cornerRadius: CGFloat = 6
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
+            .mask(Mask())
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(C.Colors.bullshitRed, lineWidth: focused ? 3 : 0))
+            .background(C.Colors.bullshitRed.opacity(0.1))
+            .multilineTextAlignment(.center)
+            .lineLimit(1)
+            .cornerRadius(cornerRadius)
+            .font(.system(size: fontsize, weight: .bold))
+            .foregroundColor(C.Colors.bullshitRed)
+            .accentColor(C.Colors.bullshitRed)
+    }
+}
 
+
+struct EditableStampView: View {
+    @ObservedObject var viewModel: ViewModel
+    @State private var editingTop = false
+    @State private var editingBottom = false
+    let fontsize: CGFloat = 40
+    var body: some View {
+        VStack {
+            if viewModel.settings.isCustomTheme {
+                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
+                    self.editingTop = edit
+                })
+                .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
+                .padding(.top, 24)
+            } else {
+                Text(viewModel.settings.currentTheme.results[viewModel.precision]!.top)
+                    .font(.system(size: fontsize, weight: .bold))
+                    .foregroundColor(C.Colors.bullshitRed)
+                    .mask(Mask())
+                    .padding(.top, 25)
+                    .padding(.bottom, 0)
+            }
+            if let b = viewModel.settings.currentTheme.results[viewModel.precision]!.bottom {
+                if viewModel.settings.isCustomTheme {
+                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
+                        self.editingBottom = edit
+                    })
+                    .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
+                    .padding(.bottom, 12)
+                } else {
+                    Text(b)
+                        .font(.system(size: fontsize, weight: .bold))
+                        .foregroundColor(C.Colors.bullshitRed)
+                        .mask(Mask())
+                        .padding(.top, -10)
+                        .padding(.bottom, 25)
+                }
+            } else {
+                if viewModel.settings.isCustomTheme {
+                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
+                        self.editingBottom = edit
+                    })
+                    .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
+                    .padding(.bottom, 12)
+                } else {
+                    Text("no second line")
+                        .font(.system(size: fontsize, weight: .ultraLight))
+                        .foregroundColor(C.Colors.lightGray)
+                        .padding(.top, -10)
+                        .padding(.bottom, 25)
+                }
+            }
+        }
+    }
+}
 struct TheDetailView: View {
     @ObservedObject var viewModel: ViewModel
-
     var body: some View {
-        let fontsize: CGFloat = 40
         return GeometryReader { geo in
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
                     Display(viewModel: viewModel, editTitle: viewModel.settings.isCustomTheme)
                         .frame(height: geo.size.height * 0.2)
-                    ZStack {
-                        if viewModel.settings.isCustomTheme {
-                            TextField("line 1", text: $viewModel.customTop)
-                                .padding(6)
-                                .mask(Mask())
-                                .background(Color.green.opacity(0.3))
-                                .multilineTextAlignment(.center)
-                                .lineLimit(1)
-                                .cornerRadius(5.0)
-                                .font(.system(size: fontsize, weight: .bold))
-                                .foregroundColor(C.Colors.bullshitRed)
-                                .padding(.top, 12)
-                        } else {
-                            Text(viewModel.settings.currentTheme.results[viewModel.precision]!.top)
-                                .font(.system(size: fontsize, weight: .bold))
-                                .foregroundColor(C.Colors.bullshitRed)
-                                .mask(Mask())
-                                .padding(.top, 30)
-                                .padding(.bottom, 0)
-                        }
-                    }
-                    if let b = viewModel.settings.currentTheme.results[viewModel.precision]!.bottom {
-                        if viewModel.settings.isCustomTheme {
-                            TextField("line 2", text: $viewModel.customBottom)
-                                .padding(6)
-                                .mask(Mask())
-                                .background(Color.green.opacity(0.3))
-                                .multilineTextAlignment(.center)
-                                .lineLimit(1)
-                                .cornerRadius(5.0)
-                                .font(.system(size: fontsize, weight: .bold))
-                                .foregroundColor(C.Colors.bullshitRed)
-                                .padding(.bottom, 12)
-                        } else {
-                            Text(b)
-                                .font(.system(size: fontsize, weight: .bold))
-                                .foregroundColor(C.Colors.bullshitRed)
-                                .mask(Mask())
-                                .padding(.top, -10)
-                                .padding(.bottom, 30)
-                        }
-                    } else {
-                        Text("no second line")
-                            .font(.system(size: fontsize, weight: .ultraLight))
-                            .foregroundColor(C.Colors.lightGray)
-                            .padding(.top, -10)
-                            .padding(.bottom, 30)
-                    }
+                    EditableStampView(viewModel: viewModel)
                     RecordButton(viewModel: viewModel)
                         .frame(height: geo.size.height * 0.39)
                     //                        .background(Color.green)
