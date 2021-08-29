@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RingsView: View {
     @ObservedObject var viewModel: ViewModel
-    
+    @State private var hideInnerRings = false
+
     private struct RingPadding {
         let edge:         CGFloat
         let outer:        CGFloat
@@ -35,7 +36,6 @@ struct RingsView: View {
         }
     }
     
-    
     var body: some View {
         let drawBorders = viewModel.state == .settings
         var edgeColor = C.color.bullshitRed
@@ -57,52 +57,59 @@ struct RingsView: View {
                 bullsEyeColor = C.color.lightGray
             }
         }
+        
+        func downCallback() {
+            hideInnerRings = true
+            print("down callback()")
+        }
+        func upCallback() {
+            hideInnerRings = true
+            viewModel.tap(Precision.edge)
+            print("up callback()")
+        }
+
         return GeometryReader { (geo) in
             let ringPadding = RingPadding(min(geo.size.width, geo.size.height))
             ZStack {
                 Group {
-                    Circle()
-                        .fill(edgeColor)
+                    CircleRectShapechanger(
+                        tapDownCallback: downCallback,
+                        tapUpCallback: upCallback,
+                        color: edgeColor)
                         .padding(ringPadding.edge)
-                        .animation(.easeInOut(duration: 2))
-                        .onTapGesture {
-                            viewModel.tap(Precision.edge)
-                        }
                     Circle()
                         .fill(outerColor)
+                        .isHidden(hideInnerRings)
                         .animation(nil)
                         .padding(ringPadding.outer)
-                        .animation(nil)
                         .onTapGesture {
-                            viewModel.tap(Precision.outer)
+                            upCallback()
                         }
                     Circle()
                         .fill(middleColor)
+                        .isHidden(hideInnerRings)
                         .animation(nil)
                         .padding(ringPadding.middle)
                         .onTapGesture {
-                            viewModel.tap(Precision.middle)
+                            upCallback()
                         }
                     Circle()
                         .fill(innerColor)
+                        .isHidden(hideInnerRings)
                         .animation(nil)
                         .padding(ringPadding.inner)
                         .onTapGesture {
-                            viewModel.tap(Precision.inner)
+                            upCallback()
+                        }
+                    Circle()
+                        .fill(bullsEyeColor)
+                        .isHidden(hideInnerRings)
+                        .animation(nil)
+                        .padding(ringPadding.bullsEye)
+                        .onTapGesture {
+                            upCallback()
                         }
                 }
-                .animation(nil)
-                Circle()
-                    .fill(bullsEyeColor)
-                    .animation(nil)
-                    .padding(ringPadding.bullsEye)
-                    .onTapGesture {
-                        DispatchQueue.main.async {
-                            withAnimation() {
-                                viewModel.tap(Precision.bullsEye)
-                            }
-                        }
-                    }
                 if drawBorders {
                     Circle()
                         .stroke(C.color.lightGray, lineWidth: 1)
@@ -125,8 +132,36 @@ struct RingsView: View {
 struct RingsView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        viewModel.setState(.settings)
+//        viewModel.setState(.settings)
         return RingsView(viewModel: viewModel)
-            .padding()
+//            .padding()
+    }
+}
+
+extension View {
+    
+    /// Hide or show the view based on a boolean value.
+    ///
+    /// Example for visibility:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true)
+    ///
+    /// Example for complete removal:
+    ///
+    ///     Text("Label")
+    ///         .isHidden(true, remove: true)
+    ///
+    /// - Parameters:
+    ///   - hidden: Set to `false` to show the view. Set to `true` to hide the view.
+    ///   - remove: Boolean value indicating whether or not to remove the view.
+    @ViewBuilder func isHidden(_ hidden: Bool, remove: Bool = false) -> some View {
+        if hidden {
+            if !remove {
+                self.hidden()
+            }
+        } else {
+            self
+        }
     }
 }

@@ -27,11 +27,11 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                CircleRectShapechanger(tappedCallback: call)
-                    .onTapGesture {
-                        print("xxx main()")
-                    }
-                    .padding(100)
+                RingsView(viewModel: viewModel)
+//                CircleRectShapechanger(
+//                    tappedCallback: call,
+//                    color: C.color.bullshitRed)
+//                    .padding(100)
 //                MainView(viewModel: viewModel)
 //                    .environmentObject(viewModel.needle)
                 #endif
