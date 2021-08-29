@@ -15,7 +15,7 @@ func call() {
 struct Truth_O_MeterApp: App {
     var body: some Scene {
         let viewModel = ViewModel()
-        viewModel.setState(.wait)
+        viewModel.setState(.settings)
         return WindowGroup {
             VStack {
                 #if os(macOS)
@@ -28,10 +28,7 @@ struct Truth_O_MeterApp: App {
                     .background(Color.white)
                 #else
                 RingsView(viewModel: viewModel)
-//                CircleRectShapechanger(
-//                    tappedCallback: call,
-//                    color: C.color.bullshitRed)
-//                    .padding(100)
+                    .padding(100)
 //                MainView(viewModel: viewModel)
 //                    .environmentObject(viewModel.needle)
                 #endif

@@ -51,8 +51,8 @@
 		AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AACDCDA6255FCEE100A43728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* Model.swift */; };
 		AACDCDA7255FCEE100A43728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* Model.swift */; };
-		AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapechanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */; };
-		AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapechanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */; };
+		AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */; };
+		AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,7 +84,7 @@
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AACDCDA5255FCEE100A43728 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRectShapechanger.swift; sourceTree = "<group>"; };
+		AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRectShapeShifter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +137,7 @@
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
-				AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */,
+				AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */,
 				AA6063F626D730D400EDD38F /* RingsView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
 				AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */,
@@ -286,7 +286,7 @@
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */,
-				AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapechanger.swift in Sources */,
+				AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* TapPrecision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
@@ -315,7 +315,7 @@
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */,
-				AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapechanger.swift in Sources */,
+				AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */,
 				AA40FD6226D611C9006DBFD8 /* TapPrecision.swift in Sources */,
 				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
