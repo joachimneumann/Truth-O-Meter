@@ -12,6 +12,7 @@ import AVFoundation // for sound on Mac
 #endif
 
 struct RecordButton: View {
+    @ObservedObject var viewModel: ViewModel
 
     struct ListenView: View {
         var viewModel: ViewModel
@@ -59,9 +60,7 @@ struct RecordButton: View {
             rectanglePadding = radius * 0.6
         }
     }
-    
-    @ObservedObject var viewModel: ViewModel
-    
+        
     var body: some View {
         print("RecordButton: stampTexts.top = \(viewModel.settings.currentTheme.result(precision: viewModel.precision))")
         return GeometryReader { (geo) in
