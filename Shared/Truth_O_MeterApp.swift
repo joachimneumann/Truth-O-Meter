@@ -15,7 +15,7 @@ func call() {
 struct Truth_O_MeterApp: App {
     var body: some Scene {
         let viewModel = ViewModel()
-        viewModel.setState(.settings)
+        viewModel.setState(.wait)
         return WindowGroup {
             VStack {
                 #if os(macOS)

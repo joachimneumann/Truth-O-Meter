@@ -208,6 +208,10 @@ class ViewModel: ObservableObject {
             needle.setValue(1.00)
         }
     }
+    
+    var isSettingsState: Bool {
+        state == .settings
+    }
 
     func tap(_ ring: Precision) {
         print("tap(ring = \(ring))")
