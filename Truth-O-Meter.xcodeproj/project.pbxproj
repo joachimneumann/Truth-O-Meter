@@ -137,6 +137,7 @@
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
+				AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */,
 				AA6063F626D730D400EDD38F /* RingsView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
 				AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */,
@@ -149,7 +150,6 @@
 				AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
-				AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapechanger.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

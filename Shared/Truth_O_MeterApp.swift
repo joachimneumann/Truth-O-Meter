@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+func call() {
+    print("call")
+}
+
 @main
 struct Truth_O_MeterApp: App {
     var body: some Scene {
@@ -23,8 +27,13 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                MainView(viewModel: viewModel)
-                    .environmentObject(viewModel.needle)
+                CircleRectShapechanger(tappedCallback: call)
+                    .onTapGesture {
+                        print("xxx main()")
+                    }
+                    .padding(100)
+//                MainView(viewModel: viewModel)
+//                    .environmentObject(viewModel.needle)
                 #endif
             }
         }
