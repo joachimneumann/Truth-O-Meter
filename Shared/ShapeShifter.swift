@@ -12,13 +12,15 @@ struct ShapeShifter: View {
     var up: (_: Precision) -> Void
     var pale: Bool
     var circle: Bool
+    var gray: Bool
     
     
-    var color = C.color.bullshitRed
-
     private let paleAnimationTime = 0.10
 
     var body: some View {
+
+        let color = gray ? C.color.lightGray : C.color.bullshitRed
+
         GeometryReader { geo in
             let w = min(geo.size.width, geo.size.height)
             VStack {
@@ -51,11 +53,14 @@ struct ShapeShifter: View {
 struct ShapeShifter_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        let diskViewModel = DiskViewModel(callback: viewModel.tap)
+        let diskViewModel = DiskViewModel(
+            callback: viewModel.tap,
+            isSetting: viewModel.isSettingsState)
         ShapeShifter(
             down: diskViewModel.down,
             up: diskViewModel.up,
             pale: diskViewModel.shapeShifterIsPale,
-            circle: diskViewModel.shapeShifterIsCircle)
+            circle: diskViewModel.shapeShifterIsCircle,
+            gray: diskViewModel.shapeShifterIsGray)
     }
 }

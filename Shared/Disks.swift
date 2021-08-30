@@ -18,14 +18,16 @@ struct Disks: View {
                 ShapeShifter(down: diskViewModel.down,
                              up: diskViewModel.up,
                              pale: diskViewModel.shapeShifterIsPale,
-                             circle: diskViewModel.shapeShifterIsCircle)
+                             circle: diskViewModel.shapeShifterIsCircle,
+                             gray: diskViewModel.shapeShifterIsGray)
                     .animation(.linear(duration: shapeShiftTime))
                 ZStack {
                     ForEach(diskViewModel.diskParameters) { diskParameter in
                         Disk(precision: diskParameter.precision,
                              down: diskViewModel.down,
                              up: diskViewModel.up,
-                             isSetting: diskViewModel.isSetting)
+                             isSetting: diskViewModel.isSetting,
+                             isGray: diskParameter.isGray)
                             .padding(radius * CGFloat(diskParameter.relativePadding))
                     }
                 }
@@ -40,7 +42,9 @@ struct Disks: View {
 struct Disks_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        let diskViewModel = DiskViewModel(callback: viewModel.tap)
+        let diskViewModel = DiskViewModel(
+            callback: viewModel.tap,
+            isSetting: viewModel.isSettingsState)
         Disks(diskViewModel: diskViewModel)
     }
 }

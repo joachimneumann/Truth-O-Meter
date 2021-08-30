@@ -12,13 +12,13 @@ struct Disk: View {
     var down: (_: Precision) -> Void
     var up: (_: Precision) -> Void
     var isSetting: Bool
-    var color = C.color.bullshitRed
+    var isGray: Bool
 
     @State private var isVisible = true
     var body: some View {
         ZStack {
             Circle()
-                .fill(color)
+                .fill(isGray ? C.color.lightGray : C.color.bullshitRed)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
@@ -43,7 +43,10 @@ struct Disk: View {
 struct Disk_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        let diskViewModel = DiskViewModel(callback: viewModel.tap)
-        Disk(precision: .middle, down: diskViewModel.down, up: diskViewModel.up, isSetting: true)
+        let diskViewModel = DiskViewModel(
+            callback: viewModel.tap,
+            isSetting: viewModel.isSettingsState)
+        Disk(precision: .middle, down: diskViewModel.down, up: diskViewModel.up, isSetting: true,
+             isGray: false)
     }
 }

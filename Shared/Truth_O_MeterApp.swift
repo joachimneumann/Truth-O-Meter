@@ -16,7 +16,9 @@ struct Truth_O_MeterApp: App {
     var body: some Scene {
         let viewModel = ViewModel()
         viewModel.setState(.wait)
-        let diskViewModel = DiskViewModel(callback: viewModel.tap)
+        let diskViewModel = DiskViewModel(
+            callback: viewModel.tap,
+            isSetting: viewModel.isSettingsState)
         return WindowGroup {
             VStack {
                 #if os(macOS)
@@ -42,7 +44,9 @@ struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
         viewModel.setState(.wait)
-        let diskViewModel = DiskViewModel(callback: viewModel.tap)
+        let diskViewModel = DiskViewModel(
+            callback: viewModel.tap,
+            isSetting: viewModel.isSettingsState)
         return Disks(diskViewModel: diskViewModel)
             .padding(100)
 //        MainView(viewModel: viewModel)
