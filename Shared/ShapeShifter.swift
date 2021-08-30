@@ -35,13 +35,17 @@ struct ShapeShifter: View {
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                print("ShapeShifter down")
-                                down(.edge)
+                                if circle {
+                                    print("ShapeShifter down")
+                                    down(.edge)
+                                }
                             }
 
                             .onEnded { _ in
-                                print("Disk up")
-                                up(.edge)
+                                if circle {
+                                    print("Disk up")
+                                    up(.edge)
+                                }
                             }
                     )
                 Spacer(minLength: 0)

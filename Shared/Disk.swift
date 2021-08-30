@@ -31,7 +31,8 @@ struct Disk: View {
                             up(precision)
                         }
                 )
-            if isSetting{
+            // border
+            if isSetting {
                 Circle()
                     .stroke(C.color.lightGray, lineWidth: 1)
             }

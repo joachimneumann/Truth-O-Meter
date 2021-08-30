@@ -53,8 +53,7 @@ class DiskViewModel: ObservableObject {
     
     func down(_ precision: Precision) {
         print("DiskViewModel down()")
-        if isSetting {
-        } else {
+        if !isSetting {
             disksVisible = false
             shapeShifterIsPale = true
         }
