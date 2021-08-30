@@ -1,5 +1,5 @@
 //
-//  Disk.swift
+//  DiskView.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 30/08/2021.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct Disk: View {
+struct DiskView: View {
     var precision: Precision
-    var down: (_: Precision) -> Void
+    var down: () -> Void
     var up: (_: Precision) -> Void
     var isSetting: Bool
     var isGray: Bool
@@ -23,7 +23,7 @@ struct Disk: View {
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
                             print("Disk down")
-                            down(precision)
+                            down()
                         }
 
                         .onEnded { _ in
@@ -43,11 +43,8 @@ struct Disk: View {
 
 struct Disk_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-        let diskViewModel = DiskViewModel(
-            callback: viewModel.tap,
-            isSetting: viewModel.isSettingsState)
-        Disk(precision: .middle, down: diskViewModel.down, up: diskViewModel.up, isSetting: true,
+        let buttonModel = ButtonModel(isSetting: false)
+        DiskView(precision: .middle, down: buttonModel.down, up: buttonModel.up, isSetting: buttonModel.isSetting,
              isGray: false)
     }
 }

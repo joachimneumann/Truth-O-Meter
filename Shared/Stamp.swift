@@ -11,10 +11,14 @@ struct Stamp: View {
     var texts: Result
     var rotated = true
     var body: some View {
-        if let bottom = texts.bottom {
-            return AnyView(TwoLines(texts.top+"\n"+bottom, rotated ? -18.0 : 0.0))
-        } else {
-            return AnyView(OneLine(texts.top, rotated ? -25.0 : 0.0))
+        VStack {
+            Spacer(minLength: 0)
+            if let bottom = texts.bottom {
+                TwoLines(texts.top+"\n"+bottom, rotated ? -18.0 : 0.0)
+            } else {
+                OneLine(texts.top, rotated ? -25.0 : 0.0)
+            }
+            Spacer(minLength: 0)
         }
     }
 }

@@ -1,26 +1,35 @@
 //
-//  DiskViewModel.swift
+//  ButtonModel.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 30/08/2021.
 //
 
-import SwiftUI
+import Foundation
 
-class DiskViewModel: ObservableObject {
-    let callback: (_: Precision) -> Void
+class ButtonModel: ObservableObject {
+    @Published var isShowingStamp = false
+    @Published var isListening = false
+    @Published var isAnalysing = false
+    @Published var result = Result("top", "bottom")
     var isSetting: Bool
-
+    
     @Published var disksVisible = true
     @Published var shapeShifterIsCircle = true
     @Published var shapeShifterIsPale = false
     @Published var shapeShifterIsGray = false
-    
 
     var diskParameters = [DiskParameter]()
+
+    init(isSetting iss: Bool) {
+        isSetting = iss
+        diskParameters.append(DiskParameter(.outer))
+        diskParameters.append(DiskParameter(.middle))
+        diskParameters.append(DiskParameter(.inner))
+        diskParameters.append(DiskParameter(.bullsEye))
+    }
     
-    func down(_ precision: Precision) {
-        print("DiskViewModel down()")
+    func down() {
         if !isSetting {
             disksVisible = false
             shapeShifterIsPale = true
@@ -28,8 +37,13 @@ class DiskViewModel: ObservableObject {
     }
     
     func up(_ precision: Precision) {
-        print("DiskViewModel up()")
-        callback(precision)
+        print("ButtonModel up() with precision \(precision)")
+        
+        // stamp =
+        isListening = true
+        isAnalysing = false
+        isShowingStamp = false
+
         if isSetting {
             switch precision {
             case .edge:
@@ -69,12 +83,30 @@ class DiskViewModel: ObservableObject {
         }
     }
     
-    init(callback: @escaping (_: Precision) -> Void, isSetting: Bool) {
-        self.isSetting = isSetting
-        self.callback = callback
-        diskParameters.append(DiskParameter(.outer))
-        diskParameters.append(DiskParameter(.middle))
-        diskParameters.append(DiskParameter(.inner))
-        diskParameters.append(DiskParameter(.bullsEye))
+    func listeningFinished() {
+        isListening = false
+        isAnalysing = true
+        isShowingStamp = false
+        analysingFinished()
     }
+    
+    func analysingFinished() {
+        isListening = false
+        isAnalysing = false
+        isShowingStamp = true
+    }
+
+    func startOver() {
+        isListening = false
+        isAnalysing = false
+        isShowingStamp = false
+    }
+    
+//    func down(_ precision: Precision) {
+//        print("DiskViewModel down()")
+//        if !isSetting {
+//            disksVisible = false
+//            shapeShifterIsPale = true
+//        }
+//    }
 }

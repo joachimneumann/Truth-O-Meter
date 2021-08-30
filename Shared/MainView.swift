@@ -32,7 +32,7 @@ struct TheMainView: View {
                         .padding(.top, 30)
                         .padding()
                     Spacer()
-                    ControlView(viewModel: viewModel)
+//                    ControlView(viewModel: viewModel)
                         .aspectRatio(contentMode: .fit)
                     Spacer()
                 }

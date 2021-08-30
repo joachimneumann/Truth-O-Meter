@@ -1,5 +1,5 @@
 //
-//  ShapeShifter.swift
+//  ShapeShifterView.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 30/08/2021.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ShapeShifter: View {
-    var down: (_: Precision) -> Void
+struct ShapeShifterView: View {
+    var down: () -> Void
     var up: (_: Precision) -> Void
     var pale: Bool
     var circle: Bool
@@ -37,7 +37,7 @@ struct ShapeShifter: View {
                             .onChanged { _ in
                                 if circle {
                                     print("ShapeShifter down")
-                                    down(.edge)
+                                    down()
                                 }
                             }
 
@@ -56,15 +56,12 @@ struct ShapeShifter: View {
 
 struct ShapeShifter_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-        let diskViewModel = DiskViewModel(
-            callback: viewModel.tap,
-            isSetting: viewModel.isSettingsState)
-        ShapeShifter(
-            down: diskViewModel.down,
-            up: diskViewModel.up,
-            pale: diskViewModel.shapeShifterIsPale,
-            circle: diskViewModel.shapeShifterIsCircle,
-            gray: diskViewModel.shapeShifterIsGray)
+        let buttonModel = ButtonModel(isSetting: false)
+        ShapeShifterView(
+            down: buttonModel.down,
+            up: buttonModel.up,
+            pale: buttonModel.shapeShifterIsPale,
+            circle: buttonModel.shapeShifterIsCircle,
+            gray: buttonModel.shapeShifterIsGray)
     }
 }

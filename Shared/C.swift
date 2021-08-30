@@ -22,6 +22,10 @@ struct C {
         return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
     }
     
+    struct button {
+        static let outerRingWidth: CGFloat = 0.05
+    }
+    
     struct timing {
         static let listeningTimeIncrement = 0.02
         static let analyseTimeIncrement = 0.02

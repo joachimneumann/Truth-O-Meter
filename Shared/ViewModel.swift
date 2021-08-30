@@ -9,8 +9,29 @@ import Foundation
 import SwiftUI
 
 class ViewModel: ObservableObject {
-    
+    @Published var isListening = false
 
+    func endOfListening() {
+        isListening = false
+    }
+
+    func pressed(precision: Precision) {
+        isListening = true
+        switch precision {
+        case .bullsEye:
+            needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
+        case .inner:
+            needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
+        case .middle:
+            needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
+        case .outer:
+            needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
+        case .edge:
+            needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
+        }
+    }
+    
+    
     private      var model = Model()
     private(set) var needle = Needle()
 //    private(set) var settingsPrecision: Precision = Precision.middle
@@ -188,6 +209,7 @@ class ViewModel: ObservableObject {
             forKey: C.key.custom.bullsEye.bottom)
     }
         
+    
     var state: Model.State {
         get { model.state }
     }
@@ -201,7 +223,7 @@ class ViewModel: ObservableObject {
         print("tap(precision = \(newPrecision))")
 //        precision = newPrecision
         if state == .wait {
-            setState(.listen)
+//            setState(.listen)
 
             switch newPrecision {
             case .bullsEye:
