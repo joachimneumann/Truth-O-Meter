@@ -12,18 +12,15 @@ class DiskViewModel: ObservableObject {
     var isSetting: Bool
 
     @Published var disksVisible = true
-    @Published var shapeShifterIsCircle = true
-    @Published var shapeShifterIsPale = false
     @Published var shapeShifterIsGray = false
     
 
-    var diskParameters = [DiskParameter]()
+    var diskParameters = [DiskParameters]()
     
     func down(_ precision: Precision) {
         print("DiskViewModel down()")
         if !isSetting {
             disksVisible = false
-            shapeShifterIsPale = true
         }
     }
     
@@ -63,18 +60,15 @@ class DiskViewModel: ObservableObject {
                 diskParameters[2].isGray = false
                 diskParameters[3].isGray = true
             }
-        } else {
-            shapeShifterIsCircle = false
-            shapeShifterIsPale = false
         }
     }
     
     init(callback: @escaping (_: Precision) -> Void, isSetting: Bool) {
         self.isSetting = isSetting
         self.callback = callback
-        diskParameters.append(DiskParameter(.outer))
-        diskParameters.append(DiskParameter(.middle))
-        diskParameters.append(DiskParameter(.inner))
-        diskParameters.append(DiskParameter(.bullsEye))
+        diskParameters.append(DiskParameters(.outer))
+        diskParameters.append(DiskParameters(.middle))
+        diskParameters.append(DiskParameters(.inner))
+        diskParameters.append(DiskParameters(.bullsEye))
     }
 }

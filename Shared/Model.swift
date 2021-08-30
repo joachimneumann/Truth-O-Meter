@@ -24,7 +24,8 @@ struct Model {
             case .settings:
                 return "settings"
             }
-        }    }
+        }
+    }
 
     private(set) var state: State = .wait
     

@@ -16,17 +16,19 @@ class ButtonModel: ObservableObject {
     
     @Published var disksVisible = true
     @Published var shapeShifterIsCircle = true
-    @Published var shapeShifterIsPale = false
+    var shapeShifterIsPale = false
     @Published var shapeShifterIsGray = false
 
-    var diskParameters = [DiskParameter]()
+    var diskParameters = [DiskParameters]()
+    
+    private var settings = Settings()
 
     init(isSetting iss: Bool) {
         isSetting = iss
-        diskParameters.append(DiskParameter(.outer))
-        diskParameters.append(DiskParameter(.middle))
-        diskParameters.append(DiskParameter(.inner))
-        diskParameters.append(DiskParameter(.bullsEye))
+        diskParameters.append(DiskParameters(.outer))
+        diskParameters.append(DiskParameters(.middle))
+        diskParameters.append(DiskParameters(.inner))
+        diskParameters.append(DiskParameters(.bullsEye))
     }
     
     func down() {
@@ -36,10 +38,9 @@ class ButtonModel: ObservableObject {
         }
     }
     
-    func up(_ precision: Precision) {
+    func buttonPressedWith(_ precision: Precision) {
         print("ButtonModel up() with precision \(precision)")
-        
-        // stamp =
+        result = settings.currentTheme.result(forPrecision: precision)
         isListening = true
         isAnalysing = false
         isShowingStamp = false
@@ -83,6 +84,7 @@ class ButtonModel: ObservableObject {
         }
     }
     
+    // MARK: intents
     func listeningFinished() {
         isListening = false
         isAnalysing = true
@@ -100,13 +102,10 @@ class ButtonModel: ObservableObject {
         isListening = false
         isAnalysing = false
         isShowingStamp = false
+        shapeShifterIsPale = false
+        shapeShifterIsCircle = true
+        shapeShifterIsGray = false
+        isSetting = false
     }
-    
-//    func down(_ precision: Precision) {
-//        print("DiskViewModel down()")
-//        if !isSetting {
-//            disksVisible = false
-//            shapeShifterIsPale = true
-//        }
-//    }
+
 }

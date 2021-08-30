@@ -57,7 +57,7 @@ struct Theme: Identifiable, Equatable {
         }
     }
 
-    func result(precision: Precision) -> Result {
+    func result(forPrecision precision: Precision) -> Result {
         switch precision {
         case .edge:
             return results.edge

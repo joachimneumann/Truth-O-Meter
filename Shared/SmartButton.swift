@@ -15,6 +15,9 @@ struct SmartButton: View {
             let linewidth = w * C.button.outerRingWidth
             if buttonModel.isShowingStamp {
                 Stamp(texts: buttonModel.result)
+                    .onTapGesture {
+                        buttonModel.startOver()
+                    }
             } else if buttonModel.isAnalysing {
                 EmptyView()
             } else if buttonModel.isListening {

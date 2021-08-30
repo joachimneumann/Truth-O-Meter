@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct DiskView: View {
-    var precision: Precision
-    var down: () -> Void
-    var up: (_: Precision) -> Void
-    var isSetting: Bool
-    var isGray: Bool
+    @Binding var superViewIsPale: Bool
+    @Binding var isHidden: Bool
+    @Binding var drawBorder: Bool
+    @Binding var isGray: Bool
+    var up: () -> Void
 
-    @State private var isVisible = true
     var body: some View {
         ZStack {
             Circle()
@@ -22,29 +21,36 @@ struct DiskView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
-                            print("Disk down")
-                            down()
+                            if !isHidden {
+                                superViewIsPale = true
+                                print("Disk down isHidden = \(isHidden)")
+                                isHidden = true
+                            }
                         }
-
                         .onEnded { _ in
                             print("Disk up")
-                            up(precision)
+                            up()
                         }
                 )
+                .opacity(superViewIsPale || isHidden ? 0.0 : 1.0)
             // border
-            if isSetting {
+            if drawBorder {
                 Circle()
                     .stroke(C.color.lightGray, lineWidth: 1)
             }
         }
-        .opacity(isVisible ? 1.0 : 0.0)
     }
 }
 
 struct Disk_Previews: PreviewProvider {
     static var previews: some View {
-        let buttonModel = ButtonModel(isSetting: false)
-        DiskView(precision: .middle, down: buttonModel.down, up: buttonModel.up, isSetting: buttonModel.isSetting,
-             isGray: false)
+        @State var buttonModel = ButtonModel(isSetting: false)
+        return DiskView(
+            superViewIsPale: $buttonModel.isSetting,
+            isHidden: $buttonModel.shapeShifterIsPale,
+            drawBorder: $buttonModel.isSetting,
+            isGray: $buttonModel.isSetting) {
+//            $buttonModel.buttonPressedWith(.middle)
+        }
     }
 }

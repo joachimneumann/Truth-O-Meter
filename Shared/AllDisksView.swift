@@ -9,26 +9,38 @@ import SwiftUI
 
 struct AllDisksView: View {
     @ObservedObject var buttonModel: ButtonModel
+    @State var pale: Bool = false
+    @State var circle: Bool = true
+    @State var disksHidden = false
     private let paleAnimationTime = 0.10
     private let shapeShiftTime = 0.25
     var body: some View {
         GeometryReader { geo in
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {
-                ShapeShifterView(down: buttonModel.down,
-                             up: buttonModel.up,
-                             pale: buttonModel.shapeShifterIsPale,
-                             circle: buttonModel.shapeShifterIsCircle,
-                             gray: buttonModel.shapeShifterIsGray)
-                    .animation(.linear(duration: shapeShiftTime))
+                ShapeShifterView(
+                    pale: $pale,
+                    circle: $circle,
+                    gray: $buttonModel.shapeShifterIsGray) {
+                    if !circle {
+                        buttonModel.buttonPressedWith(.edge)
+                    }
+                    disksHidden = !circle
+                }
+                .animation(.linear(duration: shapeShiftTime))
                 ZStack {
                     ForEach(buttonModel.diskParameters) { diskParameter in
-                        DiskView(precision: diskParameter.precision,
-                             down: buttonModel.down,
-                             up: buttonModel.up,
-                             isSetting: buttonModel.isSetting,
-                             isGray: diskParameter.isGray)
-                            .padding(radius * CGFloat(diskParameter.relativePadding))
+                        DiskView(
+                            superViewIsPale: $pale,
+                            isHidden: $disksHidden,
+                            drawBorder: $buttonModel.isSetting,
+                            isGray: $buttonModel.isSetting) {
+                            pale = false
+                            circle = false
+                            disksHidden = true
+                            buttonModel.buttonPressedWith(diskParameter.precision)
+                        }
+                        .padding(diskParameter.precision.padding(radius: radius))
                     }
                 }
                 // hiding all but the oter ShapeShifter

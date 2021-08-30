@@ -13,8 +13,11 @@ func call() {
 
 @main
 struct Truth_O_MeterApp: App {
+    @State var buttonModel = ButtonModel(isSetting: false)
+    @State var pale: Bool = false
+    @State var circle: Bool = true
+    @State var gray: Bool = false
     var body: some Scene {
-        let buttonModel = ButtonModel(isSetting: false)
 //        let viewModel = ViewModel()
 //        let diskViewModel = DiskViewModel(
 //            callback: viewModel.pressed,
@@ -32,7 +35,13 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                SmartButton(buttonModel: buttonModel)
+                AllDisksView(buttonModel: buttonModel)
+//                return ShapeShifterView(
+//                    up: buttonModel.buttonPressedWith,
+//                    pale: $pale,
+//                    circle: $circle,
+//                    gray: $gray)
+//                SmartButton(buttonModel: buttonModel)
 //                AllDisksView(diskViewModel: diskViewModel)
 //                    .padding(100)
 //                MainView(viewModel: viewModel)

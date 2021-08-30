@@ -8,18 +8,17 @@
 import SwiftUI
 
 struct ShapeShifterView: View {
-    var down: () -> Void
-    var up: (_: Precision) -> Void
-    var pale: Bool
-    var circle: Bool
-    var gray: Bool
-    
-    
+    @Binding var pale: Bool
+    @Binding var circle: Bool
+    @Binding var gray: Bool
+    var up: () -> Void
+
     private let paleAnimationTime = 0.10
+    private let shapeShiftAnimationTime = 0.25
 
     var body: some View {
 
-        let color = gray ? C.color.lightGray : C.color.bullshitRed
+        let color = Color.blue //gray ? C.color.lightGray : C.color.bullshitRed
 
         GeometryReader { geo in
             let w = min(geo.size.width, geo.size.height)
@@ -28,6 +27,7 @@ struct ShapeShifterView: View {
                 Rectangle()
                     .cornerRadius(circle ? w/2 : w/14)
                     .padding(circle ? 0 : w/4)
+                    .animation(.linear(duration: shapeShiftAnimationTime))
                     .foregroundColor(color)
                     .opacity(pale ? 0.3 : 1.0)
                     .animation(.linear(duration: paleAnimationTime))
@@ -35,17 +35,19 @@ struct ShapeShifterView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                if circle {
-                                    print("ShapeShifter down")
-                                    down()
+                                if !pale {
+                                    pale = true
                                 }
                             }
 
                             .onEnded { _ in
-                                if circle {
-                                    print("Disk up")
-                                    up(.edge)
-                                }
+                                pale = false
+                                circle.toggle()
+                                up()
+//                                if circle {
+//                                    print("Disk up")
+//                                    up(.edge)
+//                                }
                             }
                     )
                 Spacer(minLength: 0)
@@ -57,11 +59,14 @@ struct ShapeShifterView: View {
 struct ShapeShifter_Previews: PreviewProvider {
     static var previews: some View {
         let buttonModel = ButtonModel(isSetting: false)
-        ShapeShifterView(
-            down: buttonModel.down,
-            up: buttonModel.up,
-            pale: buttonModel.shapeShifterIsPale,
-            circle: buttonModel.shapeShifterIsCircle,
-            gray: buttonModel.shapeShifterIsGray)
+        @State var pale: Bool = false
+        @State var circle: Bool = true
+        @State var gray: Bool = false
+        return ShapeShifterView(
+            pale: $pale,
+            circle: $circle,
+            gray: $gray) {
+            buttonModel.buttonPressedWith(.edge)
+        }
     }
 }
