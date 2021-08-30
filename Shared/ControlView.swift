@@ -20,10 +20,10 @@ struct ShowView: View {
             Spacer()
             HStack {
                 Spacer()
-                Stamp(texts: viewModel.settings.currentTheme.result(precision: viewModel.precision))
-                    .onTapGesture {
-                        viewModel.setState(.wait)
-                    }
+//                Stamp(texts: viewModel.settings.currentTheme.result(precision: viewModel.precision))
+//                    .onTapGesture {
+//                        viewModel.setState(.wait)
+//                    }
                 Spacer()
             }
             Spacer()
@@ -37,28 +37,31 @@ struct ControlView: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
         GeometryReader { (geo) in
-            ZStack {
-                switch(viewModel.state) {
-                case .wait:
-                    RecordButton(viewModel: viewModel)
-                        .padding(geo.size.width * 0.25)
-                case .listen:
-                    RecordButton(viewModel: viewModel)
-                        .padding(geo.size.width * 0.25)
-                case .analyse:
-                    EmptyView()
-                case .show:
-                    ShowView(viewModel: viewModel)
-                        .padding(geo.size.width * 0.0)
-                case .settings:
-                    HStack {
-                        Spacer()
-                        Text("Settings (not displayed)")
-                        Spacer()
+            VStack {
+                ZStack {
+                    switch(viewModel.state) {
+                    case .wait:
+                        RingsView(viewModel: viewModel)
+                            .padding(geo.size.width * 0.25)
+                    case .listen:
+                        RingsView(viewModel: viewModel)
+                            .padding(geo.size.width * 0.25)
+                    case .analyse:
+                        EmptyView()
+                    case .show:
+                        ShowView(viewModel: viewModel)
+                            .padding(geo.size.width * 0.0)
+                    case .settings:
+                        HStack {
+                            Spacer()
+                            Text("Settings (not displayed)")
+                            Spacer()
+                        }
                     }
                 }
+                .aspectRatio(contentMode: .fit)
+                Text("ControlView: state = \(viewModel.state.description())")
             }
-            .aspectRatio(contentMode: .fit)
         }
     }
 }

@@ -39,6 +39,14 @@
 		AA6063F826D730D400EDD38F /* RingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6063F626D730D400EDD38F /* RingsView.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
+		AA8F3CBA26DC6B4100C82E56 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* Disk.swift */; };
+		AA8F3CBB26DC6B4100C82E56 /* Disk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* Disk.swift */; };
+		AA8F3CBD26DC757300C82E56 /* DiskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBC26DC757300C82E56 /* DiskViewModel.swift */; };
+		AA8F3CBE26DC757300C82E56 /* DiskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBC26DC757300C82E56 /* DiskViewModel.swift */; };
+		AA8F3CC026DC766B00C82E56 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* Disks.swift */; };
+		AA8F3CC126DC766B00C82E56 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* Disks.swift */; };
+		AA8F3CC326DC83B300C82E56 /* ShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifter.swift */; };
+		AA8F3CC426DC83B300C82E56 /* ShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifter.swift */; };
 		AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014CE26CA626000B4EA2C /* ViewModel.swift */; };
 		AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014CE26CA626000B4EA2C /* ViewModel.swift */; };
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
@@ -51,8 +59,8 @@
 		AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AACDCDA6255FCEE100A43728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* Model.swift */; };
 		AACDCDA7255FCEE100A43728 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACDCDA5255FCEE100A43728 /* Model.swift */; };
-		AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */; };
-		AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */; };
+		AAEF9EAC26DB661B00CEFFB1 /* ShapeShifterDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* ShapeShifterDisk.swift */; };
+		AAEF9EAD26DB661B00CEFFB1 /* ShapeShifterDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF9EAB26DB661B00CEFFB1 /* ShapeShifterDisk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,13 +86,17 @@
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA6063F626D730D400EDD38F /* RingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingsView.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA8F3CB926DC6B4100C82E56 /* Disk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disk.swift; sourceTree = "<group>"; };
+		AA8F3CBC26DC757300C82E56 /* DiskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskViewModel.swift; sourceTree = "<group>"; };
+		AA8F3CBF26DC766B00C82E56 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
+		AA8F3CC226DC83B300C82E56 /* ShapeShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifter.swift; sourceTree = "<group>"; };
 		AA9014CE26CA626000B4EA2C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewModel.swift; path = Shared/ViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
 		AA97067526D202B40090FA67 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AACDCDA5255FCEE100A43728 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRectShapeShifter.swift; sourceTree = "<group>"; };
+		AAEF9EAB26DB661B00CEFFB1 /* ShapeShifterDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifterDisk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +149,8 @@
 				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */,
-				AAEF9EAB26DB661B00CEFFB1 /* CircleRectShapeShifter.swift */,
+				AAEF9EAB26DB661B00CEFFB1 /* ShapeShifterDisk.swift */,
+				AA8F3CB926DC6B4100C82E56 /* Disk.swift */,
 				AA6063F626D730D400EDD38F /* RingsView.swift */,
 				AA9014D126CA62BD00B4EA2C /* NeedleView.swift */,
 				AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */,
@@ -150,6 +163,9 @@
 				AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */,
 				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
+				AA8F3CBC26DC757300C82E56 /* DiskViewModel.swift */,
+				AA8F3CBF26DC766B00C82E56 /* Disks.swift */,
+				AA8F3CC226DC83B300C82E56 /* ShapeShifter.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -286,11 +302,15 @@
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */,
-				AAEF9EAC26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */,
+				AA8F3CBD26DC757300C82E56 /* DiskViewModel.swift in Sources */,
+				AA8F3CBA26DC6B4100C82E56 /* Disk.swift in Sources */,
+				AAEF9EAC26DB661B00CEFFB1 /* ShapeShifterDisk.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* TapPrecision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA6255FCEE100A43728 /* Model.swift in Sources */,
+				AA8F3CC026DC766B00C82E56 /* Disks.swift in Sources */,
+				AA8F3CC326DC83B300C82E56 /* ShapeShifter.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
@@ -315,11 +335,15 @@
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */,
-				AAEF9EAD26DB661B00CEFFB1 /* CircleRectShapeShifter.swift in Sources */,
+				AA8F3CBE26DC757300C82E56 /* DiskViewModel.swift in Sources */,
+				AA8F3CBB26DC6B4100C82E56 /* Disk.swift in Sources */,
+				AAEF9EAD26DB661B00CEFFB1 /* ShapeShifterDisk.swift in Sources */,
 				AA40FD6226D611C9006DBFD8 /* TapPrecision.swift in Sources */,
 				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA7255FCEE100A43728 /* Model.swift in Sources */,
+				AA8F3CC126DC766B00C82E56 /* Disks.swift in Sources */,
+				AA8F3CC426DC83B300C82E56 /* ShapeShifter.swift in Sources */,
 				AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,

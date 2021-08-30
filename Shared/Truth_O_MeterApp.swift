@@ -16,6 +16,7 @@ struct Truth_O_MeterApp: App {
     var body: some Scene {
         let viewModel = ViewModel()
         viewModel.setState(.wait)
+        let diskViewModel = DiskViewModel(callback: viewModel.tap)
         return WindowGroup {
             VStack {
                 #if os(macOS)
@@ -27,7 +28,7 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                RingsView(viewModel: viewModel)
+                Disks(diskViewModel: diskViewModel)
                     .padding(100)
 //                MainView(viewModel: viewModel)
 //                    .environmentObject(viewModel.needle)
@@ -40,7 +41,11 @@ struct Truth_O_MeterApp: App {
 struct Truth_O_MeterApp_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = ViewModel()
-        MainView(viewModel: viewModel)
-            .environmentObject(viewModel.needle)
+        viewModel.setState(.wait)
+        let diskViewModel = DiskViewModel(callback: viewModel.tap)
+        return Disks(diskViewModel: diskViewModel)
+            .padding(100)
+//        MainView(viewModel: viewModel)
+//            .environmentObject(viewModel.needle)
     }
 }

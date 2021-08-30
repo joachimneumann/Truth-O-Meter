@@ -13,8 +13,8 @@ class ViewModel: ObservableObject {
 
     private      var model = Model()
     private(set) var needle = Needle()
-    private(set) var settingsPrecision: Precision = Precision.middle
-    private(set) var precision: Precision = Precision.middle
+//    private(set) var settingsPrecision: Precision = Precision.middle
+//    private(set) var precision: Precision = Precision.middle
 
     @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
@@ -39,24 +39,24 @@ class ViewModel: ObservableObject {
         }
     }
        
-    var customTop: String {
-        get {
-            settings.currentTheme.result(precision: settingsPrecision).top
-        }
-        set {
-            settings.currentTheme.setTop(newValue, forPrecision: settingsPrecision)
-        }
-    }
-    
-    var customBottom: String {
-        get {
-            settings.currentTheme.result(precision: settingsPrecision).bottom ?? ""
-        }
-        set {
-            let s: String? = newValue == "" ? nil : newValue
-            settings.currentTheme.setBottom(s, forPrecision: settingsPrecision)
-        }
-    }
+//    var customTop: String {
+//        get {
+//            settings.currentTheme.result(precision: settingsPrecision).top
+//        }
+//        set {
+//            settings.currentTheme.setTop(newValue, forPrecision: settingsPrecision)
+//        }
+//    }
+//
+//    var customBottom: String {
+//        get {
+//            settings.currentTheme.result(precision: settingsPrecision).bottom ?? ""
+//        }
+//        set {
+//            let s: String? = newValue == "" ? nil : newValue
+//            settings.currentTheme.setBottom(s, forPrecision: settingsPrecision)
+//        }
+//    }
     var customTitle: String {
         get {
             return settings.currentTheme.title
@@ -192,34 +192,18 @@ class ViewModel: ObservableObject {
         get { model.state }
     }
         
-    func settingsConfigutation(_ ring: Precision) {
-        setState(.settings)
-        settingsPrecision = ring
-        switch ring {
-        case .bullsEye:
-            needle.setValue(0.00)
-        case .inner:
-            needle.setValue(0.25)
-        case .middle:
-            needle.setValue(0.50)
-        case .outer:
-            needle.setValue(0.75)
-        case .edge:
-            needle.setValue(1.00)
-        }
-    }
     
     var isSettingsState: Bool {
         state == .settings
     }
 
-    func tap(_ ring: Precision) {
-        print("tap(ring = \(ring))")
-        precision = ring
+    func tap(_ newPrecision: Precision) {
+        print("tap(precision = \(newPrecision))")
+//        precision = newPrecision
         if state == .wait {
             setState(.listen)
 
-            switch ring {
+            switch newPrecision {
             case .bullsEye:
                 needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
             case .inner:
@@ -232,7 +216,18 @@ class ViewModel: ObservableObject {
                 needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
             }
         } else if state == .settings {
-            settingsConfigutation(ring)
+            switch newPrecision {
+            case .bullsEye:
+                needle.setValue(0.00)
+            case .inner:
+                needle.setValue(0.25)
+            case .middle:
+                needle.setValue(0.50)
+            case .outer:
+                needle.setValue(0.75)
+            case .edge:
+                needle.setValue(1.00)
+            }
         }
     }
         

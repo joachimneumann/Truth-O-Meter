@@ -23,18 +23,18 @@ import SwiftUI
 //        }
 //)
 
-struct CircleRectShapeShifter: View {
+struct ShapeShifterDisk: View {
     var circle: Bool
     var opaque: Bool
     var geoSize: CGSize
     var color: Color
 
-    private let opaqueTpPaleAnimationTime = 0.10
     private let shapeShiftTime = 0.25
     
     var body: some View {
         let w: CGFloat = min(geoSize.height, geoSize.width)
-        VStack {
+        print("CircleRectShapeShifter circle=\(circle) opaque=\(opaque) w=\(w)")
+        return VStack {
             Spacer(minLength: 0)
             HStack {
                 Spacer(minLength: 0)
@@ -44,7 +44,6 @@ struct CircleRectShapeShifter: View {
                     .animation(.linear(duration: shapeShiftTime))
                     .foregroundColor(color)
                     .opacity(opaque ? 1.0: 0.3)
-                    .animation(.linear(duration: opaqueTpPaleAnimationTime))
                     .aspectRatio(contentMode: .fit)
                 Spacer(minLength: 0)
             }
@@ -56,7 +55,7 @@ struct CircleRectShapeShifter: View {
 struct CircleRectShapeShifter_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { (geo) in
-            CircleRectShapeShifter(
+            ShapeShifterDisk(
                 circle: true,
                 opaque: true,
                 geoSize: geo.size,

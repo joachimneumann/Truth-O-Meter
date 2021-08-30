@@ -114,14 +114,14 @@ func paddingForPrecision(radius: CGFloat, precision: Precision) -> CGFloat {
 
 struct AllRings: View {
     var viewModel: ViewModel
-    @State private var circle = true
-    @State private var opaque = true
+    @State private var isShapeShifterCircle = true
+    @State private var paleShapeShifter = false
     @State private var tappedPrecision = Precision.outer
 
     struct Ring: View {
         @State private var color: Color = C.color.bullshitRed
-        @Binding var circle: Bool
-        @Binding var opaque: Bool
+        @Binding var isShapeShifterCircle: Bool
+        @Binding var paleShapeShifter: Bool
         @Binding var tappedPrecision: Precision
         var isSettingsRing: Bool
         var geoSize: CGSize
@@ -129,13 +129,16 @@ struct AllRings: View {
         var tapCallback: (_ ring: Precision) -> Void
 
         var body: some View {
+            let w = min(geoSize.width, geoSize.height)
             let paddingValue = paddingForPrecision(
-                radius: min(geoSize.width, geoSize.height) / 2,
+                radius: w / 2,
                 precision: precision)
+            print("Ring isShapeShifterCircle=\(isShapeShifterCircle) paleShapeShifter=\(paleShapeShifter) w=\(w)")
+            let isVisible = isShapeShifterCircle && !paleShapeShifter
             return ZStack {
                 Circle()
-                    .fill(tappedPrecision == precision && isSettingsRing ? C.color.lightGray : C.color.bullshitRed)
-                    .opacity(circle && opaque ? 1.0 : 0.0)
+                    .fill(Color.blue)//tappedPrecision == precision && isSettingsRing ? C.color.lightGray : C.color.bullshitRed)
+                    .opacity(isVisible ? 1.0 : 0.0)
                     .animation(nil)
                     .padding(paddingValue)
                     .gesture(
@@ -143,9 +146,7 @@ struct AllRings: View {
                             .onChanged { _ in
                                 print("Ring down")
                                 if !isSettingsRing {
-                                    if opaque {
-                                        opaque = false
-                                    }
+                                    paleShapeShifter = true
                                 }
                             }
 
@@ -156,8 +157,8 @@ struct AllRings: View {
                                     tappedPrecision = precision
                                     print("tappedPrecision = \(precision)")
                                 } else {
-                                    opaque = true
-                                    circle.toggle()
+                                    paleShapeShifter = false
+                                    isShapeShifterCircle.toggle()
                                     tappedPrecision = precision
                                     print("precision = \(precision)")
                                 }
@@ -173,42 +174,31 @@ struct AllRings: View {
     }
     
     var body: some View {
+        if viewModel.state == .listen {
+            isShapeShifterCircle = true
+        }
         return GeometryReader { (geo) in
             Group {
-                CircleRectShapeShifter(
-                    circle: circle,
-                    opaque: opaque,
+                ShapeShifterDisk(
+                    circle: isShapeShifterCircle,
+                    opaque: !paleShapeShifter,
                     geoSize: geo.size,
                     color: C.color.bullshitRed)
                     .padding(0)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                if opaque {
-                                    opaque = false
-                                }
+                                paleShapeShifter = true
                             }
-                            
+
                             .onEnded { _ in
-                                opaque = true
-                                circle.toggle()
+                                paleShapeShifter = false
+                                isShapeShifterCircle.toggle()
                             }
                     )
-                Ring(circle: $circle, opaque: $opaque, tappedPrecision: $tappedPrecision,
-                     isSettingsRing: viewModel.isSettingsState, geoSize: geo.size,
-                     precision: .outer,
-                     tapCallback: viewModel.tap)
-                Ring(circle: $circle, opaque: $opaque, tappedPrecision: $tappedPrecision,
-                     isSettingsRing: viewModel.isSettingsState, geoSize: geo.size,
-                     precision: .middle,
-                     tapCallback: viewModel.tap)
-                Ring(circle: $circle, opaque: $opaque, tappedPrecision: $tappedPrecision,
-                     isSettingsRing: viewModel.isSettingsState, geoSize: geo.size,
-                     precision: .inner,
-                     tapCallback: viewModel.tap)
-                Ring(circle: $circle, opaque: $opaque, tappedPrecision: $tappedPrecision,
-                     isSettingsRing: viewModel.isSettingsState, geoSize: geo.size,
-                     precision: .bullsEye,
+                Ring(isShapeShifterCircle: $isShapeShifterCircle, paleShapeShifter: $paleShapeShifter,
+                     tappedPrecision: $tappedPrecision, isSettingsRing: viewModel.isSettingsState,
+                     geoSize: geo.size, precision: .outer,
                      tapCallback: viewModel.tap)
             }
         }

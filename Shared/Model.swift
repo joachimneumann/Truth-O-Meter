@@ -11,7 +11,20 @@ import Foundation
 struct Model {
     enum State {
         case wait, listen, analyse, show, settings
-    }
+        func description() -> String {
+            switch self {
+            case .wait:
+                return "wait"
+            case .listen:
+                return "listen"
+            case .analyse:
+                return "analyse"
+            case .show:
+                return "show"
+            case .settings:
+                return "settings"
+            }
+        }    }
 
     private(set) var state: State = .wait
     
