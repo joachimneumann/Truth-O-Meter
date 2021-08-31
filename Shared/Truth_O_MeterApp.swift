@@ -13,7 +13,7 @@ func call() {
 
 @main
 struct Truth_O_MeterApp: App {
-    @State var buttonModel = ButtonModel(isSetting: false)
+    @State var buttonModel = ButtonModel(isSetting: true)
     @State var pale: Bool = false
     @State var circle: Bool = true
     @State var gray: Bool = false
@@ -35,7 +35,7 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                AllDisksView(buttonModel: buttonModel)
+                AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
 //                return ShapeShifterView(
 //                    up: buttonModel.buttonPressedWith,
 //                    pale: $pale,

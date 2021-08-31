@@ -8,35 +8,36 @@
 import SwiftUI
 
 struct DiskView: View {
-    @Binding var superViewIsPale: Bool
-    @Binding var isHidden: Bool
-    @Binding var drawBorder: Bool
-    @Binding var isGray: Bool
+    var isOpaque: Bool
+    var drawBorder: Bool
+    var isGray: Bool
+    var down: () -> Void
     var up: () -> Void
-
+    
+    private let borderColor = C.color.lightGray
+    private let color = C.color.bullshitRed
+    private let grayColor = C.color.lightGray
+    
     var body: some View {
         ZStack {
             Circle()
-                .fill(isGray ? C.color.lightGray : C.color.bullshitRed)
+                .fill(isGray ? grayColor : color)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
-                            if !isHidden {
-                                superViewIsPale = true
-                                print("Disk down isHidden = \(isHidden)")
-                                isHidden = true
-                            }
+                            print("Disk down")
+                            down()
                         }
                         .onEnded { _ in
                             print("Disk up")
                             up()
                         }
                 )
-                .opacity(superViewIsPale || isHidden ? 0.0 : 1.0)
+                .opacity(isOpaque ? 1.0 : 0.0)
             // border
             if drawBorder {
                 Circle()
-                    .stroke(C.color.lightGray, lineWidth: 1)
+                    .stroke(borderColor, lineWidth: 1)
             }
         }
     }
@@ -44,13 +45,13 @@ struct DiskView: View {
 
 struct Disk_Previews: PreviewProvider {
     static var previews: some View {
-        @State var buttonModel = ButtonModel(isSetting: false)
+        func f() {}
         return DiskView(
-            superViewIsPale: $buttonModel.isSetting,
-            isHidden: $buttonModel.shapeShifterIsPale,
-            drawBorder: $buttonModel.isSetting,
-            isGray: $buttonModel.isSetting) {
-//            $buttonModel.buttonPressedWith(.middle)
-        }
+            isOpaque: false,
+            drawBorder: false,
+            isGray: false,
+            down: f,
+            up: f)
     }
 }
+

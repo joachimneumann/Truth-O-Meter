@@ -11,8 +11,8 @@
 		AA161D6226DCBA40004BF2C8 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButton.swift */; };
 		AA161D6526DCBB45004BF2C8 /* SmartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButton.swift */; };
-		AA161D6726DCC9F1004BF2C8 /* DiskParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* DiskParameters.swift */; };
-		AA161D6826DCC9F1004BF2C8 /* DiskParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* DiskParameters.swift */; };
+		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
+		AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
@@ -27,8 +27,8 @@
 		AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F77D926D5DF2500AC1D3E /* Needle.swift */; };
 		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
 		AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
-		AA40FD6126D611C9006DBFD8 /* TapPrecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */; };
-		AA40FD6226D611C9006DBFD8 /* TapPrecision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */; };
+		AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
+		AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
 		AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
 		AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* Stamp.swift */; };
 		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
@@ -71,7 +71,7 @@
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 		AA161D6326DCBB45004BF2C8 /* SmartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButton.swift; sourceTree = "<group>"; };
-		AA161D6626DCC9F1004BF2C8 /* DiskParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskParameters.swift; sourceTree = "<group>"; };
+		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +84,7 @@
 		AA30E3AC26D3BE1900BC5F20 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		AA3F77D926D5DF2500AC1D3E /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapPrecision.swift; sourceTree = "<group>"; };
+		AA40FD6026D611C9006DBFD8 /* Precision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precision.swift; sourceTree = "<group>"; };
 		AA4565E226D0C4C6003CC57E /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
 		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA5847C926CA8DC300EB6D6D /* ModelDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDebugView.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				AA161D6326DCBB45004BF2C8 /* SmartButton.swift */,
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
 				AA97067526D202B40090FA67 /* Theme.swift */,
-				AA40FD6026D611C9006DBFD8 /* TapPrecision.swift */,
+				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
 				AA3F77D926D5DF2500AC1D3E /* Needle.swift */,
 				AA9014CE26CA626000B4EA2C /* ViewModel.swift */,
@@ -173,7 +173,7 @@
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
 				AA8F3CC526DC9F3600C82E56 /* RingView.swift */,
 				AA586D63255F04EF00229903 /* RecordButton.swift */,
-				AA161D6626DCC9F1004BF2C8 /* DiskParameters.swift */,
+				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -313,9 +313,9 @@
 				AA8F3CBD26DC757300C82E56 /* DiskViewModel.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
-				AA40FD6126D611C9006DBFD8 /* TapPrecision.swift in Sources */,
+				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
-				AA161D6726DCC9F1004BF2C8 /* DiskParameters.swift in Sources */,
+				AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA6255FCEE100A43728 /* Model.swift in Sources */,
 				AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */,
@@ -348,9 +348,9 @@
 				AA8F3CBE26DC757300C82E56 /* DiskViewModel.swift in Sources */,
 				AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */,
-				AA40FD6226D611C9006DBFD8 /* TapPrecision.swift in Sources */,
+				AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,
-				AA161D6826DCC9F1004BF2C8 /* DiskParameters.swift in Sources */,
+				AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AACDCDA7255FCEE100A43728 /* Model.swift in Sources */,
 				AA8F3CC126DC766B00C82E56 /* AllDisksView.swift in Sources */,

@@ -23,14 +23,14 @@ struct SmartButton: View {
             } else if buttonModel.isListening {
                 ZStack {
                     RingView(width: linewidth, totalTime: 2, callback: buttonModel.listeningFinished)
-                    AllDisksView(buttonModel: buttonModel)
+                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
                         .padding(linewidth * 1.5)
                 }
             } else {
                 ZStack {
                     Circle()
                         .stroke(C.color.lightGray, lineWidth: linewidth)
-                    AllDisksView(buttonModel: buttonModel)
+                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
                         .padding(linewidth * 1.5)
                 }
             }

@@ -19,16 +19,10 @@ class ButtonModel: ObservableObject {
     var shapeShifterIsPale = false
     @Published var shapeShifterIsGray = false
 
-    var diskParameters = [DiskParameters]()
-    
     private var settings = Settings()
 
     init(isSetting iss: Bool) {
         isSetting = iss
-        diskParameters.append(DiskParameters(.outer))
-        diskParameters.append(DiskParameters(.middle))
-        diskParameters.append(DiskParameters(.inner))
-        diskParameters.append(DiskParameters(.bullsEye))
     }
     
     func down() {
@@ -39,49 +33,11 @@ class ButtonModel: ObservableObject {
     }
     
     func buttonPressedWith(_ precision: Precision) {
-        print("ButtonModel up() with precision \(precision)")
+        print("ButtonModel buttonPressedWith(\(precision))")
         result = settings.currentTheme.result(forPrecision: precision)
         isListening = true
         isAnalysing = false
         isShowingStamp = false
-
-        if isSetting {
-            switch precision {
-            case .edge:
-                shapeShifterIsGray       = true
-                diskParameters[0].isGray = false
-                diskParameters[1].isGray = false
-                diskParameters[2].isGray = false
-                diskParameters[3].isGray = false
-            case .outer:
-                shapeShifterIsGray       = false
-                diskParameters[0].isGray = true
-                diskParameters[1].isGray = false
-                diskParameters[2].isGray = false
-                diskParameters[3].isGray = false
-            case .middle:
-                shapeShifterIsGray       = false
-                diskParameters[0].isGray = false
-                diskParameters[1].isGray = true
-                diskParameters[2].isGray = false
-                diskParameters[3].isGray = false
-            case .inner:
-                shapeShifterIsGray       = false
-                diskParameters[0].isGray = false
-                diskParameters[1].isGray = false
-                diskParameters[2].isGray = true
-                diskParameters[3].isGray = false
-            case .bullsEye:
-                shapeShifterIsGray       = false
-                diskParameters[0].isGray = false
-                diskParameters[1].isGray = false
-                diskParameters[2].isGray = false
-                diskParameters[3].isGray = true
-            }
-        } else {
-            shapeShifterIsCircle = false
-            shapeShifterIsPale = false
-        }
     }
     
     // MARK: intents
