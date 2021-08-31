@@ -30,29 +30,30 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
 }
 
 struct DisplayView: View {
-    @ObservedObject var viewModel: ViewModel
-    @State private var editing = false
+    var colorful: Bool
+    @Binding var title: String
     var editTitle = false
+
+    @State private var editing = false
         
     var body: some View {
-        let colorful = viewModel.displayBackgroundColorful
         print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return ZStack {
             if editTitle {
-                DisplayBackground(colorful: colorful)
+                DisplayBackground(colorful: true)
                     .opacity(0.5)
                 NeedleView()
                     .clipped()
                     .opacity(0.5)
-                TextField("", text: $viewModel.customTitle, onEditingChanged: { edit in
+                TextField("", text: $title, onEditingChanged: { edit in
                     self.editing = edit
                 })
                 .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
             } else {
                 DisplayBackground(colorful: colorful)
-                Text(viewModel.settings.currentTheme.title)
+                Text(title)
                     .offset(y: 15)
                     .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
                     .font(.headline)
@@ -66,13 +67,10 @@ struct DisplayView: View {
     
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-        viewModel.settings.setCurrentTheme(viewModel.settings.themes[3])
         return VStack {
-            ModelDebugView(viewModel: viewModel)
-            DisplayView(viewModel: viewModel, editTitle: true)
+            DisplayView(colorful: true, title: .constant("xx"))
                 .padding()
-                .environmentObject(viewModel.needle)
+                .environmentObject(Needle())
         }
     }
 }

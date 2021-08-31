@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA161D6126DCBA40004BF2C8 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */; };
 		AA161D6226DCBA40004BF2C8 /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */; };
-		AA161D6426DCBB45004BF2C8 /* SmartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButton.swift */; };
-		AA161D6526DCBB45004BF2C8 /* SmartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButton.swift */; };
+		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
+		AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
@@ -70,7 +70,7 @@
 /* Begin PBXFileReference section */
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
-		AA161D6326DCBB45004BF2C8 /* SmartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButton.swift; sourceTree = "<group>"; };
+		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
 		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			children = (
 				AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */,
 				AA161D6026DCBA40004BF2C8 /* ButtonModel.swift */,
-				AA161D6326DCBB45004BF2C8 /* SmartButton.swift */,
+				AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */,
 				AACDCDA5255FCEE100A43728 /* Model.swift */,
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
@@ -331,7 +331,7 @@
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014CF26CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
-				AA161D6426DCBB45004BF2C8 /* SmartButton.swift in Sources */,
+				AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
 				AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +366,7 @@
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA9014D026CA626000B4EA2C /* ViewModel.swift in Sources */,
 				AA97067726D202B40090FA67 /* Theme.swift in Sources */,
-				AA161D6526DCBB45004BF2C8 /* SmartButton.swift in Sources */,
+				AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
 				AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

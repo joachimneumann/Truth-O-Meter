@@ -12,35 +12,32 @@ struct ShapeShifterView: View {
     var isCircle: Bool
     var down: () -> Void
     var up: () -> Void
-
+    
     private let color = C.color.bullshitRed
     private let grayColor = C.color.lightGray
 
     var body: some View {
-
-        let color = isGray ? grayColor : color
-
+        
+        let color = Color.blue//isGray ? grayColor : color
         GeometryReader { geo in
             let w = min(geo.size.width, geo.size.height)
             VStack {
                 Spacer(minLength: 0)
-                Rectangle()
-                    .cornerRadius(isCircle ? w/2 : w/14)
-                    .padding(isCircle ? 0 : w/4)
-                    .animation(.linear(duration: C.timing.shapeShiftAnimationTime))
-                    
-                    .foregroundColor(color)
-                    
-                    .aspectRatio(contentMode: .fit)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                down()
-                            }
-                            .onEnded { _ in
-                                up()
-                            }
-                    )
+                HStack {
+                    Spacer(minLength: 0)
+                    Rectangle()
+                        .cornerRadius(isCircle ? w/2 : w/14)
+                        .padding(isCircle ? 0 : w/4)
+                        .animation(.linear(duration: C.timing.shapeShiftAnimationTime))
+                        .foregroundColor(color)
+                        .aspectRatio(contentMode: .fit)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { _ in down() }
+                                .onEnded   { _ in up()   }
+                        )
+                    Spacer(minLength: 0)
+                }
                 Spacer(minLength: 0)
             }
         }

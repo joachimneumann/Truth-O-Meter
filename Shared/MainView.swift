@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TheMainView: View {
     @ObservedObject var viewModel: ViewModel
+    @State var title = "ccc"
     var body: some View {
         print("redrawing TheContentView")
         return ZStack {
@@ -18,14 +19,14 @@ struct TheMainView: View {
                         switch(viewModel.state) {
                         case .analyse:
                             VStack {
-                                DisplayView(viewModel: viewModel)
+                                DisplayView(colorful: true, title: $title)
                                 AnalyseView(viewModel: viewModel)
                                     .padding(.leading, 20)
                                     .padding(.trailing, 20)
                             }
                         default:
                             VStack {
-                                DisplayView(viewModel: viewModel)
+                                DisplayView(colorful: true, title: $title)
                             }
                         }
                     }
@@ -54,7 +55,7 @@ struct SettingsIcon: View {
                 .frame(width: 30.0, height: 30.0)
                 .padding()
                 .onTapGesture {
-                    viewModel.setView(.settings)
+//                    viewModel.setView(.settings)
                 }
         }
     }
@@ -86,21 +87,21 @@ struct AnalyseView: View {
 
 
 struct MainView: View {
-    @ObservedObject var viewModel: ViewModel
-    enum ViewEnum {
-        case main, settings, detail
-    }
+    var settings: Settings
+    @Binding var title: String
+    @State private var showDisplay = true
+    @State private var displayColorful = false
+    @State private var showSmartButton = true
+    @State private var showAnalysis = false
+
     var body: some View {
-        switch viewModel.view {
-        case .main:
-            TheMainView(viewModel: viewModel)
-                .padding(.top, 0)
-        case .settings:
-            SettingsView(viewModel: viewModel)
-                .padding(.top, 20)
-        case .detail:
-            DetailView(viewModel: viewModel)
-                .padding(.top, 20)
+        VStack {
+            if showDisplay {
+                DisplayView(colorful: displayColorful, title: $title)
+            }
+            if showSmartButton {
+                SmartButtonView(settings: settings)
+            }
         }
     }
 }
@@ -108,7 +109,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-        MainView(viewModel: viewModel)
+        MainView(settings: Settings(), title: .constant("xx"))
     }
 }

@@ -26,10 +26,21 @@ struct C {
         static let outerRingWidth: CGFloat = 0.05
     }
     
+    static var firstTime = true
+    
     struct timing {
         static let listeningTimeIncrement  = 0.02
         static let analyseTimeIncrement    = 0.02
-        static let shapeShiftAnimationTime = 0.25
+        static var shapeShiftAnimationTime: Double {
+            get {
+                if firstTime {
+                    firstTime = false
+                    return 0
+                } else {
+                    return 0.25
+                }
+            }
+        }
         static let paleAnimationTime       = 0.10
     }
     

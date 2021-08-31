@@ -16,24 +16,23 @@ class ViewModel: ObservableObject {
     }
 
     func pressed(precision: Precision) {
-        isListening = true
-        switch precision {
-        case .bullsEye:
-            needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
-        case .inner:
-            needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
-        case .middle:
-            needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
-        case .outer:
-            needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
-        case .edge:
-            needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
-        }
+//        isListening = true
+//        switch precision {
+//        case .bullsEye:
+//            needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
+//        case .inner:
+//            needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
+//        case .middle:
+//            needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
+//        case .outer:
+//            needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
+//        case .edge:
+//            needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
+//        }
     }
     
     
     private      var model = Model()
-    private(set) var needle = Needle()
 //    private(set) var settingsPrecision: Precision = Precision.middle
 //    private(set) var precision: Precision = Precision.middle
 
@@ -42,8 +41,6 @@ class ViewModel: ObservableObject {
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
         
-    @Published var view: MainView.ViewEnum = .main
-
     // used in ModelDebugView
     var stateName: String {
         switch model.state {
@@ -123,54 +120,54 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func setView(_ newView: MainView.ViewEnum) {
-        if newView == .settings || newView == .detail {
-            setState(.settings)
-        } else {
-            setState(.wait)
-        }
-        view = newView
-        if newView == .detail {
-            // load custom values
-            if settings.isCustomTheme {
-                var s: String
-                customTitle = UserDefaults.standard.string(forKey: C.key.custom.title) ?? ""
+//    func setView(_ newView: MainView.ViewEnum) {
+//        if newView == .settings || newView == .detail {
+//            setState(.settings)
+//        } else {
+//            setState(.wait)
+//        }
+//        view = newView
+//        if newView == .detail {
+//            // load custom values
+//            if settings.isCustomTheme {
+//                var s: String
+//                customTitle = UserDefaults.standard.string(forKey: C.key.custom.title) ?? ""
+//
+//                s = UserDefaults.standard.string(forKey: C.key.custom.edge.top) ?? ""
+//                settings.currentTheme.setTop(s, forPrecision: .edge)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.edge.bottom) ?? ""
+//                settings.currentTheme.setBottom(s, forPrecision: .edge)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.outer.top) ?? ""
+//                settings.currentTheme.setTop(s, forPrecision: .outer)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.outer.bottom) ?? ""
+//                settings.currentTheme.setBottom(s, forPrecision: .outer)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.middle.top) ?? ""
+//                settings.currentTheme.setTop(s, forPrecision: .middle)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.middle.bottom) ?? ""
+//                settings.currentTheme.setBottom(s, forPrecision: .middle)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.inner.top) ?? ""
+//                settings.currentTheme.setTop(s, forPrecision: .inner)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.inner.bottom) ?? ""
+//                settings.currentTheme.setBottom(s, forPrecision: .inner)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? ""
+//                settings.currentTheme.setTop(s, forPrecision: .bullsEye)
+//                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom) ?? ""
+//                settings.currentTheme.setBottom(s, forPrecision: .bullsEye)
+//            }
+//        }
+//    }
 
-                s = UserDefaults.standard.string(forKey: C.key.custom.edge.top) ?? ""
-                settings.currentTheme.setTop(s, forPrecision: .edge)
-                s = UserDefaults.standard.string(forKey: C.key.custom.edge.bottom) ?? ""
-                settings.currentTheme.setBottom(s, forPrecision: .edge)
-                s = UserDefaults.standard.string(forKey: C.key.custom.outer.top) ?? ""
-                settings.currentTheme.setTop(s, forPrecision: .outer)
-                s = UserDefaults.standard.string(forKey: C.key.custom.outer.bottom) ?? ""
-                settings.currentTheme.setBottom(s, forPrecision: .outer)
-                s = UserDefaults.standard.string(forKey: C.key.custom.middle.top) ?? ""
-                settings.currentTheme.setTop(s, forPrecision: .middle)
-                s = UserDefaults.standard.string(forKey: C.key.custom.middle.bottom) ?? ""
-                settings.currentTheme.setBottom(s, forPrecision: .middle)
-                s = UserDefaults.standard.string(forKey: C.key.custom.inner.top) ?? ""
-                settings.currentTheme.setTop(s, forPrecision: .inner)
-                s = UserDefaults.standard.string(forKey: C.key.custom.inner.bottom) ?? ""
-                settings.currentTheme.setBottom(s, forPrecision: .inner)
-                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? ""
-                settings.currentTheme.setTop(s, forPrecision: .bullsEye)
-                s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom) ?? ""
-                settings.currentTheme.setBottom(s, forPrecision: .bullsEye)
-            }
-        }
-    }
-
-    func fromSettingsViewToMainView() {
-        // the theme has already been set inside SettingsView
-        setView(.main)
-    }
-
-    func fromDetailViewToSettingsView() {
-        if settings.isCustomTheme {
-            saveCustom()
-        }
-        setView(.settings)
-    }
+//    func fromSettingsViewToMainView() {
+//        // the theme has already been set inside SettingsView
+//        setView(.main)
+//    }
+//
+//    func fromDetailViewToSettingsView() {
+//        if settings.isCustomTheme {
+//            saveCustom()
+//        }
+//        setView(.settings)
+//    }
 
     
     func saveCustom() {
@@ -220,61 +217,61 @@ class ViewModel: ObservableObject {
     }
 
     func tap(_ newPrecision: Precision) {
-        print("tap(precision = \(newPrecision))")
-//        precision = newPrecision
-        if state == .wait {
-//            setState(.listen)
-
-            switch newPrecision {
-            case .bullsEye:
-                needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
-            case .inner:
-                needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
-            case .middle:
-                needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
-            case .outer:
-                needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
-            case .edge:
-                needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
-            }
-        } else if state == .settings {
-            switch newPrecision {
-            case .bullsEye:
-                needle.setValue(0.00)
-            case .inner:
-                needle.setValue(0.25)
-            case .middle:
-                needle.setValue(0.50)
-            case .outer:
-                needle.setValue(0.75)
-            case .edge:
-                needle.setValue(1.00)
-            }
-        }
+//        print("tap(precision = \(newPrecision))")
+////        precision = newPrecision
+//        if state == .wait {
+////            setState(.listen)
+//
+//            switch newPrecision {
+//            case .bullsEye:
+//                needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
+//            case .inner:
+//                needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
+//            case .middle:
+//                needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
+//            case .outer:
+//                needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
+//            case .edge:
+//                needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
+//            }
+//        } else if state == .settings {
+//            switch newPrecision {
+//            case .bullsEye:
+//                needle.setValue(0.00)
+//            case .inner:
+//                needle.setValue(0.25)
+//            case .middle:
+//                needle.setValue(0.50)
+//            case .outer:
+//                needle.setValue(0.75)
+//            case .edge:
+//                needle.setValue(1.00)
+//            }
+//        }
     }
         
     func setState(_ newState: Model.State) {
-        model.setState(newState)
-
-        // needle
-        switch newState {
-        case .wait:
-            displayBackgroundColorful = false
-            needle.active(false, strongNoise: false)
-            needle.setValue(0.5)
-        case .listen:
-            displayBackgroundColorful = true
-            needle.active(true, strongNoise: true)
-        case .analyse:
-            displayBackgroundColorful = true
-            needle.active(true, strongNoise: false)
-        case .show:
-            displayBackgroundColorful = true
-            needle.active(true, strongNoise: false)
-        case .settings:
-            displayBackgroundColorful = true
-            needle.active(true, strongNoise: false)
-        }
+//        model.setState(newState)
+//
+//        // needle
+//        switch newState {
+//        case .wait:
+//            displayBackgroundColorful = false
+//            needle.active(false, strongNoise: false)
+//            needle.setValue(0.5)
+//        case .listen:
+//            displayBackgroundColorful = true
+//            needle.active(true, strongNoise: true)
+//        case .analyse:
+//            displayBackgroundColorful = true
+//            needle.active(true, strongNoise: false)
+//        case .show:
+//            displayBackgroundColorful = true
+//            needle.active(true, strongNoise: false)
+//        case .settings:
+//            displayBackgroundColorful = true
+//            needle.active(true, strongNoise: false)
+//        }
     }
     
 }

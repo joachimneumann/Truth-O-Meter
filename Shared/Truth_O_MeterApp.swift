@@ -13,38 +13,55 @@ func call() {
 
 @main
 struct Truth_O_MeterApp: App {
-    @State var buttonModel = ButtonModel(isSetting: true)
     @State var pale: Bool = false
     @State var circle: Bool = true
     @State var gray: Bool = false
-    func f() {}
+    
+    @State var title = "title"
+    private(set) var needle = Needle()
+    func f1() {}
+    func f2(p: Precision) {}
     var body: some Scene {
-//        let viewModel = ViewModel()
-//        let diskViewModel = DiskViewModel(
-//            callback: viewModel.pressed,
-//            isSetting: viewModel.isSettingsState)
+        needle.setValue(0.7)
+        needle.active(true, strongNoise: false)
         return WindowGroup {
-            VStack {
-                #if os(macOS)
-                let w : CGFloat = 375
-                let h : CGFloat = 667
-                Disks(diskViewModel: diskViewModel)
-                    .padding(100)
-//                MainView(viewModel: viewModel)
-//                    .environmentObject(viewModel.needle)
-                    .frame(minWidth: w, minHeight: h)
-                    .frame(maxWidth: w, maxHeight: h)
-                    .background(Color.white)
-                #else
-                AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith(_:))
-//                SmartButton()
-//                MainView(viewModel: viewModel)
-//                    .environmentObject(viewModel.needle)
-                #endif
-            }
+            #if os(macOS)
+//            SmartButtonView(settings: Settings())
+//            AllDisksView(isSetting: false, callback: f2)
+            MainView(
+                settings: Settings(),
+                title: $title)
+                .environmentObject(needle)
+                .frame(minWidth: 375, minHeight: 667)
+                .frame(maxWidth: 375, maxHeight: 667)
+                .background(Color.white)
+            #else
+//            SmartButtonView(settings: Settings())
+            MainView(
+                settings: Settings(),
+                title: $title)
+                .environmentObject(needle)
+            #endif
         }
     }
 }
+
+//                #if os(macOS)
+//                let w : CGFloat = 375
+//                let h : CGFloat = 667
+//                Disks(diskViewModel: diskViewModel)
+//                    .padding(100)
+////                MainView(viewModel: viewModel)
+////                    .environmentObject(viewModel.needle)
+//                    .frame(minWidth: w, minHeight: h)
+//                    .frame(maxWidth: w, maxHeight: h)
+//                    .background(Color.white)
+//                #else
+
+//                AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith(_:))
+//                SmartButton()
+//                DisplayView(colorful: true, title: $title, editTitle: false)
+//                MainView(viewModel: viewModel)
 
 //struct Truth_O_MeterApp_Previews: PreviewProvider {
 //    static var previews: some View {

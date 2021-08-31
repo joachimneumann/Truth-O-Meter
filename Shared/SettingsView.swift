@@ -59,7 +59,7 @@ struct ThemesList: View {
                         }
                         .foregroundColor(C.color.bullshitRed)
                         .onTapGesture {
-                            viewModel.setView(.detail)
+//                            viewModel.setView(.detail)
                         }
                         Spacer()
                         Image(systemName: "checkmark")
@@ -107,7 +107,7 @@ struct SettingsView: View {
             }
             .padding(.leading)
             .onTapGesture {
-                viewModel.fromSettingsViewToMainView()
+//                viewModel.fromSettingsViewToMainView()
             }
         }
     }

@@ -158,7 +158,7 @@ struct Settings {
 
 
         // last Step: set currentTheme
-        let index: Int = UserDefaults.standard.integer(forKey: C.key.selectedTheme)
+        let index: Int = 0//UserDefaults.standard.integer(forKey: C.key.selectedTheme)
         // This returns 0 if invalud or not set yet.
         // But this is what we want initially anyway (Bullshit-O-Meter)
         
