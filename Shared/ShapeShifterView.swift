@@ -15,7 +15,6 @@ struct ShapeShifterView: View {
 
     private let color = C.color.bullshitRed
     private let grayColor = C.color.lightGray
-    private let paleAnimationTime = 0.10
 
     var body: some View {
 
@@ -31,7 +30,6 @@ struct ShapeShifterView: View {
                     .animation(.linear(duration: C.timing.shapeShiftAnimationTime))
                     
                     .foregroundColor(color)
-                    .animation(.linear(duration: paleAnimationTime))
                     
                     .aspectRatio(contentMode: .fit)
                     .gesture(
@@ -51,7 +49,6 @@ struct ShapeShifterView: View {
 
 struct ShapeShifter_Previews: PreviewProvider {
     static var previews: some View {
-        @State var pale: Bool = false
         @State var circle: Bool = true
         @State var gray: Bool = false
         func f() {}

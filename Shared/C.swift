@@ -27,9 +27,10 @@ struct C {
     }
     
     struct timing {
-        static let listeningTimeIncrement = 0.02
-        static let analyseTimeIncrement = 0.02
+        static let listeningTimeIncrement  = 0.02
+        static let analyseTimeIncrement    = 0.02
         static let shapeShiftAnimationTime = 0.25
+        static let paleAnimationTime       = 0.10
     }
     
     struct sounds {

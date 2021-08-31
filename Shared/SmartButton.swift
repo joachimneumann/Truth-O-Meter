@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SmartButton: View {
-//    @ObservedObject var buttonModel: ButtonModel
+    //    @ObservedObject var buttonModel: ButtonModel
     @State private var showRing = true
     @State private var showRingWithProgress = false
     @State private var showDisks = true
     @State private var showStamp = false
-
+    
     func pressed(p: Precision) {
         DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
             showRing = false
@@ -36,60 +36,27 @@ struct SmartButton: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
-            let linewidth = min(geo.size.width, geo.size.height) * C.button.outerRingWidth
-            if showRing {
-                Circle()
-                    .stroke(C.color.lightGray, lineWidth: linewidth)
-            }
-            if showRingWithProgress {
-                RingView(width: linewidth, totalTime: 2, whenFinished: ringProgressFinished)
-            }
-            if showDisks {
-                AllDisksView(isSetting: false, callback: pressed)
-                    .padding(linewidth * 1.5)
-            }
-            if showStamp {
-                Stamp(texts: Result("top", "bottom"))
-                    .onTapGesture {
-                        stampTapped()
-                    }
-            }
-//                    Circle()
-//                        .stroke(C.color.lightGray, lineWidth: linewidth)
-//                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
-//                        .padding(linewidth * 1.5)
-//                } else {
-//                    Circle()
-//                        .stroke(C.color.lightGray, lineWidth: linewidth)
-//                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
-//                        .padding(linewidth * 1.5)
-//                }
-//            }
-            
-            //            let linewidth = w * C.button.outerRingWidth
-//            if buttonModel.isShowingStamp {
-//                Stamp(texts: buttonModel.result)
-//                    .onTapGesture {
-//                        buttonModel.startOver()
-//                    }
-//            } else if buttonModel.isAnalysing {
-//                EmptyView()
-//            } else if buttonModel.isListening {
-//                ZStack {
-//                    RingView(width: linewidth, totalTime: 2, callback: buttonModel.listeningFinished)
-//                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
-//                        .padding(linewidth * 1.5)
-//                }
-//            } else { // waiting
-//                ZStack {
-//                    Circle()
-//                        .stroke(C.color.lightGray, lineWidth: linewidth)
-//                    AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
-//                        .padding(linewidth * 1.5)
-//                }
-//            }
-        }
+        AllDisksView(isSetting: false, callback: pressed)
+            .padding(5 * 1.5)
+        //        GeometryReader { geo in
+        //            let linewidth = min(geo.size.width, geo.size.height) * C.button.outerRingWidth
+        //            if showRing {
+        //                Circle()
+        //                    .stroke(C.color.lightGray, lineWidth: linewidth)
+        //            }
+        //            if showRingWithProgress {
+        //                RingView(width: linewidth, totalTime: 2, whenFinished: ringProgressFinished)
+        //            }
+        //            if showDisks {
+        //                AllDisksView(isSetting: false, callback: pressed)
+        //                    .padding(linewidth * 1.5)
+        //            }
+        //            if showStamp {
+        //                Stamp(texts: Result("top", "bottom"))
+        //                    .onTapGesture {
+        //                        stampTapped()
+        //                    }
+        //            }
     }
 }
 

@@ -17,6 +17,7 @@ struct Truth_O_MeterApp: App {
     @State var pale: Bool = false
     @State var circle: Bool = true
     @State var gray: Bool = false
+    func f() {}
     var body: some Scene {
 //        let viewModel = ViewModel()
 //        let diskViewModel = DiskViewModel(
@@ -35,15 +36,8 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                SmartButton()
-//                return ShapeShifterView(
-//                    up: buttonModel.buttonPressedWith,
-//                    pale: $pale,
-//                    circle: $circle,
-//                    gray: $gray)
-//                SmartButton(buttonModel: buttonModel)
-//                AllDisksView(diskViewModel: diskViewModel)
-//                    .padding(100)
+                AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith(_:))
+//                SmartButton()
 //                MainView(viewModel: viewModel)
 //                    .environmentObject(viewModel.needle)
                 #endif

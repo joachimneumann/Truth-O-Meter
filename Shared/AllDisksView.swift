@@ -10,14 +10,12 @@ import SwiftUI
 struct AllDisksView: View {
     var isSetting: Bool
     var callback: (Precision) -> Void
-
+    
     @State private var pale: Bool = false
     @State private var circle: Bool = true
     @State private var disksHidden = false
     @State private var selectedPrecisionInSettings: Precision = .middle
-
-    private let paleAnimationTime = 0.10
-    private let shapeShiftTime = 0.25
+    
     private let disks = Disks()
     
     var body: some View {
@@ -34,6 +32,7 @@ struct AllDisksView: View {
                         }
                     },
                     up: {
+                        if circle { callback(.edge) }
                         if isSetting {
                             selectedPrecisionInSettings = .edge
                         } else {
@@ -41,33 +40,31 @@ struct AllDisksView: View {
                             circle.toggle()
                             disksHidden.toggle()
                         }
-                        callback(.edge)
                     })
-                .animation(.linear(duration: shapeShiftTime))
-                ZStack {
-                    ForEach(disks.disks) { disk in
-                        DiskView(
-                            isOpaque: !pale && circle,
-                            drawBorder: isSetting,
-                            isGray: isSetting && selectedPrecisionInSettings == disk.precision,
-                            down: {
-                                if !isSetting {
-                                    pale = true
-                                    disksHidden = true
-                                }
-                            },
-                            up: {
-                                if isSetting {
-                                    selectedPrecisionInSettings = disk.precision
-                                } else {
-                                    pale = false
-                                    circle = false
-                                    disksHidden = true
-                                }
-                                callback(disk.precision)
-                            })
+                    .opacity(pale ? 0.3 : 1.0)
+                    .animation(.linear(duration: C.timing.paleAnimationTime))
+                ForEach(disks.disks) { disk in
+                    DiskView(
+                        isOpaque: !pale && circle,
+                        drawBorder: isSetting,
+                        isGray: isSetting && selectedPrecisionInSettings == disk.precision,
+                        down: {
+                            if !isSetting {
+                                pale = true
+                                disksHidden = true
+                            }
+                        },
+                        up: {
+                            if circle { callback(disk.precision) }
+                            if isSetting {
+                                selectedPrecisionInSettings = disk.precision
+                            } else {
+                                pale = false
+                                circle = false
+                                disksHidden = true
+                            }
+                        })
                         .padding(disk.padding(radius: radius))
-                    }
                 }
             }
         }

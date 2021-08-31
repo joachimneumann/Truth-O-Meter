@@ -18,6 +18,7 @@ struct DiskView: View {
     private let color = C.color.bullshitRed
     private let grayColor = C.color.lightGray
     
+    @State private var isDown = false
     var body: some View {
         ZStack {
             Circle()
@@ -25,12 +26,18 @@ struct DiskView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
-                            print("Disk down")
-                            down()
+                            if !isDown {
+                                isDown = true
+                                print("Disk down")
+                                down()
+                            }
                         }
                         .onEnded { _ in
-                            print("Disk up")
-                            up()
+                            if isDown {
+                                isDown = false
+                                print("Disk up")
+                                up()
+                            }
                         }
                 )
                 .opacity(isOpaque ? 1.0 : 0.0)
