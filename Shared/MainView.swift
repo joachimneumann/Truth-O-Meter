@@ -7,44 +7,6 @@
 
 import SwiftUI
 
-struct TheMainView: View {
-    @ObservedObject var viewModel: ViewModel
-    @State var title = "ccc"
-    var body: some View {
-        print("redrawing TheContentView")
-        return ZStack {
-            ZStack(alignment: .bottomTrailing){
-                VStack {
-                    VStack {
-                        switch(viewModel.state) {
-                        case .analyse:
-                            VStack {
-                                DisplayView(title: $title, colorful: true)
-                                AnalyseView(viewModel: viewModel)
-                                    .padding(.leading, 20)
-                                    .padding(.trailing, 20)
-                            }
-                        default:
-                            VStack {
-                                DisplayView(title: $title, colorful: true)
-                            }
-                        }
-                    }
-                        .padding(.top, 30)
-                        .padding()
-                    Spacer()
-//                    ControlView(viewModel: viewModel)
-                        .aspectRatio(contentMode: .fit)
-                    Spacer()
-                }
-                SettingsIcon(viewModel: viewModel)
-            }
-        }
-        .ignoresSafeArea()
-        .accentColor(C.color.gray)
-    }
-}
-
 struct SettingsIcon: View {
     @ObservedObject var viewModel: ViewModel
     var body: some View {
@@ -61,9 +23,10 @@ struct SettingsIcon: View {
     }
 }
 
-struct AnalyseView: View {
-    var viewModel: ViewModel
-
+struct AnalysisView: View {
+    @EnvironmentObject var settings: Settings
+    @Binding var showStampView: Bool
+    @Binding var showAnalysisView: Bool
     @State private var value: CGFloat = 0.0
     private let timer = Timer.publish(every: C.timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
 
@@ -72,12 +35,15 @@ struct AnalyseView: View {
             HorizontalProgressBar(value: value)
                 .frame(height: 5)
                     .onReceive(timer) { input in
-                        value += CGFloat(C.timing.analyseTimeIncrement/100000)//Settings.shared.analysisTiming.time())
+                        value += CGFloat(C.timing.analyseTimeIncrement/settings.analysisTime)
                         if value >= 1.0 {
-                            viewModel.setState(.show)
+                            showAnalysisView = false
+                            showStampView = true
                         }
                     }
                 .padding(.top, 10)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
             Text("Analysing...")
                 .font(.headline)
                 .foregroundColor(C.color.gray)
@@ -89,15 +55,16 @@ struct AnalyseView: View {
 struct MainView: View {
     @EnvironmentObject var settings: Settings
     @State private var displayColorful = false
-    @State private var showSmartButton = true
-    @State private var showAnalysis = false
+    @State private var showAnalysisView = false
+    @State private var showStampView = false
 
     var body: some View {
         VStack {
             DisplayView(title: $settings.title, colorful: displayColorful)
-            if showSmartButton {
-                SmartButtonView(displayColorful: $displayColorful)
+            if showAnalysisView {
+                AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
             }
+            SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
         }
     }
 }

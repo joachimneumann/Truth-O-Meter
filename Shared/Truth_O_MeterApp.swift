@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-func call() {
-    print("call")
-}
-
 @main
 struct Truth_O_MeterApp: App {
     @State var pale: Bool = false

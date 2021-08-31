@@ -15,11 +15,12 @@ struct SmartButtonView: View {
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var needle: Needle
     @Binding var displayColorful: Bool
+    @Binding var showAnalysisView: Bool
+    @Binding var showStampView: Bool
     @State private var result = Result("top", "bottom")
     @State private var showRing = true
     @State private var showRingWithProgress = false
     @State private var showDisks = true
-    @State private var showStamp = false
     
     func pressed(precision: Precision) {
         needle.active(true, strongNoise: true)
@@ -51,7 +52,7 @@ struct SmartButtonView: View {
         showRing = false
         showRingWithProgress = false
         showDisks = false
-        showStamp = true
+        showAnalysisView = true
     }
     
     func stampTapped() {
@@ -61,7 +62,7 @@ struct SmartButtonView: View {
         showRing = true
         showRingWithProgress = false
         showDisks = true
-        showStamp = false
+        showStampView = false
     }
     
     var body: some View {
@@ -78,7 +79,7 @@ struct SmartButtonView: View {
                 AllDisksView(isSetting: false, callback: pressed)
                     .padding(linewidth * 1.5)
             }
-            if showStamp {
+            if showStampView {
                 Stamp(texts: result)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -91,6 +92,6 @@ struct SmartButtonView: View {
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmartButtonView(displayColorful: .constant(true))
+        SmartButtonView(displayColorful: .constant(true), showAnalysisView: .constant(true), showStampView: .constant(true))
     }
 }
