@@ -42,7 +42,7 @@ struct AllDisksView: View {
                         }
                     })
                     .opacity(pale ? 0.3 : 1.0)
-                    .animation(.linear(duration: 3))//C.timing.paleAnimationTime))
+                    .animation(.linear(duration: C.timing.paleAnimationTime))
                 ForEach(disks.disks) { disk in
                     DiskView(
                         isOpaque: !pale && circle,

@@ -23,8 +23,8 @@ struct Truth_O_MeterApp: App {
     func f1() {}
     func f2(p: Precision) {}
     var body: some Scene {
-        needle.setValue(0.7)
-        needle.active(true, strongNoise: false)
+        needle.setValue(0.5)
+        needle.active(false)
         return WindowGroup {
             #if os(macOS)
 //            SmartButtonView(settings: Settings())

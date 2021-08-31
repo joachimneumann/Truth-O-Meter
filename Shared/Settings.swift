@@ -120,8 +120,14 @@ class Settings: ObservableObject {
         currentTheme = newTheme
     }
 
+    var listenTime: Double {
+        listenTiming.time()
+    }
+    var analysisTime: Double {
+        analysisTiming.time()
+    }
     var listenAndAnalysisTime: Double {
-        get { listenTiming.time() + analysisTiming.time() }
+        listenTime + analysisTime
     }
 
     init() {

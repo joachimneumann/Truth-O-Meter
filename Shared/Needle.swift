@@ -40,7 +40,7 @@ class Needle: ObservableObject {
         }
     }
 
-    func active(_ onOff: Bool, strongNoise: Bool) {
+    func active(_ onOff: Bool, strongNoise: Bool = false) {
         self.strongNoise = strongNoise
         if onOff {
             colorful = true

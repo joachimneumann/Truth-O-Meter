@@ -256,7 +256,7 @@ class ViewModel: ObservableObject {
 //        switch newState {
 //        case .wait:
 //            displayBackgroundColorful = false
-//            needle.active(false, strongNoise: false)
+//            needle.active(false)
 //            needle.setValue(0.5)
 //        case .listen:
 //            displayBackgroundColorful = true

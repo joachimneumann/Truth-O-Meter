@@ -88,18 +88,15 @@ struct AnalyseView: View {
 
 struct MainView: View {
     @EnvironmentObject var settings: Settings
-    @State private var showDisplay = true
     @State private var displayColorful = false
     @State private var showSmartButton = true
     @State private var showAnalysis = false
 
     var body: some View {
         VStack {
-            if showDisplay {
-                DisplayView(title: $settings.title, colorful: displayColorful)
-            }
+            DisplayView(title: $settings.title, colorful: displayColorful)
             if showSmartButton {
-                SmartButtonView()
+                SmartButtonView(displayColorful: $displayColorful)
             }
         }
     }

@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-import GameKit // for Audio
-#if os(macOS)
-import AVFoundation // for sound on Mac
-#endif
+
 
 struct RingView: View {
     var width: CGFloat
@@ -34,11 +31,9 @@ struct RingView: View {
     }
     
     func startTimer(){
-        AudioServicesPlaySystemSound(C.sounds.startRecording)
         timer = Timer.scheduledTimer(withTimeInterval: C.timing.listeningTimeIncrement, repeats: true) { _ in
             self.value += C.timing.listeningTimeIncrement/totalTime
             if self.value >= 1.0 {
-                AudioServicesPlaySystemSound(C.sounds.stopRecording)
                 timer?.invalidate()
                 timer = nil
                 whenFinished()
