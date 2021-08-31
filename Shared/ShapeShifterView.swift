@@ -18,7 +18,7 @@ struct ShapeShifterView: View {
 
     var body: some View {
         
-        let color = Color.blue//isGray ? grayColor : color
+        let color = isGray ? grayColor : color
         GeometryReader { geo in
             let w = min(geo.size.width, geo.size.height)
             VStack {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SmartButtonView: View {
-    var settings: Settings
+    @EnvironmentObject var settings: Settings
     @State private var result = Result("top", "bottom")
     @State private var showRing = true
     @State private var showRingWithProgress = false
@@ -16,7 +16,7 @@ struct SmartButtonView: View {
     @State private var showStamp = false
     
     func pressed(precision: Precision) {
-        result = settings.currentTheme.result(forPrecision: precision)
+        result = settings.result(forPrecision: precision)
         DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
             showRing = false
             showRingWithProgress = true
@@ -53,6 +53,7 @@ struct SmartButtonView: View {
             }
             if showStamp {
                 Stamp(texts: result)
+                    .contentShape(Rectangle())
                     .onTapGesture {
                         stampTapped()
                     }
@@ -63,6 +64,6 @@ struct SmartButtonView: View {
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmartButtonView(settings: Settings())
+        SmartButtonView()
     }
 }

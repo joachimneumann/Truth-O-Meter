@@ -6,9 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct Settings {
-    enum TimingEnum {
+class Settings: ObservableObject {
+
+    
+    var title: String // will be set when the currentTheme is edited
+    func result(forPrecision precision:  Precision) -> Result {
+        currentTheme.result(forPrecision: precision)
+    }
+
+    private enum TimingEnum {
         case fast, medium, slow
         func time() -> Double {
             switch self {
@@ -22,7 +30,7 @@ struct Settings {
         }
     }
 
-    var listenTimingIndex: Int {
+    private var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
                 UserDefaults.standard.set(1, forKey: C.key.listenTiming)
@@ -33,8 +41,8 @@ struct Settings {
             UserDefaults.standard.set(newValue, forKey: C.key.listenTiming)
         }
     }
-    
-    var analysisTimingIndex: Int {
+
+    private var analysisTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.analysisTiming) == nil {
                 UserDefaults.standard.set(1, forKey: C.key.analysisTiming)
@@ -46,17 +54,17 @@ struct Settings {
         }
     }
 
-    var listenTiming: TimingEnum {
+    private var listenTiming: TimingEnum {
         if listenTimingIndex == 0 { return .fast }
         if listenTimingIndex == 1 { return .medium }
         return .slow
     }
-    var analysisTiming: TimingEnum {
+    private var analysisTiming: TimingEnum {
         if analysisTimingIndex == 0 { return .fast }
         if analysisTimingIndex == 1 { return .medium }
         return .slow
     }
-    
+
     private let bullshit = Theme(
         index: 0,
         title: "Bullshit-O-Meter",
@@ -76,7 +84,7 @@ struct Settings {
             middle:   Result("undecided", nil),
             inner:    Result("Bullshit", nil),
             bullsEye: Result("Absolute", "Bullshit")))
-    
+
     private let singing = Theme(
         index: 2,
         title: "Voice-O-Meter",
@@ -96,32 +104,28 @@ struct Settings {
             middle:   Result("", ""),
             inner:    Result("", ""),
             bullsEye: Result("", "")))
-   
-    mutating func updateCustom(t: String) {
-        custom.title = t
-    }
-    
-    
-    var themes: [Theme] {
+
+    private var themes: [Theme] {
         [bullshit, truth, singing, custom]
     }
-    
+
     var isCustomTheme: Bool {
         currentTheme == custom
     }
-    
+
     var currentTheme:Theme
 
-    mutating func setCurrentTheme(_ newTheme: Theme) {
+    func setCurrentTheme(_ newTheme: Theme) {
         UserDefaults.standard.setValue(newTheme.id, forKey: C.key.selectedTheme)
         currentTheme = newTheme
     }
-    
+
     var listenAndAnalysisTime: Double {
         get { listenTiming.time() + analysisTiming.time() }
     }
-    
+
     init() {
+        title = "xxxx"
         if let s = UserDefaults.standard.string(forKey: C.key.custom.title) {
             custom.title = s
         }
@@ -158,18 +162,19 @@ struct Settings {
 
 
         // last Step: set currentTheme
-        let index: Int = 0//UserDefaults.standard.integer(forKey: C.key.selectedTheme)
+//        let index: Int = 0//UserDefaults.standard.integer(forKey: C.key.selectedTheme)
         // This returns 0 if invalud or not set yet.
         // But this is what we want initially anyway (Bullshit-O-Meter)
-        
-        // currentTheme = themes[index]
+
+//         currentTheme = themes[index]
         // --> compiler error !?!
 
+        currentTheme = bullshit
         // work-around:
-        if index == 0 { currentTheme = bullshit }
-        else if index == 1 { currentTheme = truth }
-        else if index == 2 { currentTheme = singing }
-        else if index == 3 { currentTheme = custom }
-        else { currentTheme = bullshit }
+//        if index == 0 { currentTheme = bullshit }
+//        else if index == 1 { currentTheme = truth }
+//        else if index == 2 { currentTheme = singing }
+//        else if index == 3 { currentTheme = custom }
+//        else { currentTheme = bullshit }
     }
 }

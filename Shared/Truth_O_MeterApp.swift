@@ -19,6 +19,7 @@ struct Truth_O_MeterApp: App {
     
     @State var title = "title"
     private(set) var needle = Needle()
+    private(set) var settings = Settings()
     func f1() {}
     func f2(p: Precision) {}
     var body: some Scene {
@@ -28,19 +29,16 @@ struct Truth_O_MeterApp: App {
             #if os(macOS)
 //            SmartButtonView(settings: Settings())
 //            AllDisksView(isSetting: false, callback: f2)
-            MainView(
-                settings: Settings(),
-                title: $title)
+            MainView()
                 .environmentObject(needle)
+                .environmentObject(settings)
                 .frame(minWidth: 375, minHeight: 667)
                 .frame(maxWidth: 375, maxHeight: 667)
                 .background(Color.white)
             #else
-//            SmartButtonView(settings: Settings())
-            MainView(
-                settings: Settings(),
-                title: $title)
+            MainView()
                 .environmentObject(needle)
+                .environmentObject(settings)
             #endif
         }
     }

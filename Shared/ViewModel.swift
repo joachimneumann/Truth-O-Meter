@@ -36,7 +36,6 @@ class ViewModel: ObservableObject {
 //    private(set) var settingsPrecision: Precision = Precision.middle
 //    private(set) var precision: Precision = Precision.middle
 
-    @Published var settings = Settings()
     @Published var listeningProgress: CGFloat = 0.0
     @Published var analyseProgress: CGFloat = 0.0
     @Published var displayBackgroundColorful = false
@@ -75,14 +74,14 @@ class ViewModel: ObservableObject {
 //            settings.currentTheme.setBottom(s, forPrecision: settingsPrecision)
 //        }
 //    }
-    var customTitle: String {
-        get {
-            return settings.currentTheme.title
-        }
-        set {
-            settings.currentTheme.title = newValue
-        }
-    }
+//    var customTitle: String {
+//        get {
+//            return Settings.shared.currentTheme.title
+//        }
+//        set {
+//            Settings.shared.currentTheme.title = newValue
+//        }
+//    }
 
     
     var stateIndex: Int { // for ModelDebugView
@@ -170,41 +169,41 @@ class ViewModel: ObservableObject {
 //    }
 
     
-    func saveCustom() {
-        UserDefaults.standard.set(
-            customTitle,
-            forKey: C.key.custom.title)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.edge.top,
-            forKey: C.key.custom.edge.top)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.edge.bottom,
-            forKey: C.key.custom.edge.bottom)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.outer.top,
-            forKey: C.key.custom.outer.top)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.outer.bottom,
-            forKey: C.key.custom.outer.bottom)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.middle.top,
-            forKey: C.key.custom.middle.top)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.middle.bottom,
-            forKey: C.key.custom.middle.bottom)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.inner.top,
-            forKey: C.key.custom.inner.top)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.inner.bottom,
-            forKey: C.key.custom.inner.bottom)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.bullsEye.top,
-            forKey: C.key.custom.bullsEye.top)
-        UserDefaults.standard.set(
-            settings.currentTheme.results.bullsEye.bottom,
-            forKey: C.key.custom.bullsEye.bottom)
-    }
+//    func saveCustom() {
+//        UserDefaults.standard.set(
+//            customTitle,
+//            forKey: C.key.custom.title)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.edge.top,
+//            forKey: C.key.custom.edge.top)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.edge.bottom,
+//            forKey: C.key.custom.edge.bottom)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.outer.top,
+//            forKey: C.key.custom.outer.top)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.outer.bottom,
+//            forKey: C.key.custom.outer.bottom)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.middle.top,
+//            forKey: C.key.custom.middle.top)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.middle.bottom,
+//            forKey: C.key.custom.middle.bottom)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.inner.top,
+//            forKey: C.key.custom.inner.top)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.inner.bottom,
+//            forKey: C.key.custom.inner.bottom)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.bullsEye.top,
+//            forKey: C.key.custom.bullsEye.top)
+//        UserDefaults.standard.set(
+//            Settings.shared.currentTheme.results.bullsEye.bottom,
+//            forKey: C.key.custom.bullsEye.bottom)
+//    }
         
     
     var state: Model.State {

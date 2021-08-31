@@ -19,14 +19,14 @@ struct TheMainView: View {
                         switch(viewModel.state) {
                         case .analyse:
                             VStack {
-                                DisplayView(colorful: true, title: $title)
+                                DisplayView(title: $title, colorful: true)
                                 AnalyseView(viewModel: viewModel)
                                     .padding(.leading, 20)
                                     .padding(.trailing, 20)
                             }
                         default:
                             VStack {
-                                DisplayView(colorful: true, title: $title)
+                                DisplayView(title: $title, colorful: true)
                             }
                         }
                     }
@@ -72,7 +72,7 @@ struct AnalyseView: View {
             HorizontalProgressBar(value: value)
                 .frame(height: 5)
                     .onReceive(timer) { input in
-                        value += CGFloat(C.timing.analyseTimeIncrement/viewModel.settings.analysisTiming.time())
+                        value += CGFloat(C.timing.analyseTimeIncrement/100000)//Settings.shared.analysisTiming.time())
                         if value >= 1.0 {
                             viewModel.setState(.show)
                         }
@@ -87,8 +87,7 @@ struct AnalyseView: View {
 
 
 struct MainView: View {
-    var settings: Settings
-    @Binding var title: String
+    @EnvironmentObject var settings: Settings
     @State private var showDisplay = true
     @State private var displayColorful = false
     @State private var showSmartButton = true
@@ -97,10 +96,10 @@ struct MainView: View {
     var body: some View {
         VStack {
             if showDisplay {
-                DisplayView(colorful: displayColorful, title: $title)
+                DisplayView(title: $settings.title, colorful: displayColorful)
             }
             if showSmartButton {
-                SmartButtonView(settings: settings)
+                SmartButtonView()
             }
         }
     }
@@ -109,6 +108,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(settings: Settings(), title: .constant("xx"))
+        MainView()
     }
 }

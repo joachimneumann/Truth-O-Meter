@@ -64,7 +64,6 @@ struct AllDisksView: View {
                                 disksHidden = true
                             }
                         })
-                        .opacity(0.3)
                         .padding(disk.padding(radius: radius))
                 }
             }

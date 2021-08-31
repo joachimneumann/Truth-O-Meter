@@ -30,8 +30,8 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
 }
 
 struct DisplayView: View {
-    var colorful: Bool
     @Binding var title: String
+    var colorful: Bool
     var editTitle = false
 
     @State private var editing = false
@@ -68,7 +68,7 @@ struct DisplayView: View {
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         return VStack {
-            DisplayView(colorful: true, title: .constant("xx"))
+            DisplayView(title: .constant("xx"), colorful: true)
                 .padding()
                 .environmentObject(Needle())
         }
