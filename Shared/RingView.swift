@@ -14,7 +14,7 @@ import AVFoundation // for sound on Mac
 struct RingView: View {
     var width: CGFloat
     var totalTime: Double
-    var callback: () -> Void
+    var whenFinished: () -> Void
 
     @State private var value = 0.0
     @State var timer: Timer? = nil
@@ -41,7 +41,7 @@ struct RingView: View {
                 AudioServicesPlaySystemSound(C.sounds.stopRecording)
                 timer?.invalidate()
                 timer = nil
-                callback()
+                whenFinished()
             }
         }
     }
@@ -50,6 +50,6 @@ struct RingView: View {
 struct RingView_Previews: PreviewProvider {
     static var previews: some View {
         func doNothing() {}
-        return RingView(width: 10, totalTime: 2, callback: doNothing)
+        return RingView(width: 10, totalTime: 2, whenFinished: doNothing)
     }
 }

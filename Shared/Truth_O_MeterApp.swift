@@ -35,7 +35,7 @@ struct Truth_O_MeterApp: App {
                     .frame(maxWidth: w, maxHeight: h)
                     .background(Color.white)
                 #else
-                AllDisksView(isSetting: false, callback: buttonModel.buttonPressedWith)
+                SmartButton()
 //                return ShapeShifterView(
 //                    up: buttonModel.buttonPressedWith,
 //                    pale: $pale,

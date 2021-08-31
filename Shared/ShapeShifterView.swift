@@ -16,7 +16,6 @@ struct ShapeShifterView: View {
     private let color = C.color.bullshitRed
     private let grayColor = C.color.lightGray
     private let paleAnimationTime = 0.10
-    private let shapeShiftAnimationTime = 0.25
 
     var body: some View {
 
@@ -29,9 +28,11 @@ struct ShapeShifterView: View {
                 Rectangle()
                     .cornerRadius(isCircle ? w/2 : w/14)
                     .padding(isCircle ? 0 : w/4)
-                    .animation(.linear(duration: shapeShiftAnimationTime))
+                    .animation(.linear(duration: C.timing.shapeShiftAnimationTime))
+                    
                     .foregroundColor(color)
                     .animation(.linear(duration: paleAnimationTime))
+                    
                     .aspectRatio(contentMode: .fit)
                     .gesture(
                         DragGesture(minimumDistance: 0)
