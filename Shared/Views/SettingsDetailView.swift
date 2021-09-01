@@ -10,44 +10,37 @@ import SwiftUI
 struct SettingsDetailView: View {
     @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
+    @Binding var displayTitle: String
     //    @State private var title: String = "not set"
     //    @State private var result: StampTexts = StampTexts("top", "bottom")
     var body: some View {
-        Text("detail")
+        ZStack (alignment: .topLeading) {
+            HStack(spacing: 0) {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 20))
+                Text("Back")
+            }
+            .padding(.leading)
+            .onTapGesture {
+                navigation = .settings
+            }
+            VStack (alignment: .center) {
+                DisplayView(colorful: true, editTitle: settings.isCustom)
+                //                        .frame(height: geo.size.height * 0.2)
+                
+                Stamp(top: settings.stampTop, bottom: settings.stampBottom)
+                AllDisksView(
+                    displayColorful: .constant(true),
+                    showRing: .constant(false),
+                    showRingWithProgress: .constant(false),
+                    isSetting: true)
+                //                        .frame(height: geo.size.height * 0.39)
+            }
+        }
+        //            TheDetailView(viewModel: viewModel)
+        .padding(.top, 40)
     }
 }
-        //        ZStack (alignment: .topLeading) {
-        //            HStack(spacing: 0) {
-        //                Image(systemName: "chevron.backward")
-        //                    .font(.system(size: 20))
-        //                Text("Back")
-        //            }
-        //            .padding(.leading)
-        //            .onTapGesture {
-        //                navigation = .settings
-        //            }
-        //            HStack {
-        //                Spacer()
-        //                VStack (alignment: .center) {
-        //                    DisplayView(title: $settings.currentTheme.title, colorful: true, editTitle: settings.isCustomTheme)
-        //                    //                        .frame(height: geo.size.height * 0.2)
-        //
-        //                    TextField("", text: $settings.currentTheme.experimentalTop) {_ in }
-        //
-        //                    AllDisksView(
-        //                        displayColorful: .constant(true),
-        //                        result: .constant(StampTexts("not used", "not used")),
-        //                        showRing: .constant(false),
-        //                        showRingWithProgress: .constant(false),
-        //                        isSetting: true)
-        //                    //                        .frame(height: geo.size.height * 0.39)
-        //                }
-        //                .padding()
-        //                Spacer()
-        //            }
-        //            //            TheDetailView(viewModel: viewModel)
-        //            .padding(.top, 40)
-        //        }
 //    }
 //}
 //
@@ -179,15 +172,6 @@ struct SettingsDetailView: View {
 //    }
 //}
 //
-//struct ThemeDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewModel = ViewModel()
-//        viewModel.setState(.settings)
-//        viewModel.settings.setCurrentTheme(viewModel.settings.themes[3])
-//        return DetailView(viewModel: viewModel)
-//            .environmentObject(viewModel.needle)
-//    }
-//}
 //
 //#if os(macOS)
 //struct VisualEffectView: NSViewRepresentable {
@@ -213,3 +197,12 @@ struct SettingsDetailView: View {
 //}
 //
 //#endif
+
+struct ThemeDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let settings = Settings()
+        return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))
+            .environmentObject(Needle())
+            .environmentObject(settings)
+    }
+}

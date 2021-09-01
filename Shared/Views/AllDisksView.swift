@@ -18,7 +18,6 @@ struct AllDisksView: View {
     @State private var pale: Bool = false
     @State private var circle: Bool = true
     @State private var disksHidden = false
-    @State private var grayPrecision: Precision = .middle
     
     private let disks = Disks()
     
@@ -59,7 +58,7 @@ struct AllDisksView: View {
             if isSetting {
                 needle.setValue(newNeedleValue)
                 needle.active(true, strongNoise: false)
-                grayPrecision = precision
+                settings.grayPrecision = precision
             } else {
                 needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
                 needle.active(true, strongNoise: true)
@@ -75,7 +74,7 @@ struct AllDisksView: View {
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {
                 ShapeShifterView(
-                    isGray: isSetting && grayPrecision == .edge,
+                    isGray: isSetting && settings.grayPrecision == .edge,
                     isCircle: circle,
                     down: downPressed,
                     up: {
@@ -87,7 +86,7 @@ struct AllDisksView: View {
                     DiskView(
                         isOpaque: !pale && circle,
                         drawBorder: isSetting,
-                        isGray: isSetting && grayPrecision == disk.precision,
+                        isGray: isSetting && settings.grayPrecision == disk.precision,
                         down: downPressed,
                         up: {
                             upPressed(disk.precision)

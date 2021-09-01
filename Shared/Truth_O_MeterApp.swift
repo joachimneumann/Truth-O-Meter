@@ -14,12 +14,13 @@ struct Truth_O_MeterApp: App {
     @State var gray: Bool = false
     
     private(set) var needle = Needle()
-    private(set) var settings = Settings()
+//    private(set) var settings = Settings()
     func f1() {}
     func f2(p: Precision) {}
     var body: some Scene {
         needle.setValue(0.5)
         needle.active(false)
+        let settings = Settings()
         return WindowGroup {
             #if os(macOS)
 //            SmartButtonView(settings: Settings())
@@ -31,6 +32,7 @@ struct Truth_O_MeterApp: App {
                 .frame(maxWidth: 375, maxHeight: 667)
                 .background(Color.white)
             #else
+//            DisplayView(colorful: true, editTitle: true)
             NavigationView()
                 .environmentObject(needle)
                 .environmentObject(settings)

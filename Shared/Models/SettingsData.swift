@@ -15,7 +15,6 @@ struct ThemeName: Identifiable {
 struct SettingsData {
     
     init() {
-        selectedThemeIndex = 0//UserDefaults.standard.integer(forKey: C.key.selectedTheme)
     }
     
     func stampTop(forprecision precision: Precision) -> String {
@@ -26,7 +25,12 @@ struct SettingsData {
         seletedTheme.bottom(forPrecision: precision)
     }
     
-    var selectedThemeIndex = 0
+    var selectedThemeIndex: Int {
+        get { UserDefaults.standard.integer(forKey: C.key.selectedTheme) }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: C.key.selectedTheme)
+        }
+    }
     
     var themeNames: [ThemeName] {
         get {
@@ -34,7 +38,7 @@ struct SettingsData {
             ret.append(ThemeName(id: 0, name: bullshit.title, isCustom: false))
             ret.append(ThemeName(id: 1, name: truth.title,    isCustom: false))
             ret.append(ThemeName(id: 2, name: singing.title,  isCustom: false))
-            ret.append(ThemeName(id: 3, name: bullshit.title, isCustom: true))
+            ret.append(ThemeName(id: 3, name: custom.title, isCustom: true))
             return ret
         }
     }
@@ -122,11 +126,16 @@ struct SettingsData {
 
     private var custom = Theme(
         id: 3,
-        title: "",
-        edge:     Theme.StampTexts("", ""),
-        outer:    Theme.StampTexts("", ""),
-        middle:   Theme.StampTexts("", ""),
-        inner:    Theme.StampTexts("", ""),
-        bullsEye: Theme.StampTexts("", ""),
-        isCustomisable: false)
+        title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
+        edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "top",
+                         UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? "bottom"),
+        outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "top",
+                         UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? "bottom"),
+        middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "top",
+                         UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? "bottom"),
+        inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "top",
+                         UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? "bottom"),
+        bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "top",
+                         UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? "bottom"),
+        isCustomisable: true)
 }

@@ -20,7 +20,7 @@ struct NavigationView: View {
         case .settings:
             SettingsView(navigation: $navigation)
         case .detail:
-            SettingsDetailView(navigation: $navigation)
+            SettingsDetailView(navigation: $navigation, displayTitle: .constant("ss"))
         }
     }
 }
