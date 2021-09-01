@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SettingsDetailView: View {
+    @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
+    @State private var title: String = "not set"
+    @State private var Results: [StampTexts] = [StampTexts]()
     var body: some View {
         ZStack (alignment: .topLeading) {
             HStack(spacing: 0) {
@@ -23,9 +26,9 @@ struct SettingsDetailView: View {
             HStack {
                 Spacer()
                 VStack (alignment: .center) {
-                    DisplayView(title: .constant("s title"), colorful: true)
+                    DisplayView(title: $settings.currentTheme.title, colorful: true, editTitle: settings.isCustomTheme)
 //                        .frame(height: geo.size.height * 0.2)
-                    EditableStampView()
+//                    EditableStampView()
 //                    AllDisksView(isSetting: true, callback: () -> Void)
 //                        .frame(height: geo.size.height * 0.39)
                 }

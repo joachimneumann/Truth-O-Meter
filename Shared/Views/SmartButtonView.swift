@@ -13,7 +13,7 @@ struct SmartButtonView: View {
     @Binding var displayColorful: Bool
     @Binding var showAnalysisView: Bool
     @Binding var showStampView: Bool
-    @State private var result = Result("top", "bottom")
+    @State private var result = StampTexts("top", "bottom")
     @State private var showRing = true
     @State private var showRingWithProgress = false
     @State private var showDisks = true

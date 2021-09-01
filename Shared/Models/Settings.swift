@@ -9,8 +9,7 @@ import Foundation
 
 class Settings: ObservableObject {
 
-    var title: String // will be set when the currentTheme is edited
-    func result(forPrecision precision:  Precision) -> Result {
+    func result(forPrecision precision:  Precision) -> StampTexts {
         currentTheme.result(forPrecision: precision)
     }
 
@@ -28,6 +27,24 @@ class Settings: ObservableObject {
         }
     }
 
+    @Published private var privateCurrentTheme: Theme!
+    
+    var themes: [Theme] {
+        [bullshit, truth, singing, custom]
+    }
+
+    var isCustomTheme: Bool {
+        privateCurrentTheme == custom
+    }
+
+    var currentTheme:Theme {
+        get { privateCurrentTheme }
+        set {
+            privateCurrentTheme = newValue
+            UserDefaults.standard.setValue(newValue.id, forKey: C.key.selectedTheme)
+        }
+    }
+    
     var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
@@ -67,118 +84,69 @@ class Settings: ObservableObject {
         index: 0,
         title: "Bullshit-O-Meter",
         results: Results(
-            edge:     Result("Absolute", "Bullshit"),
-            outer:    Result("Bullshit", nil),
-            middle:   Result("undecided", nil),
-            inner:    Result("Mostly", "True"),
-            bullsEye: Result("True", nil)))
+            edge:     StampTexts("Absolute", "Bullshit"),
+            outer:    StampTexts("Bullshit", nil),
+            middle:   StampTexts("undecided", nil),
+            inner:    StampTexts("Mostly", "True"),
+            bullsEye: StampTexts("True", nil)))
 
     private let truth = Theme(
         index: 1,
         title: "Truth-O-Meter",
         results: Results(
-            edge:     Result("True", nil),
-            outer:    Result("Mostly", "True"),
-            middle:   Result("undecided", nil),
-            inner:    Result("Bullshit", nil),
-            bullsEye: Result("Absolute", "Bullshit")))
+            edge:     StampTexts("True", nil),
+            outer:    StampTexts("Mostly", "True"),
+            middle:   StampTexts("undecided", nil),
+            inner:    StampTexts("Bullshit", nil),
+            bullsEye: StampTexts("Absolute", "Bullshit")))
 
     private let singing = Theme(
         index: 2,
         title: "Voice-O-Meter",
         results: Results(
-            edge:     Result("Sexy", nil),
-            outer:    Result("impressive", nil),
-            middle:   Result("good", nil),
-            inner:    Result("could be", "better"),
-            bullsEye: Result("flimsy", nil)))
+            edge:     StampTexts("Sexy", nil),
+            outer:    StampTexts("impressive", nil),
+            middle:   StampTexts("good", nil),
+            inner:    StampTexts("could be", "better"),
+            bullsEye: StampTexts("flimsy", nil)))
 
     private var custom = Theme(
         index: 3,
-        title: "",
+        title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
         results: Results(
-            edge:     Result("", ""),
-            outer:    Result("", ""),
-            middle:   Result("", ""),
-            inner:    Result("", ""),
-            bullsEye: Result("", "")))
+            edge:     StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "top",
+                             UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? "bottom"),
+            outer:    StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "top",
+                             UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? "bottom"),
+            middle:   StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "top",
+                             UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? "bottom"),
+            inner:    StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "top",
+                             UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? "bottom"),
+            bullsEye: StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "top",
+                             UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? "bottom")),
+        isCustomisable: true)
 
-    var themes: [Theme] {
-        [bullshit, truth, singing, custom]
-    }
 
-    var isCustomTheme: Bool {
-        currentTheme == custom
-    }
 
-    @Published var currentTheme:Theme
-
-    func setCurrentTheme(_ newTheme: Theme) {
-        UserDefaults.standard.setValue(newTheme.id, forKey: C.key.selectedTheme)
-        currentTheme = newTheme
+    func isCurrentTheme(_ themeInQuestion: Theme) -> Bool {
+        return currentTheme == themeInQuestion
     }
 
     var listenTime: Double {
-        2//listenTiming.time()
+        listenTiming.time()
     }
     var analysisTime: Double {
-        2//analysisTiming.time()
+        analysisTiming.time()
     }
     var listenAndAnalysisTime: Double {
         listenTime + analysisTime
     }
 
     init() {
-        title = "xxxx"
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.title) {
-            custom.title = s
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.edge.top) {
-            custom.setTop(s, forPrecision: .edge)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.edge.bottom) {
-            custom.setBottom(s, forPrecision: .edge)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.outer.top) {
-            custom.setTop(s, forPrecision: .outer)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.outer.bottom) {
-            custom.setBottom(s, forPrecision: .outer)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.middle.top) {
-            custom.setTop(s, forPrecision: .middle)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.middle.bottom) {
-            custom.setBottom(s, forPrecision: .middle)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.inner.top) {
-            custom.setTop(s, forPrecision: .inner)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.inner.bottom) {
-            custom.setBottom(s, forPrecision: .inner)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) {
-            custom.setTop(s, forPrecision: .bullsEye)
-        }
-        if let s = UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom) {
-            custom.setBottom(s, forPrecision: .bullsEye)
-        }
-
-
-        // last Step: set currentTheme
-//        let index: Int = 0//UserDefaults.standard.integer(forKey: C.key.selectedTheme)
+        // Set currentTheme
+        let index: Int = UserDefaults.standard.integer(forKey: C.key.selectedTheme)
         // This returns 0 if invalud or not set yet.
         // But this is what we want initially anyway (Bullshit-O-Meter)
-
-//         currentTheme = themes[index]
-        // --> compiler error !?!
-
-        currentTheme = bullshit
-        // work-around:
-//        if index == 0 { currentTheme = bullshit }
-//        else if index == 1 { currentTheme = truth }
-//        else if index == 2 { currentTheme = singing }
-//        else if index == 3 { currentTheme = custom }
-//        else { currentTheme = bullshit }
+        currentTheme = themes[index]
     }
 }

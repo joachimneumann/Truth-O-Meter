@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Stamp: View {
-    var texts: Result
+    var texts: StampTexts
     var rotated = true
     var body: some View {
         VStack {
@@ -76,7 +76,7 @@ struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Stamp(texts: Result("Absolute", "Bullshit"))
+            Stamp(texts: StampTexts("Absolute", "Bullshit"))
                 .background(Color.yellow)
             Spacer()
         }

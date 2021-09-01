@@ -48,7 +48,7 @@ struct ThemesList: View {
         VStack {
             ForEach(settings.themes) { theme in
                 HStack {
-                    if theme == settings.currentTheme {
+                    if settings.isCurrentTheme(theme) {
                         Text(theme.title == "" ? "Custom" :  theme.title)
                         Group {
                             if settings.isCustomTheme {
@@ -58,8 +58,6 @@ struct ThemesList: View {
                                 Image(systemName: "info.circle")
                             }
                         }
-                        .padding(.top, 5)
-                        .padding(.bottom, 5)
                         .contentShape(Rectangle())
                         .foregroundColor(C.color.bullshitRed)
                         .onTapGesture {
@@ -73,19 +71,17 @@ struct ThemesList: View {
                             Text(theme.title == "" ? "Custom" :  theme.title)
                             Spacer()
                         }
-                        .padding(.top, 5)
-                        .padding(.bottom, 5)
                         .contentShape(Rectangle())
-                        .background(Color.green)
                         .onTapGesture {
-                            settings.setCurrentTheme(theme)
+                            settings.currentTheme = theme
                         }
                     }
                 }
                 .padding(.leading)
                 .padding(.trailing)
+                .frame(height: 25)
                 Rectangle().fill(C.color.lightGray)
-                    .frame(width: .infinity, height: 0.5)
+                    .frame(height: 0.5)
                     .padding(.leading)
             }
         }
@@ -101,7 +97,7 @@ struct SettingsView: View {
             VStack(alignment: .leading) {
                 TimePicker()
                 Rectangle().fill(C.color.lightGray)
-                    .frame(width: .infinity, height: 0.5)
+                    .frame(height: 0.5)
                     .padding(.leading)
                 ThemesList(navigation: $navigation)
                 Spacer()

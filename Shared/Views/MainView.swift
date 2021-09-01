@@ -63,7 +63,7 @@ struct MainView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack {
-                DisplayView(title: $settings.title, colorful: displayColorful)
+                DisplayView(title: .constant(settings.currentTheme.title), colorful: displayColorful)
                 if showAnalysisView {
                     AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
                 }

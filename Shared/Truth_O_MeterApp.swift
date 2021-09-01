@@ -13,7 +13,6 @@ struct Truth_O_MeterApp: App {
     @State var circle: Bool = true
     @State var gray: Bool = false
     
-    @State var title = "title"
     private(set) var needle = Needle()
     private(set) var settings = Settings()
     func f1() {}

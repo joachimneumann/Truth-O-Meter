@@ -11,7 +11,7 @@ struct AllDisksView: View {
     @EnvironmentObject var needle: Needle
     @EnvironmentObject var settings: Settings
     @Binding var displayColorful: Bool
-    @Binding var result: Result
+    @Binding var result: StampTexts
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
     var isSetting: Bool
@@ -103,7 +103,7 @@ struct Disks_Previews: PreviewProvider {
         func f(p: Precision) {}
         return AllDisksView(
             displayColorful: .constant(true),
-            result: .constant(Result("top", "bottom")),
+            result: .constant(StampTexts("top", "bottom")),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
             isSetting: false)
