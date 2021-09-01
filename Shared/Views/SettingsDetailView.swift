@@ -7,23 +7,34 @@
 
 import SwiftUI
 
-struct DetailView: View {
-    @ObservedObject var viewModel: ViewModel
+struct SettingsDetailView: View {
+    @Binding var navigation: NavigationEnum
     var body: some View {
-        Text("DetailView")
-//        ZStack (alignment: .topLeading) {
+        ZStack (alignment: .topLeading) {
+            HStack(spacing: 0) {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 20))
+                Text("Back")
+            }
+            .padding(.leading)
+            .onTapGesture {
+                navigation = .settings
+            }
+            HStack {
+                Spacer()
+                VStack (alignment: .center) {
+                    DisplayView(title: .constant("s title"), colorful: true)
+//                        .frame(height: geo.size.height * 0.2)
+                    EditableStampView()
+//                    AllDisksView(isSetting: true, callback: () -> Void)
+//                        .frame(height: geo.size.height * 0.39)
+                }
+                .padding()
+                Spacer()
+            }
 //            TheDetailView(viewModel: viewModel)
-//                .padding(.top, 40)
-//            HStack(spacing: 0) {
-//                Image(systemName: "chevron.backward")
-//                    .font(.system(size: 20))
-//                Text("Back")
-//            }
-//            .padding(.leading)
-//            .onTapGesture {
-//                viewModel.fromDetailViewToSettingsView()
-//            }
-//        }
+                .padding(.top, 40)
+        }
     }
 }
 //
@@ -53,21 +64,21 @@ struct DetailView: View {
 //#endif
 //
 //
-//struct EditableStampView: View {
-//    @ObservedObject var viewModel: ViewModel
-//    @State private var editingTop = false
-//    @State private var editingBottom = false
-//    let fontsize: CGFloat = 40
-//    var body: some View {
-//        VStack {
-//            if viewModel.settings.isCustomTheme {
-//                #if os(iOS)
+struct EditableStampView: View {
+    @EnvironmentObject var settings: Settings
+    @State private var editingTop = false
+    @State private var editingBottom = false
+    let fontsize: CGFloat = 40
+    var body: some View {
+        VStack {
+            if settings.isCustomTheme {
+                #if os(iOS)
 //                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
 //                    self.editingTop = edit
 //                })
 //                .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingTop))
 //                .padding(.top, 24)
-//                #elseif os(macOS)
+                #elseif os(macOS)
 //                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
 //                    self.editingTop = edit
 //                })
@@ -77,17 +88,17 @@ struct DetailView: View {
 //                .background(C.color.bullshitRed.opacity(0.2))
 //                .foregroundColor(C.color.bullshitRed)
 //                .padding(.top, 24)
-//                #endif
-//            } else {
-//                Text(viewModel.settings.currentTheme.result(precision: viewModel.precision).top)
+                #endif
+            } else {
+//                Text(settings.currentTheme.result(precision: viewModel.precision).top)
 //                    .font(.system(size: fontsize, weight: .bold))
 //                    .foregroundColor(C.color.bullshitRed)
 //                    .mask(Mask())
 //                    .padding(.top, 25)
 //                    .padding(.bottom, 0)
-//            }
-//            if let b = viewModel.settings.currentTheme.result(precision: viewModel.precision).bottom {
-//                if viewModel.settings.isCustomTheme {
+            }
+//            if let b = settings.result(precision: viewModel.precision).bottom {
+//                if settings.isCustomTheme {
 //                    #if os(iOS)
 //                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
 //                        self.editingBottom = edit
@@ -114,7 +125,7 @@ struct DetailView: View {
 //                        .padding(.bottom, 25)
 //                }
 //            } else {
-//                if viewModel.settings.isCustomTheme {
+//                if settings.isCustomTheme {
 //                    #if os(iOS)
 //                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
 //                        self.editingBottom = edit
@@ -131,9 +142,9 @@ struct DetailView: View {
 //                        .padding(.bottom, 25)
 //                }
 //            }
-//        }
-//    }
-//}
+        }
+    }
+}
 //
 //struct TheDetailView: View {
 //    @ObservedObject var viewModel: ViewModel
@@ -169,14 +180,14 @@ struct DetailView: View {
 //struct VisualEffectView: NSViewRepresentable {
 //    func makeNSView(context: Context) -> NSVisualEffectView {
 //        let view = NSVisualEffectView()
-//        
+//
 //        view.blendingMode = .behindWindow    // << important !!
 //        view.isEmphasized = true
 //        view.layer?.backgroundColor = NSColor(red: 255, green: 0, blue: 0, alpha: 0.5).cgColor
 //        view.material = .contentBackground
 //        return view
 //    }
-//    
+//
 //    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
 //    }
 //}

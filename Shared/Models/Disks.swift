@@ -15,12 +15,12 @@ struct Disks {
         // Instead of 0, 0.2, 0.4, 0.6, 0.8, 1.0
         // I make the bulls eye and the out disk a bit larger
         // This makes the edge results easier to hit.
-        let edge:CGFloat     = 1.0
+//        let edge:CGFloat     = 1.0
         let outer:CGFloat    = 0.8 - 0.05
         let middle:CGFloat   = 0.6 - 0.0125
         let inner:CGFloat    = 0.4 + 0.0125
         let bullsEye:CGFloat = 0.2 + 0.05
-        disks.append(Disk(.edge,     relativePadding: (1.0 - edge)))
+//        disks.append(Disk(.edge,     relativePadding: (1.0 - edge)))
         disks.append(Disk(.outer,    relativePadding: (1.0 - outer)))
         disks.append(Disk(.middle,   relativePadding: (1.0 - middle)))
         disks.append(Disk(.inner,    relativePadding: (1.0 - inner)))

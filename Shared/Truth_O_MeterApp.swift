@@ -25,14 +25,14 @@ struct Truth_O_MeterApp: App {
             #if os(macOS)
 //            SmartButtonView(settings: Settings())
 //            AllDisksView(isSetting: false, callback: f2)
-            MainView()
+            NavigationView()
                 .environmentObject(needle)
                 .environmentObject(settings)
                 .frame(minWidth: 375, minHeight: 667)
                 .frame(maxWidth: 375, maxHeight: 667)
                 .background(Color.white)
             #else
-            MainView()
+            NavigationView()
                 .environmentObject(needle)
                 .environmentObject(settings)
             #endif

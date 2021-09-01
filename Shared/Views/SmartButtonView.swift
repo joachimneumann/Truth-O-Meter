@@ -21,31 +21,7 @@ struct SmartButtonView: View {
     @State private var showRing = true
     @State private var showRingWithProgress = false
     @State private var showDisks = true
-    
-    func pressed(precision: Precision) {
-        needle.active(true, strongNoise: true)
-        displayColorful = true
-        result = settings.result(forPrecision: precision)
-        DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
-            AudioServicesPlaySystemSound(C.sounds.startRecording)
-            showRing = false
-            showRingWithProgress = true
-        }
-
-        switch precision {
-        case .bullsEye:
-            needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
-        case .inner:
-            needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
-        case .middle:
-            needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
-        case .outer:
-            needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
-        case .edge:
-            needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
-        }
-    }
-    
+        
     func ringProgressFinished() {
         AudioServicesPlaySystemSound(C.sounds.stopRecording)
         needle.active(true, strongNoise: false)
@@ -76,7 +52,12 @@ struct SmartButtonView: View {
                 RingView(width: linewidth, totalTime: settings.listenTime, whenFinished: ringProgressFinished)
             }
             if showDisks {
-                AllDisksView(isSetting: false, callback: pressed)
+                AllDisksView(
+                    displayColorful: $displayColorful,
+                    result: $result,
+                    showRing: $showRing,
+                    showRingWithProgress: $showRingWithProgress,
+                    isSetting: false)
                     .padding(linewidth * 1.5)
             }
             if showStampView {

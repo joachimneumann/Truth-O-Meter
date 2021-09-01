@@ -6,17 +6,15 @@
 //
 
 import Foundation
-import SwiftUI
 
 class Settings: ObservableObject {
 
-    
     var title: String // will be set when the currentTheme is edited
     func result(forPrecision precision:  Precision) -> Result {
         currentTheme.result(forPrecision: precision)
     }
 
-    private enum TimingEnum {
+    enum TimingEnum {
         case fast, medium, slow
         func time() -> Double {
             switch self {
@@ -30,7 +28,7 @@ class Settings: ObservableObject {
         }
     }
 
-    private var listenTimingIndex: Int {
+    var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
                 UserDefaults.standard.set(1, forKey: C.key.listenTiming)
@@ -42,7 +40,7 @@ class Settings: ObservableObject {
         }
     }
 
-    private var analysisTimingIndex: Int {
+    var analysisTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.analysisTiming) == nil {
                 UserDefaults.standard.set(1, forKey: C.key.analysisTiming)
@@ -105,7 +103,7 @@ class Settings: ObservableObject {
             inner:    Result("", ""),
             bullsEye: Result("", "")))
 
-    private var themes: [Theme] {
+    var themes: [Theme] {
         [bullshit, truth, singing, custom]
     }
 
@@ -113,7 +111,7 @@ class Settings: ObservableObject {
         currentTheme == custom
     }
 
-    var currentTheme:Theme
+    @Published var currentTheme:Theme
 
     func setCurrentTheme(_ newTheme: Theme) {
         UserDefaults.standard.setValue(newTheme.id, forKey: C.key.selectedTheme)
@@ -121,10 +119,10 @@ class Settings: ObservableObject {
     }
 
     var listenTime: Double {
-        listenTiming.time()
+        2//listenTiming.time()
     }
     var analysisTime: Double {
-        analysisTiming.time()
+        2//analysisTiming.time()
     }
     var listenAndAnalysisTime: Double {
         listenTime + analysisTime

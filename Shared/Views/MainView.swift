@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SettingsIcon: View {
-    @ObservedObject var viewModel: ViewModel
+    @Binding var isHidden: Bool
+    @Binding var navigation: NavigationEnum
     var body: some View {
-        if viewModel.state == .wait {
+        if !isHidden {
             Image("settings")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30.0, height: 30.0)
                 .padding()
                 .onTapGesture {
-//                    viewModel.setView(.settings)
+                    navigation = .settings
                 }
         }
     }
@@ -54,24 +55,30 @@ struct AnalysisView: View {
 
 struct MainView: View {
     @EnvironmentObject var settings: Settings
+    @Binding var navigation: NavigationEnum
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showStampView = false
 
     var body: some View {
-        VStack {
-            DisplayView(title: $settings.title, colorful: displayColorful)
-            if showAnalysisView {
-                AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
+        ZStack(alignment: .bottomTrailing) {
+            VStack {
+                DisplayView(title: $settings.title, colorful: displayColorful)
+                if showAnalysisView {
+                    AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
+                }
+                SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
+                Spacer()
             }
-            SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
+            SettingsIcon(isHidden: $displayColorful, navigation: $navigation)
         }
+        .accentColor(C.color.gray)
     }
 }
 
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(navigation: .constant(.main))
     }
 }

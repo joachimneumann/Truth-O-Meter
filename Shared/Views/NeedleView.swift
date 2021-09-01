@@ -57,9 +57,7 @@ struct AnimatedPath: Shape {
 
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
         VStack {
-            ModelDebugView(viewModel: viewModel)
             NeedleView()
                 .environmentObject(Needle())
         }
