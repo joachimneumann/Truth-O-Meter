@@ -6,10 +6,6 @@
 //
 
 import SwiftUI
-import GameKit // for Audio
-#if os(macOS)
-import AVFoundation // for sound on Mac
-#endif
 
 struct SmartButtonView: View {
     @EnvironmentObject var settings: Settings
@@ -23,7 +19,6 @@ struct SmartButtonView: View {
     @State private var showDisks = true
         
     func ringProgressFinished() {
-        AudioServicesPlaySystemSound(C.sounds.stopRecording)
         needle.active(true, strongNoise: false)
         showRing = false
         showRingWithProgress = false

@@ -15,9 +15,9 @@ struct HorizontalProgressBar: View {
             GeometryReader { (geo) in
                 Rectangle()
                     .foregroundColor(C.color.lightGray)
-                    .opacity(0.3)
+                    .opacity(0.2)
                 Rectangle()
-                    .foregroundColor(C.color.gray)
+                    .foregroundColor(C.color.lightGray)
                     .frame(width:geo.size.width*value, height: geo.size.height)
             }
         }

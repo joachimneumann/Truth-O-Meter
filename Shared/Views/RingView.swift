@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import GameKit // for Audio
+#if os(macOS)
+import AVFoundation // for sound on Mac
+#endif
 
 
 struct RingView: View {
@@ -26,6 +30,7 @@ struct RingView: View {
                 .rotationEffect(Angle(degrees:-90))
         }
         .onAppear {
+            AudioServicesPlaySystemSound(C.sounds.startRecording)
             startTimer()
         }
     }
@@ -34,6 +39,7 @@ struct RingView: View {
         timer = Timer.scheduledTimer(withTimeInterval: C.timing.listeningTimeIncrement, repeats: true) { _ in
             self.value += C.timing.listeningTimeIncrement/totalTime
             if self.value >= 1.0 {
+                AudioServicesPlaySystemSound(C.sounds.stopRecording)
                 timer?.invalidate()
                 timer = nil
                 whenFinished()

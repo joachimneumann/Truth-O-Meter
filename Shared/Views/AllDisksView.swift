@@ -6,10 +6,6 @@
 //
 
 import SwiftUI
-import GameKit // for Audio
-#if os(macOS)
-import AVFoundation // for sound on Mac
-#endif
 
 struct AllDisksView: View {
     @EnvironmentObject var needle: Needle
@@ -47,7 +43,6 @@ struct AllDisksView: View {
             result = settings.result(forPrecision: precision)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
-                AudioServicesPlaySystemSound(C.sounds.startRecording)
                 showRing = false
                 showRingWithProgress = true
             }
