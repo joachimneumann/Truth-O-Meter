@@ -15,9 +15,9 @@ struct TimePicker: View {
                 Text("Listening time")
                     .frame(width:150, alignment: .leading)
                 Picker(selection: $settings.listenTimingIndex, label: Text("")) {
-                    Text("\(Int(Settings.TimingEnum.fast.time())) sec").tag(0)
-                    Text("\(Int(Settings.TimingEnum.medium.time())) sec").tag(1)
-                    Text("\(Int(Settings.TimingEnum.slow.time())) sec").tag(2)
+                    Text(settings.listenTimeStrings[0]).tag(0)
+                    Text(settings.listenTimeStrings[1]).tag(1)
+                    Text(settings.listenTimeStrings[2]).tag(2)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
@@ -27,9 +27,9 @@ struct TimePicker: View {
                 Text("Analysis time")
                     .frame(width:150, alignment: .leading)
                 Picker(selection: $settings.analysisTimingIndex, label: Text("")) {
-                    Text("\(Int(Settings.TimingEnum.fast.time())) sec").tag(0)
-                    Text("\(Int(Settings.TimingEnum.medium.time())) sec").tag(1)
-                    Text("\(Int(Settings.TimingEnum.slow.time())) sec").tag(2)
+                    Text(settings.analysisTimeStrings[0]).tag(0)
+                    Text(settings.analysisTimeStrings[1]).tag(1)
+                    Text(settings.analysisTimeStrings[2]).tag(2)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .frame(width: 150)
@@ -41,51 +41,92 @@ struct TimePicker: View {
     }
 }
 
+struct ThemeCell: View {
+    @Binding var navigation: NavigationEnum
+    var name: String
+    var isSelected: Bool
+    var isCustom: Bool
+    var body: some View {
+        HStack {
+            Text(name == "" ? "Custom" :  name)
+            if isSelected {
+                Group {
+                    if isCustom {
+                        Text("Edit")
+                            .padding(.leading, 10)
+                    } else {
+                        Image(systemName: "info.circle")
+                    }
+                }
+                .contentShape(Rectangle())
+                .foregroundColor(C.color.bullshitRed)
+                .onTapGesture {
+                    navigation = .detail
+                }
+            }
+            Spacer()
+            if isSelected {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.blue)
+            }
+        }
+        .padding(.leading)
+        .padding(.trailing)
+        .frame(height: 25)
+        .contentShape(Rectangle())
+    }
+}
+
 struct ThemesList: View {
     @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
+    var themeNames: [ThemeName]
     var body: some View {
         VStack {
-            ForEach(settings.themes) { theme in
-                HStack {
-                    if settings.isCurrentTheme(theme) {
-                        Text(theme.title == "" ? "Custom" :  theme.title)
-                        Group {
-                            if settings.isCustomTheme {
-                                Text("Edit")
-                                    .padding(.leading, 10)
-                            } else {
-                                Image(systemName: "info.circle")
-                            }
-                        }
-                        .contentShape(Rectangle())
-                        .foregroundColor(C.color.bullshitRed)
-                        .onTapGesture {
-                            navigation = .detail
-                        }
-                        Spacer()
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.blue)
-                    } else {
-                        HStack {
-                            Text(theme.title == "" ? "Custom" :  theme.title)
-                            Spacer()
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            settings.currentTheme = theme
-                        }
-                    }
+            ForEach(themeNames) { themeName in
+                ThemeCell(
+                    navigation: $navigation,
+                    name: themeName.name,
+                    isSelected: themeName.id == settings.selectedThemeIndex,
+                    isCustom: themeName.isCustom)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    settings.selectedThemeIndex = themeName.id
                 }
-                .padding(.leading)
-                .padding(.trailing)
-                .frame(height: 25)
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
             }
+            //                HStack {
+            //                    if settings.isCurrentTheme(theme) {
+            //                        Text(theme.title == "" ? "Custom" :  theme.title)
+            //                        Group {
+            //                            if settings.isCustomTheme {
+            //                                Text("Edit")
+            //                                    .padding(.leading, 10)
+            //                            } else {
+            //                                Image(systemName: "info.circle")
+            //                            }
+            //                        }
+            //                        .contentShape(Rectangle())
+            //                        .foregroundColor(C.color.bullshitRed)
+            //                        .onTapGesture {
+            //                            navigation = .detail
+            //                        }
+            //                        Spacer()
+            //                        Image(systemName: "checkmark")
+            //                            .foregroundColor(.blue)
+            //                    } else {
+            //                        HStack {
+            //                            Text(theme.title == "" ? "Custom" :  theme.title)
+            //                            Spacer()
+            //                        }
+            //                        .contentShape(Rectangle())
+            //                        .onTapGesture {
+            //                            settings.currentTheme = theme
+            //                        }
+            //                    }
         }
-        Spacer(minLength: 30)
     }
 }
 
@@ -99,7 +140,7 @@ struct SettingsView: View {
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
-                ThemesList(navigation: $navigation)
+                ThemesList(navigation: $navigation, themeNames: settings.themeNames)
                 Spacer()
             }
             .padding(.top, 40)

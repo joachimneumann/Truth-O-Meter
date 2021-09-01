@@ -8,24 +8,89 @@
 import Foundation
 
 class Settings: ObservableObject {
-
-    func result(forPrecision precision:  Precision) -> StampTexts {
-        currentTheme.result(forPrecision: precision)
-    }
-
-    enum TimingEnum {
-        case fast, medium, slow
-        func time() -> Double {
-            switch self {
-            case .fast:
-                return 2.0
-            case .medium:
-                return 6.0
-            case .slow:
-                return 10.0
-            }
+    private var settingsData = SettingsData()
+    
+    @Published var title: String {
+        didSet {
+            settingsData.setTitle(title)
         }
     }
+    
+    @Published var stampTop: String {
+        didSet {
+            
+        }
+    }
+    
+    @Published var stampBottom: String? {
+        didSet {
+            
+        }
+    }
+
+    var selectedThemeIndex: Int {
+        get {
+            settingsData.selectedThemeIndex
+        }
+        set {
+            settingsData.selectedThemeIndex = newValue
+            objectWillChange.send()
+        }
+    }
+    var themeNames: [ThemeName] {
+        settingsData.themeNames
+    }
+
+    var listenTimingIndex: Int
+    var analysisTimingIndex: Int = 0
+    
+    var listenTime: Double {
+        settingsData.listenTime
+    }
+    var analysisTime: Double {
+        settingsData.analysisTime
+    }
+    var listenAndAnalysisTime: Double {
+        listenTime + analysisTime
+    }
+
+    var listenTimeStrings: [String] {
+        get {
+            var ret = [String]()
+            ret.append("\(settingsData.listenTimes[0]) sec")
+            ret.append("\(settingsData.listenTimes[1]) sec")
+            ret.append("\(settingsData.listenTimes[2]) sec")
+            return ret
+        }
+    }
+    var analysisTimeStrings: [String] {
+        get {
+            var ret = [String]()
+            ret.append("\(settingsData.analysisTimes[0]) sec")
+            ret.append("\(settingsData.analysisTimes[1]) sec")
+            ret.append("\(settingsData.analysisTimes[2]) sec")
+            return ret
+        }
+    }
+
+    func precisionSelected(_ precision: Precision) {
+        stampTop = settingsData.stampTop(forprecision: precision)
+        stampBottom = settingsData.stampBottom(forprecision: precision)
+    }
+
+    init() {
+        listenTimingIndex = settingsData.listenTimingIndex
+        analysisTimingIndex = settingsData.analysisTimingIndex
+        title = settingsData.title
+        stampTop = "top not set"
+        stampBottom = "bottom not set"
+    }
+    
+    /*
+    func stampTexts(forPrecision precision:  Precision) -> StampTexts {
+        currentTheme.stampTexts(forPrecision: precision)
+    }
+
 
     @Published private var privateCurrentTheme: Theme!
     
@@ -45,71 +110,8 @@ class Settings: ObservableObject {
         }
     }
     
-    var listenTimingIndex: Int {
-        get {
-            if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
-                UserDefaults.standard.set(1, forKey: C.key.listenTiming)
-            }
-            return UserDefaults.standard.integer(forKey: C.key.listenTiming)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: C.key.listenTiming)
-        }
-    }
 
-    var analysisTimingIndex: Int {
-        get {
-            if UserDefaults.standard.object(forKey: C.key.analysisTiming) == nil {
-                UserDefaults.standard.set(1, forKey: C.key.analysisTiming)
-            }
-            return UserDefaults.standard.integer(forKey: C.key.analysisTiming)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: C.key.analysisTiming)
-        }
-    }
-
-    private var listenTiming: TimingEnum {
-        if listenTimingIndex == 0 { return .fast }
-        if listenTimingIndex == 1 { return .medium }
-        return .slow
-    }
-    private var analysisTiming: TimingEnum {
-        if analysisTimingIndex == 0 { return .fast }
-        if analysisTimingIndex == 1 { return .medium }
-        return .slow
-    }
-
-    private let bullshit = Theme(
-        index: 0,
-        title: "Bullshit-O-Meter",
-        results: Results(
-            edge:     StampTexts("Absolute", "Bullshit"),
-            outer:    StampTexts("Bullshit", nil),
-            middle:   StampTexts("undecided", nil),
-            inner:    StampTexts("Mostly", "True"),
-            bullsEye: StampTexts("True", nil)))
-
-    private let truth = Theme(
-        index: 1,
-        title: "Truth-O-Meter",
-        results: Results(
-            edge:     StampTexts("True", nil),
-            outer:    StampTexts("Mostly", "True"),
-            middle:   StampTexts("undecided", nil),
-            inner:    StampTexts("Bullshit", nil),
-            bullsEye: StampTexts("Absolute", "Bullshit")))
-
-    private let singing = Theme(
-        index: 2,
-        title: "Voice-O-Meter",
-        results: Results(
-            edge:     StampTexts("Sexy", nil),
-            outer:    StampTexts("impressive", nil),
-            middle:   StampTexts("good", nil),
-            inner:    StampTexts("could be", "better"),
-            bullsEye: StampTexts("flimsy", nil)))
-
+ 
     private var custom = Theme(
         index: 3,
         title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
@@ -132,16 +134,6 @@ class Settings: ObservableObject {
         return currentTheme == themeInQuestion
     }
 
-    var listenTime: Double {
-        listenTiming.time()
-    }
-    var analysisTime: Double {
-        analysisTiming.time()
-    }
-    var listenAndAnalysisTime: Double {
-        listenTime + analysisTime
-    }
-
     init() {
         // Set currentTheme
         let index: Int = UserDefaults.standard.integer(forKey: C.key.selectedTheme)
@@ -149,4 +141,5 @@ class Settings: ObservableObject {
         // But this is what we want initially anyway (Bullshit-O-Meter)
         currentTheme = themes[index]
     }
+ */
 }

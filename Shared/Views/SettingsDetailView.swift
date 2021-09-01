@@ -10,36 +10,46 @@ import SwiftUI
 struct SettingsDetailView: View {
     @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
-    @State private var title: String = "not set"
-    @State private var Results: [StampTexts] = [StampTexts]()
+    //    @State private var title: String = "not set"
+    //    @State private var result: StampTexts = StampTexts("top", "bottom")
     var body: some View {
-        ZStack (alignment: .topLeading) {
-            HStack(spacing: 0) {
-                Image(systemName: "chevron.backward")
-                    .font(.system(size: 20))
-                Text("Back")
-            }
-            .padding(.leading)
-            .onTapGesture {
-                navigation = .settings
-            }
-            HStack {
-                Spacer()
-                VStack (alignment: .center) {
-                    DisplayView(title: $settings.currentTheme.title, colorful: true, editTitle: settings.isCustomTheme)
-//                        .frame(height: geo.size.height * 0.2)
-//                    EditableStampView()
-//                    AllDisksView(isSetting: true, callback: () -> Void)
-//                        .frame(height: geo.size.height * 0.39)
-                }
-                .padding()
-                Spacer()
-            }
-//            TheDetailView(viewModel: viewModel)
-                .padding(.top, 40)
-        }
+        Text("detail")
     }
 }
+        //        ZStack (alignment: .topLeading) {
+        //            HStack(spacing: 0) {
+        //                Image(systemName: "chevron.backward")
+        //                    .font(.system(size: 20))
+        //                Text("Back")
+        //            }
+        //            .padding(.leading)
+        //            .onTapGesture {
+        //                navigation = .settings
+        //            }
+        //            HStack {
+        //                Spacer()
+        //                VStack (alignment: .center) {
+        //                    DisplayView(title: $settings.currentTheme.title, colorful: true, editTitle: settings.isCustomTheme)
+        //                    //                        .frame(height: geo.size.height * 0.2)
+        //
+        //                    TextField("", text: $settings.currentTheme.experimentalTop) {_ in }
+        //
+        //                    AllDisksView(
+        //                        displayColorful: .constant(true),
+        //                        result: .constant(StampTexts("not used", "not used")),
+        //                        showRing: .constant(false),
+        //                        showRingWithProgress: .constant(false),
+        //                        isSetting: true)
+        //                    //                        .frame(height: geo.size.height * 0.39)
+        //                }
+        //                .padding()
+        //                Spacer()
+        //            }
+        //            //            TheDetailView(viewModel: viewModel)
+        //            .padding(.top, 40)
+        //        }
+//    }
+//}
 //
 //
 //#if os(iOS)
@@ -67,87 +77,87 @@ struct SettingsDetailView: View {
 //#endif
 //
 //
-struct EditableStampView: View {
-    @EnvironmentObject var settings: Settings
-    @State private var editingTop = false
-    @State private var editingBottom = false
-    let fontsize: CGFloat = 40
-    var body: some View {
-        VStack {
-            if settings.isCustomTheme {
-                #if os(iOS)
-//                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
-//                    self.editingTop = edit
-//                })
-//                .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingTop))
-//                .padding(.top, 24)
-                #elseif os(macOS)
-//                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
-//                    self.editingTop = edit
-//                })
-//                .textFieldStyle(PlainTextFieldStyle())
-//                .foregroundColor(.black)
-//                .frame(width: .infinity, height: 30, alignment: .center)
-//                .background(C.color.bullshitRed.opacity(0.2))
-//                .foregroundColor(C.color.bullshitRed)
-//                .padding(.top, 24)
-                #endif
-            } else {
-//                Text(settings.currentTheme.result(precision: viewModel.precision).top)
-//                    .font(.system(size: fontsize, weight: .bold))
-//                    .foregroundColor(C.color.bullshitRed)
-//                    .mask(Mask())
-//                    .padding(.top, 25)
-//                    .padding(.bottom, 0)
-            }
-//            if let b = settings.result(precision: viewModel.precision).bottom {
-//                if settings.isCustomTheme {
-//                    #if os(iOS)
-//                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
-//                        self.editingBottom = edit
-//                    })
-//                    .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
-//                    .padding(.bottom, 12)
-//                    #elseif os(macOS)
-//                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
-//                        self.editingBottom = edit
-//                    })
-//                    .textFieldStyle(PlainTextFieldStyle())
-//                    .foregroundColor(.black)
-//                    .frame(width: .infinity, height: 30, alignment: .center)
-//                    .background(C.color.bullshitRed.opacity(0.2))
-//                    .foregroundColor(C.color.bullshitRed)
-//                    .padding(.bottom, 12)
-//                    #endif
-//                } else {
-//                    Text(b)
-//                        .font(.system(size: fontsize, weight: .bold))
-//                        .foregroundColor(C.color.bullshitRed)
-//                        .mask(Mask())
-//                        .padding(.top, -10)
-//                        .padding(.bottom, 25)
-//                }
+//struct EditableStampView: View {
+//    @EnvironmentObject var settings: Settings
+//    @State private var editingTop = false
+//    @State private var editingBottom = false
+//    let fontsize: CGFloat = 40
+//    var body: some View {
+//        VStack {
+//            if settings.isCustomTheme {
+//                #if os(iOS)
+//                //                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
+//                //                    self.editingTop = edit
+//                //                })
+//                //                .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingTop))
+//                //                .padding(.top, 24)
+//                #elseif os(macOS)
+//                //                TextField("", text: $viewModel.customTop, onEditingChanged: { edit in
+//                //                    self.editingTop = edit
+//                //                })
+//                //                .textFieldStyle(PlainTextFieldStyle())
+//                //                .foregroundColor(.black)
+//                //                .frame(width: .infinity, height: 30, alignment: .center)
+//                //                .background(C.color.bullshitRed.opacity(0.2))
+//                //                .foregroundColor(C.color.bullshitRed)
+//                //                .padding(.top, 24)
+//                #endif
 //            } else {
-//                if settings.isCustomTheme {
-//                    #if os(iOS)
-//                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
-//                        self.editingBottom = edit
-//                    })
-//                    .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
-//                    .padding(.bottom, 12)
-//                    #elseif os(macOS)
-//                    #endif
-//                } else {
-//                    Text("no second line")
-//                        .font(.system(size: fontsize, weight: .ultraLight))
-//                        .foregroundColor(C.color.lightGray)
-//                        .padding(.top, -10)
-//                        .padding(.bottom, 25)
-//                }
+//                //                Text(settings.currentTheme.result(precision: viewModel.precision).top)
+//                //                    .font(.system(size: fontsize, weight: .bold))
+//                //                    .foregroundColor(C.color.bullshitRed)
+//                //                    .mask(Mask())
+//                //                    .padding(.top, 25)
+//                //                    .padding(.bottom, 0)
 //            }
-        }
-    }
-}
+//            //            if let b = settings.result(precision: viewModel.precision).bottom {
+//            //                if settings.isCustomTheme {
+//            //                    #if os(iOS)
+//            //                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
+//            //                        self.editingBottom = edit
+//            //                    })
+//            //                    .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
+//            //                    .padding(.bottom, 12)
+//            //                    #elseif os(macOS)
+//            //                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
+//            //                        self.editingBottom = edit
+//            //                    })
+//            //                    .textFieldStyle(PlainTextFieldStyle())
+//            //                    .foregroundColor(.black)
+//            //                    .frame(width: .infinity, height: 30, alignment: .center)
+//            //                    .background(C.color.bullshitRed.opacity(0.2))
+//            //                    .foregroundColor(C.color.bullshitRed)
+//            //                    .padding(.bottom, 12)
+//            //                    #endif
+//            //                } else {
+//            //                    Text(b)
+//            //                        .font(.system(size: fontsize, weight: .bold))
+//            //                        .foregroundColor(C.color.bullshitRed)
+//            //                        .mask(Mask())
+//            //                        .padding(.top, -10)
+//            //                        .padding(.bottom, 25)
+//            //                }
+//            //            } else {
+//            //                if settings.isCustomTheme {
+//            //                    #if os(iOS)
+//            //                    TextField("", text: $viewModel.customBottom, onEditingChanged: { edit in
+//            //                        self.editingBottom = edit
+//            //                    })
+//            //                    .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
+//            //                    .padding(.bottom, 12)
+//            //                    #elseif os(macOS)
+//            //                    #endif
+//            //                } else {
+//            //                    Text("no second line")
+//            //                        .font(.system(size: fontsize, weight: .ultraLight))
+//            //                        .foregroundColor(C.color.lightGray)
+//            //                        .padding(.top, -10)
+//            //                        .padding(.bottom, 25)
+//            //                }
+//            //            }
+//        }
+//    }
+//}
 //
 //struct TheDetailView: View {
 //    @ObservedObject var viewModel: ViewModel

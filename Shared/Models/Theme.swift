@@ -7,93 +7,105 @@
 
 import Foundation
 
-struct StampTexts {
-    var top: String
-    var bottom: String?
-    init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
-}
 
-struct Results {
+
+struct Theme: Identifiable, Equatable {
+    private(set) var id: Int
+
+    var title: String {
+        didSet {
+            UserDefaults.standard.set(title, forKey: C.key.custom.title)
+        }
+    }
+    
+    mutating func setTitle(_ newTitle: String) {
+        title = newTitle
+    }
+
+    func top(forPrecision precision: Precision) -> String {
+        switch precision {
+        case .edge:
+            return edge.top
+        case .outer:
+            return outer.top
+        case .middle:
+            return middle.top
+        case .inner:
+            return inner.top
+        case .bullsEye:
+            return bullsEye.top
+        }
+    }
+    
+    func bottom(forPrecision precision: Precision) -> String? {
+        switch precision {
+        case .edge:
+            return edge.bottom
+        case .outer:
+            return outer.bottom
+        case .middle:
+            return middle.bottom
+        case .inner:
+            return inner.bottom
+        case .bullsEye:
+            return bullsEye.bottom
+        }
+    }
+
+    
+    struct StampTexts {
+        var top: String
+        var bottom: String?
+        init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
+    }
+
     var edge: StampTexts
     var outer: StampTexts
     var middle: StampTexts
     var inner: StampTexts
     var bullsEye: StampTexts
-}
-
-
-class Theme: Identifiable, Equatable {
-    private(set) var id: Int
-    private(set) var results: Results
     var isCustomisable: Bool
-        
-    @Published var title: String { // public, because we use @Binding in DisplayView
-            didSet {
-                UserDefaults.standard.set(title, forKey: C.key.custom.title)
-            }
-        }
-    
-    func setTop(_ newTop: String, forPrecision: Precision) {
+
+    mutating func setTop(_ newTop: String, forPrecision: Precision) {
         switch forPrecision {
         case .edge:
-            results.edge.top = newTop
+            edge.top = newTop
             if isCustomisable { UserDefaults.standard.set(newTop, forKey: C.key.custom.edge.top) }
         case .outer:
-            results.outer.top = newTop
+            outer.top = newTop
             if isCustomisable { UserDefaults.standard.set(newTop, forKey: C.key.custom.outer.top) }
         case .middle:
-            results.middle.top = newTop
+            middle.top = newTop
             if isCustomisable { UserDefaults.standard.set(newTop, forKey: C.key.custom.middle.top) }
         case .inner:
-            results.inner.top = newTop
+            inner.top = newTop
             if isCustomisable { UserDefaults.standard.set(newTop, forKey: C.key.custom.inner.top) }
         case .bullsEye:
-            results.bullsEye.top = newTop
+            bullsEye.top = newTop
             if isCustomisable { UserDefaults.standard.set(newTop, forKey: C.key.custom.bullsEye.top) }
         }
     }
-
-    func setBottom(_ newBottom: String?, forPrecision: Precision) {
+    
+    mutating func setBottom(_ newBottom: String?, forPrecision: Precision) {
         switch forPrecision {
         case .edge:
-            results.edge.bottom = newBottom
+            edge.bottom = newBottom
             if isCustomisable { UserDefaults.standard.set(newBottom, forKey: C.key.custom.edge.bottom) }
         case .outer:
-            results.outer.bottom = newBottom
+            outer.bottom = newBottom
             if isCustomisable { UserDefaults.standard.set(newBottom, forKey: C.key.custom.outer.bottom) }
         case .middle:
-            results.middle.bottom = newBottom
+            middle.bottom = newBottom
             if isCustomisable { UserDefaults.standard.set(newBottom, forKey: C.key.custom.middle.bottom) }
         case .inner:
-            results.inner.bottom = newBottom
+            inner.bottom = newBottom
             if isCustomisable { UserDefaults.standard.set(newBottom, forKey: C.key.custom.inner.bottom) }
         case .bullsEye:
-            results.bullsEye.bottom = newBottom
+            bullsEye.bottom = newBottom
             if isCustomisable { UserDefaults.standard.set(newBottom, forKey: C.key.custom.bullsEye.bottom) }
         }
     }
 
-    func result(forPrecision precision: Precision) -> StampTexts {
-        switch precision {
-        case .edge:
-            return results.edge
-        case .outer:
-            return results.outer
-        case .middle:
-            return results.middle
-        case .inner:
-            return results.inner
-        case .bullsEye:
-            return results.bullsEye
-        }
-    }
-    init(index: Int, title: String, results: Results, isCustomisable: Bool = false) {
-        self.id = index
-        self.title = title
-        self.results = results
-        self.isCustomisable = isCustomisable
-    }
-    
     static func == (lhs: Theme, rhs: Theme) -> Bool {
         return lhs.id == rhs.id
     }

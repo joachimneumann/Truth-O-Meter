@@ -13,7 +13,6 @@ struct SmartButtonView: View {
     @Binding var displayColorful: Bool
     @Binding var showAnalysisView: Bool
     @Binding var showStampView: Bool
-    @State private var result = StampTexts("top", "bottom")
     @State private var showRing = true
     @State private var showRingWithProgress = false
     @State private var showDisks = true
@@ -49,14 +48,13 @@ struct SmartButtonView: View {
             if showDisks {
                 AllDisksView(
                     displayColorful: $displayColorful,
-                    result: $result,
                     showRing: $showRing,
                     showRingWithProgress: $showRingWithProgress,
                     isSetting: false)
                     .padding(linewidth * 1.5)
             }
             if showStampView {
-                Stamp(texts: result)
+                Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: true)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         stampTapped()

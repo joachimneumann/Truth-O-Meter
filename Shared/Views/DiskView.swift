@@ -28,14 +28,12 @@ struct DiskView: View {
                         .onChanged { _ in
                             if !isDown {
                                 isDown = true
-                                print("Disk down")
                                 down()
                             }
                         }
                         .onEnded { _ in
                             if isDown {
                                 isDown = false
-                                print("Disk up")
                                 up()
                             }
                         }

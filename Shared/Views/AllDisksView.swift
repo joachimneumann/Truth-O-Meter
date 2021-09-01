@@ -11,7 +11,6 @@ struct AllDisksView: View {
     @EnvironmentObject var needle: Needle
     @EnvironmentObject var settings: Settings
     @Binding var displayColorful: Bool
-    @Binding var result: StampTexts
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
     var isSetting: Bool
@@ -25,7 +24,6 @@ struct AllDisksView: View {
     
     func downPressed() {
         if !pale {
-            print("...down")
             if !isSetting {
                 pale = true
                 disksHidden = true
@@ -34,39 +32,42 @@ struct AllDisksView: View {
     }
     func upPressed(_ precision: Precision) {
         if circle {
-            print("...up")
-
-            needle.active(true, strongNoise: true)
 
             displayColorful = true
 
-            result = settings.result(forPrecision: precision)
+            settings.precisionSelected(precision)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
                 showRing = false
                 showRingWithProgress = true
             }
 
+            var newNeedleValue = 0.5
             switch precision {
             case .bullsEye:
-                needle.setValueInSteps(0.00, totalTime: settings.listenAndAnalysisTime)
+                newNeedleValue = 0.00
             case .inner:
-                needle.setValueInSteps(0.25, totalTime: settings.listenAndAnalysisTime)
+                newNeedleValue = 0.25
             case .middle:
-                needle.setValueInSteps(0.50, totalTime: settings.listenAndAnalysisTime)
+                newNeedleValue = 0.50
             case .outer:
-                needle.setValueInSteps(0.75, totalTime: settings.listenAndAnalysisTime)
+                newNeedleValue = 0.75
             case .edge:
-                needle.setValueInSteps(1.00, totalTime: settings.listenAndAnalysisTime)
+                newNeedleValue = 1.00
             }
 
             if isSetting {
+                needle.setValue(newNeedleValue)
+                needle.active(true, strongNoise: false)
                 grayPrecision = precision
             } else {
+                needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+                needle.active(true, strongNoise: true)
                 pale = false
                 circle = false
                 disksHidden = true
             }
+
         }
     }
     var body: some View {
@@ -103,7 +104,6 @@ struct Disks_Previews: PreviewProvider {
         func f(p: Precision) {}
         return AllDisksView(
             displayColorful: .constant(true),
-            result: .constant(StampTexts("top", "bottom")),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
             isSetting: false)

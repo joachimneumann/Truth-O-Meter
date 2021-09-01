@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
+		AA0C217B26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
@@ -56,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
 		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
 				AA3F77D926D5DF2500AC1D3E /* Needle.swift */,
 				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
+				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -311,6 +315,7 @@
 				AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
+				AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA27BEAF26DE974500E7C092 /* NavigationView.swift in Sources */,
@@ -340,6 +345,7 @@
 				AA8F3CC426DC83B300C82E56 /* ShapeShifterView.swift in Sources */,
 				AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
+				AA0C217B26DF36EF00D7BBB7 /* SettingsData.swift in Sources */,
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA27BEB026DE974500E7C092 /* NavigationView.swift in Sources */,

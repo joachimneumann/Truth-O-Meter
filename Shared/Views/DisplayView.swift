@@ -30,7 +30,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
 }
 
 struct DisplayView: View {
-    @Binding var title: String
+    @EnvironmentObject var settings: Settings
     var colorful: Bool
     var editTitle = false
 
@@ -47,13 +47,13 @@ struct DisplayView: View {
                 NeedleView()
                     .clipped()
                     .opacity(0.5)
-                TextField("", text: $title, onEditingChanged: { edit in
+                TextField("", text: $settings.title, onEditingChanged: { edit in
                     self.editing = edit
                 })
                 .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
             } else {
                 DisplayBackground(colorful: colorful)
-                Text(title)
+                Text(settings.title)
                     .offset(y: 15)
                     .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
                     .font(.headline)
@@ -68,7 +68,7 @@ struct DisplayView: View {
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         return VStack {
-            DisplayView(title: .constant("xx"), colorful: true)
+            DisplayView(colorful: true)
                 .padding()
                 .environmentObject(Needle())
         }

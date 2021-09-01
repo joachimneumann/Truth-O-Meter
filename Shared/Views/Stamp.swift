@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct Stamp: View {
-    var texts: StampTexts
+    var top: String
+    var bottom: String?
     var rotated = true
     var body: some View {
         VStack {
             Spacer(minLength: 0)
-            if let bottom = texts.bottom {
-                TwoLines(texts.top+"\n"+bottom, rotated ? -18.0 : 0.0)
+            if let b = bottom {
+                TwoLines(top+"\n"+b, rotated ? -18.0 : 0.0)
             } else {
-                OneLine(texts.top, rotated ? -25.0 : 0.0)
+                OneLine(top, rotated ? -25.0 : 0.0)
             }
             Spacer(minLength: 0)
         }
@@ -76,7 +77,7 @@ struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Stamp(texts: StampTexts("Absolute", "Bullshit"))
+            Stamp(top: "top", bottom: "bottom", rotated: true)
                 .background(Color.yellow)
             Spacer()
         }
