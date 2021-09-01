@@ -54,8 +54,10 @@ struct ThemeCell: View {
                     if isCustom {
                         Text("Edit")
                             .padding(.leading, 10)
+                            .font(.headline)
                     } else {
                         Image(systemName: "info.circle")
+                            .font(.title2.weight(.semibold))
                     }
                 }
                 .contentShape(Rectangle())
@@ -67,13 +69,13 @@ struct ThemeCell: View {
             Spacer()
             if isSelected {
                 Image(systemName: "checkmark")
+                    .font(.title2.weight(.bold))
                     .foregroundColor(.blue)
             }
         }
         .padding(.leading)
         .padding(.trailing)
-        .frame(height: 25)
-        .contentShape(Rectangle())
+        .frame(height: 30)
     }
 }
 
