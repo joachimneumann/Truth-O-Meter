@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct HorizontalProgressBar: View {
-    @EnvironmentObject var settings: Settings
-    var animationFinished: (() -> Void)?
-    @State var widthFactor: CGFloat = 0.0
+    @EnvironmentObject private var settings: Settings
+    var animationFinished: () -> Void
+    @State private var widthFactor: CGFloat = 0.0
     var body: some View {
         ZStack {
             GeometryReader { (geo) in
@@ -28,9 +28,7 @@ struct HorizontalProgressBar: View {
             widthFactor = 1.0
             DispatchQueue.main.asyncAfter(deadline: .now() + settings.analysisTime) {
                 // this will not guarantee precise timing, but that might not be required here
-                if let f = animationFinished {
-                    f()
-                }
+                animationFinished()
             }
         }
     }
@@ -38,7 +36,7 @@ struct HorizontalProgressBar: View {
 
 struct HorizontalProgressbar_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalProgressBar(animationFinished: nil)
-            .padding()
+        func doNothing() {}
+        return HorizontalProgressBar(animationFinished: doNothing)
     }
 }
