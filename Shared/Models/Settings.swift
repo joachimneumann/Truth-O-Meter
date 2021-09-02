@@ -42,9 +42,17 @@ class Settings: ObservableObject {
         }
     }
     
-    var stampBottom: String {
+    var nonNilStampBottom: String {
         get {
-            settingsData.seletedTheme.bottom(forPrecision: precision) ?? ""
+            stampBottom ?? ""
+        }
+        set {
+            stampBottom = newValue == "" ? nil : newValue
+        }
+    }
+    var stampBottom: String? {
+        get {
+            settingsData.seletedTheme.bottom(forPrecision: precision)
         }
         set {
             if newValue == "" {

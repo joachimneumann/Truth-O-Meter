@@ -91,7 +91,7 @@ struct EditableStampView: View {
             .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingTop))
             .padding(.top, 24)
             
-            TextField("", text: $settings.stampBottom, onEditingChanged: { edit in
+            TextField("", text: $settings.nonNilStampBottom, onEditingChanged: { edit in
                 self.editingBottom = edit
             })
             .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
