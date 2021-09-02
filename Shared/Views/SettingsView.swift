@@ -99,35 +99,6 @@ struct ThemesList: View {
                     .frame(height: 0.5)
                     .padding(.leading)
             }
-            //                HStack {
-            //                    if settings.isCurrentTheme(theme) {
-            //                        Text(theme.title == "" ? "Custom" :  theme.title)
-            //                        Group {
-            //                            if settings.isCustomTheme {
-            //                                Text("Edit")
-            //                                    .padding(.leading, 10)
-            //                            } else {
-            //                                Image(systemName: "info.circle")
-            //                            }
-            //                        }
-            //                        .contentShape(Rectangle())
-            //                        .foregroundColor(C.color.bullshitRed)
-            //                        .onTapGesture {
-            //                            navigation = .detail
-            //                        }
-            //                        Spacer()
-            //                        Image(systemName: "checkmark")
-            //                            .foregroundColor(.blue)
-            //                    } else {
-            //                        HStack {
-            //                            Text(theme.title == "" ? "Custom" :  theme.title)
-            //                            Spacer()
-            //                        }
-            //                        .contentShape(Rectangle())
-            //                        .onTapGesture {
-            //                            settings.currentTheme = theme
-            //                        }
-            //                    }
         }
     }
 }

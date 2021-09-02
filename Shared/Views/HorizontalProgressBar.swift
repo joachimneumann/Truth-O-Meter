@@ -9,16 +9,28 @@ import Foundation
 import SwiftUI
 
 struct HorizontalProgressBar: View {
-    var value:CGFloat
+    @EnvironmentObject var settings: Settings
+    var animationFinished: (() -> Void)?
+    @State var widthFactor: CGFloat = 0.0
     var body: some View {
-        ZStack { //(alignment: .leading) {
+        ZStack {
             GeometryReader { (geo) in
                 Rectangle()
                     .foregroundColor(C.color.lightGray)
                     .opacity(0.2)
                 Rectangle()
                     .foregroundColor(C.color.lightGray)
-                    .frame(width:geo.size.width*value, height: geo.size.height)
+                    .frame(width:geo.size.width*widthFactor, height: geo.size.height)
+                    .animation(.linear(duration: settings.analysisTime))
+            }
+        }
+        .onAppear {
+            widthFactor = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + settings.analysisTime) {
+                // this will not guarantee precise timing, but that might not be required here
+                if let f = animationFinished {
+                    f()
+                }
             }
         }
     }
@@ -26,7 +38,7 @@ struct HorizontalProgressBar: View {
 
 struct HorizontalProgressbar_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalProgressBar(value: 0.8)
+        HorizontalProgressBar(animationFinished: nil)
             .padding()
     }
 }

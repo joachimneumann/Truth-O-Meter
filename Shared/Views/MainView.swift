@@ -28,21 +28,15 @@ struct AnalysisView: View {
     @EnvironmentObject var settings: Settings
     @Binding var showStampView: Bool
     @Binding var showAnalysisView: Bool
-    @State private var value: CGFloat = 0.0
-    private let timer = Timer.publish(every: C.timing.analyseTimeIncrement, on: .main, in: .common).autoconnect()
 
+    func animationFinished() {
+        showAnalysisView = false
+        showStampView = true
+    }
     var body: some View {
         VStack{
-            HorizontalProgressBar(value: value)
+            HorizontalProgressBar(animationFinished: animationFinished)
                 .frame(height: 5)
-                    .onReceive(timer) { input in
-//                        print("HorizontalProgressBar value = \(value)")
-                        value += CGFloat(C.timing.analyseTimeIncrement/settings.analysisTime)
-                        if value >= 1.0 {
-                            showAnalysisView = false
-                            showStampView = true
-                        }
-                    }
                 .padding(.top, 10)
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
