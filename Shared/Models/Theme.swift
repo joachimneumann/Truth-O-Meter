@@ -22,6 +22,35 @@ struct Theme: Identifiable, Equatable {
         title = newTitle
     }
 
+    mutating func setTop(top: String, forPrecision precision: Precision) {
+        switch precision {
+        case .edge:
+            edge.top = top
+        case .outer:
+            outer.top = top
+        case .middle:
+            middle.top = top
+        case .inner:
+            inner.top = top
+        case .bullsEye:
+            bullsEye.top = top
+        }
+    }
+    mutating func setBottom(bottom: String?, forPrecision precision: Precision) {
+        switch precision {
+        case .edge:
+            edge.bottom = bottom
+        case .outer:
+            outer.bottom = bottom
+        case .middle:
+            middle.bottom = bottom
+        case .inner:
+            inner.bottom = bottom
+        case .bullsEye:
+            bullsEye.bottom = bottom
+        }
+    }
+    
     func top(forPrecision precision: Precision) -> String {
         switch precision {
         case .edge:

@@ -34,7 +34,7 @@ struct AllDisksView: View {
 
             displayColorful = true
 
-            settings.precisionSelected(precision)
+            settings.grayPrecision = precision
 
             DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
                 showRing = false
@@ -70,7 +70,7 @@ struct AllDisksView: View {
         }
     }
     var body: some View {
-        GeometryReader { geo in
+        return GeometryReader { geo in
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {
                 ShapeShifterView(

@@ -12,13 +12,17 @@ struct ThemeName: Identifiable {
     let name: String
     let isCustom: Bool
 }
+
 struct SettingsData {
     
     init() {
     }
     
-    func stampTop(forprecision precision: Precision) -> String {
-        seletedTheme.top(forPrecision: precision)
+    mutating func setTop(top: String, forPrecision precision: Precision) {
+        custom.setTop(top, forPrecision: precision)
+    }
+    mutating func setBottom(bottom: String?, forPrecision precision: Precision) {
+        custom.setBottom(bottom, forPrecision: precision)
     }
     
     func stampBottom(forprecision precision: Precision) -> String? {
@@ -124,7 +128,7 @@ struct SettingsData {
         bullsEye: Theme.StampTexts("flimsy", nil),
         isCustomisable: false)
 
-    private var custom = Theme(
+    var custom = Theme(
         id: 3,
         title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
         edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "top",

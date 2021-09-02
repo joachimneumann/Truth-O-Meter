@@ -9,9 +9,12 @@ import Foundation
 
 class Settings: ObservableObject {
     private var settingsData = SettingsData()
+    private var settingPrecision: Precision
+    
     var grayPrecision: Precision {
         didSet {
-            precisionSelected(grayPrecision)
+            settingPrecision = grayPrecision
+            objectWillChange.send()
         }
     }
     var title: String {
@@ -28,15 +31,23 @@ class Settings: ObservableObject {
         settingsData.seletedTheme.isCustomisable
     }
     
-    @Published var stampTop: String {
-        didSet {
-            
+    var stampTop: String {
+        get {
+            settingsData.seletedTheme.top(forPrecision: settingPrecision)
+        }
+        set {
+            settingsData.setTop(top: newValue, forPrecision: settingPrecision)
+            objectWillChange.send()
         }
     }
     
-    @Published var stampBottom: String? {
-        didSet {
-            
+    var stampBottom: String? {
+        get {
+            settingsData.seletedTheme.bottom(forPrecision: settingPrecision)
+        }
+        set {
+            settingsData.setBottom(bottom: newValue, forPrecision: settingPrecision)
+            objectWillChange.send()
         }
     }
 
@@ -85,18 +96,11 @@ class Settings: ObservableObject {
         }
     }
 
-    func precisionSelected(_ precision: Precision) {
-        stampTop = settingsData.stampTop(forprecision: precision)
-        stampBottom = settingsData.stampBottom(forprecision: precision)
-    }
-
     init() {
         listenTimingIndex = settingsData.listenTimingIndex
         analysisTimingIndex = settingsData.analysisTimingIndex
-        stampTop = "top not set"
-        stampBottom = "bottom not set"
         grayPrecision = .middle
-        precisionSelected(grayPrecision)
+        settingPrecision = grayPrecision
     }
     
     /*
