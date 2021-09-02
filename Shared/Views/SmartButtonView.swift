@@ -17,7 +17,7 @@ struct SmartButtonView: View {
     @State private var showDisks = true
         
     func ringProgressFinished() {
-        NeedleValue.shared.active(true, strongNoise: false)
+        Needle.shared.active(true, strongNoise: false)
         showRing = false
         showRingWithProgress = false
         showDisks = false
@@ -26,8 +26,8 @@ struct SmartButtonView: View {
     
     func stampTapped() {
         displayColorful = false
-        NeedleValue.shared.active(false)
-        NeedleValue.shared.setValue(0.5)
+        Needle.shared.active(false)
+        Needle.shared.setValue(0.5)
         showRing = true
         showRingWithProgress = false
         showDisks = true

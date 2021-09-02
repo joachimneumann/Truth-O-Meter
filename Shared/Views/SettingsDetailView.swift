@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  SettingsDetailView.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 23/08/2021.
@@ -11,8 +11,6 @@ struct SettingsDetailView: View {
     @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
     @Binding var displayTitle: String
-    //    @State private var title: String = "not set"
-    //    @State private var result: StampTexts = StampTexts("top", "bottom")
     var body: some View {
         ZStack (alignment: .topLeading) {
             HStack(spacing: 0) {
@@ -28,8 +26,7 @@ struct SettingsDetailView: View {
                 DisplayView(colorful: true, editTitle: false)//settings.isCustom)
                 //                        .frame(height: geo.size.height * 0.2)
                 
-//                Stamp(top: settings.stampTop, bottom: settings.stampBottom)
-//                SmartButtonView(displayColorful: .constant(true), showAnalysisView: .constant(false), showStampView: .constant(false))
+                Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: false)
                 AllDisksView(
                     displayColorful: .constant(true),
                     showRing: .constant(false),
@@ -43,7 +40,7 @@ struct SettingsDetailView: View {
     }
 }
 
-struct ThemeDetailView_Previews: PreviewProvider {
+struct SettingsDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
         return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))

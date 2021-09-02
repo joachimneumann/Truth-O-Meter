@@ -12,7 +12,7 @@ let p2 = CGPoint(x: 100, y: 25)
 let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
-    @ObservedObject var needleValue = NeedleValue.shared
+    @ObservedObject var needleValue = Needle.shared
 
     var body: some View {
         ZStack {

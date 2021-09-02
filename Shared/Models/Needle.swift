@@ -1,5 +1,5 @@
 //
-//  NeedleState.swift
+//  Needle.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 02/09/2021.
@@ -9,11 +9,11 @@ import Foundation
 import GameKit // for GKGaussianDistribution
 import SwiftUI
 
-class NeedleValue: ObservableObject {
+class Needle: ObservableObject {
     @Published private(set) var value: Double = 0.5
     @Published private(set) var colorful = false
     
-    static var shared = NeedleValue()
+    static var shared = Needle()
     private init() {
     }
     

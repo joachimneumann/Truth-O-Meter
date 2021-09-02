@@ -43,9 +43,9 @@ struct AllDisksView: View {
             newNeedleValue = 1.00
         }
         if isSetting {
-            NeedleValue.shared.active(true, strongNoise: false)
+            Needle.shared.active(true, strongNoise: false)
             settings.grayPrecision = precision
-            NeedleValue.shared.setValue(newNeedleValue)
+            Needle.shared.setValue(newNeedleValue)
         } else {
             if circle {
                 displayColorful = true
@@ -53,8 +53,8 @@ struct AllDisksView: View {
                     showRing = false
                     showRingWithProgress = true
                 }
-                NeedleValue.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
-                NeedleValue.shared.active(true, strongNoise: true)
+                Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+                Needle.shared.active(true, strongNoise: true)
                 pale = false
                 circle = false
                 disksHidden = true
