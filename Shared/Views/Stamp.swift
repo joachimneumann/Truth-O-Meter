@@ -14,10 +14,20 @@ struct Stamp: View {
     var body: some View {
         VStack {
             Spacer(minLength: 0)
-            if let b = bottom {
-                TwoLines(top+"\n"+b, rotated ? -18.0 : 0.0)
-            } else {
-                OneLine(top, rotated ? -25.0 : 0.0)
+            HStack {
+                Spacer(minLength: 0)
+                if top == "" && (bottom == "" || bottom == nil) {
+                    OneLine("(not set)", rotated ? -25.0 : 0.0)
+                } else if let b = bottom {
+                    if top != "" {
+                        TwoLines(top+"\n"+b, rotated ? -18.0 : 0.0)
+                    } else {
+                        OneLine(b, rotated ? -25.0 : 0.0)
+                    }
+                } else {
+                    OneLine(top, rotated ? -25.0 : 0.0)
+                }
+                Spacer(minLength: 0)
             }
             Spacer(minLength: 0)
         }
@@ -46,7 +56,7 @@ struct TwoLines: View {
             .lineLimit(2)
             .padding(10)
             .overlay(RoundedRectangle(cornerRadius: 20)
-                .stroke(C.color.bullshitRed, lineWidth: 6))
+                        .stroke(C.color.bullshitRed, lineWidth: 6))
             .padding(25)
             .mask(Mask())
             .rotationEffect(Angle(degrees: rotationAngle))
@@ -65,7 +75,7 @@ struct OneLine: View {
             .foregroundColor(C.color.bullshitRed)
             .lineLimit(1)
             .overlay(RoundedRectangle(cornerRadius: 20)
-                .stroke(C.color.bullshitRed, lineWidth: 6))
+                        .stroke(C.color.bullshitRed, lineWidth: 6))
             .padding(10)
             .mask(Mask())
             .rotationEffect(Angle(degrees: rotationAngle))
