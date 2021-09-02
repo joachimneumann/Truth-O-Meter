@@ -68,26 +68,26 @@ struct C {
         static let analysisTiming       = "analysisTimingIndex"
         static let selectedTheme        = "selectedThemeIndexKey"
         struct custom {
-            static let title          = "displayTextkey"
+            static let title          = "CustomiseddisplayTextkey"
             struct edge {
-                static let top        = "farLeftText1key"
-                static let bottom     = "farLeftText2key"
+                static let top        = "CustomisedfarLeftText1key"
+                static let bottom     = "CustomisedfarLeftText2key"
             }
             struct outer {
-                static let top       = "leftText1key"
-                static let bottom    = "leftText2key"
+                static let top       = "CustomisedleftText1key"
+                static let bottom    = "CustomisedleftText2key"
             }
             struct middle {
-                static let top      = "centerText1key"
-                static let bottom   = "centerText2key"
+                static let top      = "CustomisedcenterText1key"
+                static let bottom   = "CustomisedcenterText2key"
             }
             struct inner {
-                static let top       = "rightText1key"
-                static let bottom    = "rightText2key"
+                static let top       = "CustomisedrightText1key"
+                static let bottom    = "CustomisedrightText2key"
             }
             struct bullsEye {
-                static let top    = "farRightText1key"
-                static let bottom = "farRightText2key"
+                static let top    = "CustomisedfarRightText1key"
+                static let bottom = "CustomisedfarRightText2key"
             }
         }
     }

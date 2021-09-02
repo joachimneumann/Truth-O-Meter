@@ -14,24 +14,7 @@ struct ThemeName: Identifiable {
 }
 
 struct SettingsData {
-    init() {
-        let t = UserDefaults.standard.string(forKey: C.key.custom.title) ?? ""
-//        print("title \(t) read from userdefaults")
-        self.custom = Theme(
-            id: 3,
-            title: t, //UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
-            edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "",
-                             UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? ""),
-            outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "",
-                             UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? ""),
-            middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "",
-                             UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? ""),
-            inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "",
-                             UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? ""),
-            bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "",
-                             UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? ""),
-            isCustomisable: true)
-    }
+    
     mutating func setTop(top: String, forPrecision precision: Precision) {
         custom.setTop(top, forPrecision: precision)
     }
@@ -53,14 +36,14 @@ struct SettingsData {
     var themeNames: [ThemeName] {
         get {
             var ret = [ThemeName]()
-            ret.append(ThemeName(id: 0, name: bullshit.title, isCustom: false))
-            ret.append(ThemeName(id: 1, name: truth.title,    isCustom: false))
+            ret.append(ThemeName(id: 0, name: truth.title,    isCustom: false))
+            ret.append(ThemeName(id: 1, name: bullshit.title, isCustom: false))
             ret.append(ThemeName(id: 2, name: singing.title,  isCustom: false))
             ret.append(ThemeName(id: 3, name: custom.title, isCustom: true))
             return ret
         }
     }
-
+    
     
     var seletedTheme: Theme {
         let s = selectedThemeIndex
@@ -77,17 +60,17 @@ struct SettingsData {
     mutating func setTitle(_ newTitle: String) {
         custom.setTitle(newTitle)
     }
-
+    
     let waitTimes = [2, 4, 10]
     var listenTime: Double {
         Double(waitTimes[listenTimingIndex])
     }
-
+    
     let analysisTimes = [2, 4, 10]
     var analysisTime: Double {
         Double(waitTimes[analysisTimingIndex])
     }
-
+    
     var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
@@ -100,7 +83,7 @@ struct SettingsData {
             UserDefaults.standard.set(newValue, forKey: C.key.listenTiming)
         }
     }
-
+    
     var analysisTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.analysisTiming) == nil {
@@ -113,16 +96,6 @@ struct SettingsData {
         }
     }
     
-    private let bullshit = Theme(
-        id: 0,
-        title: "Bullshit-O-Meter",
-        edge:     Theme.StampTexts("Absolute", "Bullshit"),
-        outer:    Theme.StampTexts("Bullshit", nil),
-        middle:   Theme.StampTexts("undecided", nil),
-        inner:    Theme.StampTexts("Mostly", "True"),
-        bullsEye: Theme.StampTexts("True", nil),
-        isCustomisable: false)
-
     private let truth = Theme(
         id: 1,
         title: "Truth-O-Meter",
@@ -132,8 +105,17 @@ struct SettingsData {
         inner:    Theme.StampTexts("Bullshit", nil),
         bullsEye: Theme.StampTexts("Absolute", "Bullshit"),
         isCustomisable: false)
-
-
+    
+    private let bullshit = Theme(
+        id: 0,
+        title: "Bullshit-O-Meter",
+        edge:     Theme.StampTexts("Absolute", "Bullshit"),
+        outer:    Theme.StampTexts("Bullshit", nil),
+        middle:   Theme.StampTexts("undecided", nil),
+        inner:    Theme.StampTexts("Mostly", "True"),
+        bullsEye: Theme.StampTexts("True", nil),
+        isCustomisable: false)
+    
     private let singing = Theme(
         id: 2,
         title: "Voice-O-Meter",
@@ -143,6 +125,20 @@ struct SettingsData {
         inner:    Theme.StampTexts("could be", "better"),
         bullsEye: Theme.StampTexts("flimsy", nil),
         isCustomisable: false)
-
-    var custom: Theme
+    
+    private var custom = Theme(
+        id: 3,
+        title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
+        edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "",
+                                   UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? ""),
+        outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "",
+                                   UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? ""),
+        middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "",
+                                   UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? ""),
+        inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "",
+                                   UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? ""),
+        bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "",
+                                   UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? ""),
+        isCustomisable: true)
+    
 }
