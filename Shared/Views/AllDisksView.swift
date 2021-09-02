@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AllDisksView: View {
-    @EnvironmentObject var needle: Needle
     @EnvironmentObject var settings: Settings
     @Binding var displayColorful: Bool
     @Binding var showRing: Bool
@@ -44,11 +43,9 @@ struct AllDisksView: View {
             newNeedleValue = 1.00
         }
         if isSetting {
-//            needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
-            needle.active(false, strongNoise: false)
-//            settings.grayPrecision = precision
-//            needle.setValue(newNeedleValue)
-//            needle.active(true, strongNoise: false)
+            NeedleValue.shared.active(true, strongNoise: false)
+            settings.grayPrecision = precision
+            NeedleValue.shared.setValue(newNeedleValue)
         } else {
             if circle {
                 displayColorful = true
@@ -56,8 +53,8 @@ struct AllDisksView: View {
                     showRing = false
                     showRingWithProgress = true
                 }
-                needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
-                needle.active(true, strongNoise: true)
+                NeedleValue.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+                NeedleValue.shared.active(true, strongNoise: true)
                 pale = false
                 circle = false
                 disksHidden = true

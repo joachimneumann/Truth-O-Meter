@@ -12,18 +12,18 @@ let p2 = CGPoint(x: 100, y: 25)
 let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
-    @EnvironmentObject var needle: Needle
+    @ObservedObject var needleValue = NeedleValue.shared
 
     var body: some View {
         ZStack {
             GeometryReader { (geometry) in
                 let rect = geometry.frame(in: .local)
                 var temp = Path()
-                let _ = temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: needle.noisyValue), clockwise: true)
+                let _ = temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: self.needleValue.value), clockwise: true)
                 let a = temp.currentPoint!
                 let b = C.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
-                    .stroke(needle.colorful ? C.color.bullshitRed : C.color.lightGray,
+                    .stroke(self.needleValue.colorful ? C.color.bullshitRed : C.color.lightGray,
                             style: StrokeStyle(lineWidth: C.needleLineWidth, lineCap: .round))
             }
         }
@@ -59,7 +59,6 @@ struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             NeedleView()
-                .environmentObject(Needle())
         }
     }
 }

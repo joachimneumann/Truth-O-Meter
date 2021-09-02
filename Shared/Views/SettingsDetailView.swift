@@ -47,7 +47,6 @@ struct ThemeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
         return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))
-            .environmentObject(Needle())
             .environmentObject(settings)
     }
 }

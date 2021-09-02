@@ -71,7 +71,6 @@ struct Display_Previews: PreviewProvider {
         return VStack {
             DisplayView(colorful: true, editTitle: true)
                 .padding()
-                .environmentObject(Needle())
                 .environmentObject(settings)
         }
     }

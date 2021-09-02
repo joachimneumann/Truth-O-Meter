@@ -13,20 +13,16 @@ struct Truth_O_MeterApp: App {
     @State var circle: Bool = true
     @State var gray: Bool = false
     
-    private(set) var needle = Needle()
 //    private(set) var settings = Settings()
     func f1() {}
     func f2(p: Precision) {}
     var body: some Scene {
-        needle.setValue(0.5)
-        needle.active(false)
         let settings = Settings()
         return WindowGroup {
             #if os(macOS)
 //            SmartButtonView(settings: Settings())
 //            AllDisksView(isSetting: false, callback: f2)
             NavigationView()
-                .environmentObject(needle)
                 .environmentObject(settings)
                 .frame(minWidth: 375, minHeight: 667)
                 .frame(maxWidth: 375, maxHeight: 667)
@@ -34,7 +30,6 @@ struct Truth_O_MeterApp: App {
             #else
 //            DisplayView(colorful: true, editTitle: true)
             NavigationView()
-                .environmentObject(needle)
                 .environmentObject(settings)
             #endif
         }
@@ -47,7 +42,6 @@ struct Truth_O_MeterApp: App {
 //                Disks(diskViewModel: diskViewModel)
 //                    .padding(100)
 ////                MainView(viewModel: viewModel)
-////                    .environmentObject(viewModel.needle)
 //                    .frame(minWidth: w, minHeight: h)
 //                    .frame(maxWidth: w, maxHeight: h)
 //                    .background(Color.white)
@@ -68,6 +62,5 @@ struct Truth_O_MeterApp: App {
 //        return DisksView(diskViewModel: diskViewModel)
 //            .padding(100)
 ////        MainView(viewModel: viewModel)
-////            .environmentObject(viewModel.needle)
 //    }
 //}

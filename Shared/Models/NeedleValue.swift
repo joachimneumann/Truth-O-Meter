@@ -1,38 +1,42 @@
 //
-//  Needle.swift
+//  NeedleState.swift
 //  Truth-O-Meter
 //
-//  Created by Joachim Neumann on 25/08/2021.
+//  Created by Joachim Neumann on 02/09/2021.
 //
 
 import Foundation
 import GameKit // for GKGaussianDistribution
 import SwiftUI
 
-class Needle: ObservableObject {
-    @Published var noisyValue: Double = 0
+class NeedleValue: ObservableObject {
+    @Published private(set) var value: Double = 0.5
     @Published private(set) var colorful = false
     
-    private var value: Double = 0
+    static var shared = NeedleValue()
+    private init() {
+    }
+    
+    private var privateValue: Double = 0
     private var needleNoiseTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
     private var strongNoise = false
 
     func setValue(_ v: Double) {
         withAnimation(.default) {
+            privateValue = v
             value = v
-            noisyValue = v
         }
     }
     
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
         var delay = 0.25 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.setValue(self.value + 0.3 * (newValue - self.value))
+            self.setValue(self.privateValue + 0.3 * (newValue - self.privateValue))
         }
         delay = 0.5 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.setValue(self.value + 0.6 * (newValue - self.value))
+            self.setValue(self.privateValue + 0.6 * (newValue - self.privateValue))
         }
         delay = 0.95 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -64,8 +68,9 @@ class Needle: ObservableObject {
         if strongNoise { noiseLevel *= 3 }
         let noise = noiseLevel * Double(n)
         withAnimation(.default) {
-            noisyValue = value + noise
+            value = privateValue + noise
         }
     }
 
+    
 }

@@ -25,8 +25,6 @@
 		AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA6C526D8BB44007064E3 /* MainView.swift */; };
 		AA30E3AD26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */; };
 		AA30E3AE26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */; };
-		AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F77D926D5DF2500AC1D3E /* Needle.swift */; };
-		AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3F77D926D5DF2500AC1D3E /* Needle.swift */; };
 		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
 		AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
 		AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
@@ -55,6 +53,8 @@
 		AACB1EB5255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
+		AAE4C2E226E06F6900FE043B /* NeedleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* NeedleValue.swift */; };
+		AAE4C2E326E06F6900FE043B /* NeedleValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* NeedleValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +73,6 @@
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
 		AA2DA6C526D8BB44007064E3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailView.swift; sourceTree = "<group>"; };
-		AA3F77D926D5DF2500AC1D3E /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA40FD6026D611C9006DBFD8 /* Precision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precision.swift; sourceTree = "<group>"; };
 		AA4565E226D0C4C6003CC57E /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		AA97067526D202B40090FA67 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
+		AAE4C2E126E06F6900FE043B /* NeedleValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
-				AA3F77D926D5DF2500AC1D3E /* Needle.swift */,
+				AAE4C2E126E06F6900FE043B /* NeedleValue.swift */,
 				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
 				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 			);
@@ -303,7 +303,6 @@
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
-				AA3F77DA26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
@@ -319,6 +318,7 @@
 				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA27BEAF26DE974500E7C092 /* NavigationView.swift in Sources */,
+				AAE4C2E226E06F6900FE043B /* NeedleValue.swift in Sources */,
 				AA30E3AD26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
@@ -333,7 +333,6 @@
 			files = (
 				AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
-				AA3F77DB26D5DF2500AC1D3E /* Needle.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* Stamp.swift in Sources */,
 				AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */,
@@ -349,6 +348,7 @@
 				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
 				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AA27BEB026DE974500E7C092 /* NavigationView.swift in Sources */,
+				AAE4C2E326E06F6900FE043B /* NeedleValue.swift in Sources */,
 				AA30E3AE26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */,
 				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA97067726D202B40090FA67 /* Theme.swift in Sources */,

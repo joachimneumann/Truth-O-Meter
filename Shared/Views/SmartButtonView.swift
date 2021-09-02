@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SmartButtonView: View {
     @EnvironmentObject var settings: Settings
-    @EnvironmentObject var needle: Needle
     @Binding var displayColorful: Bool
     @Binding var showAnalysisView: Bool
     @Binding var showStampView: Bool
@@ -18,7 +17,7 @@ struct SmartButtonView: View {
     @State private var showDisks = true
         
     func ringProgressFinished() {
-        needle.active(true, strongNoise: false)
+        NeedleValue.shared.active(true, strongNoise: false)
         showRing = false
         showRingWithProgress = false
         showDisks = false
@@ -27,8 +26,8 @@ struct SmartButtonView: View {
     
     func stampTapped() {
         displayColorful = false
-        needle.active(false)
-        needle.setValue(0.5)
+        NeedleValue.shared.active(false)
+        NeedleValue.shared.setValue(0.5)
         showRing = true
         showRingWithProgress = false
         showDisks = true
