@@ -25,10 +25,11 @@ struct SettingsDetailView: View {
                 navigation = .settings
             }
             VStack (alignment: .center) {
-                DisplayView(colorful: true, editTitle: settings.isCustom)
+                DisplayView(colorful: true, editTitle: false)//settings.isCustom)
                 //                        .frame(height: geo.size.height * 0.2)
                 
-                Stamp(top: settings.stampTop, bottom: settings.stampBottom)
+//                Stamp(top: settings.stampTop, bottom: settings.stampBottom)
+//                SmartButtonView(displayColorful: .constant(true), showAnalysisView: .constant(false), showStampView: .constant(false))
                 AllDisksView(
                     displayColorful: .constant(true),
                     showRing: .constant(false),
@@ -41,6 +42,17 @@ struct SettingsDetailView: View {
         .padding(.top, 40)
     }
 }
+
+struct ThemeDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let settings = Settings()
+        return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))
+            .environmentObject(Needle())
+            .environmentObject(settings)
+    }
+}
+
+
 //    }
 //}
 //
@@ -197,12 +209,3 @@ struct SettingsDetailView: View {
 //}
 //
 //#endif
-
-struct ThemeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let settings = Settings()
-        return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))
-            .environmentObject(Needle())
-            .environmentObject(settings)
-    }
-}

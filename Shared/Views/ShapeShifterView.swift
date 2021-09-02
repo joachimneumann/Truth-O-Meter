@@ -10,16 +10,17 @@ import SwiftUI
 struct ShapeShifterView: View {
     var isGray: Bool
     var isCircle: Bool
+    var animate: Bool
     var down: () -> Void
     var up: () -> Void
     
     private let color = C.color.bullshitRed
     private let grayColor = C.color.lightGray
-
+    
     var body: some View {
-        
         let color = isGray ? grayColor : color
-        GeometryReader { geo in
+//        print("Shapeshifter gray=\(isGray) circle=\(isCircle)")
+        return GeometryReader { geo in
             let w = min(geo.size.width, geo.size.height)
             VStack {
                 Spacer(minLength: 0)
@@ -28,7 +29,10 @@ struct ShapeShifterView: View {
                     Rectangle()
                         .cornerRadius(isCircle ? w/2 : w/14)
                         .padding(isCircle ? 0 : w/4)
-                        .animation(.linear(duration: C.timing.shapeShiftAnimationTime))
+                        .animation(
+                            .linear(
+                                duration:
+                                animate ? C.timing.shapeShiftAnimationTime : 0))
                         .foregroundColor(color)
                         .aspectRatio(contentMode: .fit)
                         .gesture(
@@ -52,6 +56,7 @@ struct ShapeShifter_Previews: PreviewProvider {
         return ShapeShifterView(
             isGray: false,
             isCircle: false,
+            animate: true,
             down: f,
             up: f)
     }

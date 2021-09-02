@@ -30,58 +30,56 @@ struct AllDisksView: View {
         }
     }
     func upPressed(_ precision: Precision) {
-        if circle {
-
-            displayColorful = true
-
-            settings.grayPrecision = precision
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
-                showRing = false
-                showRingWithProgress = true
-            }
-
-            var newNeedleValue = 0.5
-            switch precision {
-            case .bullsEye:
-                newNeedleValue = 0.00
-            case .inner:
-                newNeedleValue = 0.25
-            case .middle:
-                newNeedleValue = 0.50
-            case .outer:
-                newNeedleValue = 0.75
-            case .edge:
-                newNeedleValue = 1.00
-            }
-
-            if isSetting {
-                needle.setValue(newNeedleValue)
-                needle.active(true, strongNoise: false)
-                settings.grayPrecision = precision
-            } else {
+        let newNeedleValue: Double
+        switch precision {
+        case .bullsEye:
+            newNeedleValue = 0.00
+        case .inner:
+            newNeedleValue = 0.25
+        case .middle:
+            newNeedleValue = 0.50
+        case .outer:
+            newNeedleValue = 0.75
+        case .edge:
+            newNeedleValue = 1.00
+        }
+        if isSetting {
+//            needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+            needle.active(false, strongNoise: false)
+//            settings.grayPrecision = precision
+//            needle.setValue(newNeedleValue)
+//            needle.active(true, strongNoise: false)
+        } else {
+            if circle {
+                displayColorful = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
+                    showRing = false
+                    showRingWithProgress = true
+                }
                 needle.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
                 needle.active(true, strongNoise: true)
                 pale = false
                 circle = false
                 disksHidden = true
             }
-
         }
     }
+    
     var body: some View {
+        print("AllDisksView pale \(pale)")
         return GeometryReader { geo in
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {
                 ShapeShifterView(
                     isGray: isSetting && settings.grayPrecision == .edge,
                     isCircle: circle,
+                    animate: !isSetting,
                     down: downPressed,
                     up: {
                         upPressed(.edge)
                     })
-                    .opacity(pale ? 0.3 : 1.0)
-                    .animation(.linear(duration: C.timing.paleAnimationTime))
+                    .opacity(pale&&circle ? 0.3 : 1.0)
+                    .animation(.linear(duration: isSetting ? 0 : C.timing.paleAnimationTime))
                 ForEach(disks.disks) { disk in
                     DiskView(
                         isOpaque: !pale && circle,

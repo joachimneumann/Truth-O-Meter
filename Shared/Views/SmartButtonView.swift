@@ -36,7 +36,9 @@ struct SmartButtonView: View {
     }
     
     var body: some View {
-        GeometryReader { geo in
+        print("SmartButton")
+        return
+            GeometryReader { geo in
             let linewidth = min(geo.size.width, geo.size.height) * C.button.outerRingWidth
             if showRing {
                 Circle()

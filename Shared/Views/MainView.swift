@@ -36,6 +36,7 @@ struct AnalysisView: View {
             HorizontalProgressBar(value: value)
                 .frame(height: 5)
                     .onReceive(timer) { input in
+//                        print("HorizontalProgressBar value = \(value)")
                         value += CGFloat(C.timing.analyseTimeIncrement/settings.analysisTime)
                         if value >= 1.0 {
                             showAnalysisView = false

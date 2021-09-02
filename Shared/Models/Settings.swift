@@ -15,6 +15,7 @@ class Settings: ObservableObject {
         didSet {
             settingPrecision = grayPrecision
             objectWillChange.send()
+            print("Settings gray send()")
         }
     }
     var title: String {
@@ -24,6 +25,7 @@ class Settings: ObservableObject {
         set {
             settingsData.setTitle(newValue)
             objectWillChange.send()
+            print("Settings title send()")
         }
     }
     
@@ -38,6 +40,7 @@ class Settings: ObservableObject {
         set {
             settingsData.setTop(top: newValue, forPrecision: settingPrecision)
             objectWillChange.send()
+            print("Settings stampTop send()")
         }
     }
     
@@ -48,6 +51,7 @@ class Settings: ObservableObject {
         set {
             settingsData.setBottom(bottom: newValue, forPrecision: settingPrecision)
             objectWillChange.send()
+            print("Settings stampBottom send()")
         }
     }
 
@@ -58,6 +62,7 @@ class Settings: ObservableObject {
         set {
             settingsData.selectedThemeIndex = newValue
             objectWillChange.send()
+            print("Settings themeIndex send()")
         }
     }
     var themeNames: [ThemeName] {
