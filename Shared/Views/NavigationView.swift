@@ -5,6 +5,9 @@
 //  Created by Joachim Neumann on 31/08/2021.
 //
 
+// "normal" iOS navigation does not work in MacOS
+// Therefore, I write my own very simple navigation
+
 import SwiftUI
 
 enum NavigationEnum {

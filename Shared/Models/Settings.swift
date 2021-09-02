@@ -43,6 +43,7 @@ class Settings: ObservableObject {
     }
     
     var nonNilStampBottom: String {
+        // needed for binding in TextField
         get {
             stampBottom ?? ""
         }

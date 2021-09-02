@@ -6,6 +6,7 @@
 //
 
 // cross platform image for macOS and iOS
+// from https://www.alfianlosari.com/posts/building-cross-platform-swiftui-ios-macos-app/
 
 import SwiftUI
 

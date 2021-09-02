@@ -144,9 +144,9 @@
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
+				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 				AAE4C2E126E06F6900FE043B /* Needle.swift */,
 				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
-				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
