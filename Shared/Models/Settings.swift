@@ -9,11 +9,11 @@ import Foundation
 
 class Settings: ObservableObject {
     private var settingsData = SettingsData()
-    private var settingPrecision: Precision
+    private var privatePrecision: Precision
     
-    var grayPrecision: Precision {
+    var precision: Precision {
         didSet {
-            settingPrecision = grayPrecision
+            privatePrecision = precision
             objectWillChange.send()
             print("Settings gray send()")
         }
@@ -35,21 +35,25 @@ class Settings: ObservableObject {
     
     var stampTop: String {
         get {
-            settingsData.seletedTheme.top(forPrecision: settingPrecision)
+            settingsData.seletedTheme.top(forPrecision: privatePrecision)
         }
         set {
-            settingsData.setTop(top: newValue, forPrecision: settingPrecision)
+            settingsData.setTop(top: newValue, forPrecision: privatePrecision)
             objectWillChange.send()
             print("Settings stampTop send()")
         }
     }
     
-    var stampBottom: String? {
+    var stampBottom: String {
         get {
-            settingsData.seletedTheme.bottom(forPrecision: settingPrecision)
+            settingsData.seletedTheme.bottom(forPrecision: privatePrecision) ?? ""
         }
         set {
-            settingsData.setBottom(bottom: newValue, forPrecision: settingPrecision)
+            if newValue == "" {
+                settingsData.setBottom(bottom: nil, forPrecision: privatePrecision)
+            } else {
+                settingsData.setBottom(bottom: newValue, forPrecision: privatePrecision)
+            }
             objectWillChange.send()
             print("Settings stampBottom send()")
         }
@@ -104,8 +108,8 @@ class Settings: ObservableObject {
     init() {
         listenTimingIndex = settingsData.listenTimingIndex
         analysisTimingIndex = settingsData.analysisTimingIndex
-        grayPrecision = .middle
-        settingPrecision = grayPrecision
+        precision = .middle
+        privatePrecision = precision
     }
     
     /*
