@@ -73,7 +73,7 @@ class Settings: ObservableObject {
         set {
             settingsData.selectedThemeIndex = newValue
             objectWillChange.send()
-            print("Settings themeIndex send()")
+//            print("Settings themeIndex send() with newValue  \(newValue)")
         }
     }
     var themeNames: [ThemeName] {

@@ -14,10 +14,24 @@ struct ThemeName: Identifiable {
 }
 
 struct SettingsData {
-    
     init() {
+        let t = UserDefaults.standard.string(forKey: C.key.custom.title) ?? ""
+//        print("title \(t) read from userdefaults")
+        self.custom = Theme(
+            id: 3,
+            title: t, //UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
+            edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "",
+                             UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? ""),
+            outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "",
+                             UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? ""),
+            middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "",
+                             UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? ""),
+            inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "",
+                             UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? ""),
+            bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "",
+                             UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? ""),
+            isCustomisable: true)
     }
-    
     mutating func setTop(top: String, forPrecision precision: Precision) {
         custom.setTop(top, forPrecision: precision)
     }
@@ -49,9 +63,10 @@ struct SettingsData {
 
     
     var seletedTheme: Theme {
-        if selectedThemeIndex == 0 { return bullshit }
-        if selectedThemeIndex == 1 { return truth }
-        if selectedThemeIndex == 2 { return singing }
+        let s = selectedThemeIndex
+        if s == 0 { return bullshit }
+        if s == 1 { return truth }
+        if s == 2 { return singing }
         return custom
     }
     
@@ -129,18 +144,5 @@ struct SettingsData {
         bullsEye: Theme.StampTexts("flimsy", nil),
         isCustomisable: false)
 
-    var custom = Theme(
-        id: 3,
-        title: UserDefaults.standard.string(forKey: C.key.custom.title) ?? "",
-        edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.edge.top)     ?? "",
-                         UserDefaults.standard.string(forKey: C.key.custom.edge.bottom)      ?? ""),
-        outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.outer.top)    ?? "",
-                         UserDefaults.standard.string(forKey: C.key.custom.outer.bottom)     ?? ""),
-        middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.middle.top)   ?? "",
-                         UserDefaults.standard.string(forKey: C.key.custom.middle.bottom)    ?? ""),
-        inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.inner.top)    ?? "",
-                         UserDefaults.standard.string(forKey: C.key.custom.inner.bottom)     ?? ""),
-        bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: C.key.custom.bullsEye.top) ?? "",
-                         UserDefaults.standard.string(forKey: C.key.custom.bullsEye.bottom)  ?? ""),
-        isCustomisable: true)
+    var custom: Theme
 }
