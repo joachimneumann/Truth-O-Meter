@@ -33,6 +33,7 @@ struct C {
         static let analyseTimeIncrement    = 0.02
         static var shapeShiftAnimationTime: Double {
             get {
+                // this is hack, because the view was animated on MacOS
                 if firstTime {
                     firstTime = false
                     return 0

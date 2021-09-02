@@ -47,10 +47,18 @@ struct DisplayView: View {
                 NeedleView()
                     .clipped()
                     .opacity(0.5)
+                #if os(iOS)
                 TextField("", text: $settings.title, onEditingChanged: { edit in
                     self.editing = edit
                 })
                 .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
+                #elseif os(macOS)
+                TextField("", text: $settings.title)
+                    .disableAutocorrection(true)
+                    .multilineTextAlignment(TextAlignment.center)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
+                #endif
             } else {
                 DisplayBackground(colorful: colorful)
                 Text(settings.title)

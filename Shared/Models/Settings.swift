@@ -79,8 +79,22 @@ class Settings: ObservableObject {
         settingsData.themeNames
     }
 
-    var listenTimingIndex: Int
-    var analysisTimingIndex: Int = 0
+    var listenTimingIndex: Int {
+        get {
+            settingsData.listenTimingIndex
+        }
+        set {
+            settingsData.listenTimingIndex = newValue
+        }
+    }
+    var analysisTimingIndex: Int {
+        get {
+            settingsData.analysisTimingIndex
+        }
+        set {
+            settingsData.analysisTimingIndex = newValue
+        }
+    }
     
     var listenTime: Double {
         settingsData.listenTime
@@ -95,9 +109,9 @@ class Settings: ObservableObject {
     var listenTimeStrings: [String] {
         get {
             var ret = [String]()
-            ret.append("\(settingsData.listenTimes[0]) sec")
-            ret.append("\(settingsData.listenTimes[1]) sec")
-            ret.append("\(settingsData.listenTimes[2]) sec")
+            ret.append("\(settingsData.waitTimes[0]) sec")
+            ret.append("\(settingsData.waitTimes[1]) sec")
+            ret.append("\(settingsData.waitTimes[2]) sec")
             return ret
         }
     }
@@ -112,8 +126,6 @@ class Settings: ObservableObject {
     }
 
     init() {
-        listenTimingIndex = settingsData.listenTimingIndex
-        analysisTimingIndex = settingsData.analysisTimingIndex
         precision = .middle
     }
 }

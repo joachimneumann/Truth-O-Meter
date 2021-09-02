@@ -56,6 +56,9 @@ struct AllDisksView: View {
                 pale = false
                 circle = false
                 disksHidden = true
+                // initially, set the needle a bit in the wrong direction
+                let wrongDirection = -0.15 * (newNeedleValue-0.5)
+                Needle.shared.setValue(0.5 + wrongDirection)
                 Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
                 Needle.shared.active(true, strongNoise: true)
             }

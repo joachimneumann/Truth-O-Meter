@@ -38,7 +38,11 @@ class Needle: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.setValue(self.privateValue + 0.6 * (newValue - self.privateValue))
         }
-        delay = 0.95 * totalTime
+        delay = 0.675 * totalTime
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.setValue(self.privateValue + 0.7 * (newValue - self.privateValue))
+        }
+        delay = 0.85 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.setValue(newValue)
         }

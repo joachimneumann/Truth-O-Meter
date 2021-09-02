@@ -88,7 +88,6 @@ struct Stamp_Previews: PreviewProvider {
         VStack {
             Spacer()
             Stamp(top: "top", bottom: "bottom", rotated: true)
-                .background(Color.yellow)
             Spacer()
         }
     }

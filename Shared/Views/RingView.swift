@@ -28,7 +28,7 @@ struct RingView: View {
                 .trim(from: 0, to: value)
                 .stroke(C.color.bullshitRed, lineWidth: width)
                 .rotationEffect(Angle(degrees:-90))
-                .animation(.linear(duration: settings.analysisTime))
+                .animation(.linear(duration: settings.listenTime))
         }
         .onAppear {
             value = 1.0

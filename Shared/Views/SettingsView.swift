@@ -48,8 +48,9 @@ struct ThemeCell: View {
     var isCustom: Bool
     var body: some View {
         HStack {
-            Text(name == "" ? "Custom" :  name)
             if isSelected {
+                Text(name == "" ? "Custom" :  name)
+                    .font(.headline)
                 Group {
                     if isCustom {
                         Text("Edit")
@@ -65,6 +66,8 @@ struct ThemeCell: View {
                 .onTapGesture {
                     navigation = .detail
                 }
+            } else {
+                Text(name == "" ? "Custom" :  name)
             }
             Spacer()
             if isSelected {
@@ -108,15 +111,6 @@ struct SettingsView: View {
     @Binding var navigation: NavigationEnum
     var body: some View {
         ZStack (alignment: .topLeading) {
-            VStack(alignment: .leading) {
-                TimePicker()
-                Rectangle().fill(C.color.lightGray)
-                    .frame(height: 0.5)
-                    .padding(.leading)
-                ThemesList(navigation: $navigation, themeNames: settings.themeNames)
-                Spacer()
-            }
-            .padding(.top, 40)
             HStack(spacing: 0) {
                 Image(systemName: "chevron.backward")
                     .font(.system(size: 20))
@@ -126,8 +120,18 @@ struct SettingsView: View {
             .onTapGesture {
                 navigation = .main
             }
+            VStack(alignment: .leading) {
+                TimePicker()
+                Rectangle().fill(C.color.lightGray)
+                    .frame(height: 0.5)
+                    .padding(.leading)
+                ThemesList(navigation: $navigation, themeNames: settings.themeNames)
+                Spacer()
+            }
+            .padding(.top, 40)
             Spacer()
         }
+        .padding(.top, 10)
     }
 }
 

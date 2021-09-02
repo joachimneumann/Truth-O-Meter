@@ -63,19 +63,20 @@ struct SettingsData {
         custom.setTitle(newTitle)
     }
 
-    let listenTimes = [2, 4, 10]
+    let waitTimes = [2, 4, 10]
     var listenTime: Double {
-        Double(listenTimes[listenTimingIndex])
+        Double(waitTimes[listenTimingIndex])
     }
 
     let analysisTimes = [2, 4, 10]
     var analysisTime: Double {
-        Double(listenTimes[analysisTimingIndex])
+        Double(waitTimes[analysisTimingIndex])
     }
 
     var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
+                // not set? use middle value of [0, 1, 2]
                 UserDefaults.standard.set(1, forKey: C.key.listenTiming)
             }
             return UserDefaults.standard.integer(forKey: C.key.listenTiming)

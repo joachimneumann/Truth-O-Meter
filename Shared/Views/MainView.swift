@@ -65,10 +65,14 @@ struct MainView: View {
                 SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
                 Spacer()
             }
+            .padding(40)
             SettingsIcon(isHidden: $displayColorful, navigation: $navigation)
+                .padding(0)
         }
+        .edgesIgnoringSafeArea(.bottom)
         .accentColor(C.color.gray)
     }
+
 }
 
 
