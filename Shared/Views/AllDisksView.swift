@@ -12,6 +12,7 @@ struct AllDisksView: View {
     @Binding var displayColorful: Bool
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
+    @Binding var grayPrecision: Precision
     var isSetting: Bool
     
     @State private var pale: Bool = false
@@ -31,7 +32,7 @@ struct AllDisksView: View {
     
     func upPressed(_ precision: Precision) {
         let newNeedleValue = settings.needleValue(forPrecision: precision)
-        settings.precision = precision
+        grayPrecision = precision
         if isSetting {
             Needle.shared.active(true, strongNoise: false)
             Needle.shared.setValue(newNeedleValue)
@@ -62,7 +63,7 @@ struct AllDisksView: View {
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {
                 ShapeShifterView(
-                    isGray: isSetting && settings.precision == .edge,
+                    isGray: isSetting && grayPrecision == .edge,
                     isCircle: circle,
                     animate: !isSetting,
                     down: downPressed,
@@ -75,7 +76,7 @@ struct AllDisksView: View {
                     DiskView(
                         isOpaque: !pale && circle,
                         drawBorder: isSetting,
-                        isGray: isSetting && settings.precision == disk.precision,
+                        isGray: isSetting && grayPrecision == disk.precision,
                         down: downPressed,
                         up: {
                             upPressed(disk.precision)
@@ -94,6 +95,7 @@ struct Disks_Previews: PreviewProvider {
             displayColorful: .constant(true),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
+            grayPrecision: .constant(.middle),
             isSetting: false)
     }
 }

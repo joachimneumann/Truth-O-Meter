@@ -130,6 +130,11 @@ struct SettingsView: View {
                     .frame(height: 0.5)
                     .padding(.leading)
                 ThemesList(navigation: $navigation, themeNames: settings.themeNames)
+                Button("Show Instructions") {
+                    settings.navigation = .instructions
+                }
+                .padding(.top, 30)
+                .padding(.leading)
                 Spacer()
             }
             .padding(.top, 40)

@@ -8,14 +8,22 @@
 import Foundation
 
 class Settings: ObservableObject {
+    
+    @Published var navigation: NavigationEnum = .instructions
+    
     private var settingsData = SettingsData()
     
-    var precision: Precision {
-        didSet {
-            objectWillChange.send()
-            print("Settings gray send()")
-        }
+    var precision: Precision
+
+    func setPrecisionAndSend(_ newPrecision: Precision) {
+        precision = newPrecision
+        objectWillChange.send()
     }
+
+    func setPrecisionWithoutSend(_ newPrecision: Precision) {
+        precision = newPrecision
+    }
+
     var title: String {
         get {
             settingsData.title
@@ -144,5 +152,8 @@ class Settings: ObservableObject {
     init() {
         precision = .middle
         Needle.shared.setValue(needleValue(forPrecision: precision))
+        if UserDefaults.standard.bool(forKey: C.key.instructionGiven) {
+            navigation = .main
+        }
     }
 }

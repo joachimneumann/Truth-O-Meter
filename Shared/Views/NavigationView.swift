@@ -11,19 +11,21 @@
 import SwiftUI
 
 enum NavigationEnum {
-    case main, settings, detail
+    case main, settings, detail, instructions
 }
 
 struct NavigationView: View {
-    @State private var navigation: NavigationEnum = .main
+    @EnvironmentObject var settings: Settings
     var body: some View {
-        switch navigation {
+        switch settings.navigation {
         case .main:
-            MainView(navigation: $navigation)
+            MainView(navigation: $settings.navigation)
         case .settings:
-            SettingsView(navigation: $navigation)
+            SettingsView(navigation: $settings.navigation)
         case .detail:
-            SettingsDetailView(navigation: $navigation, displayTitle: .constant("ss"))
+            SettingsDetailView(navigation: $settings.navigation, displayTitle: .constant("ss"))
+        case .instructions:
+            InstructionView(navigation: $settings.navigation)
         }
     }
 }
@@ -31,5 +33,6 @@ struct NavigationView: View {
 struct NavigationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView()
+            .environmentObject(Settings())
     }
 }
