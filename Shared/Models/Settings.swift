@@ -125,8 +125,24 @@ class Settings: ObservableObject {
             return ret
         }
     }
+    
+    func needleValue(forPrecision precision: Precision) -> Double {
+        switch precision {
+        case .bullsEye:
+            return 0.00
+        case .inner:
+            return 0.25
+        case .middle:
+            return 0.50
+        case .outer:
+            return 0.75
+        case .edge:
+            return 1.00
+        }
+    }
 
     init() {
         precision = .middle
+        Needle.shared.setValue(needleValue(forPrecision: precision))
     }
 }

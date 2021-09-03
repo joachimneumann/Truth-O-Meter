@@ -47,8 +47,8 @@ struct SettingsData {
     
     var seletedTheme: Theme {
         let s = selectedThemeIndex
-        if s == 0 { return bullshit }
-        if s == 1 { return truth }
+        if s == 0 { return truth }
+        if s == 1 { return bullshit }
         if s == 2 { return singing }
         return custom
     }

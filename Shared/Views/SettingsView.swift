@@ -42,6 +42,7 @@ struct TimePicker: View {
 }
 
 struct ThemeCell: View {
+    @EnvironmentObject var settings: Settings
     @Binding var navigation: NavigationEnum
     var name: String
     var isSelected: Bool
@@ -65,6 +66,7 @@ struct ThemeCell: View {
                 .foregroundColor(C.color.bullshitRed)
                 .onTapGesture {
                     navigation = .detail
+                    Needle.shared.active(true)
                 }
             } else {
                 Text(name == "" ? "Custom" :  name)
@@ -119,6 +121,8 @@ struct SettingsView: View {
             .padding(.leading)
             .onTapGesture {
                 navigation = .main
+                Needle.shared.active(false)
+                Needle.shared.setValue(0.5)
             }
             VStack(alignment: .leading) {
                 TimePicker()

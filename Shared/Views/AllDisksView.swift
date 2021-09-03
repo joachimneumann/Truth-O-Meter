@@ -28,20 +28,9 @@ struct AllDisksView: View {
             }
         }
     }
+    
     func upPressed(_ precision: Precision) {
-        let newNeedleValue: Double
-        switch precision {
-        case .bullsEye:
-            newNeedleValue = 0.00
-        case .inner:
-            newNeedleValue = 0.25
-        case .middle:
-            newNeedleValue = 0.50
-        case .outer:
-            newNeedleValue = 0.75
-        case .edge:
-            newNeedleValue = 1.00
-        }
+        let newNeedleValue = settings.needleValue(forPrecision: precision)
         settings.precision = precision
         if isSetting {
             Needle.shared.active(true, strongNoise: false)
@@ -61,6 +50,8 @@ struct AllDisksView: View {
                 Needle.shared.setValue(0.5 + wrongDirection)
                 Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
                 Needle.shared.active(true, strongNoise: true)
+            } else {
+                Needle.shared.active(false)
             }
         }
     }
