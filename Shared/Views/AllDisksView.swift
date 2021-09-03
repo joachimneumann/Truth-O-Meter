@@ -58,7 +58,7 @@ struct AllDisksView: View {
     }
     
     var body: some View {
-        print("AllDisksView pale \(pale)")
+        // print("AllDisksView pale \(pale)")
         return GeometryReader { geo in
             let radius = min(geo.size.width, geo.size.height) / 2
             ZStack {

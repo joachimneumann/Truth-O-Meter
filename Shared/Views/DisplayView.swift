@@ -37,7 +37,7 @@ struct DisplayView: View {
     @State private var editing = false
         
     var body: some View {
-        print("redrawing Display, colorful = \(String(colorful))")
+        // print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         return ZStack {

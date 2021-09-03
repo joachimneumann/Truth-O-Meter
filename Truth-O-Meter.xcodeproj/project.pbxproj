@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,7 +55,6 @@
 		AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AAE4C2E226E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
 		AAE4C2E326E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
-		AAE4C2E726E226AD00FE043B /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = AAE4C2E626E226AD00FE043B /* SwiftUITooltip */; };
 		AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E826E2281F00FE043B /* InstructionView.swift */; };
 		AAE4C2EA26E2282000FE043B /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E826E2281F00FE043B /* InstructionView.swift */; };
 /* End PBXBuildFile section */
@@ -99,7 +98,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAE4C2E726E226AD00FE043B /* SwiftUITooltip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +221,6 @@
 			);
 			name = "Truth-O-Meter (iOS)";
 			packageProductDependencies = (
-				AAE4C2E626E226AD00FE043B /* SwiftUITooltip */,
 			);
 			productName = "Truth-O-Meter (iOS)";
 			productReference = AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */;
@@ -273,7 +270,6 @@
 			);
 			mainGroup = AA2B352C255AA99300AD0B14;
 			packageReferences = (
-				AAE4C2E526E226AD00FE043B /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
 			);
 			productRefGroup = AA2B353A255AA99400AD0B14 /* Products */;
 			projectDirPath = "";
@@ -609,25 +605,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AAE4C2E526E226AD00FE043B /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quassummanus/SwiftUI-Tooltip.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AAE4C2E626E226AD00FE043B /* SwiftUITooltip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AAE4C2E526E226AD00FE043B /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
-			productName = SwiftUITooltip;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA2B352D255AA99300AD0B14 /* Project object */;
 }
