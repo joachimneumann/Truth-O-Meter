@@ -51,7 +51,6 @@ struct SmartButtonView: View {
                     displayColorful: $displayColorful,
                     showRing: $showRing,
                     showRingWithProgress: $showRingWithProgress,
-                    grayPrecision: $settings.precision,
                     isSetting: false)
                     .padding(linewidth * 1.5)
             }

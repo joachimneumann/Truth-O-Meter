@@ -39,7 +39,6 @@ struct SettingsDetailView: View {
                     displayColorful: .constant(true),
                     showRing: .constant(false),
                     showRingWithProgress: .constant(false),
-                    grayPrecision: $settings.precision,
                     isSetting: true)
                     //                        .frame(height: geo.size.height * 0.39)
                     .padding(.bottom, 20)

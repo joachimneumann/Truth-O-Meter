@@ -13,16 +13,7 @@ class Settings: ObservableObject {
     
     private var settingsData = SettingsData()
     
-    var precision: Precision
-
-    func setPrecisionAndSend(_ newPrecision: Precision) {
-        precision = newPrecision
-        objectWillChange.send()
-    }
-
-    func setPrecisionWithoutSend(_ newPrecision: Precision) {
-        precision = newPrecision
-    }
+    @Published var precision: Precision
 
     var title: String {
         get {

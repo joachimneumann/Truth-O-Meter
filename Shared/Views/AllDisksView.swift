@@ -12,7 +12,7 @@ struct AllDisksView: View {
     @Binding var displayColorful: Bool
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
-    @Binding var grayPrecision: Precision
+    @State var grayPrecision: Precision = .middle
     var isSetting: Bool
     
     @State private var pale: Bool = false
@@ -33,6 +33,7 @@ struct AllDisksView: View {
     func upPressed(_ precision: Precision) {
         let newNeedleValue = settings.needleValue(forPrecision: precision)
         grayPrecision = precision
+        settings.precision = precision
         if isSetting {
             Needle.shared.active(true, strongNoise: false)
             Needle.shared.setValue(newNeedleValue)
@@ -95,7 +96,6 @@ struct Disks_Previews: PreviewProvider {
             displayColorful: .constant(true),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
-            grayPrecision: .constant(.middle),
             isSetting: false)
     }
 }
