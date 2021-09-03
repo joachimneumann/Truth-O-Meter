@@ -13,13 +13,13 @@ struct Truth_O_MeterApp: App {
         let settings = Settings()
         return WindowGroup {
             #if os(macOS)
-            NavigationView()
+            MainView()
                 .environmentObject(settings)
                 .frame(minWidth: 375, minHeight: 667)
                 .frame(maxWidth: 375, maxHeight: 667)
                 .background(Color.white)
             #else
-            NavigationView()
+            MainView()
                 .environmentObject(settings)
             #endif
         }

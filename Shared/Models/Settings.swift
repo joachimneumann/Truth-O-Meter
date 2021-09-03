@@ -8,9 +8,7 @@
 import Foundation
 
 class Settings: ObservableObject {
-    
-    @Published var navigation: NavigationEnum = .instructions
-    
+        
     private var settingsData = SettingsData()
     
     @Published var precision: Precision
@@ -144,7 +142,7 @@ class Settings: ObservableObject {
         precision = .middle
         Needle.shared.setValue(needleValue(forPrecision: precision))
         if UserDefaults.standard.bool(forKey: C.key.instructionGiven) {
-            navigation = .main
+//            navigation = .main
         }
     }
 }

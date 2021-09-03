@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct InstructionView: View {
-    @Binding var navigation: NavigationEnum
     var body: some View {
         return VStack {
             VStack {
@@ -28,9 +28,9 @@ struct InstructionView: View {
             }
             Spacer()
             VStack {
-                Button("OK, I got it") {
-                    UserDefaults.standard.setValue(true, forKey: C.key.instructionGiven)
-                    navigation = .main
+                PopView {
+                    Text("OK, I got it")
+                        .foregroundColor(.blue)
                 }
                 .padding(.bottom, 5)
                 Text("You can see this again in the settings")
@@ -41,10 +41,14 @@ struct InstructionView: View {
         .padding(.top, 20)
         .padding(20)
     }
+    
+    init() {
+        UserDefaults.standard.setValue(true, forKey: C.key.instructionGiven)
+    }
 }
 
 struct Instructions_Previews: PreviewProvider {
     static var previews: some View {
-        InstructionView(navigation: .constant(.instructions))
+        InstructionView()
     }
 }

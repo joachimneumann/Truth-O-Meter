@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct TimePicker: View {
     @EnvironmentObject var settings: Settings
@@ -43,7 +44,6 @@ struct TimePicker: View {
 
 struct ThemeCell: View {
     @EnvironmentObject var settings: Settings
-    @Binding var navigation: NavigationEnum
     var name: String
     var isSelected: Bool
     var isCustom: Bool
@@ -52,21 +52,22 @@ struct ThemeCell: View {
             if isSelected {
                 Text(name == "" ? "Custom" :  name)
                     .font(.headline)
-                Group {
-                    if isCustom {
-                        Text("Edit")
-                            .padding(.leading, 10)
-                            .font(.headline)
-                    } else {
-                        Image(systemName: "info.circle")
-                            .font(.title2.weight(.semibold))
+                PushView(destination: SettingsDetailView(displayTitle: $settings.title)) {
+                    Group {
+                        if isCustom {
+                            Text("Edit")
+                                .padding(.leading, 10)
+                                .font(.headline)
+                        } else {
+                            Image(systemName: "info.circle")
+                                .font(.title2.weight(.semibold))
+                        }
                     }
-                }
-                .contentShape(Rectangle())
-                .foregroundColor(C.color.bullshitRed)
-                .onTapGesture {
-                    navigation = .detail
-                    Needle.shared.active(true)
+                    .contentShape(Rectangle())
+                    .foregroundColor(C.color.bullshitRed)
+//                .onTapGesture {
+//                    Needle.shared.active(true)
+//                }
                 }
             } else {
                 Text(name == "" ? "Custom" :  name)
@@ -86,13 +87,11 @@ struct ThemeCell: View {
 
 struct ThemesList: View {
     @EnvironmentObject var settings: Settings
-    @Binding var navigation: NavigationEnum
     var themeNames: [ThemeName]
     var body: some View {
         VStack {
             ForEach(themeNames) { themeName in
                 ThemeCell(
-                    navigation: $navigation,
                     name: themeName.name,
                     isSelected: themeName.id == settings.selectedThemeIndex,
                     isCustom: themeName.isCustom)
@@ -110,28 +109,33 @@ struct ThemesList: View {
 
 struct SettingsView: View {
     @EnvironmentObject var settings: Settings
-    @Binding var navigation: NavigationEnum
     var body: some View {
         ZStack (alignment: .topLeading) {
-            HStack(spacing: 0) {
-                Image(systemName: "chevron.backward")
-                    .font(.system(size: 20))
-                Text("Back")
+            PopView {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20))
+                    Text("Back")
+                }
+                .foregroundColor(.blue)
+                .padding(.leading)
             }
-            .padding(.leading)
-            .onTapGesture {
-                navigation = .main
-                Needle.shared.active(false)
-                Needle.shared.setValue(0.5)
-            }
+//            .onTapGesture {
+//                navigation = .main
+//                Needle.shared.active(false)
+//                Needle.shared.setValue(0.5)
+//            }
             VStack(alignment: .leading) {
                 TimePicker()
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
-                ThemesList(navigation: $navigation, themeNames: settings.themeNames)
-                Button("Show Instructions") {
-                    settings.navigation = .instructions
+                ThemesList(themeNames: settings.themeNames)
+                PushView(destination: InstructionView()) {
+                    Text("Show Instructions")
+//                    {
+//                        settings.navigation = .instructions
+//                    }
                 }
                 .padding(.top, 30)
                 .padding(.leading)
@@ -146,7 +150,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(navigation: .constant(.settings))
+        SettingsView()
             .environmentObject(Settings())
             .padding(.top, 70)
     }

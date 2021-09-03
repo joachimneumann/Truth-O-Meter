@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct SettingsDetailView: View {
     @EnvironmentObject var settings: Settings
-    @Binding var navigation: NavigationEnum
     @Binding var displayTitle: String
     
     
     var body: some View {
         ZStack (alignment: .topLeading) {
-            HStack(spacing: 0) {
-                Image(systemName: "chevron.backward")
-                    .font(.system(size: 20))
-                Text("Back")
+            PopView {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20))
+                    Text("Back")
+                }
+                .padding(.leading)
             }
-            .padding(.leading)
-            .onTapGesture {
-                navigation = .settings
-            }
+//            .onTapGesture {
+//                navigation = .settings
+//            }
             VStack(alignment: .leading) {
                 DisplayView(colorful: true, editTitle: settings.isCustom)
                     .padding(.leading, 40)
@@ -53,7 +55,7 @@ struct SettingsDetailView: View {
 struct SettingsDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
-        return SettingsDetailView(navigation: .constant(NavigationEnum.detail), displayTitle: .constant("xx"))
+        return SettingsDetailView(displayTitle: .constant("xx"))
             .environmentObject(settings)
     }
 }

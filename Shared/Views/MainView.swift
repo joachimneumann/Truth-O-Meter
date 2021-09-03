@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct SettingsIcon: View {
     @Binding var isHidden: Bool
-    @Binding var navigation: NavigationEnum
     var body: some View {
         if !isHidden {
-            Image("settings")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30.0, height: 30.0)
-                .padding()
-                .onTapGesture {
-                    navigation = .settings
-                }
+            PushView(destination: SettingsView()) {
+                Image("settings")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 30.0, height: 30.0)
+                    .padding()
+            }
         }
     }
 }
@@ -28,7 +27,7 @@ struct AnalysisView: View {
     @EnvironmentObject var settings: Settings
     @Binding var showStampView: Bool
     @Binding var showAnalysisView: Bool
-
+    
     func animationFinished() {
         showAnalysisView = false
         showStampView = true
@@ -50,34 +49,34 @@ struct AnalysisView: View {
 
 struct MainView: View {
     @EnvironmentObject var settings: Settings
-    @Binding var navigation: NavigationEnum
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showStampView = false
-
+    
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            VStack {
-                DisplayView(colorful: displayColorful, editTitle: false)
-                if showAnalysisView {
-                    AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
+        NavigationStackView() {
+            ZStack(alignment: .bottomTrailing) {
+                VStack {
+                    DisplayView(colorful: displayColorful, editTitle: false)
+                    if showAnalysisView {
+                        AnalysisView(showStampView: $showStampView, showAnalysisView: $showAnalysisView)
+                    }
+                    SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
+                    Spacer()
                 }
-                SmartButtonView(displayColorful: $displayColorful, showAnalysisView: $showAnalysisView, showStampView: $showStampView)
-                Spacer()
+                .padding(40)
+                SettingsIcon(isHidden: $displayColorful)
+                    .padding(0)
             }
-            .padding(40)
-            SettingsIcon(isHidden: $displayColorful, navigation: $navigation)
-                .padding(0)
+            .edgesIgnoringSafeArea(.bottom)
+            .accentColor(C.color.gray)
         }
-        .edgesIgnoringSafeArea(.bottom)
-        .accentColor(C.color.gray)
     }
-
 }
 
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(navigation: .constant(.main))
+        MainView()
     }
 }
