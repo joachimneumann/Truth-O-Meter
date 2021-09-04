@@ -42,7 +42,6 @@ struct SettingsDetailView: View {
                     showRing: .constant(false),
                     showRingWithProgress: .constant(false),
                     isSetting: true)
-                    //                        .frame(height: geo.size.height * 0.39)
                     .padding(.bottom, 20)
             }
             .padding(.top, 40)
