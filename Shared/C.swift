@@ -66,7 +66,7 @@ struct C {
         // for compatibility with older app versions
         static let listenTiming         = "fastResponseTimeKey"
         static let analysisTiming       = "analysisTimingIndexkey"
-        static let selectedTheme        = "selectedThemeIndexKey"
+        static let selectedTheme        = "selectedThemeKey"
         struct custom {
             static let title          = "CustomiseddisplayTextkey"
             struct edge {

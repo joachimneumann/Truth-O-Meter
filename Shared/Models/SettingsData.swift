@@ -36,10 +36,9 @@ struct SettingsData {
     var themeNames: [ThemeName] {
         get {
             var ret = [ThemeName]()
-            ret.append(ThemeName(id: 0, name: truth.title,    isCustom: false))
-            ret.append(ThemeName(id: 1, name: bullshit.title, isCustom: false))
-            ret.append(ThemeName(id: 2, name: singing.title,  isCustom: false))
-            ret.append(ThemeName(id: 3, name: custom.title, isCustom: true))
+            ret.append(ThemeName(id: 0, name: bullshit.title, isCustom: false))
+            ret.append(ThemeName(id: 1, name: singing.title,  isCustom: false))
+            ret.append(ThemeName(id: 2, name: custom.title, isCustom: true))
             return ret
         }
     }
@@ -47,9 +46,8 @@ struct SettingsData {
     
     var seletedTheme: Theme {
         let s = selectedThemeIndex
-        if s == 0 { return truth }
-        if s == 1 { return bullshit }
-        if s == 2 { return singing }
+        if s == 0 { return bullshit }
+        if s == 1 { return singing }
         return custom
     }
     
@@ -95,16 +93,6 @@ struct SettingsData {
             UserDefaults.standard.set(newValue, forKey: C.key.analysisTiming)
         }
     }
-    
-    private let truth = Theme(
-        id: 1,
-        title: "Truth-O-Meter",
-        edge:     Theme.StampTexts("True", nil),
-        outer:    Theme.StampTexts("Mostly", "True"),
-        middle:   Theme.StampTexts("undecided", nil),
-        inner:    Theme.StampTexts("Bullshit", nil),
-        bullsEye: Theme.StampTexts("Absolute", "Bullshit"),
-        isCustomisable: false)
     
     private let bullshit = Theme(
         id: 0,
