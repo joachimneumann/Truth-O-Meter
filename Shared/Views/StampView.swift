@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Stamp: View {
+struct StampView: View {
     var top: String
     var bottom: String?
     var rotated = true
@@ -87,7 +87,7 @@ struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Stamp(top: "top", bottom: "bottom", rotated: true)
+            StampView(top: "top", bottom: "bottom", rotated: true)
             Spacer()
         }
     }
