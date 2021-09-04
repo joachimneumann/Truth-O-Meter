@@ -26,7 +26,7 @@ struct SmartButtonView: View {
     
     func stampTapped() {
         displayColorful = false
-        Needle.shared.active(false)
+        Needle.shared.active(false, strongNoise: false)
         Needle.shared.setValue(0.5)
         showRing = true
         showRingWithProgress = false
@@ -37,9 +37,9 @@ struct SmartButtonView: View {
     var body: some View {
         // print("SmartButton")
         return
-            GeometryReader { geo in
-                ZStack {
-                    let linewidth = min(geo.size.width, geo.size.height) * C.button.outerRingWidth
+            ZStack {
+                Group {
+                    let linewidth = settings.w * C.button.outerRingWidth
                     if showRing {
                         Circle()
                             .stroke(C.color.lightGray, lineWidth: linewidth)
@@ -52,17 +52,30 @@ struct SmartButtonView: View {
                             displayColorful: $displayColorful,
                             showRing: $showRing,
                             showRingWithProgress: $showRingWithProgress,
-                            isSetting: false,
-                            geoSize: geo.size)
+                            isSetting: false)
                             .padding(linewidth * 1.5)
                             .aspectRatio(contentMode: .fit)
                     }
-                    if showStampView {
-                        Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: true)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                stampTapped()
-                            }
+                }
+                .padding(40)
+                if showStampView {
+                    VStack(alignment: .center) {
+                        Spacer(minLength: 0)
+                        HStack(alignment: .center) {
+                            Spacer(minLength: 0)
+                            StampView(
+                                top: settings.stampTop,
+                                bottom: settings.stampBottom,
+                                rotated: true)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    stampTapped()
+                                }
+                                .padding(20)
+                            Spacer(minLength: 0)
+                        }
+                        .aspectRatio(1.3, contentMode: .fit)
+                        Spacer(minLength: 0)
                     }
                 }
             }

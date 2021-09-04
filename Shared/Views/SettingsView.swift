@@ -67,7 +67,7 @@ struct ThemeCell: View {
                 .contentShape(Rectangle())
                 .foregroundColor(C.color.bullshitRed)
                 .onTapGesture {
-                    Needle.shared.active(true)
+                    Needle.shared.active(true, strongNoise: false)
                     DispatchQueue.main.async {
                         self.navigationStack.push(SettingsDetailView(displayTitle: $settings.title), withId: Self.childID)
                     }
@@ -98,10 +98,10 @@ struct ThemesList: View {
                     name: themeName.name,
                     isSelected: themeName.id == settings.selectedThemeIndex,
                     isCustom: themeName.isCustom)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    settings.selectedThemeIndex = themeName.id
-                }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        settings.selectedThemeIndex = themeName.id
+                    }
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
@@ -113,20 +113,21 @@ struct ThemesList: View {
 struct SettingsView: View {
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var navigationStack: NavigationStack
+    
     var body: some View {
         ZStack (alignment: .topLeading) {
-                HStack(spacing: 0) {
-                    Image(systemName: "chevron.backward")
-                        .font(.system(size: 20))
-                    Text("Back")
-                }
-                .foregroundColor(.blue)
-                .padding(.leading)
-                .onTapGesture {
-                    self.navigationStack.pop()
-                    Needle.shared.active(false)
-                    Needle.shared.setValue(0.5)
-                }
+            HStack(spacing: 0) {
+                Image(systemName: "chevron.backward")
+                    .font(.system(size: 20))
+                Text("Back")
+            }
+            .foregroundColor(.blue)
+            .padding(.leading)
+            .onTapGesture {
+                self.navigationStack.pop()
+                Needle.shared.active(false, strongNoise: false)
+                Needle.shared.setValue(0.5)
+            }
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()

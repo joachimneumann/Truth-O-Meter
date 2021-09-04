@@ -13,6 +13,7 @@ let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
     @ObservedObject var needleValue = Needle.shared
+    var linewidth: CGFloat
 
     var body: some View {
         ZStack {
@@ -24,7 +25,7 @@ struct NeedleView: View {
                 let b = C.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
                     .stroke(self.needleValue.colorful ? C.color.bullshitRed : C.color.lightGray,
-                            style: StrokeStyle(lineWidth: C.needleLineWidth, lineCap: .round))
+                            style: StrokeStyle(lineWidth: linewidth*C.needleLineWidth, lineCap: .round))
             }
         }
         .aspectRatio(1.9, contentMode: .fit)
@@ -58,7 +59,7 @@ struct AnimatedPath: Shape {
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            NeedleView()
+            NeedleView(linewidth: 1)
         }
     }
 }

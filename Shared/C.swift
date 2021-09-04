@@ -26,6 +26,10 @@ struct C {
         static let outerRingWidth: CGFloat = 0.05
     }
     
+    struct macSize {
+        static let width:CGFloat  = 375
+        static let height:CGFloat = 667
+    }
     static var firstTime = true
     
     struct timing {
@@ -66,7 +70,7 @@ struct C {
         // for compatibility with older app versions
         static let listenTiming         = "fastResponseTimeKey"
         static let analysisTiming       = "analysisTimingIndexkey"
-        static let selectedTheme        = "selectedThemeKey"
+        static let selectedTheme        = "selectedTheme"
         struct custom {
             static let title          = "CustomiseddisplayTextkey"
             struct edge {

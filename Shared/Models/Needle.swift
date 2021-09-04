@@ -37,6 +37,7 @@ class Needle: ObservableObject {
     }
     
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
+        self.active(true, strongNoise: true)
         var delay = 0.25 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.setValue(self.privateValue + 0.3 * (newValue - self.privateValue))
@@ -47,15 +48,17 @@ class Needle: ObservableObject {
         }
         delay = 0.675 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.active(true, strongNoise: false)
             self.setValue(self.privateValue + 0.7 * (newValue - self.privateValue))
         }
         delay = 0.85 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.active(true, strongNoise: false)
             self.setValue(newValue)
         }
     }
 
-    func active(_ onOff: Bool, strongNoise: Bool = false) {
+    func active(_ onOff: Bool, strongNoise: Bool) {
         self.strongNoise = strongNoise
         if onOff {
             colorful = true

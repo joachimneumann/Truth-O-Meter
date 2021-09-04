@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ShapeShifterView: View {
+    @EnvironmentObject private var settings: Settings
     var isGray: Bool
     var down: () -> Void
     var up: () -> Void
@@ -20,12 +21,11 @@ struct ShapeShifterView: View {
     
     @State private var isDown = false
     var body: some View {
-        let w = min(geoSize.width, geoSize.height)
         ZStack {
             Rectangle()
                 .fill(isGray ? grayColor : color)
-                .cornerRadius(isCircle ? w/2 : w/14)
-                .padding(isCircle ? 0 : w/4)
+                .cornerRadius(isCircle ? settings.w/2 : settings.w/14)
+                .padding(isCircle ? 0 : settings.w/4)
                 .animation(.easeIn(duration: C.timing.shapeShiftAnimationTime), value: isCircle)
                 .gesture(
                     DragGesture(minimumDistance: 0)

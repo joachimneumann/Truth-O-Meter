@@ -7,13 +7,17 @@
 
 import Foundation
 import SwiftUI
-import NavigationStack
 
 class Settings: ObservableObject {
-    @EnvironmentObject private var navigationStack: NavigationStack
     private var settingsData = SettingsData()
     
     @Published var precision: Precision
+
+    #if os(iOS)
+    let w = UIScreen.main.bounds.width
+    #else
+    let w = C.macSize.width
+    #endif
 
     var title: String {
         get {

@@ -7,29 +7,42 @@
 
 import SwiftUI
 
+
 struct StampView: View {
-    var top: String
-    var bottom: String?
-    var rotated = true
+    let top: String
+    let bottom: String?
+    let rotated: Bool
     var body: some View {
-        VStack {
-            Spacer(minLength: 0)
-            HStack {
+        // we do not want texts that are only one or two characters long
+        // In this case, we pad with a space to the left and right
+        let _top    = top.count    < 3 ? " \(top) " : top
+        let _bottom = bottom == nil ? nil : (bottom!.count < 3 ? " \(bottom!) " : bottom!)
+        // TODO:
+        // Stangely, for bottom = "BB" the trailing space
+        // is not shown in the stamp
+        return Group {
+            VStack {
+                HStack {
+                    Spacer(minLength: 0)
+                }
                 Spacer(minLength: 0)
-                if top == "" && (bottom == "" || bottom == nil) {
-                    OneLine("(not set)", rotated ? -25.0 : 0.0)
-                } else if let b = bottom {
-                    if top != "" {
-                        TwoLines(top+"\n"+b, rotated ? -18.0 : 0.0)
+                HStack {
+                    Spacer(minLength: 0)
+                    if _top == "" && (_bottom == "" || _bottom == nil) {
+                        OneLine("(not set)", angle: rotated ? -25.0 : 0.0)
+                    } else if let b = _bottom {
+                        if _top != "" {
+                            TwoLines(_top, b, angle: rotated ? -18.0 : 0.0)
+                        } else {
+                            OneLine(b, angle: rotated ? -25.0 : 0.0)
+                        }
                     } else {
-                        OneLine(b, rotated ? -25.0 : 0.0)
+                        OneLine(_top, angle: rotated ? -25.0 : 0.0)
                     }
-                } else {
-                    OneLine(top, rotated ? -25.0 : 0.0)
+                    Spacer(minLength: 0)
                 }
                 Spacer(minLength: 0)
             }
-            Spacer(minLength: 0)
         }
     }
 }
@@ -43,52 +56,73 @@ struct Mask: View {
 }
 
 struct TwoLines: View {
-    var text: String
+    @EnvironmentObject private var settings: Settings
+    var text1: String
+    var text2: String
     var rotationAngle:Double
     var body: some View {
+        var f:CGFloat
+        let textCount = max(text1.count, text2.count)
+        let numberOfLetters: CGFloat = CGFloat(textCount) + 2.0
+        if textCount < 6 { f = 0.3 } else
+        { f = 2.2 / numberOfLetters }
+        let fontsize = settings.w * f
+        let linewidth = fontsize * 0.24
+        let text = text1+"\n"+text2
+        //        let linewidth = w * 0.06
+        //        let fontsize = w*0.25
         return Text(text)
-            .padding(10)
-            .font(.system(size: 500, weight: .bold))
-            .minimumScaleFactor(0.01)
-            .multilineTextAlignment(.center)
-            .lineSpacing(0)
-            .foregroundColor(C.color.bullshitRed)
             .lineLimit(2)
-            .padding(10)
-            .overlay(RoundedRectangle(cornerRadius: 20)
-                        .stroke(C.color.bullshitRed, lineWidth: 6))
-            .padding(25)
+            .fixedSize(horizontal: true, vertical: true)
+            .font(.system(size: fontsize, weight: .bold, design: .monospaced))
+            .padding(fontsize*0.3)
+            .overlay(RoundedRectangle(cornerRadius: linewidth*1.5)
+                        .stroke(C.color.bullshitRed, lineWidth: linewidth))
+            .foregroundColor(C.color.bullshitRed)
+            .padding(linewidth/2)
             .mask(Mask())
             .rotationEffect(Angle(degrees: rotationAngle))
     }
-    init(_ t: String, _ angle: Double) { text = t; rotationAngle = angle }
+    init(_ t1: String, _ t2: String, angle: Double) {
+        text1 = t1
+        text2 = t2
+        rotationAngle = angle
+    }
 }
 
 struct OneLine: View {
+    @EnvironmentObject private var settings: Settings
     var text: String
     var rotationAngle: Double
     var body: some View {
+        var f:CGFloat
+        let numberOfLetters: CGFloat = CGFloat(text.count) + 2.0
+        if text.count == 1 { f = 0.48 } else
+        if text.count == 2 { f = 0.45 } else
+        { f = 2.2 / numberOfLetters }
+        let fontsize = settings.w * f
+        let linewidth = fontsize * 0.24
         return Text(text)
-            .padding(15)
-            .font(.system(size: 500, weight: .bold))
-            .minimumScaleFactor(0.01)
+            .fixedSize(horizontal: true, vertical: true)
+            .font(.system(size: fontsize, weight: .bold, design: .monospaced))
+            .padding(fontsize*0.3)
+            .overlay(RoundedRectangle(cornerRadius: linewidth*1.5)
+                        .stroke(C.color.bullshitRed, lineWidth: linewidth))
             .foregroundColor(C.color.bullshitRed)
-            .lineLimit(1)
-            .overlay(RoundedRectangle(cornerRadius: 20)
-                        .stroke(C.color.bullshitRed, lineWidth: 6))
-            .padding(10)
+            .padding(linewidth/2)
             .mask(Mask())
             .rotationEffect(Angle(degrees: rotationAngle))
     }
-    init(_ t: String, _ angle: Double) { text = t; rotationAngle = angle }
+    init(_ t: String, angle: Double) { text = t; rotationAngle = angle }
 }
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            Spacer()
-            StampView(top: "top", bottom: "bottom", rotated: true)
-            Spacer()
-        }
+        StampView(top: "1", bottom: nil, rotated: false)
+            .background(Color.yellow)
+            .aspectRatio(1.3, contentMode: .fit)
+        StampView(top: "A", bottom: "BB", rotated: false)
+            .background(Color.yellow)
+            .aspectRatio(1.3, contentMode: .fit)
     }
 }

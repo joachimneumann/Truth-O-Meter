@@ -22,7 +22,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
             .multilineTextAlignment(TextAlignment.center)
             .lineLimit(1)
             .cornerRadius(cornerRadius)
-            .font(.headline)
+//            .font(.headline)
             .accentColor(C.color.gray)
             .foregroundColor(C.color.gray)
             .offset(y: 15)
@@ -40,11 +40,11 @@ struct DisplayView: View {
         // print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
-        return ZStack {
+        ZStack {
             if editTitle {
-                DisplayBackground(colorful: true)
+                DisplayBackground(linewidth: settings.w/320, colorful: true)
                     .opacity(0.5)
-                NeedleView()
+                NeedleView(linewidth: settings.w/320)
                     .clipped()
                     .opacity(0.5)
                 #if os(iOS)
@@ -52,6 +52,7 @@ struct DisplayView: View {
                     self.editing = edit
                 })
                 .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
+                .font(.system(size: settings.w * 0.07).bold())
                 #elseif os(macOS)
                 TextField("", text: $settings.title)
                     .disableAutocorrection(true)
@@ -60,12 +61,12 @@ struct DisplayView: View {
                     .padding(.trailing, 20)
                 #endif
             } else {
-                DisplayBackground(colorful: colorful)
+                DisplayBackground(linewidth: settings.w/320, colorful: colorful)
                 Text(settings.title)
-                    .offset(y: 15)
+                    .offset(y: settings.w*0.06)
                     .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
-                    .font(.headline)
-                NeedleView()
+                    .font(.system(size: settings.w * 0.07).bold())
+                NeedleView(linewidth: settings.w/320)
                     .clipped()
             }
         }
@@ -76,10 +77,18 @@ struct DisplayView: View {
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
-        return VStack {
-            DisplayView(colorful: true, editTitle: true)
-                .padding()
-                .environmentObject(settings)
+        return Group {
+            VStack {
+                DisplayView(colorful: true, editTitle: true)
+                    .padding()
+                    .environmentObject(settings)
+            }
+//            VStack {
+//                DisplayView(colorful: true, editTitle: true)
+//                    .padding()
+//                    .environmentObject(settings)
+//            }
+//            .previewDevice("iPhone 12")
         }
     }
 }

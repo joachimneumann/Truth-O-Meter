@@ -16,26 +16,37 @@ struct SettingsDetailView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack (alignment: .topLeading) {
-                    HStack(spacing: 0) {
-                        Image(systemName: "chevron.backward")
-                            .font(.system(size: 20))
-                        Text("Back")
-                    }
-                    .padding(.leading)
-                    .foregroundColor(.blue)
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20))
+                    Text("Back")
+                }
+                .foregroundColor(.blue)
+                .padding(.leading)
                 .onTapGesture {
                     self.navigationStack.pop()
                 }
                 VStack(alignment: .leading) {
                     DisplayView(colorful: true, editTitle: settings.isCustom)
+                        .padding(.top, 40)
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
                     if settings.isCustom {
                         EditableStampView()
                     } else {
-                        Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: false)
-                            .padding(.leading, 40)
-                            .padding(.trailing, 40)
+                        VStack(alignment: .center) {
+                            Spacer(minLength: 0)
+                            HStack(alignment: .center) {
+                                Spacer(minLength: 0)
+                                StampView(
+                                    top: settings.stampTop,
+                                    bottom: settings.stampBottom,
+                                    rotated: true)
+                                    .padding(20)
+                                Spacer(minLength: 0)
+                            }
+                            Spacer(minLength: 0)
+                        }
                     }
                     HStack {
                         Spacer()
@@ -43,15 +54,11 @@ struct SettingsDetailView: View {
                             displayColorful: .constant(true),
                             showRing: .constant(false),
                             showRingWithProgress: .constant(false),
-                            isSetting: true,
-                            geoSize: geo.size)
+                            isSetting: true)
                             .aspectRatio(contentMode: .fit)
-                            .padding(.bottom, 20)
                         Spacer()
                     }
                 }
-                .padding(.top, 40)
-                Spacer()
             }
             .padding(.top, 10)
         }
@@ -114,10 +121,10 @@ struct EditableStampView: View {
             #elseif os(macOS)
             Group {
                 TextField("top", text: $settings.stampTop)
-                .padding(.top, 24)
+                    .padding(.top, 24)
                 
                 TextField("Bottom", text: $settings.nonNilStampBottom)
-                .padding(.bottom, 12)
+                    .padding(.bottom, 12)
             }
             .padding(.leading, 20)
             .padding(.trailing, 20)

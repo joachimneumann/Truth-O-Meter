@@ -17,8 +17,8 @@ struct Truth_O_MeterApp: App {
             MainView()
                 .environmentObject(settings)
                 .environmentObject(NavigationStack())
-                .frame(minWidth: 375, minHeight: 667)
-                .frame(maxWidth: 375, maxHeight: 667)
+                .frame(minWidth: C.macSize.width, minHeight: C.macSize.width)
+                .frame(maxWidth: C.macSize.height, maxHeight: C.macSize.height)
                 .background(Color.white)
             #else
             MainView()

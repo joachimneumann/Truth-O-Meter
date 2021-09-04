@@ -13,7 +13,6 @@ struct AllDisksView: View {
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
     var isSetting: Bool
-    var geoSize: CGSize
     
     @State private var pale: Bool = false
     @State private var circle: Bool = true
@@ -52,7 +51,7 @@ struct AllDisksView: View {
                 Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
                 Needle.shared.active(true, strongNoise: true)
             } else {
-                Needle.shared.active(false)
+                Needle.shared.active(false, strongNoise: false)
             }
         }
     }
@@ -134,7 +133,6 @@ struct Disks_Previews: PreviewProvider {
             displayColorful: .constant(true),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
-            isSetting: false,
-            geoSize: CGSize(width: 100, height: 100))
+            isSetting: false)
     }
 }

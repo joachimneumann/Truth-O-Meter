@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct DisplayBackground: View {
+    var linewidth: CGFloat
     var colorful: Bool
 
     var body: some View {
         return ZStack {
-            let boldStrokeStyle = StrokeStyle(lineWidth: C.needleLineWidth, lineCap: .butt)
-            let fineStrokeStyle = StrokeStyle(lineWidth: 1, lineCap: .butt)
+            let boldStrokeStyle = StrokeStyle(lineWidth: linewidth*C.needleLineWidth, lineCap: .butt)
+            let fineStrokeStyle = StrokeStyle(lineWidth: linewidth, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
                         .stroke(colorful ? C.color.gray : C.color.lightGray, style: boldStrokeStyle)
@@ -28,7 +29,7 @@ struct DisplayBackground: View {
                         .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .stroke(C.color.lightGray, lineWidth: 2)
+                        .stroke(C.color.lightGray, lineWidth: linewidth*2)
                 }
         }
     }
@@ -110,8 +111,18 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(colorful: true)
-            .aspectRatio(1.9, contentMode: .fit)
-            .padding()
+        return Group {
+            VStack {
+                DisplayBackground(linewidth: 6, colorful: true)
+                    .aspectRatio(1.9, contentMode: .fit)
+                    .padding()
+            }
+            VStack {
+                DisplayBackground(linewidth: 2, colorful: true)
+                    .aspectRatio(1.9, contentMode: .fit)
+                    .padding()
+            }
+            .previewDevice("iPhone 12")
+        }
     }
 }
