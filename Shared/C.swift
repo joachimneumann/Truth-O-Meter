@@ -64,7 +64,6 @@ struct C {
     struct key {
         // some key names might seem stange, but this is
         // for compatibility with older app versions
-        static let instructionGiven     = "instructionGivenKey"
         static let listenTiming         = "fastResponseTimeKey"
         static let analysisTiming       = "analysisTimingIndexkey"
         static let selectedTheme        = "selectedThemeIndexKey"

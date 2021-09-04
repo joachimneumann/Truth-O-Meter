@@ -13,41 +13,48 @@ struct SettingsDetailView: View {
     @EnvironmentObject private var navigationStack: NavigationStack
     @Binding var displayTitle: String
     
-    
     var body: some View {
-        ZStack (alignment: .topLeading) {
-                HStack(spacing: 0) {
-                    Image(systemName: "chevron.backward")
-                        .font(.system(size: 20))
-                    Text("Back")
+        GeometryReader { geo in
+            ZStack (alignment: .topLeading) {
+                    HStack(spacing: 0) {
+                        Image(systemName: "chevron.backward")
+                            .font(.system(size: 20))
+                        Text("Back")
+                    }
+                    .padding(.leading)
+                    .foregroundColor(.blue)
+                .onTapGesture {
+                    self.navigationStack.pop()
                 }
-                .padding(.leading)
-                .foregroundColor(.blue)
-            .onTapGesture {
-                self.navigationStack.pop()
-            }
-            VStack(alignment: .leading) {
-                DisplayView(colorful: true, editTitle: settings.isCustom)
-                    .padding(.leading, 40)
-                    .padding(.trailing, 40)
-                if settings.isCustom {
-                    EditableStampView()
-                } else {
-                    Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: false)
+                VStack(alignment: .leading) {
+                    DisplayView(colorful: true, editTitle: settings.isCustom)
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
+                    if settings.isCustom {
+                        EditableStampView()
+                    } else {
+                        Stamp(top: settings.stampTop, bottom: settings.stampBottom, rotated: false)
+                            .padding(.leading, 40)
+                            .padding(.trailing, 40)
+                    }
+                    HStack {
+                        Spacer()
+                        AllDisksView(
+                            displayColorful: .constant(true),
+                            showRing: .constant(false),
+                            showRingWithProgress: .constant(false),
+                            isSetting: true,
+                            geoSize: geo.size)
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.bottom, 20)
+                        Spacer()
+                    }
                 }
-                AllDisksView(
-                    displayColorful: .constant(true),
-                    showRing: .constant(false),
-                    showRingWithProgress: .constant(false),
-                    isSetting: true)
-                    .padding(.bottom, 20)
+                .padding(.top, 40)
+                Spacer()
             }
-            .padding(.top, 40)
-            Spacer()
+            .padding(.top, 10)
         }
-        .padding(.top, 10)
     }
 }
 

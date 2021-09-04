@@ -13,6 +13,7 @@ struct AllDisksView: View {
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool
     var isSetting: Bool
+    var geoSize: CGSize
     
     @State private var pale: Bool = false
     @State private var circle: Bool = true
@@ -69,18 +70,58 @@ struct AllDisksView: View {
                     },
                     isCircle: circle,
                     geoSize: geo.size)
-                    .aspectRatio(contentMode: .fit)
-                ForEach(disks.disks) { disk in
-                    DiskView(
-                        isOpaque: !pale && circle,
-                        drawBorder: isSetting,
-                        isGray: isSetting && settings.precision == disk.precision,
-                        down: downPressed,
-                        up: {
-                            upPressed(disk.precision)
-                        })
-                        .padding(disk.padding(radius: radius))
-                }
+                DiskView(
+                    isOpaque: !pale && circle,
+                    drawBorder: isSetting,
+                    isGray: isSetting && settings.precision == disks.disks[0].precision,
+                    down: downPressed,
+                    up: {
+                        upPressed(disks.disks[0].precision)
+                    })
+                    .padding(disks.disks[0].padding(radius: radius))
+                DiskView(
+                    isOpaque: !pale && circle,
+                    drawBorder: isSetting,
+                    isGray: isSetting && settings.precision == disks.disks[1].precision,
+                    down: downPressed,
+                    up: {
+                        upPressed(disks.disks[1].precision)
+                    })
+                    .padding(disks.disks[1].padding(radius: radius))
+                DiskView(
+                    isOpaque: !pale && circle,
+                    drawBorder: isSetting,
+                    isGray: isSetting && settings.precision == disks.disks[2].precision,
+                    down: downPressed,
+                    up: {
+                        upPressed(disks.disks[2].precision)
+                    })
+                    .padding(disks.disks[2].padding(radius: radius))
+                DiskView(
+                    isOpaque: !pale && circle,
+                    drawBorder: isSetting,
+                    isGray: isSetting && settings.precision == disks.disks[3].precision,
+                    down: downPressed,
+                    up: {
+                        upPressed(disks.disks[3].precision)
+                    })
+                    .padding(disks.disks[3].padding(radius: radius))
+                
+//                TODO: make ForEach work
+//                Current problem: during the back animation,
+//                they appear at the screen center
+//
+//                ForEach(disks.disks) { disk in
+//                    DiskView(
+//                        isOpaque: !pale && circle,
+//                        drawBorder: isSetting,
+//                        isGray: isSetting && settings.precision == disk.precision,
+//                        down: downPressed,
+//                        up: {
+//                            upPressed(disk.precision)
+//                        })
+//                        .padding(disk.padding(radius: radius))
+//                }
             }
         }
     }
@@ -93,6 +134,7 @@ struct Disks_Previews: PreviewProvider {
             displayColorful: .constant(true),
             showRing: .constant(false),
             showRingWithProgress: .constant(false),
-            isSetting: false)
+            isSetting: false,
+            geoSize: CGSize(width: 100, height: 100))
     }
 }

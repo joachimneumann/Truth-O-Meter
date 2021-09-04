@@ -128,14 +128,24 @@ struct SettingsView: View {
                     Needle.shared.setValue(0.5)
                 }
             VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    Text("Show Instructions")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            DispatchQueue.main.async {
+                                self.navigationStack.push(InstructionView(), withId: "InstructionView")
+                            }
+                        }
+                    Spacer()
+                }
+                .padding(.top, 20)
+                .padding(.bottom, 40)
                 TimePicker()
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
                 ThemesList(themeNames: settings.themeNames)
-                Text("Show Instructions")
-                .padding(.top, 30)
-                .padding(.leading)
                 Spacer()
             }
             .padding(.top, 40)
