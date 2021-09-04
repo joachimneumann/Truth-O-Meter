@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
+import NavigationStack
 
 class Settings: ObservableObject {
-        
+    @EnvironmentObject private var navigationStack: NavigationStack
     private var settingsData = SettingsData()
     
     @Published var precision: Precision
@@ -141,8 +143,5 @@ class Settings: ObservableObject {
     init() {
         precision = .middle
         Needle.shared.setValue(needleValue(forPrecision: precision))
-        if UserDefaults.standard.bool(forKey: C.key.instructionGiven) {
-//            navigation = .main
-        }
     }
 }

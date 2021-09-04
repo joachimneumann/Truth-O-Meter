@@ -9,7 +9,7 @@ import SwiftUI
 import NavigationStack
 
 struct TimePicker: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     var body: some View {
         VStack(alignment: .leading) {
             HStack  {
@@ -43,7 +43,9 @@ struct TimePicker: View {
 }
 
 struct ThemeCell: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var navigationStack: NavigationStack
+    private static let childID = "SetingsDetailView"
     var name: String
     var isSelected: Bool
     var isCustom: Bool
@@ -52,22 +54,23 @@ struct ThemeCell: View {
             if isSelected {
                 Text(name == "" ? "Custom" :  name)
                     .font(.headline)
-                PushView(destination: SettingsDetailView(displayTitle: $settings.title)) {
-                    Group {
-                        if isCustom {
-                            Text("Edit")
-                                .padding(.leading, 10)
-                                .font(.headline)
-                        } else {
-                            Image(systemName: "info.circle")
-                                .font(.title2.weight(.semibold))
-                        }
+                Group {
+                    if isCustom {
+                        Text("Edit")
+                            .padding(.leading, 10)
+                            .font(.headline)
+                    } else {
+                        Image(systemName: "info.circle")
+                            .font(.title2.weight(.semibold))
                     }
-                    .contentShape(Rectangle())
-                    .foregroundColor(C.color.bullshitRed)
-//                .onTapGesture {
-//                    Needle.shared.active(true)
-//                }
+                }
+                .contentShape(Rectangle())
+                .foregroundColor(C.color.bullshitRed)
+                .onTapGesture {
+                    Needle.shared.active(true)
+                    DispatchQueue.main.async {
+                        self.navigationStack.push(SettingsDetailView(displayTitle: $settings.title), withId: Self.childID)
+                    }
                 }
             } else {
                 Text(name == "" ? "Custom" :  name)
@@ -86,7 +89,7 @@ struct ThemeCell: View {
 }
 
 struct ThemesList: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     var themeNames: [ThemeName]
     var body: some View {
         VStack {
@@ -108,10 +111,10 @@ struct ThemesList: View {
 }
 
 struct SettingsView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var navigationStack: NavigationStack
     var body: some View {
         ZStack (alignment: .topLeading) {
-            PopView {
                 HStack(spacing: 0) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 20))
@@ -119,24 +122,18 @@ struct SettingsView: View {
                 }
                 .foregroundColor(.blue)
                 .padding(.leading)
-            }
-//            .onTapGesture {
-//                navigation = .main
-//                Needle.shared.active(false)
-//                Needle.shared.setValue(0.5)
-//            }
+                .onTapGesture {
+                    self.navigationStack.pop()
+                    Needle.shared.active(false)
+                    Needle.shared.setValue(0.5)
+                }
             VStack(alignment: .leading) {
                 TimePicker()
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
                     .padding(.leading)
                 ThemesList(themeNames: settings.themeNames)
-                PushView(destination: InstructionView()) {
-                    Text("Show Instructions")
-//                    {
-//                        settings.navigation = .instructions
-//                    }
-                }
+                Text("Show Instructions")
                 .padding(.top, 30)
                 .padding(.leading)
                 Spacer()

@@ -30,7 +30,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
 }
 
 struct DisplayView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     var colorful: Bool
     var editTitle: Bool
 

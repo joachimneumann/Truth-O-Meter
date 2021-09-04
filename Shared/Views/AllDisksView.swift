@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AllDisksView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     @Binding var displayColorful: Bool
     @Binding var showRing: Bool
     @Binding var showRingWithProgress: Bool

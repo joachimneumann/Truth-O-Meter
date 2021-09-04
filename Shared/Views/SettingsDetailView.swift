@@ -9,23 +9,23 @@ import SwiftUI
 import NavigationStack
 
 struct SettingsDetailView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var navigationStack: NavigationStack
     @Binding var displayTitle: String
     
     
     var body: some View {
         ZStack (alignment: .topLeading) {
-            PopView {
                 HStack(spacing: 0) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 20))
                     Text("Back")
                 }
                 .padding(.leading)
+                .foregroundColor(.blue)
+            .onTapGesture {
+                self.navigationStack.pop()
             }
-//            .onTapGesture {
-//                navigation = .settings
-//            }
             VStack(alignment: .leading) {
                 DisplayView(colorful: true, editTitle: settings.isCustom)
                     .padding(.leading, 40)
@@ -87,7 +87,7 @@ struct CustomTextFieldStyleiOS: TextFieldStyle {
 
 
 struct EditableStampView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     @State private var editingTop = false
     @State private var editingBottom = false
     let fontsize: CGFloat = 40

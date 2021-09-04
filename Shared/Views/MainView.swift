@@ -10,21 +10,30 @@ import NavigationStack
 
 struct SettingsIcon: View {
     @Binding var isHidden: Bool
+    private static let childID = "SetingsView"
+    @EnvironmentObject private var navigationStack: NavigationStack
+    
     var body: some View {
-        if !isHidden {
-            PushView(destination: SettingsView()) {
+        VStack {
+            if !isHidden {
                 Image("settings")
+                    .renderingMode(.original)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 30.0, height: 30.0)
                     .padding()
+                    .onTapGesture {
+                        DispatchQueue.main.async {
+                            self.navigationStack.push(SettingsView(), withId: Self.childID)
+                        }
+                    }
             }
         }
     }
 }
 
 struct AnalysisView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
     @Binding var showStampView: Bool
     @Binding var showAnalysisView: Bool
     
@@ -48,13 +57,14 @@ struct AnalysisView: View {
 
 
 struct MainView: View {
-    @EnvironmentObject var settings: Settings
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var navigationStack: NavigationStack
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showStampView = false
     
     var body: some View {
-        NavigationStackView() {
+        NavigationStackView(navigationStack: navigationStack) {
             ZStack(alignment: .bottomTrailing) {
                 VStack {
                     DisplayView(colorful: displayColorful, editTitle: false)

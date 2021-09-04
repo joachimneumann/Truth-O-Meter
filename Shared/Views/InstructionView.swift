@@ -28,10 +28,8 @@ struct InstructionView: View {
             }
             Spacer()
             VStack {
-                PopView {
-                    Text("OK, I got it")
-                        .foregroundColor(.blue)
-                }
+                Text("OK, I got it")
+                    .foregroundColor(.blue)
                 .padding(.bottom, 5)
                 Text("You can see this again in the settings")
                     .foregroundColor(.gray)
