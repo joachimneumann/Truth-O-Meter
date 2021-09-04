@@ -78,9 +78,7 @@ class Needle: ObservableObject {
         var noiseLevel = 0.001
         if strongNoise { noiseLevel *= 3 }
         let noise = noiseLevel * Double(n)
-        withAnimation(.default) {
-            value = privateValue + noise
-        }
+        setValue(privateValue + noise)
     }
 
     

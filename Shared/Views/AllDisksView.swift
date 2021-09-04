@@ -63,14 +63,13 @@ struct AllDisksView: View {
             ZStack {
                 ShapeShifterView(
                     isGray: isSetting && settings.precision == .edge,
-                    isCircle: circle,
-                    animate: !isSetting,
                     down: downPressed,
                     up: {
                         upPressed(.edge)
-                    })
-                    .opacity(pale&&circle ? 0.3 : 1.0)
-                    .animation(.linear(duration: isSetting ? 0 : C.timing.paleAnimationTime))
+                    },
+                    isCircle: circle,
+                    geoSize: geo.size)
+                    .aspectRatio(contentMode: .fit)
                 ForEach(disks.disks) { disk in
                     DiskView(
                         isOpaque: !pale && circle,

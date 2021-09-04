@@ -37,13 +37,13 @@ struct AnalysisView: View {
     @Binding var showStampView: Bool
     @Binding var showAnalysisView: Bool
     
-    func animationFinished() {
+    func analysisFinished() {
         showAnalysisView = false
         showStampView = true
     }
     var body: some View {
         VStack{
-            HorizontalProgressBar(animationFinished: animationFinished)
+            HorizontalProgressBar(animationFinished: analysisFinished)
                 .frame(height: 5)
                 .padding(.top, 10)
                 .padding(.leading, 20)
