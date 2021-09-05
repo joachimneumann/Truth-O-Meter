@@ -26,7 +26,10 @@ struct C {
     static func lw1(_ geo: GeometryProxy) -> CGFloat {
         geo.size.width / 320
     }
-    
+    static func lw1() -> CGFloat {
+        w / 320
+    }
+
     struct button {
         static let outerRingWidth: CGFloat = 0.05
     }

@@ -34,6 +34,21 @@ struct SmartButtonView: View {
         showStampView = false
     }
     
+    func callback(_ precision: Precision) {
+        settings.precision = precision
+        displayColorful = true
+        showRing = false
+        showRingWithProgress = true
+
+        // initially, set the needle a bit in the wrong direction
+        let newNeedleValue = settings.needleValue(forPrecision: precision)
+        let wrongDirection = -0.15 * (newNeedleValue-0.5)
+        Needle.shared.setValue(0.5 + wrongDirection)
+        Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+        Needle.shared.active(true, strongNoise: true)
+    }
+    
+    
     var body: some View {
         // print("SmartButton")
         return
@@ -49,15 +64,14 @@ struct SmartButtonView: View {
                     }
                     if showDisks {
                         AllDisksView(
-                            displayColorful: $displayColorful,
-                            showRing: $showRing,
-                            showRingWithProgress: $showRingWithProgress,
-                            isSetting: false)
+                            isSetting: false,
+                            color: C.color.bullshitRed,
+                            grayColor: C.color.lightGray,
+                            callback: callback)
                             .padding(linewidth * 1.5)
                             .aspectRatio(contentMode: .fit)
                     }
                 }
-                .padding(40)
                 if showStampView {
                     VStack(alignment: .center) {
                         Spacer(minLength: 0)
@@ -66,7 +80,8 @@ struct SmartButtonView: View {
                             StampView(
                                 top: settings.stampTop,
                                 bottom: settings.stampBottom,
-                                rotated: true)
+                                rotated: true,
+                                color: C.color.bullshitRed)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
                                     stampTapped()
@@ -84,6 +99,10 @@ struct SmartButtonView: View {
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmartButtonView(displayColorful: .constant(true), showAnalysisView: .constant(true), showStampView: .constant(true))
+        SmartButtonView(
+            displayColorful: .constant(false),
+            showAnalysisView: .constant(false),
+            showStampView: .constant(true))
+            .environmentObject(Settings())
     }
 }

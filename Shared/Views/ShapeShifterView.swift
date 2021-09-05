@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct ShapeShifterView: View {
-    @EnvironmentObject private var settings: Settings
     var isGray: Bool
     var down: () -> Void
     var up: () -> Void
     var isCircle: Bool
-    var geoSize: CGSize
+//    var geoSize: CGSize
     
-    private let borderColor = C.color.lightGray
-    private let color = C.color.bullshitRed
-    private let grayColor = C.color.lightGray
+    let color: Color
+    let grayColor: Color
+    let animationTime: Double
     
     @State private var isDown = false
     var body: some View {
-        ZStack {
+        GeometryReader { geo in
+            let w = geo.size.width
             Rectangle()
                 .fill(isGray ? grayColor : color)
-                .cornerRadius(isCircle ? C.w/2 : C.w/14)
-                .padding(isCircle ? 0 : C.w/4)
-                .animation(.easeIn(duration: C.timing.shapeShiftAnimationTime), value: isCircle)
+                .cornerRadius(isCircle ? w/2 : w/14)
+                .padding(isCircle ? 0 : w/4)
+                .animation(.easeIn(duration: animationTime), value: isCircle)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { _ in
@@ -43,6 +43,7 @@ struct ShapeShifterView: View {
                         }
                 )
         }
+        .aspectRatio(1.0, contentMode: .fit)
     }
 }
 
@@ -53,7 +54,8 @@ struct ShapeShifter_Previews: PreviewProvider {
             down: {},
             up: {},
             isCircle: false,
-            geoSize: CGSize(width: 100, height: 100))
-            .aspectRatio(contentMode: .fit)
+            color: C.color.bullshitRed,
+            grayColor: C.color.lightGray,
+            animationTime: C.timing.shapeShiftAnimationTime)
     }
 }

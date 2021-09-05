@@ -65,11 +65,10 @@ struct MainView: View {
                                     .foregroundColor(passiveColor)
                             }
                         }
-                        //                        SmartButtonView(
-                        //                            displayColorful: $displayColorful,
-                        //                            showAnalysisView: $showAnalysisView,
-                        //                            showStampView: $showStampView)
-                        //                            .padding(.bottom, C.w*0.05)
+                        SmartButtonView(
+                            displayColorful: $displayColorful,
+                            showAnalysisView: $showAnalysisView,
+                            showStampView: $showStampView)
                     }
                     SettingsIcon(isHidden: $displayColorful)
                         .padding(0)

@@ -24,7 +24,7 @@ struct HorizontalProgressBar: View {
                 Rectangle()
                     .foregroundColor(activeColor)
                     .frame(width:geo.size.width*widthFactor, height: geo.size.height)
-                    .animation(.linear(duration: animationTime))
+                    .animation(.linear(duration: animationTime), value: widthFactor)
             }
         }
         .onAppear {

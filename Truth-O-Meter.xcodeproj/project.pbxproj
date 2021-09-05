@@ -15,6 +15,8 @@
 		AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
+		AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
+		AA27B53C26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
@@ -64,6 +66,7 @@
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
 		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
+		AA27B53A26E4E4E800382215 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +140,7 @@
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
 				AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */,
 				AAE4C2E826E2281F00FE043B /* InstructionView.swift */,
+				AA27B53A26E4E4E800382215 /* MaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,6 +322,7 @@
 				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
 				AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */,
+				AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */,
 				AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */,
@@ -348,6 +353,7 @@
 				AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,
 				AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */,
+				AA27B53C26E4E4E800382215 /* MaskView.swift in Sources */,
 				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
 				AA8F3CC126DC766B00C82E56 /* AllDisksView.swift in Sources */,
 				AAE4C2EA26E2282000FE043B /* InstructionView.swift in Sources */,

@@ -9,14 +9,13 @@ import SwiftUI
 
 struct DiskView: View {
     var isOpaque: Bool
-    var drawBorder: Bool
+    var borderWidth: CGFloat
     var isGray: Bool
     var down: () -> Void
     var up: () -> Void
     
-    private let borderColor = C.color.lightGray
-    private let color = C.color.bullshitRed
-    private let grayColor = C.color.lightGray
+    let color: Color
+    let grayColor: Color
     
     @State private var isDown = false
     var body: some View {
@@ -40,9 +39,9 @@ struct DiskView: View {
                 )
                 .opacity(isOpaque ? 1.0 : 0.0)
             // border
-            if drawBorder {
+            if borderWidth > 0 && isOpaque {
                 Circle()
-                    .stroke(borderColor, lineWidth: 1)
+                    .stroke(grayColor, lineWidth: borderWidth)
             }
         }
     }
@@ -52,11 +51,13 @@ struct Disk_Previews: PreviewProvider {
     static var previews: some View {
         func f() {}
         return DiskView(
-            isOpaque: false,
-            drawBorder: false,
+            isOpaque: true,
+            borderWidth: 20.0,
             isGray: false,
             down: f,
-            up: f)
+            up: f,
+            color: C.color.bullshitRed,
+            grayColor: C.color.lightGray)
     }
 }
 

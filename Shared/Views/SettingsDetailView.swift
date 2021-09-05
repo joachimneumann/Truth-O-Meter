@@ -13,6 +13,20 @@ struct SettingsDetailView: View {
     @EnvironmentObject private var navigationStack: NavigationStack
     @Binding var displayTitle: String
     
+    func callback(_ precision: Precision) {
+//        settings.precision = precision
+//        displayColorful = true
+//        showRing = false
+//        showRingWithProgress = true
+//
+//        // initially, set the needle a bit in the wrong direction
+//        let newNeedleValue = settings.needleValue(forPrecision: precision)
+//        let wrongDirection = -0.15 * (newNeedleValue-0.5)
+//        Needle.shared.setValue(0.5 + wrongDirection)
+//        Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
+//        Needle.shared.active(true, strongNoise: true)
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ZStack (alignment: .topLeading) {
@@ -41,7 +55,8 @@ struct SettingsDetailView: View {
                                 StampView(
                                     top: settings.stampTop,
                                     bottom: settings.stampBottom,
-                                    rotated: true)
+                                    rotated: true,
+                                    color: C.color.bullshitRed)
                                     .padding(20)
                                 Spacer(minLength: 0)
                             }
@@ -51,10 +66,10 @@ struct SettingsDetailView: View {
                     HStack {
                         Spacer()
                         AllDisksView(
-                            displayColorful: .constant(true),
-                            showRing: .constant(false),
-                            showRingWithProgress: .constant(false),
-                            isSetting: true)
+                            isSetting: true,
+                            color: C.color.bullshitRed,
+                            grayColor: C.color.lightGray,
+                            callback: callback)
                             .aspectRatio(contentMode: .fit)
                         Spacer()
                     }
@@ -83,7 +98,7 @@ struct CustomTextFieldStyleiOS: TextFieldStyle {
         configuration
             .disableAutocorrection(true)
             .accentColor(C.color.bullshitRed)
-            .mask(Mask())
+            .mask(MaskView())
             .autocapitalization(.none)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
