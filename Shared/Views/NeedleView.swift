@@ -13,22 +13,23 @@ let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
     @ObservedObject var needleValue = Needle.shared
-    var linewidth: CGFloat
+    let activeColor:Color
+    let passiveColor:Color
 
     var body: some View {
         ZStack {
-            GeometryReader { (geometry) in
-                let rect = geometry.frame(in: .local)
+            GeometryReader { (geo) in
+                let rect = geo.frame(in: .local)
                 var temp = Path()
-                let _ = temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.proportionalAngle(proportion: self.needleValue.value), clockwise: true)
+                let _ = temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.proportionalAngle(proportion: self.needleValue.value), clockwise: true)
                 let a = temp.currentPoint!
-                let b = C.displayCenter(rect: rect)
+                let b = DisplayBackground.displayCenter(rect: rect)
                 AnimatedPath(from: a, to: b, c: b)
-                    .stroke(self.needleValue.colorful ? C.color.bullshitRed : C.color.lightGray,
-                            style: StrokeStyle(lineWidth: linewidth*C.needleLineWidth, lineCap: .round))
+                    .stroke(self.needleValue.colorful ? activeColor : passiveColor,
+                            style: StrokeStyle(lineWidth: DisplayBackground.thickLineFactor * C.lw1(geo), lineCap: .round))
             }
         }
-        .aspectRatio(1.9, contentMode: .fit)
+        .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
     }
 }
 
@@ -58,8 +59,9 @@ struct AnimatedPath: Shape {
 
 struct TruthView_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
-            NeedleView(linewidth: 1)
+        Needle.shared.active(true, strongNoise: false)
+        return VStack {
+            NeedleView(activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
         }
     }
 }

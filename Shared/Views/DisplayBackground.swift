@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-    var linewidth: CGFloat
+
+    static let startAngle = Angle(radians: .pi*2*(0.5+0.11))
+    static let endAngle = Angle(radians: .pi*2*(1.0-0.11))
+    static let midAngle = Angle(degrees: startAngle.degrees+0.7*(endAngle.degrees-startAngle.degrees))
+    static let aspectRatio: CGFloat = 1.9
+    static let thickLineFactor: CGFloat = 7
+
+    static func proportionalAngle(proportion: Double) -> Angle {
+        return startAngle+(endAngle-startAngle)*proportion
+    }
+    static func displayCenter(rect: CGRect) -> CGPoint {
+        return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
+    }
+    static func radius1(rect: CGRect) -> CGFloat { return rect.height * 0.95 }
+    static func radius2(rect: CGRect) -> CGFloat { return radius1(rect: rect) * 1.07 }
+    static func radius3(rect: CGRect) -> CGFloat { return radius2(rect: rect) * 1.045 }
+
     var colorful: Bool
 
     var body: some View {
-        return ZStack {
-            let boldStrokeStyle = StrokeStyle(lineWidth: linewidth*C.needleLineWidth, lineCap: .butt)
-            let fineStrokeStyle = StrokeStyle(lineWidth: linewidth, lineCap: .butt)
+        GeometryReader { geo in
+            let lw1 = C.lw1(geo)
+            let boldStrokeStyle = StrokeStyle(lineWidth: DisplayBackground.thickLineFactor*lw1, lineCap: .butt)
+            let fineStrokeStyle = StrokeStyle(lineWidth: lw1, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
                         .stroke(colorful ? C.color.gray : C.color.lightGray, style: boldStrokeStyle)
@@ -29,9 +46,10 @@ struct DisplayBackground: View {
                         .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .stroke(C.color.lightGray, lineWidth: linewidth*2)
+                        .stroke(C.color.lightGray, lineWidth: 2*lw1)
                 }
         }
+        .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
     }
 }
 
@@ -39,7 +57,7 @@ struct DisplayBackground: View {
 struct MainArcBlack: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
+        path.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius1(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.midAngle, clockwise: false)
         return path
     }
 }
@@ -47,7 +65,7 @@ struct MainArcBlack: Shape {
 struct MainArcRed: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.midAngle, endAngle: C.endAngle, clockwise: false)
+        path.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius1(rect: rect), startAngle: DisplayBackground.midAngle, endAngle: DisplayBackground.endAngle, clockwise: false)
         return path
     }
 }
@@ -56,12 +74,12 @@ struct TopArcBlack: Shape {
     func path(in rect: CGRect) -> Path {
         var temp = Path()
         let p: Path = Path { path in
-            path.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
+            path.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.midAngle, clockwise: false)
             for proportion in [0.12, 0.2, 0.265, 0.32, 0.37, 0.42, 0.47, 0.52, 0.57, 0.62, 0.66] {
-                let end = C.proportionalAngle(proportion: proportion)
-                temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
+                let end = DisplayBackground.proportionalAngle(proportion: proportion)
+                temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: end, clockwise: false)
                 let a = temp.currentPoint!
-                temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
+                temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius3(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: end, clockwise: false)
                 let b = temp.currentPoint!
                 path.move(to: a)
                 path.addLine(to: b)
@@ -77,31 +95,31 @@ struct TopArcRed: Shape {
         let p: Path = Path { path in
             
             // top arc
-            path.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.midAngle, endAngle: C.endAngle, clockwise: false)
+            path.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.midAngle, endAngle: DisplayBackground.endAngle, clockwise: false)
             
             // little red ticks on the right
             for proportion in [0.79, 0.87, 0.94] {
-                let end = C.proportionalAngle(proportion: proportion)
-                temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius2(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
+                let end = DisplayBackground.proportionalAngle(proportion: proportion)
+                temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: end, clockwise: false)
                 path.move(to: temp.currentPoint!)
-                temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: end, clockwise: false)
+                temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius3(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: end, clockwise: false)
                 path.addLine(to: temp.currentPoint!)
             }
             
             // red divider line
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius1(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
+            temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius1(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.midAngle, clockwise: false)
             path.move(to: temp.currentPoint!)
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.midAngle, clockwise: false)
+            temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius3(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.midAngle, clockwise: false)
             path.addLine(to: temp.currentPoint!)
             
             // line at the beginning
-            path.move(to: C.displayCenter(rect: rect))
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.startAngle, clockwise: false)
+            path.move(to: DisplayBackground.displayCenter(rect: rect))
+            temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius3(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.startAngle, clockwise: false)
             path.addLine(to: temp.currentPoint!)
 
             // line at the end
-            path.move(to: C.displayCenter(rect: rect))
-            temp.addArc(center: C.displayCenter(rect: rect), radius: C.radius3(rect: rect), startAngle: C.startAngle, endAngle: C.endAngle, clockwise: false)
+            path.move(to: DisplayBackground.displayCenter(rect: rect))
+            temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius3(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.endAngle, clockwise: false)
             path.addLine(to: temp.currentPoint!)
         }
         return p
@@ -113,16 +131,15 @@ struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         return Group {
             VStack {
-                DisplayBackground(linewidth: 6, colorful: true)
-                    .aspectRatio(1.9, contentMode: .fit)
-                    .padding()
+                DisplayBackground(colorful: true)
+                    .padding(300)
             }
+            .background(Color.yellow)
             VStack {
-                DisplayBackground(linewidth: 2, colorful: true)
-                    .aspectRatio(1.9, contentMode: .fit)
-                    .padding()
+                DisplayBackground(colorful: true)
             }
             .previewDevice("iPhone 12")
+            .background(Color.yellow)
         }
     }
 }

@@ -33,62 +33,71 @@ struct DisplayView: View {
     @EnvironmentObject private var settings: Settings
     var colorful: Bool
     var editTitle: Bool
-
     @State private var editing = false
-        
+    let activeColor:Color
+    let passiveColor:Color
+
     var body: some View {
+        GeometryReader { geo in
+            ZStack {
+                Spacer()
+                DisplayBackground(colorful: true)
+                Spacer()
+                if editTitle {
+                    // needle behind the text
+                    NeedleView(activeColor: activeColor, passiveColor: passiveColor)
+                        .clipped()
+                        .opacity(0.5)
+                    #if os(iOS)
+                    TextField("", text: $settings.title, onEditingChanged: { edit in
+                        self.editing = edit
+                    })
+                    .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
+                    #elseif os(macOS)
+                    TextField("", text: $settings.title)
+                        .disableAutocorrection(true)
+                        .multilineTextAlignment(TextAlignment.center)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 20)
+                    #endif
+                } else {
+                    // needle in front of the text
+                    Text(settings.title)
+                        .lineLimit(1)
+                        .font(.system(size: 500).bold())
+                        .minimumScaleFactor(0.01)
+                        .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
+                        .offset(y: geo.size.height*0.15)
+                        .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
+                    NeedleView(activeColor: activeColor, passiveColor: passiveColor)
+                        .clipped()
+                }
+            }
+        }
+        .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
         // print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
-        ZStack {
-            if editTitle {
-                DisplayBackground(linewidth: settings.w/320, colorful: true)
-                    .opacity(0.5)
-                NeedleView(linewidth: settings.w/320)
-                    .clipped()
-                    .opacity(0.5)
-                #if os(iOS)
-                TextField("", text: $settings.title, onEditingChanged: { edit in
-                    self.editing = edit
-                })
-                .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
-                .font(.system(size: settings.w * 0.07).bold())
-                #elseif os(macOS)
-                TextField("", text: $settings.title)
-                    .disableAutocorrection(true)
-                    .multilineTextAlignment(TextAlignment.center)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 20)
-                #endif
-            } else {
-                DisplayBackground(linewidth: settings.w/320, colorful: colorful)
-                Text(settings.title)
-                    .offset(y: settings.w*0.06)
-                    .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
-                    .font(.system(size: settings.w * 0.07).bold())
-                NeedleView(linewidth: settings.w/320)
-                    .clipped()
-            }
-        }
-        .aspectRatio(1.9, contentMode: .fit)
+
     }
 }
     
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let settings = Settings()
+        Needle.shared.active(true, strongNoise: false)
         return Group {
             VStack {
-                DisplayView(colorful: true, editTitle: true)
+                DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+                    .padding(200)
+                    .environmentObject(settings)
+            }
+            VStack {
+                DisplayView(colorful: true, editTitle: true, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
                     .padding()
                     .environmentObject(settings)
             }
-//            VStack {
-//                DisplayView(colorful: true, editTitle: true)
-//                    .padding()
-//                    .environmentObject(settings)
-//            }
-//            .previewDevice("iPhone 12")
+            .previewDevice("iPhone 12")
         }
     }
 }

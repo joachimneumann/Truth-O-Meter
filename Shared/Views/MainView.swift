@@ -20,7 +20,7 @@ struct SettingsIcon: View {
                 Image("settings")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: settings.w*0.1, height: settings.w*0.1)
+                    .frame(width: C.w*0.1, height: C.w*0.1)
                     .padding()
                     .onTapGesture {
                         DispatchQueue.main.async {
@@ -44,12 +44,12 @@ struct AnalysisView: View {
     var body: some View {
         VStack{
             HorizontalProgressBar(animationFinished: analysisFinished)
-                .frame(height: settings.w/320*2)
+                .frame(height: 100)
                 .padding(.top, 10)
                 .padding(.leading, 20)
                 .padding(.trailing, 20)
             Text("Analysing...")
-                .font(.system(size: settings.w * 0.04))
+                .font(.analyseTitle)
                 .foregroundColor(C.color.gray)
         }
     }
@@ -68,19 +68,19 @@ struct MainView: View {
                 ZStack(alignment: .bottomTrailing) {
                     VStack {
                         VStack {
-                            DisplayView(colorful: displayColorful, editTitle: false)
+                            DisplayView(colorful: displayColorful, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
                             if showAnalysisView {
                                 AnalysisView(
                                     showStampView: $showStampView,
                                     showAnalysisView: $showAnalysisView)
                             }
                         }
-                        .padding(settings.w*0.09)
+                        .padding(C.w*0.09)
                         SmartButtonView(
                             displayColorful: $displayColorful,
                             showAnalysisView: $showAnalysisView,
                             showStampView: $showStampView)
-                        Spacer()
+                            .padding(.bottom, C.w*0.05)
                     }
                     SettingsIcon(isHidden: $displayColorful)
                         .padding(0)

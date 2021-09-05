@@ -7,29 +7,30 @@
 
 import SwiftUI
 
+extension Font {
+    static var displayTitle: Font { return Font.system(size: C.w * 0.07).bold() }
+    static var analyseTitle: Font { return Font.system(size: C.w * 0.04).bold() }
+}
+
+
 struct C {
-    static let startAngle = Angle(radians: .pi*2*(0.5+0.11))
-    static let endAngle = Angle(radians: .pi*2*(1.0-0.11))
-    static let midAngle = Angle(degrees: startAngle.degrees+0.7*(endAngle.degrees-startAngle.degrees))
-    static let needleLineWidth: CGFloat = 7
-    static func proportionalAngle(proportion: Double) -> Angle {
-        return C.startAngle+(C.endAngle-C.startAngle)*proportion
-    }
-    static func radius1(rect: CGRect) -> CGFloat { return rect.height * 0.95 }
-    static func radius2(rect: CGRect) -> CGFloat { return C.radius1(rect: rect) * 1.07 }
-    static func radius3(rect: CGRect) -> CGFloat { return C.radius2(rect: rect) * 1.045 }
-    static func displayCenter(rect: CGRect) -> CGPoint {
-        return CGPoint(x: rect.midX, y: rect.origin.y + 1.2 * rect.size.height)
+    #if os(iOS)
+    static let w = UIScreen.main.bounds.width
+    static let h = UIScreen.main.bounds.height
+    #else
+    static let w:CGFloat  = 375
+    static let h:CGFloat  = 667
+    #endif
+    
+    // the equivialent of linewith 1 on a small device with width 320
+    static func lw1(_ geo: GeometryProxy) -> CGFloat {
+        geo.size.width / 320
     }
     
     struct button {
         static let outerRingWidth: CGFloat = 0.05
     }
     
-    struct macSize {
-        static let width:CGFloat  = 375
-        static let height:CGFloat = 667
-    }
     static var firstTime = true
     
     struct timing {
@@ -95,5 +96,5 @@ struct C {
             }
         }
     }
-
+    
 }

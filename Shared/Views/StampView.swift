@@ -66,7 +66,7 @@ struct TwoLines: View {
         let numberOfLetters: CGFloat = CGFloat(textCount) + 2.0
         if textCount < 6 { f = 0.3 } else
         { f = 2.2 / numberOfLetters }
-        let fontsize = settings.w * f
+        let fontsize = C.w * f
         let linewidth = fontsize * 0.24
         let text = text1+"\n"+text2
         //        let linewidth = w * 0.06
@@ -100,7 +100,7 @@ struct OneLine: View {
         if text.count == 1 { f = 0.48 } else
         if text.count == 2 { f = 0.45 } else
         { f = 2.2 / numberOfLetters }
-        let fontsize = settings.w * f
+        let fontsize = C.w * f
         let linewidth = fontsize * 0.24
         return Text(text)
             .fixedSize(horizontal: true, vertical: true)

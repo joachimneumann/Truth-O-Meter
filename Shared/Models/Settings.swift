@@ -13,12 +13,6 @@ class Settings: ObservableObject {
     
     @Published var precision: Precision
 
-    #if os(iOS)
-    let w = UIScreen.main.bounds.width
-    #else
-    let w = C.macSize.width
-    #endif
-
     var title: String {
         get {
             settingsData.title

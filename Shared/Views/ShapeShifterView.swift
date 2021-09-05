@@ -24,8 +24,8 @@ struct ShapeShifterView: View {
         ZStack {
             Rectangle()
                 .fill(isGray ? grayColor : color)
-                .cornerRadius(isCircle ? settings.w/2 : settings.w/14)
-                .padding(isCircle ? 0 : settings.w/4)
+                .cornerRadius(isCircle ? C.w/2 : C.w/14)
+                .padding(isCircle ? 0 : C.w/4)
                 .animation(.easeIn(duration: C.timing.shapeShiftAnimationTime), value: isCircle)
                 .gesture(
                     DragGesture(minimumDistance: 0)

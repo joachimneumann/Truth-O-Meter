@@ -39,7 +39,7 @@ struct SmartButtonView: View {
         return
             ZStack {
                 Group {
-                    let linewidth = settings.w * C.button.outerRingWidth
+                    let linewidth = C.w * C.button.outerRingWidth
                     if showRing {
                         Circle()
                             .stroke(C.color.lightGray, lineWidth: linewidth)

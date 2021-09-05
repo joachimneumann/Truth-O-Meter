@@ -27,7 +27,7 @@ struct SettingsDetailView: View {
                     self.navigationStack.pop()
                 }
                 VStack(alignment: .leading) {
-                    DisplayView(colorful: true, editTitle: settings.isCustom)
+                    DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
                         .padding(.top, 40)
                         .padding(.leading, 40)
                         .padding(.trailing, 40)
