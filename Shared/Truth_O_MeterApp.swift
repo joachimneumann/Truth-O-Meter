@@ -22,7 +22,7 @@ struct Truth_O_MeterApp: App {
                 .frame(maxWidth: C.h, maxHeight: C.h)
                 .background(Color.white)
             #else
-            DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+            MainView()
                 .environmentObject(settings)
                 .environmentObject(NavigationStack())
             #endif

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CustomTitleTextFieldStyle: TextFieldStyle {
+    let activeColor:Color
+    let darkColor: Color
     @Binding var focused: Bool
-    let fontsize: CGFloat = 40
     let cornerRadius: CGFloat = 5
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
@@ -17,14 +18,13 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
             .padding(6)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(C.color.bullshitRed, lineWidth: focused ? 3 : 0))
-            .background(C.color.bullshitRed.opacity(0.1))
+                    .strokeBorder(activeColor, lineWidth: focused ? 3 : 0))
+            .background(activeColor.opacity(0.1))
             .multilineTextAlignment(TextAlignment.center)
             .lineLimit(1)
             .cornerRadius(cornerRadius)
-//            .font(.headline)
-            .accentColor(C.color.gray)
-            .foregroundColor(C.color.gray)
+            .accentColor(darkColor)
+            .foregroundColor(darkColor)
             .offset(y: 15)
     }
 }
@@ -36,12 +36,13 @@ struct DisplayView: View {
     @State private var editing = false
     let activeColor:Color
     let passiveColor:Color
+    let darkColor: Color
 
     var body: some View {
         GeometryReader { geo in
             ZStack {
                 Spacer()
-                DisplayBackground(colorful: true)
+                DisplayBackground(colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor)
                 Spacer()
                 if editTitle {
                     // needle behind the text
@@ -52,7 +53,7 @@ struct DisplayView: View {
                     TextField("", text: $settings.title, onEditingChanged: { edit in
                         self.editing = edit
                     })
-                    .textFieldStyle(CustomTitleTextFieldStyle(focused: $editing))
+                    .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
                     #elseif os(macOS)
                     TextField("", text: $settings.title)
                         .disableAutocorrection(true)
@@ -68,7 +69,7 @@ struct DisplayView: View {
                         .minimumScaleFactor(0.01)
                         .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
                         .offset(y: geo.size.height*0.15)
-                        .foregroundColor(colorful ? C.color.gray : C.color.lightGray)
+                        .foregroundColor(colorful ? darkColor : passiveColor)
                     NeedleView(activeColor: activeColor, passiveColor: passiveColor)
                         .clipped()
                 }
@@ -88,12 +89,12 @@ struct Display_Previews: PreviewProvider {
         Needle.shared.active(true, strongNoise: false)
         return Group {
             VStack {
-                DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+                DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
                     .padding(200)
                     .environmentObject(settings)
             }
             VStack {
-                DisplayView(colorful: true, editTitle: true, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+                DisplayView(colorful: true, editTitle: true, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
                     .padding()
                     .environmentObject(settings)
             }

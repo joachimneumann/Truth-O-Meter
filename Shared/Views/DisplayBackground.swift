@@ -26,6 +26,9 @@ struct DisplayBackground: View {
     static func radius3(rect: CGRect) -> CGFloat { return radius2(rect: rect) * 1.045 }
 
     var colorful: Bool
+    var lightColor: Color
+    var darkColor: Color
+    var activeColor: Color
 
     var body: some View {
         GeometryReader { geo in
@@ -34,19 +37,19 @@ struct DisplayBackground: View {
             let fineStrokeStyle = StrokeStyle(lineWidth: lw1, lineCap: .butt)
                 ZStack {
                     MainArcBlack()
-                        .stroke(colorful ? C.color.gray : C.color.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? darkColor : lightColor, style: boldStrokeStyle)
                         .clipped()
                     MainArcRed()
-                        .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: boldStrokeStyle)
+                        .stroke(colorful ? activeColor : lightColor, style: boldStrokeStyle)
                         .clipped()
                     TopArcBlack()
-                        .stroke(colorful ? C.color.gray : C.color.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? darkColor : lightColor, style: fineStrokeStyle)
                         .clipped()
                     TopArcRed()
-                        .stroke(colorful ? C.color.bullshitRed : C.color.lightGray, style: fineStrokeStyle)
+                        .stroke(colorful ? activeColor : lightColor, style: fineStrokeStyle)
                         .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
-                        .stroke(C.color.lightGray, lineWidth: 2*lw1)
+                        .stroke(lightColor, lineWidth: 2*lw1)
                 }
         }
         .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
@@ -129,17 +132,6 @@ struct TopArcRed: Shape {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        return Group {
-            VStack {
-                DisplayBackground(colorful: true)
-                    .padding(300)
-            }
-            .background(Color.yellow)
-            VStack {
-                DisplayBackground(colorful: true)
-            }
-            .previewDevice("iPhone 12")
-            .background(Color.yellow)
-        }
+        DisplayBackground(colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed)
     }
 }

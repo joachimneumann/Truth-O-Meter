@@ -32,35 +32,19 @@ struct SettingsIcon: View {
     }
 }
 
-struct AnalysisView: View {
+struct MainView: View {
     @EnvironmentObject private var settings: Settings
-    @Binding var showStampView: Bool
-    @Binding var showAnalysisView: Bool
+    @EnvironmentObject private var navigationStack: NavigationStack
+    @State private var displayColorful = false
+    @State private var showAnalysisView = true
+    @State private var showStampView = false
+    let activeColor = C.color.bullshitRed
+    let passiveColor = C.color.lightGray
     
     func analysisFinished() {
         showAnalysisView = false
         showStampView = true
     }
-    var body: some View {
-        VStack{
-            HorizontalProgressBar(animationFinished: analysisFinished)
-                .frame(height: 100)
-                .padding(.top, 10)
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
-            Text("Analysing...")
-                .font(.analyseTitle)
-                .foregroundColor(C.color.gray)
-        }
-    }
-}
-
-struct MainView: View {
-    @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var navigationStack: NavigationStack
-    @State private var displayColorful = false
-    @State private var showAnalysisView = false
-    @State private var showStampView = false
     
     var body: some View {
         ZStack {
@@ -68,19 +52,24 @@ struct MainView: View {
                 ZStack(alignment: .bottomTrailing) {
                     VStack {
                         VStack {
-                            DisplayView(colorful: displayColorful, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
-                            if showAnalysisView {
-                                AnalysisView(
-                                    showStampView: $showStampView,
-                                    showAnalysisView: $showAnalysisView)
+                            DisplayView(colorful: displayColorful, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
+                            if true {
+                                HorizontalProgressBar(
+                                    animationFinished: analysisFinished,
+                                    activeColor: activeColor,
+                                    passiveColor: passiveColor,
+                                    animationTime: settings.analysisTime)
+                                    .aspectRatio(40, contentMode: .fit)
+                                Text("Analysing...")
+                                    .font(.analyseTitle)
+                                    .foregroundColor(passiveColor)
                             }
                         }
-                        .padding(C.w*0.09)
-                        SmartButtonView(
-                            displayColorful: $displayColorful,
-                            showAnalysisView: $showAnalysisView,
-                            showStampView: $showStampView)
-                            .padding(.bottom, C.w*0.05)
+                        //                        SmartButtonView(
+                        //                            displayColorful: $displayColorful,
+                        //                            showAnalysisView: $showAnalysisView,
+                        //                            showStampView: $showStampView)
+                        //                            .padding(.bottom, C.w*0.05)
                     }
                     SettingsIcon(isHidden: $displayColorful)
                         .padding(0)

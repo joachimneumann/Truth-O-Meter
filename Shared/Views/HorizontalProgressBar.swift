@@ -9,25 +9,31 @@ import Foundation
 import SwiftUI
 
 struct HorizontalProgressBar: View {
-    @EnvironmentObject private var settings: Settings
     var animationFinished: () -> Void
+    let activeColor:Color
+    let passiveColor:Color
+    let animationTime: Double
+    
     @State private var widthFactor: CGFloat = 0.0
     var body: some View {
-        ZStack {
-            GeometryReader { (geo) in
+        GeometryReader { (geo) in
+            ZStack(alignment: .leading) {
                 Rectangle()
-                    .foregroundColor(C.color.lightGray)
+                    .foregroundColor(passiveColor)
                     .opacity(0.2)
                 Rectangle()
-                    .foregroundColor(C.color.lightGray)
+                    .foregroundColor(activeColor)
                     .frame(width:geo.size.width*widthFactor, height: geo.size.height)
-                    .animation(.linear(duration: settings.analysisTime))
+                    .animation(.linear(duration: animationTime))
             }
         }
         .onAppear {
             widthFactor = 1.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + settings.analysisTime) {
-                // this will not guarantee precise timing, but that might not be required here
+            
+            // callback()
+            // The timing will be precise, but that
+            // might be good enough for most use cases
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
                 animationFinished()
             }
         }
@@ -37,6 +43,9 @@ struct HorizontalProgressBar: View {
 struct HorizontalProgressbar_Previews: PreviewProvider {
     static var previews: some View {
         func doNothing() {}
-        return HorizontalProgressBar(animationFinished: doNothing)
+        return HorizontalProgressBar(animationFinished: doNothing,
+                                     activeColor: C.color.bullshitRed,
+                                     passiveColor: C.color.lightGray,
+                                     animationTime: 2)
     }
 }
