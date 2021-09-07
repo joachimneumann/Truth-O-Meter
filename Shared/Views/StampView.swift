@@ -64,11 +64,13 @@ struct StampView: View {
             Text(text)
                 .font(.system(size: 300))
                 .fixedSize() // Prevents text truncating
-                .background(Color.black.opacity(0.2))
+                .background(Color.black.opacity(0.1))
                 .padding(margin)
-                .background(Color.red.opacity(0.6))
-                .padding(borderWidth)
-                .border(Color.green.opacity(0.2), width: borderWidth)
+//                .background(Color.red.opacity(0.6))
+                .padding(borderWidth/2)
+//                .background(Color.red.opacity(0.6))
+                .overlay(RoundedRectangle(cornerRadius: borderWidth*1.5)
+                            .stroke(color.opacity(0.3), lineWidth: borderWidth))
         }
     }
     
@@ -79,13 +81,15 @@ struct StampView: View {
         var color: Color
         var frameWidth: CGFloat
         var frameHeight: CGFloat
-        private let marginFactor: CGFloat = 0.05
-        private let borderWidthFactor: CGFloat = 0.05
+        private let marginFactor: CGFloat = 0.25
+        private let borderWidthFactor: CGFloat = 0.25
         
         var body: some View {
             let marginWidth: CGFloat = textSize.height * marginFactor
             let borderWidth: CGFloat = textSize.height * borderWidthFactor
-            let scale = frameHeight/(textSize.height+marginWidth+borderWidth)
+            let scaleW = frameHeight/(textSize.height+marginWidth*2+borderWidth*2)
+            let scaleH = frameWidth/(textSize.width+marginWidth*2+borderWidth*2)
+            let scale = min(scaleW, scaleH)
             ZStack {
                 // invisible Text --> textSize
                 Text(text)
@@ -185,6 +189,6 @@ struct FrameAdjustingContainer<Content: View>: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "1Éj", bottom: "33", rotated: true, color: Color.blue)
+        StampView(top: "1Éj12", bottom: "33", rotated: true, color: Color.blue)
     }
 }
