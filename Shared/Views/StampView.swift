@@ -25,24 +25,33 @@ struct AutosizeText: View {
     var frameWidth: CGFloat
     var frameHeight: CGFloat
     @Binding var textSize: CGSize
+    @Binding var border: CGFloat
 
     var body: some View {
-        let verticalTextMargin = textSize.height / 16
-        let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
-        let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
+        let scalew = frameWidth / (textSize.width)
+        let scaleh = frameHeight / (textSize.height)
         let scale = min(scalew, scaleh)
-        let stampBorder = verticalTextMargin
-        
-        Text(text)
+        return Text(text)
             .font(.system(size: 300))  // Bigger font size then final rendering
             .foregroundColor(textColor)
             .fixedSize() // Prevents text truncating
             .captureSize(in: $textSize)
             .background(Color.black.opacity(0.05))
-            .border(Color.blue, width: 1)
-            .padding(stampBorder)
-            .border(textColor, width: 1)
             .scaleEffect(scale)
+            .onChange(of: frameHeight, perform: { value in
+                let verticalTextMargin = textSize.height / 16
+                let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
+                let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
+                let scale = min(scalew, scaleh)
+                border = verticalTextMargin * scale
+            })
+            .onChange(of: frameWidth, perform: { value in
+                let verticalTextMargin = textSize.height / 16
+                let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
+                let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
+                let scale = min(scalew, scaleh)
+                border = verticalTextMargin * scale
+            })
     }
 }
 
@@ -52,14 +61,14 @@ struct StampText: View {
     var frameWidth: CGFloat
     var frameHeight: CGFloat
     @State private var textSize = CGSize(width: 200, height: 1000)
-    
+    @State private var border: CGFloat = 15.0
+
     var body: some View {
-        let stampborder = textSize.height / 16
-        AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight, textSize: $textSize)
+        AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight, textSize: $textSize, border: $border)
             .frame(width: frameWidth, height: frameHeight)
-            .padding(stampborder)
+            .padding(border)
             .border(color)
-            .background(Color.green.opacity(0.3))
+            .background(Color.yellow.opacity(0.3))
     }
 }
 
@@ -73,11 +82,12 @@ private struct SizeKey: PreferenceKey {
 extension View {
     func captureSize(in binding: Binding<CGSize>) -> some View {
         overlay(GeometryReader { proxy in
+            let _ = print("captureSize1: \(proxy.size)")
             Color.clear.preference(key: SizeKey.self, value: proxy.size)
         })
         .onPreferenceChange(SizeKey.self) {
             size in binding.wrappedValue = size
-            print("captureSize: \(size)")
+            print("captureSize2: \(size)")
         }
     }
 }
