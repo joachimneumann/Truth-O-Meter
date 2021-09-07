@@ -62,15 +62,16 @@ struct StampView: View {
         var borderWidth: CGFloat
         var body: some View {
             Text(text)
+                .foregroundColor(color)
                 .font(.system(size: 300))
                 .fixedSize() // Prevents text truncating
-                .background(Color.black.opacity(0.1))
+//                .background(Color.black.opacity(0.1))
                 .padding(margin)
 //                .background(Color.red.opacity(0.6))
                 .padding(borderWidth/2)
 //                .background(Color.red.opacity(0.6))
                 .overlay(RoundedRectangle(cornerRadius: borderWidth*1.5)
-                            .stroke(color.opacity(0.3), lineWidth: borderWidth))
+                            .stroke(color, lineWidth: borderWidth))
         }
     }
     
@@ -109,6 +110,11 @@ struct StampView: View {
                     color: color,
                     margin: marginWidth,
                     borderWidth: borderWidth)
+                    .mask(MaskView()
+                            .scaleEffect(1.3, anchor: .center)
+                    )
+                    .padding(borderWidth/2)
+                    .border(Color.black, width: 3)
                     .scaleEffect(scale, anchor: .center)
             }
             //            .captureSize(in: $textSize)
@@ -174,7 +180,7 @@ struct FrameAdjustingContainer<Content: View>: View {
             content()
                 .frame(width: frameWidth, height: frameHeight)
                 .border(Color.blue, width: 1)
-                .background(Color.blue.opacity(0.2))
+//                .background(Color.blue.opacity(0.2))
             
             VStack {
                 Spacer()
@@ -189,6 +195,6 @@ struct FrameAdjustingContainer<Content: View>: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "1Éj12", bottom: "33", rotated: true, color: Color.blue)
+        StampView(top: "Éj23", bottom: "33", rotated: true, color: Color.blue)
     }
 }
