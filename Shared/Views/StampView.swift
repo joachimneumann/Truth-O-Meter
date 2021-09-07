@@ -27,6 +27,7 @@ struct AutosizeText: View {
     @State private var textSize = CGSize(width: 200, height: 100)
     
     var body: some View {
+        let stampborder = textSize.height / 8
         Text(text)
             .font(.system(size: 300))  // Bigger font size then final rendering
             .foregroundColor(textColor)
@@ -34,8 +35,24 @@ struct AutosizeText: View {
             .captureSize(in: $textSize)
             .background(Color.black.opacity(0.05))
             .border(Color.blue, width: 1)
-            .scaleEffect(min(frameWidth / textSize.width, frameHeight / textSize.height))
+//            .padding(stampborder)
+            .border(Color.blue, width: 1)
+            .padding(stampborder/2)
+            .border(textColor, width: 1)
+            .scaleEffect(min(frameWidth / (textSize.width+stampborder), frameHeight / (textSize.height+stampborder)))
             let _ = print("captureSize: \(textSize) \(frameWidth), \(frameHeight))")
+    }
+}
+
+struct StampText: View {
+    var text: String
+    var color: Color
+    var frameWidth: CGFloat
+    var frameHeight: CGFloat
+    @State private var textSize = CGSize(width: 200, height: 100)
+    
+    var body: some View {
+        AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight)
     }
 }
 
@@ -67,7 +84,7 @@ struct FrameAdjustingContainer<Content: View>: View {
         ZStack {
             content()
                 .frame(width: frameWidth, height: frameHeight)
-                .border(Color.red, width: 1)
+                .border(Color.blue, width: 1)
             
             VStack {
                 Spacer()
@@ -86,7 +103,7 @@ struct Playground: View {
     
     var body: some View {
         FrameAdjustingContainer(frameWidth: $frameWidth, frameHeight: $frameHeight) {
-            AutosizeText(text: text, textColor: C.color.bullshitRed, frameWidth: frameWidth, frameHeight: frameHeight)
+            StampText(text: text, color: C.color.bullshitRed, frameWidth: frameWidth, frameHeight: frameHeight)
         }
     }
 }
@@ -94,6 +111,6 @@ struct Playground: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "22", bottom: "33", rotated: false, color: Color.blue)
+        StampView(top: "1Éj", bottom: "33", rotated: false, color: Color.blue)
     }
 }

@@ -23,7 +23,7 @@ struct Truth_O_MeterApp: App {
                 .frame(maxWidth: C.h, maxHeight: C.h)
                 .background(Color.white)
             #else
-            StampView(top: "12", bottom: nil, rotated: true, color: Color.blue)
+            StampView(top: "1Éj", bottom: nil, rotated: true, color: Color.blue)
 //            DiskView(isOpaque: true, borderWidth: 2, isGray: false, down: f, up: f, color: C.color.bullshitRed, grayColor: C.color.lightGray)
 //            MainView()
                 .environmentObject(settings)
