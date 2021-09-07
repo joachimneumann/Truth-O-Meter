@@ -15,138 +15,85 @@ struct StampView: View {
     let color: Color
     
     var body: some View {
-        // we do not want texts that are only one or two characters long
-        // In this case, we pad with a space to the left and right
-        var _top: String
-        if top.count == 1 {_top = "    \(top)    " } else
-        if top.count == 2 {_top = "  \(top)  " } else
-        if top.count == 3 {_top = " \(top) " } else { _top = top }
-        let _bottom = bottom == nil ? nil : (bottom!.count < 3 ? " \(bottom!) " : bottom!)
-        // TODO:
-        // Stangely, for bottom = "BB" the trailing space
-        // is not shown in the stamp
-        //            VStack {
-        //                HStack {
-        //                    Spacer(minLength: 0)
-        //                }
-        //                Spacer(minLength: 0)
-        //                HStack {
-        //                    Spacer(minLength: 0)
-        return ZStack {
-            if _top == "" && (_bottom == "" || _bottom == nil) {
-                OneLine(
-                    text: "(not set)",
-                    rotationAngle: rotated ? -25.0 : 0.0,
-                    color: color)
-            } else if let b = _bottom {
-                if _top != "" {
-                    TwoLines(
-                        text1: _top,
-                        text2: b,
-                        rotationAngle: rotated ? -18.0 : 0.0,
-                        color: color)
-                } else {
-                    OneLine(
-                        text: b,
-                        rotationAngle: rotated ? -25.0 : 0.0,
-                        color: color)
-                }
-            } else {
-                OneLine(
-                    text: _top,
-                    rotationAngle: rotated ? -25.0 : 0.0,
-                    color: color)
-        }
-
-        }
-        //                    Spacer(minLength: 0)
-        //                }
-        //                Spacer(minLength: 0)
-        //            }
-        //        }
+        Playground(text: top)
     }
-    
-    struct OneLine: View {
-        var text: String
-        var rotationAngle: Double
-        var color: Color
-        var body: some View {
-            let linewidth = 0.15 * C.w / sqrt(CGFloat(text.count))
-            var hpadding:CGFloat = 0.05
-            if (rotationAngle < 0) && (text.count < 6) {
-                hpadding *= 2
-            }
-            print(rotationAngle)
-            print(hpadding)
-            return GeometryReader { geo in
-                let w = geo.size.width
-                VStack {
-                    Spacer(minLength: 0)
-                    HStack {
-                        Spacer(minLength: 0)
-                        Text(text)
-                            .lineLimit(1)
-                            .foregroundColor(color)
-                            .font(.system(size: 500).bold())
-                            .minimumScaleFactor(0.01)
-                            .padding(.leading, w*hpadding)
-                            .padding(.trailing, w*hpadding)
-                            .padding(.top, w*0.05)
-                            .padding(.bottom, w*0.05)
-                            .overlay(RoundedRectangle(cornerRadius: linewidth*1.5)
-                                        .stroke(color, lineWidth: linewidth))
-                            .padding(.leading, w*hpadding)
-                            .padding(.trailing, w*hpadding)
-                            .mask(MaskView())
-                            .background(Color.gray)
-                        Spacer(minLength: 0)
-                    }
-                    Spacer(minLength: 0)
-                }
-            }
-            .rotationEffect(Angle(degrees: rotationAngle))
-            .contentShape(Rectangle())
-            .aspectRatio(1.3, contentMode: .fit)
-        }
-    }
-    
-    struct TwoLines: View {
-        var text1: String
-        var text2: String
-        var rotationAngle:Double
-        var color: Color
-        var body: some View {
-            var f:CGFloat
-            let textCount = max(text1.count, text2.count)
-            let numberOfLetters: CGFloat = CGFloat(textCount) + 2.0
-            if textCount < 6 { f = 0.3 } else
-            { f = 2.2 / numberOfLetters }
-            let fontsize = C.w * f
-            let linewidth = fontsize * 0.24
-            let text = text1+"\n"+text2
-            //        let linewidth = w * 0.06
-            //        let fontsize = w*0.25
-            return Text(text)
-                .lineLimit(2)
-                .fixedSize(horizontal: true, vertical: true)
-                .font(.system(size: fontsize, weight: .bold, design: .monospaced))
-                .padding(fontsize*0.3)
-                .overlay(RoundedRectangle(cornerRadius: linewidth*1.5)
-                            .stroke(C.color.bullshitRed, lineWidth: linewidth))
-                .foregroundColor(color)
-                .padding(linewidth/2)
-                .mask(MaskView())
-                .rotationEffect(Angle(degrees: rotationAngle))
-        }
-    }
-    
 }
+
+struct AutosizeText: View {
+    var text: String
+    var textColor: Color
+    var frameWidth: CGFloat
+    var frameHeight: CGFloat
+    @State private var textSize = CGSize(width: 200, height: 100)
+    
+    var body: some View {
+        Text(text)
+            .font(.system(size: 300))  // Bigger font size then final rendering
+            .foregroundColor(textColor)
+            .fixedSize() // Prevents text truncating
+            .captureSize(in: $textSize)
+            .background(Color.black.opacity(0.05))
+            .border(Color.blue, width: 1)
+            .scaleEffect(min(frameWidth / textSize.width, frameHeight / textSize.height))
+            let _ = print("captureSize: \(textSize) \(frameWidth), \(frameHeight))")
+    }
+}
+
+private struct SizeKey: PreferenceKey {
+    static let defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
+extension View {
+    func captureSize(in binding: Binding<CGSize>) -> some View {
+        overlay(GeometryReader { proxy in
+            Color.clear.preference(key: SizeKey.self, value: proxy.size)
+        })
+        .onPreferenceChange(SizeKey.self) {
+            size in binding.wrappedValue = size
+            print("captureSize: \(size)")
+        }
+    }
+}
+
+struct FrameAdjustingContainer<Content: View>: View {
+    @Binding var frameWidth: CGFloat
+    @Binding var frameHeight: CGFloat
+    let content: () -> Content
+    
+    var body: some View  {
+        ZStack {
+            content()
+                .frame(width: frameWidth, height: frameHeight)
+                .border(Color.red, width: 1)
+            
+            VStack {
+                Spacer()
+                Slider(value: $frameWidth, in: 50...300)
+                Slider(value: $frameHeight, in: 50...600)
+            }
+            .padding()
+        }
+    }
+}
+
+struct Playground: View {
+    var text: String
+    @State private var frameWidth: CGFloat = 175
+    @State private var frameHeight: CGFloat = 175
+    
+    var body: some View {
+        FrameAdjustingContainer(frameWidth: $frameWidth, frameHeight: $frameHeight) {
+            AutosizeText(text: text, textColor: C.color.bullshitRed, frameWidth: frameWidth, frameHeight: frameHeight)
+        }
+    }
+}
+
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "Dii", bottom: nil, rotated: true, color: Color.blue)
-            .background(Color.yellow)
-        //        StampView(top: "A", bottom: "BBb", rotated: false)
-        //            .background(Color.yellow)
+        StampView(top: "22", bottom: "33", rotated: false, color: Color.blue)
     }
 }
