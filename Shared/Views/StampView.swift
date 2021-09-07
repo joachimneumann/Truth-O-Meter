@@ -24,13 +24,14 @@ struct AutosizeText: View {
     var textColor: Color
     var frameWidth: CGFloat
     var frameHeight: CGFloat
-    @State private var textSize = CGSize(width: 200, height: 100)
-    
+    @Binding var textSize: CGSize
+
     var body: some View {
-        let stampborder = textSize.height / 16
-        let scalew = frameWidth / (textSize.width+2*stampborder)
-        let scaleh = frameHeight / (textSize.height+2*stampborder)
+        let verticalTextMargin = textSize.height / 16
+        let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
+        let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
         let scale = min(scalew, scaleh)
+        let stampBorder = verticalTextMargin
         
         Text(text)
             .font(.system(size: 300))  // Bigger font size then final rendering
@@ -39,10 +40,9 @@ struct AutosizeText: View {
             .captureSize(in: $textSize)
             .background(Color.black.opacity(0.05))
             .border(Color.blue, width: 1)
-            .padding(stampborder)
+            .padding(stampBorder)
             .border(textColor, width: 1)
             .scaleEffect(scale)
-            let _ = print("captureSize: \(textSize) \(frameWidth), \(frameHeight))")
     }
 }
 
@@ -51,10 +51,15 @@ struct StampText: View {
     var color: Color
     var frameWidth: CGFloat
     var frameHeight: CGFloat
-    @State private var textSize = CGSize(width: 200, height: 100)
+    @State private var textSize = CGSize(width: 200, height: 1000)
     
     var body: some View {
-        AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight)
+        let stampborder = textSize.height / 16
+        AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight, textSize: $textSize)
+            .frame(width: frameWidth, height: frameHeight)
+            .padding(stampborder)
+            .border(color)
+            .background(Color.green.opacity(0.3))
     }
 }
 
@@ -87,6 +92,7 @@ struct FrameAdjustingContainer<Content: View>: View {
             content()
                 .frame(width: frameWidth, height: frameHeight)
                 .border(Color.blue, width: 1)
+                .background(Color.blue.opacity(0.2))
             
             VStack {
                 Spacer()
