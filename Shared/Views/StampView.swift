@@ -27,7 +27,11 @@ struct AutosizeText: View {
     @State private var textSize = CGSize(width: 200, height: 100)
     
     var body: some View {
-        let stampborder = textSize.height / 8
+        let stampborder = textSize.height / 4
+        let scalew = frameWidth / (textSize.width+2*stampborder)
+        let scaleh = frameHeight / (textSize.height+2*stampborder)
+        let scale = min(scalew, scaleh)
+        
         Text(text)
             .font(.system(size: 300))  // Bigger font size then final rendering
             .foregroundColor(textColor)
@@ -35,11 +39,9 @@ struct AutosizeText: View {
             .captureSize(in: $textSize)
             .background(Color.black.opacity(0.05))
             .border(Color.blue, width: 1)
-//            .padding(stampborder)
-            .border(Color.blue, width: 1)
-            .padding(stampborder/2)
+            .padding(stampborder)
             .border(textColor, width: 1)
-            .scaleEffect(min(frameWidth / (textSize.width+stampborder), frameHeight / (textSize.height+stampborder)))
+            .scaleEffect(scale)
             let _ = print("captureSize: \(textSize) \(frameWidth), \(frameHeight))")
     }
 }
