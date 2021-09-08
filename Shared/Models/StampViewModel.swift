@@ -23,24 +23,22 @@ class StampViewModel: ObservableObject {
         }
     }
 
-    var widthCGFloat: CGFloat = 100 {
+    var frameWidthCGFloat: CGFloat = 100 {
         didSet {
-            // print(widthCGFloat)
-            setSize(width: widthCGFloat, height: heightCGFloat)
+            setSize(width: frameWidthCGFloat, height: frameHeightCGFloat)
         }
     }
-    var heightCGFloat: CGFloat = 100 {
+    var frameHeightCGFloat: CGFloat = 100 {
         didSet {
-            // print(heightCGFloat)
-            setSize(width: widthCGFloat, height: heightCGFloat)
+            setSize(width: frameWidthCGFloat, height: frameHeightCGFloat)
         }
     }
     
     private var textSizeWidth: Double = 100
     private var textSizeHeight: Double = 100
     var rotationAngle = 0.0
-    private var width: Double = 100
-    private var height: Double = 100
+    private var frameWidth: Double = 100
+    private var frameHeight: Double = 100
     private var margin: Double = 0.0
     private var borderThickness: Double = 0.0
     private var scale: Double = 0.0
@@ -52,12 +50,12 @@ class StampViewModel: ObservableObject {
         self.top = top
         self.bottom = bottom
         self.color = color
-        setTextSize(CGSize(width: width, height: height))
+        setTextSize(CGSize(width: frameWidth, height: frameHeight))
     }
 
     func setSize(width: CGFloat, height: CGFloat) {
-        self.width = Double(width)
-        self.height = Double(height)
+        self.frameWidth = Double(width)
+        self.frameHeight = Double(height)
         calc()
     }
     
@@ -76,8 +74,8 @@ class StampViewModel: ObservableObject {
         borderThickness = textSizeHeight * borderWidthFactor
         let textWithBorderWidth = textSizeWidth+margin*2+borderThickness*2
         let textWithBorderHeight = textSizeHeight+margin*2+borderThickness*2
-        let scaleW = width / textWithBorderWidth
-        let scaleH = height / textWithBorderHeight
+        let scaleW = frameWidth / textWithBorderWidth
+        let scaleH = frameHeight / textWithBorderHeight
         scale = 1.0//min(scaleW, scaleH)
         
         marginCGFloat = CGFloat(margin)

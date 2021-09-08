@@ -59,63 +59,44 @@ struct StampView: View {
     }
 
 
-//    struct RotatedStampText: View {
-//        var text: String
-//        var color: Color
-//        var frameWidth: CGFloat
-//        var frameHeight: CGFloat
-//
-//        var body: some View {
-//            let A1 = Double(frameWidth)
-//            let B1 = Double(frameHeight)
-//            let alpha = 15.0  * .pi / 180
-//            let beta = Double(atan(B1/A1))
-//            //            let B2 = sin(alpha + beta) * sqrt(A1*A1+B1*B1)
-//            let term1 = sin(alpha + beta)
-//            let term2 = sqrt(A1*A1+B1*B1)
-//            let B2 = term1 * term2
-//            let rotationScaleFactor = B1/B2
-//            HorizontalStampText(text: text, color: color, frameWidth: frameWidth, frameHeight: frameHeight)
-//                .rotationEffect(Angle(degrees: 15))
-//        }
-//    }
-
     struct Playground: View {
         @ObservedObject var stampViewModel: StampViewModel
         @State private var frameWidth: CGFloat = 175
         @State private var frameHeight: CGFloat = 175
         
         var body: some View {
-            FrameAdjustingContainer(frameWidth: $stampViewModel.widthCGFloat, frameHeight: $stampViewModel.heightCGFloat, angleInDegrees: $stampViewModel.angleInDegrees) {
+            FrameAdjustingContainer(frameWidth: $stampViewModel.frameWidthCGFloat, frameHeight: $stampViewModel.frameHeightCGFloat, angleInDegrees: $stampViewModel.angleInDegrees) {
                 RotatedStampText(stampViewModel: stampViewModel)
+            }
+        }
+    }
+    
+    struct FrameAdjustingContainer<Content: View>: View {
+        @Binding var frameWidth: CGFloat
+        @Binding var frameHeight: CGFloat
+        @Binding var angleInDegrees: Double
+        let content: () -> Content
+        
+        var body: some View  {
+            ZStack {
+                content()
+                    .frame(width: frameWidth, height: frameHeight)
+                    .border(Color.blue, width: 1)
+                    .background(Color.blue.opacity(0.1))
+                
+                VStack {
+                    Spacer()
+                    Slider(value: $frameWidth, in: 50...300)
+                    Slider(value: $frameHeight, in: 50...600)
+                    Slider(value: $angleInDegrees, in: -90...90)
+                }
+                .padding()
             }
         }
     }
 }
 
-struct FrameAdjustingContainer<Content: View>: View {
-    @Binding var frameWidth: CGFloat
-    @Binding var frameHeight: CGFloat
-    @Binding var angleInDegrees: Double
-    let content: () -> Content
-    
-    var body: some View  {
-        ZStack {
-            content()
-                .frame(width: frameWidth, height: frameHeight)
-                .border(Color.blue, width: 1)
-                .background(Color.blue.opacity(0.1))
-            
-            VStack {
-                Spacer()
-                Slider(value: $frameWidth, in: 50...300)
-                Slider(value: $frameHeight, in: 50...600)
-                Slider(value: $angleInDegrees, in: -90...90)
-            }
-            .padding()
-        }
-    }
-}
+
 
 
 struct Stamp_Previews: PreviewProvider {
