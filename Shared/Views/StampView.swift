@@ -19,12 +19,12 @@ struct StampView: View {
         @ObservedObject var stampViewModel: StampViewModel
         var body: some View {
             HorizontalStampText(stampViewModel: stampViewModel)
-//                .padding(stampViewModel.marginCGFloat)
-            //                    .padding(borderWidth/2)
-            //                    .overlay(RoundedRectangle(cornerRadius: borderWidth*1.5)
-            //                                .stroke(stampViewModel.color, lineWidth: borderWidth))
-            //                    .padding(borderWidth/2)
-            //                    .border(Color.black, width: 3)
+                .padding(stampViewModel.marginCGFloat)
+                .padding(stampViewModel.borderWidthCGFloat/2)
+                                .overlay(RoundedRectangle(cornerRadius: stampViewModel.borderWidthCGFloat*1.5)
+                                            .stroke(stampViewModel.color, lineWidth: stampViewModel.borderWidthCGFloat))
+                                .padding(stampViewModel.borderWidthCGFloat/2)
+                                .border(Color.black, width: 3)
                 .scaleEffect(stampViewModel.scaleCGFloat, anchor: .center)
         }
     }
@@ -48,6 +48,16 @@ struct StampView: View {
             }
         }
     }
+    
+    struct RotatedStampText: View {
+        @ObservedObject var stampViewModel: StampViewModel
+        var body: some View {
+            BorderedHorizontalStampText(stampViewModel: stampViewModel)
+                .rotationEffect(Angle(radians: stampViewModel.rotationAngle))
+                .scaleEffect(stampViewModel.rotationScaleCGFloat)
+        }
+    }
+
 
 //    struct RotatedStampText: View {
 //        var text: String
@@ -76,8 +86,8 @@ struct StampView: View {
         @State private var frameHeight: CGFloat = 175
         
         var body: some View {
-            FrameAdjustingContainer(frameWidth: $stampViewModel.widthCGFloat, frameHeight: $stampViewModel.heightCGFloat) {
-                BorderedHorizontalStampText(stampViewModel: stampViewModel)
+            FrameAdjustingContainer(frameWidth: $stampViewModel.widthCGFloat, frameHeight: $stampViewModel.heightCGFloat, angleInDegrees: $stampViewModel.angleInDegrees) {
+                RotatedStampText(stampViewModel: stampViewModel)
             }
         }
     }
@@ -86,6 +96,7 @@ struct StampView: View {
 struct FrameAdjustingContainer<Content: View>: View {
     @Binding var frameWidth: CGFloat
     @Binding var frameHeight: CGFloat
+    @Binding var angleInDegrees: Double
     let content: () -> Content
     
     var body: some View  {
@@ -99,6 +110,7 @@ struct FrameAdjustingContainer<Content: View>: View {
                 Spacer()
                 Slider(value: $frameWidth, in: 50...300)
                 Slider(value: $frameHeight, in: 50...600)
+                Slider(value: $angleInDegrees, in: -90...90)
             }
             .padding()
         }
