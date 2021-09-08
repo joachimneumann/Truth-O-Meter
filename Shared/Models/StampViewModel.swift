@@ -16,7 +16,8 @@ class StampViewModel: ObservableObject {
     let top: String
     let bottom: String?
     let color: Color
-    
+    var rotationAngle = 0.0
+
     var angleInDegrees: Double = -25.0 * .pi / 180.0 {
         didSet {
             setAngle(angleInDegrees: angleInDegrees)
@@ -36,7 +37,6 @@ class StampViewModel: ObservableObject {
     
     private var textSizeWidth: Double = 100
     private var textSizeHeight: Double = 100
-    var rotationAngle = 0.0
     private var frameWidth: Double = 100
     private var frameHeight: Double = 100
     private var margin: Double = 0.0
@@ -46,7 +46,7 @@ class StampViewModel: ObservableObject {
     private let marginFactor = 0.05
     private let borderWidthFactor = 0.25
 
-    init(top: String, bottom: String?, rotated: Bool, color: Color) {
+    init(top: String, bottom: String?, color: Color) {
         self.top = top
         self.bottom = bottom
         self.color = color

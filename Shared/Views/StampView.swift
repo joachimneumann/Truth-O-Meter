@@ -101,7 +101,7 @@ struct StampView: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        let stampViewModel = StampViewModel(top: "Éj23", bottom: "bottom", rotated: true, color: Color.blue)
+        let stampViewModel = StampViewModel(top: "Éj23", bottom: "bottom", color: Color.blue)
         StampView(stampViewModel: stampViewModel)
     }
 }
