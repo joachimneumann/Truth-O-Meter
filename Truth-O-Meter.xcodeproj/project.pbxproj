@@ -33,6 +33,8 @@
 		AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
 		AA4565E326D0C4C6003CC57E /* StampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* StampView.swift */; };
 		AA4565E426D0C4C6003CC57E /* StampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4565E226D0C4C6003CC57E /* StampView.swift */; };
+		AA48152126E8511B0041C045 /* StampViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152026E8511B0041C045 /* StampViewModel.swift */; };
+		AA48152226E8511B0041C045 /* StampViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152026E8511B0041C045 /* StampViewModel.swift */; };
 		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
@@ -80,6 +82,7 @@
 		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA40FD6026D611C9006DBFD8 /* Precision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precision.swift; sourceTree = "<group>"; };
 		AA4565E226D0C4C6003CC57E /* StampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampView.swift; sourceTree = "<group>"; };
+		AA48152026E8511B0041C045 /* StampViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampViewModel.swift; sourceTree = "<group>"; };
 		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 				AAE4C2E126E06F6900FE043B /* Needle.swift */,
 				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
+				AA48152026E8511B0041C045 /* StampViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +320,7 @@
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
+				AA48152126E8511B0041C045 /* StampViewModel.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* StampView.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
@@ -347,6 +352,7 @@
 			files = (
 				AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
+				AA48152226E8511B0041C045 /* StampViewModel.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* StampView.swift in Sources */,
 				AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */,

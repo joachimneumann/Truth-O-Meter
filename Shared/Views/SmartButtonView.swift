@@ -77,16 +77,16 @@ struct SmartButtonView: View {
                         Spacer(minLength: 0)
                         HStack(alignment: .center) {
                             Spacer(minLength: 0)
-                            StampView(
-                                top: settings.stampTop,
-                                bottom: settings.stampBottom,
-                                rotated: true,
-                                color: C.color.bullshitRed)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    stampTapped()
-                                }
-                                .padding(20)
+//                            StampView(
+//                                top: settings.stampTop,
+//                                bottom: settings.stampBottom,
+//                                rotated: true,
+//                                color: C.color.bullshitRed)
+//                                .contentShape(Rectangle())
+//                                .onTapGesture {
+//                                    stampTapped()
+//                                }
+//                                .padding(20)
                             Spacer(minLength: 0)
                         }
                         .aspectRatio(1.3, contentMode: .fit)

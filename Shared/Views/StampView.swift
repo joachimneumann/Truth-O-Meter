@@ -9,163 +9,76 @@ import SwiftUI
 
 
 struct StampView: View {
-    let top: String
-    let bottom: String?
-    let rotated: Bool
-    let color: Color
+    let stampViewModel: StampViewModel
     
     var body: some View {
-        Playground(text: top)
+        Playground(stampViewModel: stampViewModel)
     }
-    /*
-     struct AutosizeText: View {
-     var text: String
-     var textColor: Color
-     var frameWidth: CGFloat
-     var frameHeight: CGFloat
-     @Binding var textSize: CGSize
-     @Binding var border: CGFloat
-     
-     var body: some View {
-     let scalew = frameWidth / (textSize.width)
-     let scaleh = frameHeight / (textSize.height)
-     let scale = min(scalew, scaleh)
-     return Text(text)
-     .font(.system(size: 300))  // Bigger font size then final rendering
-     .foregroundColor(textColor)
-     .fixedSize() // Prevents text truncating
-     .captureSize(in: $textSize)
-     .background(Color.black.opacity(0.05))
-     .scaleEffect(scale)
-     .onChange(of: frameHeight, perform: { value in
-     let verticalTextMargin = textSize.height / 16
-     let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
-     let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
-     let scale = min(scalew, scaleh)
-     border = verticalTextMargin * scale
-     })
-     .onChange(of: frameWidth, perform: { value in
-     let verticalTextMargin = textSize.height / 16
-     let scalew = frameWidth / (textSize.width+2*verticalTextMargin)
-     let scaleh = frameHeight / (textSize.height+2*verticalTextMargin)
-     let scale = min(scalew, scaleh)
-     border = verticalTextMargin * scale
-     })
-     }
-     }
-     */
     
-    struct StampTextWithBorder: View {
-        var text: String
-        var color: Color
-        var margin: CGFloat
-        var borderWidth: CGFloat
+    struct BorderedHorizontalStampText: View {
+        @ObservedObject var stampViewModel: StampViewModel
         var body: some View {
-            Text(text)
-                .foregroundColor(color)
-                .font(.system(size: 300))
-                .fixedSize() // Prevents text truncating
-//                .background(Color.black.opacity(0.1))
-                .padding(margin)
-//                .background(Color.red.opacity(0.6))
-                .padding(borderWidth/2)
-//                .background(Color.red.opacity(0.6))
-                .overlay(RoundedRectangle(cornerRadius: borderWidth*1.5)
-                            .stroke(color, lineWidth: borderWidth))
+            HorizontalStampText(stampViewModel: stampViewModel)
+//                .padding(stampViewModel.marginCGFloat)
+            //                    .padding(borderWidth/2)
+            //                    .overlay(RoundedRectangle(cornerRadius: borderWidth*1.5)
+            //                                .stroke(stampViewModel.color, lineWidth: borderWidth))
+            //                    .padding(borderWidth/2)
+            //                    .border(Color.black, width: 3)
+                .scaleEffect(stampViewModel.scaleCGFloat, anchor: .center)
         }
     }
     
-    struct SmartStampText: View {
-        @State private var textSize = CGSize(width: 100, height: 100)
-
-        var text: String
-        var color: Color
-        var frameWidth: CGFloat
-        var frameHeight: CGFloat
-        private let marginFactor: CGFloat = 0.25
-        private let borderWidthFactor: CGFloat = 0.25
-        
+    struct HorizontalStampText: View {
+        let stampViewModel: StampViewModel
         var body: some View {
-            let marginWidth: CGFloat = textSize.height * marginFactor
-            let borderWidth: CGFloat = textSize.height * borderWidthFactor
-            let scaleW = frameHeight/(textSize.height+marginWidth*2+borderWidth*2)
-            let scaleH = frameWidth/(textSize.width+marginWidth*2+borderWidth*2)
-            let scale = min(scaleW, scaleH)
             ZStack {
-                // invisible Text --> textSize
-                Text(text)
-                    .foregroundColor(Color.clear)
+                Text(stampViewModel.top)
+                    .foregroundColor(stampViewModel.color)
                     .font(.system(size: 300))  // Bigger font size then final rendering
                     .fixedSize() // Prevents text truncating
                     .background(
                         GeometryReader { (geo) -> Color in
-                            DispatchQueue.main.async {  // hack for modifying state during view rendering.
-                                textSize = geo.size
+                            DispatchQueue.main.async {
+                                stampViewModel.setTextSize(geo.size)
                             }
                             return Color.clear
                         }
                     )
-                StampTextWithBorder(
-                    text: text,
-                    color: color,
-                    margin: marginWidth,
-                    borderWidth: borderWidth)
-                    .mask(MaskView()
-                            .scaleEffect(1.3, anchor: .center)
-                    )
-                    .padding(borderWidth/2)
-                    .border(Color.black, width: 3)
-                    .scaleEffect(scale, anchor: .center)
             }
-            //            .captureSize(in: $textSize)
         }
     }
-//    struct StampText: View {
+
+//    struct RotatedStampText: View {
 //        var text: String
 //        var color: Color
 //        var frameWidth: CGFloat
 //        var frameHeight: CGFloat
-//        @State private var textSize = CGSize(width: 200, height: 1000)
-//        @State private var border: CGFloat = 15.0
 //
 //        var body: some View {
-//            AutosizeText(text: text, textColor: color, frameWidth: frameWidth, frameHeight: frameHeight, textSize: $textSize, border: $border)
-//                .frame(width: frameWidth, height: frameHeight)
-//                .padding(border)
-//                .border(color)
-//                .background(Color.yellow.opacity(0.3))
+//            let A1 = Double(frameWidth)
+//            let B1 = Double(frameHeight)
+//            let alpha = 15.0  * .pi / 180
+//            let beta = Double(atan(B1/A1))
+//            //            let B2 = sin(alpha + beta) * sqrt(A1*A1+B1*B1)
+//            let term1 = sin(alpha + beta)
+//            let term2 = sqrt(A1*A1+B1*B1)
+//            let B2 = term1 * term2
+//            let rotationScaleFactor = B1/B2
+//            HorizontalStampText(text: text, color: color, frameWidth: frameWidth, frameHeight: frameHeight)
+//                .rotationEffect(Angle(degrees: 15))
 //        }
 //    }
+
     struct Playground: View {
-        var text: String
+        @ObservedObject var stampViewModel: StampViewModel
         @State private var frameWidth: CGFloat = 175
         @State private var frameHeight: CGFloat = 175
         
         var body: some View {
-            FrameAdjustingContainer(frameWidth: $frameWidth, frameHeight: $frameHeight) {
-                SmartStampText(text: text, color: C.color.bullshitRed, frameWidth: frameWidth, frameHeight: frameHeight)
+            FrameAdjustingContainer(frameWidth: $stampViewModel.widthCGFloat, frameHeight: $stampViewModel.heightCGFloat) {
+                BorderedHorizontalStampText(stampViewModel: stampViewModel)
             }
-        }
-    }
-}
-
-private struct SizeKey: PreferenceKey {
-    static let defaultValue: CGSize = .zero
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        value = nextValue()
-    }
-}
-
-
-extension View {
-    func captureSize(in binding: Binding<CGSize>) -> some View {
-        overlay(GeometryReader { proxy in
-            let _ = print("captureSize1: \(proxy.size)")
-            Color.clear.preference(key: SizeKey.self, value: proxy.size)
-        })
-        .onPreferenceChange(SizeKey.self) {
-            size in binding.wrappedValue = size
-            print("captureSize2: \(size)")
         }
     }
 }
@@ -180,7 +93,7 @@ struct FrameAdjustingContainer<Content: View>: View {
             content()
                 .frame(width: frameWidth, height: frameHeight)
                 .border(Color.blue, width: 1)
-//                .background(Color.blue.opacity(0.2))
+                .background(Color.blue.opacity(0.1))
             
             VStack {
                 Spacer()
@@ -195,6 +108,7 @@ struct FrameAdjustingContainer<Content: View>: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "Éj23", bottom: "33", rotated: true, color: Color.blue)
+        let stampViewModel = StampViewModel(top: "Éj23", bottom: "bottom", rotated: true, color: Color.blue)
+        StampView(stampViewModel: stampViewModel)
     }
 }

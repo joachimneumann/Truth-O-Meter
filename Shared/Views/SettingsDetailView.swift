@@ -52,12 +52,12 @@ struct SettingsDetailView: View {
                             Spacer(minLength: 0)
                             HStack(alignment: .center) {
                                 Spacer(minLength: 0)
-                                StampView(
-                                    top: settings.stampTop,
-                                    bottom: settings.stampBottom,
-                                    rotated: true,
-                                    color: C.color.bullshitRed)
-                                    .padding(20)
+//                                StampView(
+//                                    top: settings.stampTop,
+//                                    bottom: settings.stampBottom,
+//                                    rotated: true,
+//                                    color: C.color.bullshitRed)
+//                                    .padding(20)
                                 Spacer(minLength: 0)
                             }
                             Spacer(minLength: 0)
