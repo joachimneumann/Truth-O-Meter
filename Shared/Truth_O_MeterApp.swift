@@ -13,6 +13,8 @@ struct Truth_O_MeterApp: App {
     var body: some Scene {
         func f() {}
         let settings = Settings()
+        let stampModel = StampModel()
+        stampModel.text = "Éj1234567890"
         Needle.shared.active(true, strongNoise: false)
         return WindowGroup {
             #if os(macOS)
@@ -24,10 +26,10 @@ struct Truth_O_MeterApp: App {
                 .background(Color.white)
             #else
 //            PlaygroundView(stampViewModel: stampViewModel)
-            PlaygroundView()
-//            Stamp(text: stampViewModel.top)
-//                .frame(width: 200, height: 200, alignment: .center)
-//                .background(Color.yellow.opacity(0.2))
+//            PlaygroundView()
+            Stamp(stampModel: stampModel)
+                .frame(width: 200, height: 200, alignment: .center)
+                .background(Color.yellow.opacity(0.2))
 //            DiskView(isOpaque: true, borderWidth: 2, isGray: false, down: f, up: f, color: C.color.bullshitRed, grayColor: C.color.lightGray)
 //            MainView()
                 .environmentObject(settings)

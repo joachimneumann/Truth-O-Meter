@@ -8,7 +8,7 @@
 import Foundation
 
 class StampModel: ObservableObject {
-    @Published var text: String = "text"
+    @Published var text: String = "text123"
     @Published var textSizeCaptured = false
     @Published var frameSizeCaptured = false
 }
