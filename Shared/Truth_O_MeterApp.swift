@@ -23,8 +23,9 @@ struct Truth_O_MeterApp: App {
                 .frame(maxWidth: C.h, maxHeight: C.h)
                 .background(Color.white)
             #else
-            let stampViewModel = StampViewModel(top: "Éj23", bottom: "33", color: Color.blue)
-            StampView(stampViewModel: stampViewModel)
+            let stampViewModel = StampViewModel(top: "Éj23232", bottom: "33", color: Color.blue)
+//            PlaygroundView(stampViewModel: stampViewModel)
+            Stamp(stampViewModel: stampViewModel)
 //            DiskView(isOpaque: true, borderWidth: 2, isGray: false, down: f, up: f, color: C.color.bullshitRed, grayColor: C.color.lightGray)
 //            MainView()
                 .environmentObject(settings)
