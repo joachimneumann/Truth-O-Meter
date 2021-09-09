@@ -10,43 +10,86 @@ import SwiftUI
 
 
 struct Stamp: View {
-    @ObservedObject var stampViewModel: StampViewModel
+    var stampModel: StampModel
     var body: some View {
-        VStack {
-            Spacer(minLength: 0)
-            HStack {
-                Spacer(minLength: 0)
-                HorizontalStampText(stampViewModel: stampViewModel)
-                    .frame(width: stampViewModel.frameSize.width, height: stampViewModel.frameSize.height, alignment: .center)
-                Spacer(minLength: 0)
-            }
-            Spacer(minLength: 0)
-        }
-        .stampCaptureSize(in: $stampViewModel.frameSize)
-        .background(Color.black.opacity(0.1))
+        HorizontalStampText(stampModel: stampModel)
     }
-
+    
     struct HorizontalStampText: View {
-        @ObservedObject var stampViewModel: StampViewModel
+        var stampModel: StampModel
+        @State private var scaleFactor:CGFloat = 1.0
+        @State private var newFrameSize = CGSize(width: 100, height: 100)
+        @State private var frameSize = CGSize(width: 100, height: 100)
+        @State private var textSize = CGSize(width: 100, height: 100)
+        @State private var textSizeCaptured = false
+        @State private var frameSizeCaptured = false
+        
+        private let unscaledFontSize:CGFloat = 200
+        
+        func x(_ newFrameSize: CGSize) {
+            if round(newFrameSize.width) != round(frameSize.width)
+            {
+                print("frameSize=\(frameSize)")
+                print("newFrameSize=\(newFrameSize)")
+                print("textSizeCaptured=\(textSizeCaptured)")
+                print("frameSizeCaptured=\(frameSizeCaptured)")
+
+                frameSizeCaptured = false
+                textSizeCaptured = false
+            }
+        }
+        
         var body: some View {
-                Text(stampViewModel.top)
-                    .foregroundColor(Color.yellow)//stampViewModel.color)
-                    .background(Color.blue.opacity(0.3))
-                    .font(.system(size: 300))  // Bigger font size then final rendering
-                    .fixedSize() // Prevents text truncating
-                    .stampCaptureSize(in: $stampViewModel.textSize)
-                    .scaleEffect(stampViewModel.scale)
+            GeometryReader { geo in
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .overlay(
+                            GeometryReader { geo in
+                                let _ = DispatchQueue.main.async {
+                                    x(geo.size)
+                                }
+                                Color.clear
+                            }
+                        )
+                    if !frameSizeCaptured {
+                        Rectangle()
+                            .padding()
+                            .foregroundColor(.blue.opacity(0.1))
+                            .stampCaptureSize(in: $frameSize)
+                            .onAppear() {
+                                frameSizeCaptured = true
+                            }
+                    }
+                    if (frameSizeCaptured && !textSizeCaptured) {
+                        Text(stampModel.text)
+                            .font(.system(size: unscaledFontSize))
+                            .fixedSize() // Prevents text truncating
+                            .stampCaptureSize(in: $textSize)
+                            .onAppear() {
+                                let widthFactor = frameSize.width/textSize.width
+                                let heightFactor = frameSize.height/textSize.height
+                                scaleFactor = min(widthFactor, heightFactor)
+                                print("onAppear() unscaledTextSize textScaleFactor \(scaleFactor)")
+                                textSizeCaptured = true
+                            }
+                    }
+                    if (textSizeCaptured && textSizeCaptured) {
+                        Text(stampModel.text)
+                            .font(.system(size: unscaledFontSize*scaleFactor))
+                            .fixedSize()
+                        //                    .scaleEffect(scaleFactor)
+                    }
+                }
+            }
         }
     }
 }
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        let stampViewModel = StampViewModel(top: "Éj23123", bottom: "bottom", color: Color.blue)
-        Stamp(stampViewModel: stampViewModel)
-            .background(Color.yellow.opacity(0.2))
-            .padding(30)
-//            .aspectRatio(1.0, contentMode: .fit)
+        Stamp(stampModel: StampModel())
+            .frame(width: 200, height: 200, alignment: .center)
     }
 }
 
