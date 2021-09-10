@@ -14,10 +14,9 @@ struct PlaygroundView: View {
     @State private var frameHeight: CGFloat = 175
     @State var angleInDegrees = 0.0
     
-    var stampModel = StampModel()
     var body: some View  {
         ZStack {
-            Stamp(stampModel: stampModel)
+            Stamp(text: "Éjsdf")
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)
                 .border(Color.blue, width: 1)

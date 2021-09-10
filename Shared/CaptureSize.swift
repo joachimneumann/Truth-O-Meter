@@ -17,12 +17,12 @@ private struct StampSizeKey: PreferenceKey {
 extension View {
     func stampCaptureSize(in binding: Binding<CGSize>) -> some View {
         overlay(GeometryReader { proxy in
-            let _ = print("Color.clear.preference")
+//            let _ = print("Color.clear.preference")
             Color.clear.preference(key: StampSizeKey.self, value: proxy.size)
         })
             .onPreferenceChange(StampSizeKey.self) { size in
                 binding.wrappedValue = size
-                print("onPreferenceChange")
+//                print("onPreferenceChange")
             }
     }
 }

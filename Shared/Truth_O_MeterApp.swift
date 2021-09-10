@@ -13,8 +13,6 @@ struct Truth_O_MeterApp: App {
     var body: some Scene {
         func f() {}
         let settings = Settings()
-        let stampModel = StampModel()
-        stampModel.text = "Éj1234567890"
         Needle.shared.active(true, strongNoise: false)
         return WindowGroup {
             #if os(macOS)
