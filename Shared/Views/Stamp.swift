@@ -19,7 +19,7 @@ struct Stamp: View {
     private let fontSize:CGFloat = 30.0
     
     var body: some View {
-        let _ = print("totalSize=\(totalSize.format())")
+        let _ = print("totalSize=\($totalSize.wrappedValue.width.f),\($totalSize.wrappedValue.height.f)")
         ZStack {
             Rectangle()
                 .foregroundColor(.blue)
@@ -30,7 +30,7 @@ struct Stamp: View {
                 fontSize: fontSize,
                 angle: angle)
                 .background(Color.green.opacity(0.2))
-                .scaleEffect(min(totalSize.width / sizeAfterRotation.width, totalSize.height / sizeAfterRotation.height))
+//                .scaleEffect(min(totalSize.width / sizeAfterRotation.width, totalSize.height / sizeAfterRotation.height))
         }
     }
 
@@ -118,4 +118,14 @@ struct Stamp_Previews: PreviewProvider {
 }
 
 
+extension Double {
+    var f: String {
+        return String(format:"%7.3f", self)
+    }
+}
 
+extension CGFloat {
+    var f: String {
+        return String(format:"%7.3f", self)
+    }
+}
