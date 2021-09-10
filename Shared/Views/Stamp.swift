@@ -9,22 +9,47 @@ import SwiftUI
 
 struct Stamp: View {
     var text: String
+    var color: Color
     var body: some View {
-        HorizontalStampText(text: text)
+        HorizontalStampText(
+            text: text,
+            color: color)
     }
+    
+//    struct BorderedHorizontalStampText: View {
+//        @State var frameSize = CGSize(width: 100, height: 100)
+//        @State var largeTextSize = CGSize(width: 100, height: 100)
+//        @State var actualTextSize = CGSize(width: 100, height: 100)
+//        private let marginFactor: CGFloat = 0.05
+//        var margin: Binding<CGFloat> {
+//            return $frameSize.height// * borderLineWidthFactor
+//        }
+//        var text: String
+//        var color: Color
+//        var body: some View {
+//            HorizontalStampText(
+//                text: text,
+//                color: color,
+//                frameSize: $frameSize,
+//                largeTextSize: $largeTextSize,
+//                actualTextSize: $actualTextSize
+//            )
+//            .padding($actualTextSize.wrappedValue.height*marginFactor)
+//        }
+//    }
     
     struct HorizontalStampText: View {
         var text: String
+        var color: Color
         let largeFontSize:CGFloat = 300
         @State var frameSize = CGSize(width: 100, height: 100)
-        @State var textSize = CGSize(width: 100, height: 100)
-        var scaleFactor : CGFloat {
-            let _scaleFactorWidth = frameSize.width / textSize.width
-            let _scaleFactorHeight = frameSize.height / textSize.height
+        @State var largeTextSize = CGSize(width: 100, height: 100)
+        var scaleFactor: CGFloat {
+            let _scaleFactorWidth = frameSize.width / largeTextSize.width
+            let _scaleFactorHeight = frameSize.height / largeTextSize.height
             return min(_scaleFactorWidth, _scaleFactorHeight)
         }
         
-        @State private var name = ""
         var body: some View {
             ZStack {
                 Rectangle()
@@ -36,9 +61,10 @@ struct Stamp: View {
                                 .background(Color.blue.opacity(0.2))
                                 .font(.system(size: largeFontSize))
                                 .fixedSize()
-                                .stampCaptureSize(in: $textSize)
+                                .stampCaptureSize(in: $largeTextSize)
                                 .hidden()
                             Text(text)
+                                .foregroundColor(color)
                                 .font(.system(size: largeFontSize))
                                 .fixedSize()
                                 .background(Color.green)
@@ -52,8 +78,10 @@ struct Stamp: View {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        Stamp(text: "Éjsdf")
-            .frame(width: 250, height: 250, alignment: .center)
+        Stamp(
+            text: "Éjsdf",
+            color: C.color.bullshitRed)
+            .frame(width: 350, height: 350, alignment: .center)
             .background(Color.yellow.opacity(0.2))
             .border(Color.black)
     }
