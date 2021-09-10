@@ -9,38 +9,37 @@ import SwiftUI
 
 struct Stamp: View {
     var stampModel: StampModel
+    
     var body: some View {
         HorizontalStampText(stampModel: stampModel)
     }
     
     struct HorizontalStampText: View {
-        var stampModel: StampModel
-        @State private var frameSize = CGSize(width: 100, height: 100)
-        @State private var textSize = CGSize(width: 100, height: 100)
-        private let unscaledFontSize:CGFloat = 300
+        @ObservedObject var stampModel: StampModel
         
+        var scaledFontSize:CGFloat = 20.0
+        
+        @State private var name = ""
         var body: some View {
             ZStack {
-                GeometryReader { geo in
-                    Rectangle()
-                        .foregroundColor(.blue.opacity(0.1))
-                        .stampCaptureSize(in: $frameSize)
-                    Text(stampModel.text)
-                        .font(.system(size: unscaledFontSize))
-                        .fixedSize()
-                        .background(
-                            GeometryReader { (geo) -> Color in
-                                DispatchQueue.main.async {
-                                    textSize = geo.size
-                                }
-                                return Color.clear
-                            }
-                        )
-                        .hidden()
-                    Text(stampModel.text)
-                        .font(.system(size: unscaledFontSize * frameSize.width / textSize.width))
-                    .fixedSize()
-                }
+                Rectangle()
+                    .foregroundColor(.blue.opacity(0.2))
+                    .stampCaptureSize(in: $stampModel.frameSize)
+                    .background(
+                        ZStack {
+                            Text(stampModel.text)
+                                .background(Color.blue.opacity(0.2))
+                                .font(.system(size: stampModel.largeFontSize))
+                                .fixedSize()
+                                .stampCaptureSize(in: $stampModel.textSize)
+                                .hidden()
+                            Text(stampModel.text)
+                                .font(.system(size: stampModel.largeFontSize))
+                                .fixedSize()
+                                .background(Color.green)
+                                .scaleEffect(stampModel.scaleFactor, anchor: .center)
+                        }
+                    )
             }
         }
     }
@@ -49,8 +48,11 @@ struct Stamp: View {
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         Stamp(stampModel: StampModel())
-            .frame(width: 300, height: 300, alignment: .center)
+            .frame(width: 250, height: 250, alignment: .center)
+            .background(Color.yellow.opacity(0.2))
             .border(Color.black)
     }
 }
+
+
 

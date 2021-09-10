@@ -26,10 +26,17 @@ struct Truth_O_MeterApp: App {
                 .background(Color.white)
             #else
 //            PlaygroundView(stampViewModel: stampViewModel)
-//            PlaygroundView()
-            Stamp(stampModel: stampModel)
-                .frame(width: 200, height: 200, alignment: .center)
-                .background(Color.yellow.opacity(0.2))
+            PlaygroundView()
+//            HStack(alignment: .center, spacing: 0) {
+//                Rectangle()
+//                    .foregroundColor(.yellow.opacity(0.2))
+//                Stamp(stampModel: stampModel)
+//                    .frame(width: 200, height: 200, alignment: .center)
+//                    .background(Color.yellow)//.opacity(1.0))
+//                    .border(Color.black, width: 1)
+//                Rectangle()
+//                    .foregroundColor(.yellow.opacity(0.2))
+//            }
 //            DiskView(isOpaque: true, borderWidth: 2, isGray: false, down: f, up: f, color: C.color.bullshitRed, grayColor: C.color.lightGray)
 //            MainView()
                 .environmentObject(settings)

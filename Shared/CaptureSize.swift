@@ -20,8 +20,8 @@ extension View {
             let _ = print("Color.clear.preference")
             Color.clear.preference(key: StampSizeKey.self, value: proxy.size)
         })
-            .onPreferenceChange(StampSizeKey.self) {
-                size in binding.wrappedValue = size
+            .onPreferenceChange(StampSizeKey.self) { size in
+                binding.wrappedValue = size
                 print("onPreferenceChange")
             }
     }
