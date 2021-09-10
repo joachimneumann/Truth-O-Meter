@@ -19,6 +19,7 @@ struct PlaygroundView: View {
             Stamp(
                 text: "Éjsdf23842397",
                 color: C.color.bullshitRed,
+                fontSize: 30,
                 angle: Angle(degrees: angleInDegrees))
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)
