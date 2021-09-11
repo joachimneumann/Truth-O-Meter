@@ -47,6 +47,8 @@
 		AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
+		AA813B8826EC4DAD00DE4290 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* SnapshotView.swift */; };
+		AA813B8926EC4DAD00DE4290 /* SnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* SnapshotView.swift */; };
 		AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
 		AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
 		AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */; };
@@ -95,6 +97,7 @@
 		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA813B8726EC4DAD00DE4290 /* SnapshotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotView.swift; sourceTree = "<group>"; };
 		AA8F3CB926DC6B4100C82E56 /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
 		AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDisksView.swift; sourceTree = "<group>"; };
 		AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifterView.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 				AAE4C2E826E2281F00FE043B /* InstructionView.swift */,
 				AA27B53A26E4E4E800382215 /* MaskView.swift */,
 				AA48152926E8CB6D0041C045 /* PlaygroundView.swift */,
+				AA813B8726EC4DAD00DE4290 /* SnapshotView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,6 +339,7 @@
 				AA48152126E8511B0041C045 /* StampViewModel.swift in Sources */,
 				AA4565E326D0C4C6003CC57E /* StampView.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
+				AA813B8826EC4DAD00DE4290 /* SnapshotView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
@@ -370,6 +375,7 @@
 				AA48152226E8511B0041C045 /* StampViewModel.swift in Sources */,
 				AA4565E426D0C4C6003CC57E /* StampView.swift in Sources */,
 				AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */,
+				AA813B8926EC4DAD00DE4290 /* SnapshotView.swift in Sources */,
 				AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */,
 				AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,

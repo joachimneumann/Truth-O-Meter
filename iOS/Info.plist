@@ -50,5 +50,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-</dict>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Accessing photo library...</string></dict>
 </plist>

@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// TODO: do not use a global
-var sizeAfterRotation: CGSize = CGSize(width: 200, height: 200)
-
 struct Stamp: View {
     var text: String
     var color: Color
@@ -66,22 +63,16 @@ struct StampPadding {
         let heightScale = (B2 / B1) - 1.0
         horizontal = 0.5*widthScale*A1
         vertical = 0.5*heightScale*B1
-//        sizeAfterRotation = CGSize(
-//            width:  size.width  + 2*horizontal,
-//            height: size.height + 2*vertical)
     }
 }
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         Stamp(
-            text: "Éjsdf",
+            text: "Éjsdfsdfsdssdfsdssd",
             color: C.color.bullshitRed,
             fontSize: 30,
             angle: Angle(degrees: -25.0))
-            .frame(width: 350, height: 350, alignment: .center)
-            //            .background(Color.yellow.opacity(0.2))
-            .border(Color.black)
     }
 }
 

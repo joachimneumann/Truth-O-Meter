@@ -24,14 +24,14 @@ struct Truth_O_MeterApp: App {
                 .background(Color.white)
             #else
 //            PlaygroundView(stampViewModel: stampViewModel)
-            PlaygroundView()
+//            PlaygroundView()
 //            HStack(alignment: .center, spacing: 0) {
 //                Rectangle()
 //                    .foregroundColor(.yellow.opacity(0.2))
-//                Stamp(stampModel: stampModel)
-//                    .frame(width: 200, height: 200, alignment: .center)
-//                    .background(Color.yellow)//.opacity(1.0))
-//                    .border(Color.black, width: 1)
+            Stamp(text: "xx", color: C.color.bullshitRed, fontSize: 60, angle: Angle(degrees: -25.0))
+                    .frame(width: 200, height: 200, alignment: .center)
+                    .background(Color.yellow)//.opacity(1.0))
+                    .border(Color.black, width: 1)
 //                Rectangle()
 //                    .foregroundColor(.yellow.opacity(0.2))
 //            }
