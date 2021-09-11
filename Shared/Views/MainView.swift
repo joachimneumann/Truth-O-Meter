@@ -53,7 +53,7 @@ struct MainView: View {
                     VStack {
                         VStack {
                             DisplayView(colorful: displayColorful, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
-                            if true {
+                            if showAnalysisView {
                                 HorizontalProgressBar(
                                     animationFinished: analysisFinished,
                                     activeColor: activeColor,

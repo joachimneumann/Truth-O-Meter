@@ -24,19 +24,9 @@ struct Truth_O_MeterApp: App {
                 .background(Color.white)
             #else
 
-//            SnapshotView(
-//                text: "Éj",
-//                color: C.color.bullshitRed,
-//                angle: Angle(degrees: -25.0))
-
             
             PlaygroundView()
-//            HStack(alignment: .center, spacing: 0) {
-//                Rectangle()
-//                    .foregroundColor(.yellow.opacity(0.2))
-//                    .frame(width: 200, height: 200, alignment: .center)
-//                    .background(Color.yellow)//.opacity(1.0))
-//                    .border(Color.black, width: 1)
+
 //            MainView()
 //                .environmentObject(settings)
 //                .environmentObject(NavigationStack())

@@ -18,12 +18,12 @@ struct PlaygroundView: View {
         ZStack {
             Stamp(
                 top: "Éjsdf23842397",
-                bottom: nil,
+                bottom: "Bullshit",
                 color: C.color.bullshitRed,
                 angle: angle)
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)
-                //.border(Color.blue, width: 1)
+                .border(Color.blue, width: 1)
             VStack {
                 Spacer()
                 HStack {

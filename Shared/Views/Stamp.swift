@@ -16,14 +16,7 @@ class StampImage: ObservableObject {
         self.angle = Angle(degrees: 5)
         snapshot = nil
     }
-    
-    func cropImage(imageToCrop:UIImage, toRect rect:CGRect) -> UIImage{
         
-        let imageRef:CGImage = imageToCrop.cgImage!.cropping(to: rect)!
-        let cropped:UIImage = UIImage(cgImage:imageRef)
-        return cropped
-    }
-    
     func snap(image: UIImage, borderWidth: CGFloat, cornerRadius: CGFloat) {
         let rotatedImage = image.stampRotate(angle)
         
@@ -37,7 +30,7 @@ class StampImage: ObservableObject {
             y: crop,
             width: rotatedImage.size.width*rotatedImage.scale-2*crop,
             height: rotatedImage.size.height*rotatedImage.scale-2*crop
-        ).integral
+        )
         
         let cgImage = rotatedImage.cgImage!
         let croppedCGImage = cgImage.cropping(
