@@ -68,6 +68,7 @@
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
 		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
+		AA18AD4726ECE28100C26F56 /* Truth-O-Meter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Truth-O-Meter.entitlements"; sourceTree = "<group>"; };
 		AA27B53A26E4E4E800382215 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		AA2B352C255AA99300AD0B14 = {
 			isa = PBXGroup;
 			children = (
+				AA18AD4726ECE28100C26F56 /* Truth-O-Meter.entitlements */,
 				AA2B3531255AA99300AD0B14 /* Shared */,
 				AA2B353B255AA99400AD0B14 /* iOS */,
 				AA2B3542255AA99400AD0B14 /* macOS */,
@@ -499,6 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Truth-O-Meter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;
@@ -512,6 +515,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.bullshitdetector;
 				PRODUCT_NAME = "Truth-O-Meter";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -522,6 +526,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Truth-O-Meter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8A4DL788W9;
 				ENABLE_PREVIEWS = YES;
@@ -535,6 +540,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.bullshitdetector;
 				PRODUCT_NAME = "Truth-O-Meter";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
