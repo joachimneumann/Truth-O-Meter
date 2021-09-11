@@ -10,21 +10,18 @@ import NavigationStack
 
 @main
 struct Truth_O_MeterApp: App {
-    #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
-    #endif
-
+#endif
+    func doNothing() {}
+    
     var body: some Scene {
-        //let settings = Settings()
+        let settings = Settings()
         Needle.shared.active(true, strongNoise: false)
         return WindowGroup {
-            PlaygroundView()
-            //                .background(Color.white)
-            
-            
-            //            MainView()
-            //                .environmentObject(settings)
-            //                .environmentObject(NavigationStack())
+            MainView()
+                .environmentObject(settings)
+                .environmentObject(NavigationStack())
             
         }
     }
@@ -40,8 +37,8 @@ class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .forEach { windowScene in
-                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 375*1.5, height: 667*1.5)
-                windowScene.sizeRestrictions?.maximumSize = CGSize(width: 375*1.5, height: 667*1.5)
+                windowScene.sizeRestrictions?.minimumSize = CGSize(width: C.w, height: C.h)
+                windowScene.sizeRestrictions?.maximumSize = CGSize(width: C.w, height: C.h)
             }
     }
 }

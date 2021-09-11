@@ -36,7 +36,7 @@ struct MainView: View {
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var navigationStack: NavigationStack
     @State private var displayColorful = false
-    @State private var showAnalysisView = true
+    @State private var showAnalysisView = false
     @State private var showStampView = false
     let activeColor = C.color.bullshitRed
     let passiveColor = C.color.lightGray
@@ -56,19 +56,22 @@ struct MainView: View {
                             if showAnalysisView {
                                 HorizontalProgressBar(
                                     animationFinished: analysisFinished,
-                                    activeColor: activeColor,
-                                    passiveColor: passiveColor,
+                                    activeColor: C.color.lightGray,
+                                    passiveColor: C.color.lightGray.opacity(0.7),
                                     animationTime: settings.analysisTime)
-                                    .aspectRatio(40, contentMode: .fit)
+                                    .frame(height: 2*C.lw1())
                                 Text("Analysing...")
                                     .font(.analyseTitle)
-                                    .foregroundColor(passiveColor)
+                                    .foregroundColor(C.color.gray)
                             }
                         }
+                        Spacer()
                         SmartButtonView(
                             displayColorful: $displayColorful,
                             showAnalysisView: $showAnalysisView,
                             showStampView: $showStampView)
+                            //x.background(Color.green.opacity(0.2))
+                        Spacer(minLength: 0)
                     }
                     SettingsIcon(isHidden: $displayColorful)
                         .padding(0)
@@ -77,6 +80,7 @@ struct MainView: View {
                 .accentColor(C.color.gray)
             }
         }
+        .padding()
     }
 }
 

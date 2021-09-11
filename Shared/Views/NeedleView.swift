@@ -15,7 +15,6 @@ struct NeedleView: View {
     @ObservedObject var needleValue = Needle.shared
     let activeColor:Color
     let passiveColor:Color
-
     var body: some View {
         ZStack {
             GeometryReader { (geo) in
@@ -37,18 +36,18 @@ struct AnimatedPath: Shape {
     var from: CGPoint
     var to: CGPoint
     var c: CGPoint
-
+    
     func path(in rect: CGRect) -> Path {
         return Path { p in
             p.move(to: from)
             p.addLine(to: to)
         }
     }
-
+    
     var animatableData: AnimatablePair<CGPoint.AnimatableData, CGPoint.AnimatableData> {
         get { AnimatablePair(
-                AnimatablePair(from.x, from.y),
-                AnimatablePair(to.x, to.y))
+            AnimatablePair(from.x, from.y),
+            AnimatablePair(to.x, to.y))
         }
         set {
             (from.x, from.y) = (newValue.first.first, newValue.first.second)

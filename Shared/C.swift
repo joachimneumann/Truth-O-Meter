@@ -15,8 +15,8 @@ extension Font {
 
 struct C {
     #if targetEnvironment(macCatalyst)
-    static let w:CGFloat  = 375
-    static let h:CGFloat  = 667
+    static let w:CGFloat  = 375*1.5
+    static let h:CGFloat  = 667*1.5
     #else
     static let w = UIScreen.main.bounds.width
     static let h = UIScreen.main.bounds.height

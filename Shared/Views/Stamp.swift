@@ -175,10 +175,14 @@ extension UIImage {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        Stamp(
-            top: "Absolute",
-            bottom: "BullShit",
-            color: C.color.bullshitRed,
-            angle: Angle(degrees: -25.0))
+        if #available(iOS 15.0, *) {
+            Stamp(
+                top: "Absolute",
+                bottom: "BullShit",
+                color: C.color.bullshitRed,
+                angle: Angle(degrees: -25.0))
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

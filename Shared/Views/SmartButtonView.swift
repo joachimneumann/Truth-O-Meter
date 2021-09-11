@@ -39,7 +39,7 @@ struct SmartButtonView: View {
         displayColorful = true
         showRing = false
         showRingWithProgress = true
-
+        
         // initially, set the needle a bit in the wrong direction
         let newNeedleValue = settings.needleValue(forPrecision: precision)
         let wrongDirection = -0.15 * (newNeedleValue-0.5)
@@ -50,49 +50,38 @@ struct SmartButtonView: View {
     
     
     var body: some View {
-        // print("SmartButton")
-        return
-            ZStack {
-                Group {
-                    let linewidth = C.w * C.button.outerRingWidth
-                    if showRing {
-                        Circle()
-                            .stroke(C.color.lightGray, lineWidth: linewidth)
-                    }
-                    if showRingWithProgress {
-                        RingView(width: linewidth, totalTime: settings.listenTime, whenFinished: ringProgressFinished)
-                    }
-                    if showDisks {
-                        AllDisksView(
-                            isSetting: false,
-                            color: C.color.bullshitRed,
-                            grayColor: C.color.lightGray,
-                            callback: callback)
-                            .padding(linewidth * 1.5)
-                            .aspectRatio(contentMode: .fit)
-                    }
+        ZStack {
+            Group {
+                let linewidth = C.w * C.button.outerRingWidth
+                if showRing {
+                    Circle()
+                        .stroke(C.color.lightGray, lineWidth: linewidth)
                 }
-                if showStampView {
-                    VStack(alignment: .center) {
-                        Spacer(minLength: 0)
-                        HStack(alignment: .center) {
-                            Spacer(minLength: 0)
-                            Stamp(top: settings.stampTop,
-                                  bottom: settings.stampBottom,
-                                  color: C.color.bullshitRed,
-                                  angle: settings.stampBottom == nil ? Angle(degrees: -25.0) : Angle(degrees: -18.0))
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    stampTapped()
-                                }
-                                .padding(20)
-                            Spacer(minLength: 0)
-                        }
-                        .aspectRatio(1.3, contentMode: .fit)
-                        Spacer(minLength: 0)
-                    }
+                if showRingWithProgress {
+                    RingView(width: linewidth, totalTime: settings.listenTime, whenFinished: ringProgressFinished)
+                }
+                if showDisks {
+                    AllDisksView(
+                        isSetting: false,
+                        color: C.color.bullshitRed,
+                        grayColor: C.color.lightGray,
+                        callback: callback)
+                        .padding(linewidth * 1.5)
+                        .aspectRatio(contentMode: .fit)
                 }
             }
+            if showStampView {
+                Stamp(top: settings.stampTop,
+                      bottom: settings.stampBottom,
+                      color: C.color.bullshitRed,
+                      angle: settings.stampBottom == nil ? Angle(degrees: -25.0) : Angle(degrees: -18.0))
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        stampTapped()
+                    }
+                    //.background(Color.green.opacity(0.2))
+            }
+        }
     }
 }
 
