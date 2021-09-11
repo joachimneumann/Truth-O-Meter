@@ -100,22 +100,6 @@ struct AllDisksView: View {
                     color: color,
                     grayColor: grayColor)
                     .padding(disks.disks[3].padding(radius: radius))
-                
-//                TODO: make ForEach work
-//                Current problem: during the back animation,
-//                they appear at the screen center
-//
-//                ForEach(disks.disks) { disk in
-//                    DiskView(
-//                        isOpaque: !pale && circle,
-//                        drawBorder: isSetting,
-//                        isGray: isSetting && settings.precision == disk.precision,
-//                        down: downPressed,
-//                        up: {
-//                            upPressed(disk.precision)
-//                        })
-//                        .padding(disk.padding(radius: radius))
-//                }
             }
         }
     }

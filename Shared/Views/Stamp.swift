@@ -7,16 +7,49 @@
 
 import SwiftUI
 
+
 class StampImage: ObservableObject {
     var angle: Angle
     @Published var snapshot: UIImage?
     
-    func snap(image: UIImage) {
-        snapshot = image.stampRotate(angle)
-    }
     init() {
         self.angle = Angle(degrees: 5)
         snapshot = nil
+    }
+
+    func cropImage(imageToCrop:UIImage, toRect rect:CGRect) -> UIImage{
+        
+        let imageRef:CGImage = imageToCrop.cgImage!.cropping(to: rect)!
+        let cropped:UIImage = UIImage(cgImage:imageRef)
+        return cropped
+    }
+
+    func snap(image: UIImage, borderWidth: CGFloat, cornerRadius: CGFloat) {
+        let rotatedImage = image.stampRotate(angle)
+
+        let outerCornerRadius = cornerRadius + 0.5 * borderWidth
+        let _45radiants = Angle(degrees: 45).radians
+        let x1 = cos(_45radiants - abs(angle.radians))
+        let x2 = CGFloat(sqrt(2)*x1 - 1)
+        let crop = x2 * outerCornerRadius * 3
+        let cropRect = CGRect(
+            x: crop,
+            y: crop,
+            width: rotatedImage.size.width*rotatedImage.scale-2*crop,
+            height: rotatedImage.size.height*rotatedImage.scale-2*crop
+        ).integral
+
+        let cgImage = rotatedImage.cgImage!
+        let croppedCGImage = cgImage.cropping(
+            to: cropRect
+        )!
+        
+        let croppedImage = UIImage(
+            cgImage: croppedCGImage,
+            scale: image.imageRendererFormat.scale,
+            orientation: image.imageOrientation
+        )
+        snapshot = croppedImage
     }
 }
 
@@ -25,11 +58,19 @@ struct Stamp: View {
     var color: Color
     var angle: Angle
     let fontSize:CGFloat = 100.0
-    @StateObject var snapshotViewModel = StampImage()
+    @StateObject var stampImage = StampImage()
     
-    var Snapshot: some View {
-        let margin      = fontSize * 0.4
-        let borderWidth = fontSize * 0.4
+    var cornerRadius: CGFloat {
+        fontSize * 0.4*1.5
+    }
+    var borderWidth: CGFloat {
+        fontSize * 0.4 * 1.5
+    }
+    var margin: CGFloat {
+        fontSize * 0.4
+    }
+    
+    var HorizontalStamp: some View {
         return Text(text)
             .foregroundColor(color)
             .font(.system(size: fontSize))
@@ -38,37 +79,30 @@ struct Stamp: View {
             .padding(borderWidth/2)
             .overlay(
                 RoundedRectangle(
-                    cornerRadius: borderWidth*1.5)
+                    cornerRadius: cornerRadius)
                     .stroke(color, lineWidth: borderWidth))
             .padding(borderWidth/2)
             .mask(MaskView())
     }
     
     var body: some View {
-        if snapshotViewModel.angle != angle {
-            snapshotViewModel.angle = angle
+        if stampImage.angle != angle {
+            stampImage.angle = angle
             DispatchQueue.main.async {
-                snapshotViewModel.snap(image: Snapshot.stampSnapshot())
+                stampImage.snap(image: HorizontalStamp.stampSnapshot(), borderWidth: borderWidth, cornerRadius: cornerRadius)
             }
         }
-        return VStack {
-            if let i = snapshotViewModel.snapshot {
+        return ZStack {
+            if let i = stampImage.snapshot {
                 Image(uiImage: i)
                     .resizable()
                     .scaledToFit()
+                    .clipped()
             } else {
                 EmptyView()
             }
         }
-    }
-}
-
-struct Stamp_Previews: PreviewProvider {
-    static var previews: some View {
-        Stamp(
-            text: "BullShit",
-            color: C.color.bullshitRed,
-            angle: Angle(degrees: -25.0))
+        //.background(Color.green.opacity(0.2))
     }
 }
 
@@ -90,7 +124,7 @@ extension View {
 }
 
 extension UIImage {
-    func stampRotate(_ angle: Angle) -> UIImage? {
+    func stampRotate(_ angle: Angle) -> UIImage {
         let newSize =
             CGRect(
                 origin: CGPoint.zero,
@@ -118,6 +152,15 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
+    }
+}
+
+struct Stamp_Previews: PreviewProvider {
+    static var previews: some View {
+        Stamp(
+            text: "BullShit",
+            color: C.color.bullshitRed,
+            angle: Angle(degrees: -25.0))
     }
 }

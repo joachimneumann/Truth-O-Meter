@@ -22,7 +22,7 @@ struct PlaygroundView: View {
                 angle: angle)
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)
-                .border(Color.blue, width: 1)
+                //.border(Color.blue, width: 1)
             VStack {
                 Spacer()
                 HStack {
