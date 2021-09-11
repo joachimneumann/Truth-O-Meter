@@ -8,59 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		AA01051F26E284CC00AAA18A /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA01051E26E284CC00AAA18A /* NavigationStack */; };
-		AA01052126E292CE00AAA18A /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA01052026E292CE00AAA18A /* NavigationStack */; };
 		AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
-		AA0C217B26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
-		AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
-		AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
-		AA27B53C26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
-		AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
-		AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
-		AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA6C526D8BB44007064E3 /* MainView.swift */; };
-		AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA6C526D8BB44007064E3 /* MainView.swift */; };
 		AA30E3AD26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */; };
-		AA30E3AE26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */; };
 		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
-		AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
 		AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
-		AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
 		AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152926E8CB6D0041C045 /* PlaygroundView.swift */; };
-		AA48152B26E8CB6D0041C045 /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152926E8CB6D0041C045 /* PlaygroundView.swift */; };
 		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
-		AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
-		AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
-		AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA813B8826EC4DAD00DE4290 /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* Stamp.swift */; };
-		AA813B8926EC4DAD00DE4290 /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* Stamp.swift */; };
 		AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
-		AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
 		AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */; };
-		AA8F3CC126DC766B00C82E56 /* AllDisksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */; };
 		AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */; };
-		AA8F3CC426DC83B300C82E56 /* ShapeShifterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */; };
 		AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC526DC9F3600C82E56 /* RingView.swift */; };
-		AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC526DC9F3600C82E56 /* RingView.swift */; };
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
-		AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
 		AA97067626D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
-		AA97067726D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
 		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
-		AACB1EB5255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
-		AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AAE4C2E226E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
-		AAE4C2E326E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
 		AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E826E2281F00FE043B /* InstructionView.swift */; };
-		AAE4C2EA26E2282000FE043B /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E826E2281F00FE043B /* InstructionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +47,6 @@
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2B353C255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2B3543255AA99400AD0B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
@@ -105,14 +77,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA01051F26E284CC00AAA18A /* NavigationStack in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA2B353E255AA99400AD0B14 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA01052126E292CE00AAA18A /* NavigationStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */,
-				AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -237,26 +200,6 @@
 			productReference = AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA2B3540255AA99400AD0B14 /* Truth-O-Meter (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA2B3550255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (macOS)" */;
-			buildPhases = (
-				AA2B353D255AA99400AD0B14 /* Sources */,
-				AA2B353E255AA99400AD0B14 /* Frameworks */,
-				AA2B353F255AA99400AD0B14 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Truth-O-Meter (macOS)";
-			packageProductDependencies = (
-				AA01052026E292CE00AAA18A /* NavigationStack */,
-			);
-			productName = "Truth-O-Meter (macOS)";
-			productReference = AA2B3541255AA99400AD0B14 /* Truth-O-Meter.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -267,9 +210,6 @@
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					AA2B3538255AA99400AD0B14 = {
-						CreatedOnToolsVersion = 12.2;
-					};
-					AA2B3540255AA99400AD0B14 = {
 						CreatedOnToolsVersion = 12.2;
 					};
 				};
@@ -291,7 +231,6 @@
 			projectRoot = "";
 			targets = (
 				AA2B3538255AA99400AD0B14 /* Truth-O-Meter (iOS) */,
-				AA2B3540255AA99400AD0B14 /* Truth-O-Meter (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -302,14 +241,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA2B353F255AA99400AD0B14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA2B354A255AA99400AD0B14 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,38 +276,6 @@
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
 				AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
 				AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA2B353D255AA99400AD0B14 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AACB1EBC255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
-				AA4AD83C26D0BB22004359E3 /* CPImage.swift in Sources */,
-				AA8F3CBB26DC6B4100C82E56 /* DiskView.swift in Sources */,
-				AA813B8926EC4DAD00DE4290 /* Stamp.swift in Sources */,
-				AA8F3CC726DC9F3600C82E56 /* RingView.swift in Sources */,
-				AA40FD6226D611C9006DBFD8 /* Precision.swift in Sources */,
-				AA2DA6C726D8BB44007064E3 /* MainView.swift in Sources */,
-				AA161D6826DCC9F1004BF2C8 /* Disks.swift in Sources */,
-				AA27B53C26E4E4E800382215 /* MaskView.swift in Sources */,
-				AA2B355D255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
-				AA8F3CC126DC766B00C82E56 /* AllDisksView.swift in Sources */,
-				AAE4C2EA26E2282000FE043B /* InstructionView.swift in Sources */,
-				AA8F3CC426DC83B300C82E56 /* ShapeShifterView.swift in Sources */,
-				AA9014D326CA62BD00B4EA2C /* NeedleView.swift in Sources */,
-				AACB1EB5255BB18600BA34B5 /* C.swift in Sources */,
-				AA0C217B26DF36EF00D7BBB7 /* SettingsData.swift in Sources */,
-				AA7A6B1A255D8E4B008BAE2D /* SettingsView.swift in Sources */,
-				AA2B3546255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
-				AAE4C2E326E06F6900FE043B /* Needle.swift in Sources */,
-				AA30E3AE26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */,
-				AA48152B26E8CB6D0041C045 /* PlaygroundView.swift in Sources */,
-				AA6011E926D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
-				AA97067726D202B40090FA67 /* Theme.swift in Sources */,
-				AA161D6526DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
-				AA40FD5F26D60470006DBFD8 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,58 +446,6 @@
 			};
 			name = Release;
 		};
-		AA2B3551255AA99400AD0B14 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
-				PRODUCT_NAME = "Truth-O-Meter";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		AA2B3552255AA99400AD0B14 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8A4DL788W9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.8;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.joachimneumann.Truth-O-Meter";
-				PRODUCT_NAME = "Truth-O-Meter";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -620,15 +467,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA2B3550255AA99400AD0B14 /* Build configuration list for PBXNativeTarget "Truth-O-Meter (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA2B3551255AA99400AD0B14 /* Debug */,
-				AA2B3552255AA99400AD0B14 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -644,11 +482,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		AA01051E26E284CC00AAA18A /* NavigationStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA01051D26E284CC00AAA18A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
-			productName = NavigationStack;
-		};
-		AA01052026E292CE00AAA18A /* NavigationStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA01051D26E284CC00AAA18A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;

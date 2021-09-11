@@ -11,26 +11,22 @@ import NavigationStack
 @main
 struct Truth_O_MeterApp: App {
     var body: some Scene {
-        func f() {}
-        let settings = Settings()
+        //let settings = Settings()
         Needle.shared.active(true, strongNoise: false)
         return WindowGroup {
-            #if os(macOS)
-            MainView()
-                .environmentObject(settings)
-                .environmentObject(NavigationStack())
-                .frame(minWidth: C.w, minHeight: C.w)
-                .frame(maxWidth: C.h, maxHeight: C.h)
-                .background(Color.white)
-            #else
-
-            
+            #if targetEnvironment(macCatalyst)
             PlaygroundView()
-
-//            MainView()
-//                .environmentObject(settings)
-//                .environmentObject(NavigationStack())
+                .frame(width: 375, height: 667)
+            #else
+            PlaygroundView()
             #endif
+            //                .background(Color.white)
+            
+            
+            //            MainView()
+            //                .environmentObject(settings)
+            //                .environmentObject(NavigationStack())
+            
         }
     }
 }
