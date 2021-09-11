@@ -24,7 +24,7 @@ class StampImage: ObservableObject {
         let _45radiants = Angle(degrees: 45).radians
         let x1 = cos(_45radiants - abs(angle.radians))
         let x2 = CGFloat(sqrt(2)*x1 - 1)
-        let crop = x2 * outerCornerRadius * 3
+        let crop = x2 * outerCornerRadius * image.scale
         let cropRect = CGRect(
             x: crop,
             y: crop,
