@@ -8,7 +8,6 @@
 import SwiftUI
 
 class StampImage: ObservableObject {
-    var oldAngle = 0.0
     var angle: Angle
     @Published var snapshot: UIImage?
     
@@ -24,14 +23,13 @@ class StampImage: ObservableObject {
 struct Stamp: View {
     var text: String
     var color: Color
-    var angle: Double
+    var angle: Angle
     let fontSize:CGFloat = 100.0
     @StateObject var snapshotViewModel = StampImage()
     
     var Snapshot: some View {
         let margin      = fontSize * 0.4
         let borderWidth = fontSize * 0.4
-        let _ = print("Snapshot angle \(angle)")
         return Text(text)
             .foregroundColor(color)
             .font(.system(size: fontSize))
@@ -47,16 +45,11 @@ struct Stamp: View {
     }
     
     var body: some View {
-        if snapshotViewModel.oldAngle != angle {
-            snapshotViewModel.oldAngle = angle
-            let _ = print("NEW Stamp angle \(angle) oldAngle=\(snapshotViewModel.oldAngle)")
-            snapshotViewModel.oldAngle = angle
-            snapshotViewModel.angle = Angle(degrees: angle) // angle has not been set in init()
+        if snapshotViewModel.angle != angle {
+            snapshotViewModel.angle = angle
             DispatchQueue.main.async {
                 snapshotViewModel.snap(image: Snapshot.stampSnapshot())
             }
-        } else {
-            let _ = print("OLD Stamp angle \(angle) oldAngle=\(snapshotViewModel.oldAngle)")
         }
         return VStack {
             if let i = snapshotViewModel.snapshot {
@@ -75,7 +68,7 @@ struct Stamp_Previews: PreviewProvider {
         Stamp(
             text: "BullShit",
             color: C.color.bullshitRed,
-            angle: -25.0)
+            angle: Angle(degrees: -25.0))
     }
 }
 

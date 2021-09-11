@@ -12,14 +12,14 @@ struct PlaygroundView: View {
     private var privateFrameWidth: CGFloat = 175
     @State private var frameWidth: CGFloat = 175
     @State private var frameHeight: CGFloat = 175
-    @State var angleInDegrees = -25.0
-    
+    @State var angle = Angle(degrees: -25.0)
+
     var body: some View  {
         ZStack {
             Stamp(
                 text: "Éjsdf23842397",
                 color: C.color.bullshitRed,
-                angle: angleInDegrees)
+                angle: angle)
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)
                 .border(Color.blue, width: 1)
@@ -35,7 +35,7 @@ struct PlaygroundView: View {
                 }
                 HStack {
                     Text("𝝰")
-                    Slider(value: $angleInDegrees, in: -90...90)
+                    Slider(value: $angle.degrees, in: -90...90)
                 }
             }
             .padding()
