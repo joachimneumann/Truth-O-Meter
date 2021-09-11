@@ -7,25 +7,45 @@
 
 import SwiftUI
 
+//struct FitToWidth: ViewModifier {
+//    var fraction: CGFloat = 1.0
+//    func body(content: Content) -> some View {
+//        GeometryReader { g in
+//            content
+//                .font(.system(size: 1000))
+//                .minimumScaleFactor(0.005)
+//                .lineLimit(1)
+//                .frame(width: g.size.width*self.fraction, height: g.size.height)
+//        }
+//    }
+//}
+
+var counter = 0
+
 struct SnapshotView: View {
-    @StateObject var snapshotViewModel = SnapshotViewModel()
+    var fraction: CGFloat = 1.0
     var text: String
     var color: Color
     let fontSize:CGFloat
     var angle: Angle
-    
-    @State var size: CGSize = CGSize(width: 100, height: 100)
+    @StateObject var snapshotViewModel = SnapshotViewModel(angle: Angle(degrees: -25.0))
 
+    @State var size: CGSize = CGSize(width: 100, height: 100)
+    
     var Snapshot: some View {
-//        Stamp(
-//            text: text,
-//            color: color,
-//            fontSize: fontSize,
-//            angle: angle)
+        //        Stamp(
+        //            text: text,
+        //            color: color,
+        //            fontSize: fontSize,
+        //            angle: angle)
+        //            .background(Color.red.opacity(0.2))
+        //            .modifier(FitToWidth(fraction: fraction))
         let margin      = fontSize * 0.4
         let borderWidth = fontSize * 0.4
         let stampPadding = StampPadding(size, angle: angle)
-        return Text(text)
+        let _ = print("...\(counter)")
+        let _ = counter = counter + 1
+        return Text(String(counter)+text)
             .foregroundColor(color)
             .font(.system(size: fontSize))
             .lineLimit(1)
@@ -36,19 +56,17 @@ struct SnapshotView: View {
                     cornerRadius: borderWidth*1.5)
                     .stroke(color, lineWidth: borderWidth))
             .padding(borderWidth/2)
-            .background(Color.green.opacity(0.2))
-            .stampCaptureSize(in: $size)
-            .rotationEffect(angle)
-            .padding(.leading,  stampPadding.horizontal)
-            .padding(.trailing, stampPadding.horizontal)
-            .padding(.top,      stampPadding.vertical)
-            .padding(.bottom,   stampPadding.vertical)
-            .background(Color.green.opacity(0.2))
+        //            .background(Color.red.opacity(0.2))
+        //            .stampCaptureSize(in: $size)
+        //            .rotationEffect(angle)
+        //            .padding(.horizontal,  stampPadding.horizontal)
+        //            .padding(.vertical,  stampPadding.vertical)
+        //            .background(Color.green.opacity(0.2))
     }
-
+    
     var body: some View {
         VStack {
-            if false {//snapshotViewModel.snapshotTaken {
+            if snapshotViewModel.snapshotTaken {
                 VStack{
                     Text("snapshot taken!")
                     Image(uiImage: snapshotViewModel.snapshot!)
@@ -62,8 +80,10 @@ struct SnapshotView: View {
                 }
             }
         }
+        .background(Color.green.opacity(0.2))
         .onAppear() {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                //            DispatchQueue.main.async {
                 snapshotViewModel.snap(image: Snapshot.snapshot())
                 if let s = snapshotViewModel.snapshot {
                     UIImageWriteToSavedPhotosAlbum(s, nil, nil, nil)
@@ -71,13 +91,12 @@ struct SnapshotView: View {
             }
         }
     }
-    
 }
 
 struct SnapshotView_Previews: PreviewProvider {
     static var previews: some View {
         SnapshotView(
-            text: "Éjsdf928345792378983475934",
+            text: "Éjsdf92834dfgdgdlfgfdgdfgdgfdfg",
             color: C.color.bullshitRed,
             fontSize: 30,
             angle: Angle(degrees: -25.0))

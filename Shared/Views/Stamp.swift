@@ -21,7 +21,9 @@ struct Stamp: View {
         let stampPadding = StampPadding(size, angle: angle)
         Text(text)
             .foregroundColor(color)
-            .font(.system(size: fontSize))
+            .font(.system(size: 100, weight: .bold))
+            .minimumScaleFactor(0.01)
+//            .font(.system(size: fontSize))
             .lineLimit(1)
             .padding(margin)
             .padding(borderWidth/2)
@@ -69,7 +71,7 @@ struct StampPadding {
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         Stamp(
-            text: "Éjsdfsdfsdssdfsdssd",
+            text: "Éjssdfsdfsdsdfsdfsdfsdfsdf",
             color: C.color.bullshitRed,
             fontSize: 30,
             angle: Angle(degrees: -25.0))

@@ -23,22 +23,25 @@ struct Truth_O_MeterApp: App {
                 .frame(maxWidth: C.h, maxHeight: C.h)
                 .background(Color.white)
             #else
+
+            SnapshotView(
+                text: "Éjsdf92834dfgdgdlfgfdgdfgdgfdfg",
+                color: C.color.bullshitRed,
+                fontSize: 30,
+                angle: Angle(degrees: -25.0))
+
+            
 //            PlaygroundView(stampViewModel: stampViewModel)
 //            PlaygroundView()
 //            HStack(alignment: .center, spacing: 0) {
 //                Rectangle()
 //                    .foregroundColor(.yellow.opacity(0.2))
-            Stamp(text: "xx", color: C.color.bullshitRed, fontSize: 60, angle: Angle(degrees: -25.0))
-                    .frame(width: 200, height: 200, alignment: .center)
-                    .background(Color.yellow)//.opacity(1.0))
-                    .border(Color.black, width: 1)
-//                Rectangle()
-//                    .foregroundColor(.yellow.opacity(0.2))
-//            }
-//            DiskView(isOpaque: true, borderWidth: 2, isGray: false, down: f, up: f, color: C.color.bullshitRed, grayColor: C.color.lightGray)
+//                    .frame(width: 200, height: 200, alignment: .center)
+//                    .background(Color.yellow)//.opacity(1.0))
+//                    .border(Color.black, width: 1)
 //            MainView()
-                .environmentObject(settings)
-                .environmentObject(NavigationStack())
+//                .environmentObject(settings)
+//                .environmentObject(NavigationStack())
             #endif
         }
     }
