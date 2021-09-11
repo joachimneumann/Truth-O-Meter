@@ -12,14 +12,13 @@ struct PlaygroundView: View {
     private var privateFrameWidth: CGFloat = 175
     @State private var frameWidth: CGFloat = 175
     @State private var frameHeight: CGFloat = 175
-    @State var angleInDegrees = 0.0
+    @State var angleInDegrees = -25.0
     
     var body: some View  {
         ZStack {
-            Stamp(
+            SnapshotView(
                 text: "Éjsdf23842397",
                 color: C.color.bullshitRed,
-                fontSize: 30,
                 angle: Angle(degrees: angleInDegrees))
                 .background(Color.yellow.opacity(0.1))
                 .frame(width: frameWidth, height: frameHeight)

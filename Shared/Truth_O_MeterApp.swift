@@ -24,15 +24,13 @@ struct Truth_O_MeterApp: App {
                 .background(Color.white)
             #else
 
-            SnapshotView(
-                text: "Éjsdf92834dfgdgdlfgfdgdfgdgfdfg",
-                color: C.color.bullshitRed,
-                fontSize: 30,
-                angle: Angle(degrees: -25.0))
+//            SnapshotView(
+//                text: "Éj",
+//                color: C.color.bullshitRed,
+//                angle: Angle(degrees: -25.0))
 
             
-//            PlaygroundView(stampViewModel: stampViewModel)
-//            PlaygroundView()
+            PlaygroundView()
 //            HStack(alignment: .center, spacing: 0) {
 //                Rectangle()
 //                    .foregroundColor(.yellow.opacity(0.2))

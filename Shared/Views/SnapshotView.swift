@@ -7,45 +7,31 @@
 
 import SwiftUI
 
-//struct FitToWidth: ViewModifier {
-//    var fraction: CGFloat = 1.0
-//    func body(content: Content) -> some View {
-//        GeometryReader { g in
-//            content
-//                .font(.system(size: 1000))
-//                .minimumScaleFactor(0.005)
-//                .lineLimit(1)
-//                .frame(width: g.size.width*self.fraction, height: g.size.height)
-//        }
-//    }
-//}
-
-var counter = 0
+class SnapshotViewModel: ObservableObject {
+    var angle: Angle
+    @Published var snapshot: UIImage?
+    
+    func snap(image: UIImage) {
+        snapshot = image.rotate(radians: angle.radians)
+    }
+    init() {
+        self.angle = Angle(degrees: 5)
+        snapshot = nil
+    }
+}
 
 struct SnapshotView: View {
-    var fraction: CGFloat = 1.0
     var text: String
     var color: Color
-    let fontSize:CGFloat
     var angle: Angle
-    @StateObject var snapshotViewModel = SnapshotViewModel(angle: Angle(degrees: -25.0))
+    let fontSize:CGFloat = 100.0
 
-    @State var size: CGSize = CGSize(width: 100, height: 100)
+    @StateObject var snapshotViewModel = SnapshotViewModel()
     
     var Snapshot: some View {
-        //        Stamp(
-        //            text: text,
-        //            color: color,
-        //            fontSize: fontSize,
-        //            angle: angle)
-        //            .background(Color.red.opacity(0.2))
-        //            .modifier(FitToWidth(fraction: fraction))
         let margin      = fontSize * 0.4
         let borderWidth = fontSize * 0.4
-        let stampPadding = StampPadding(size, angle: angle)
-        let _ = print("...\(counter)")
-        let _ = counter = counter + 1
-        return Text(String(counter)+text)
+        return Text(text)
             .foregroundColor(color)
             .font(.system(size: fontSize))
             .lineLimit(1)
@@ -56,38 +42,23 @@ struct SnapshotView: View {
                     cornerRadius: borderWidth*1.5)
                     .stroke(color, lineWidth: borderWidth))
             .padding(borderWidth/2)
-        //            .background(Color.red.opacity(0.2))
-        //            .stampCaptureSize(in: $size)
-        //            .rotationEffect(angle)
-        //            .padding(.horizontal,  stampPadding.horizontal)
-        //            .padding(.vertical,  stampPadding.vertical)
-        //            .background(Color.green.opacity(0.2))
+            .mask(MaskView())
     }
     
     var body: some View {
         VStack {
-            if snapshotViewModel.snapshotTaken {
-                VStack{
-                    Text("snapshot taken!")
-                    Image(uiImage: snapshotViewModel.snapshot!)
-                        .resizable()
-                        .scaledToFit()
-                }
+            if let i = snapshotViewModel.snapshot {
+                Image(uiImage: i)
+                    .resizable()
+                    .scaledToFit()
             } else {
-                VStack{
-                    Text("working...")
-                    Snapshot
-                }
+                EmptyView()
             }
         }
-        .background(Color.green.opacity(0.2))
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-                //            DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                snapshotViewModel.angle = angle // angle has not been set in init()
                 snapshotViewModel.snap(image: Snapshot.snapshot())
-                if let s = snapshotViewModel.snapshot {
-                    UIImageWriteToSavedPhotosAlbum(s, nil, nil, nil)
-                }
             }
         }
     }
@@ -96,9 +67,8 @@ struct SnapshotView: View {
 struct SnapshotView_Previews: PreviewProvider {
     static var previews: some View {
         SnapshotView(
-            text: "Éjsdf92834dfgdgdlfgfdgdfgdgfdfg",
+            text: "BullShit",
             color: C.color.bullshitRed,
-            fontSize: 30,
             angle: Angle(degrees: -25.0))
     }
 }
@@ -117,5 +87,29 @@ extension View {
         return renderer.image { _ in
             view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
+    }
+}
+
+extension UIImage {
+    func rotate(radians: Double) -> UIImage? {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        // Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+
+        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()!
+
+        // Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        // Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        // Draw the image at its center
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage
     }
 }
