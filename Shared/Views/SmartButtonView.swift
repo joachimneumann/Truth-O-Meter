@@ -77,16 +77,15 @@ struct SmartButtonView: View {
                         Spacer(minLength: 0)
                         HStack(alignment: .center) {
                             Spacer(minLength: 0)
-//                            StampView(
-//                                top: settings.stampTop,
-//                                bottom: settings.stampBottom,
-//                                rotated: true,
-//                                color: C.color.bullshitRed)
-//                                .contentShape(Rectangle())
-//                                .onTapGesture {
-//                                    stampTapped()
-//                                }
-//                                .padding(20)
+                            Stamp(top: settings.stampTop,
+                                  bottom: settings.stampBottom,
+                                  color: C.color.bullshitRed,
+                                  angle: settings.stampBottom == nil ? Angle(degrees: -25.0) : Angle(degrees: -18.0))
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    stampTapped()
+                                }
+                                .padding(20)
                             Spacer(minLength: 0)
                         }
                         .aspectRatio(1.3, contentMode: .fit)
