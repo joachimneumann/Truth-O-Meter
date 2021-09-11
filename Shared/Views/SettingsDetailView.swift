@@ -89,8 +89,7 @@ struct SettingsDetailView_Previews: PreviewProvider {
 }
 
 
-#if os(iOS)
-struct CustomTextFieldStyleiOS: TextFieldStyle {
+struct CustomTextFieldStyle: TextFieldStyle {
     @Binding var focused: Bool
     let fontsize: CGFloat = 40
     let cornerRadius: CGFloat = 6
@@ -111,8 +110,6 @@ struct CustomTextFieldStyleiOS: TextFieldStyle {
             .foregroundColor(C.color.bullshitRed)
     }
 }
-#endif
-
 
 struct EditableStampView: View {
     @EnvironmentObject private var settings: Settings
@@ -121,29 +118,17 @@ struct EditableStampView: View {
     let fontsize: CGFloat = 40
     var body: some View {
         VStack {
-            #if os(iOS)
             TextField("Top", text: $settings.stampTop, onEditingChanged: { edit in
                 self.editingTop = edit
             })
-            .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingTop))
+            .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
             .padding(.top, 24)
             
             TextField("Bottom", text: $settings.nonNilStampBottom, onEditingChanged: { edit in
                 self.editingBottom = edit
             })
-            .textFieldStyle(CustomTextFieldStyleiOS(focused: $editingBottom))
+            .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
             .padding(.bottom, 12)
-            #elseif os(macOS)
-            Group {
-                TextField("top", text: $settings.stampTop)
-                    .padding(.top, 24)
-                
-                TextField("Bottom", text: $settings.nonNilStampBottom)
-                    .padding(.bottom, 12)
-            }
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
-            #endif
         }
     }
 }

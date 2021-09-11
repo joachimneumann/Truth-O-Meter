@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MaskView: View {
     var body: some View {
-        Image(cpImage: CPImage(named: "mask")!)
+        Image(uiImage: UIImage(named: "mask")!)
             .resizable()
             .scaledToFill()
     }

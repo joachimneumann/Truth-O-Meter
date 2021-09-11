@@ -7,10 +7,6 @@
 
 import SwiftUI
 import GameKit // for Audio
-#if os(macOS)
-import AVFoundation // for sound on Mac
-#endif
-
 
 struct RingView: View {
     @EnvironmentObject private var settings: Settings

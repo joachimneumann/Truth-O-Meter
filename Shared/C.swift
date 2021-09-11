@@ -14,12 +14,12 @@ extension Font {
 
 
 struct C {
-    #if os(iOS)
-    static let w = UIScreen.main.bounds.width
-    static let h = UIScreen.main.bounds.height
-    #else
+    #if targetEnvironment(macCatalyst)
     static let w:CGFloat  = 375
     static let h:CGFloat  = 667
+    #else
+    static let w = UIScreen.main.bounds.width
+    static let h = UIScreen.main.bounds.height
     #endif
     
     // the equivialent of linewith 1 on a small device with width 320

@@ -20,7 +20,6 @@
 		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
 		AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
 		AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152926E8CB6D0041C045 /* PlaygroundView.swift */; };
-		AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4AD83A26D0BB22004359E3 /* CPImage.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA813B8826EC4DAD00DE4290 /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* Stamp.swift */; };
@@ -55,7 +54,6 @@
 		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AA40FD6026D611C9006DBFD8 /* Precision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precision.swift; sourceTree = "<group>"; };
 		AA48152926E8CB6D0041C045 /* PlaygroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundView.swift; sourceTree = "<group>"; };
-		AA4AD83A26D0BB22004359E3 /* CPImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPImage.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA813B8726EC4DAD00DE4290 /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 		AA27BEB126DE975700E7C092 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA4AD83A26D0BB22004359E3 /* CPImage.swift */,
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
@@ -252,7 +249,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
-				AA4AD83B26D0BB22004359E3 /* CPImage.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA813B8826EC4DAD00DE4290 /* Stamp.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
