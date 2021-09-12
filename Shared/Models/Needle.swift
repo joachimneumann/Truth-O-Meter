@@ -20,6 +20,7 @@ class Needle: ObservableObject {
     @Published private(set) var noisyValue: Double = 0.5
     @Published private(set) var colorful = false
     
+    // singleton: private init and static shared object
     static var shared = Needle()
     private init() {
     }

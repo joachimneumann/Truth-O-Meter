@@ -36,7 +36,6 @@ struct NeedleView: View {
                 }
             }
         }
-        .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
     }
 }
 
@@ -70,5 +69,6 @@ struct NeedleView_Previews: PreviewProvider {
         Needle.shared.setValue(1.0)
         return NeedleView(activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
             .background(Color.green.opacity(0.2))
+            .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
     }
 }
