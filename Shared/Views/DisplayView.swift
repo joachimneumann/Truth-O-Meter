@@ -39,7 +39,7 @@ struct DisplayView: View {
     let darkColor: Color
     
     var body: some View {
-        let _ = print("redrawing Display, colorful = \(String(colorful))")
+        // print("redrawing Display, colorful = \(String(colorful))")
         // I do not want to see this message very often.
         // Specifically, it should not appear every time, the needle is redrawn
         GeometryReader { geo in
@@ -63,7 +63,7 @@ struct DisplayView: View {
                         .offset(y: geo.size.height*0.15)
                         .foregroundColor(colorful ? darkColor : passiveColor)
                     NeedleView(geo.size, activeColor: activeColor, passiveColor: passiveColor)
-                        .background(Color.green.opacity(0.2))
+                        //.background(Color.green.opacity(0.2))
                 }
             }
         }

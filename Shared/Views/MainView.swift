@@ -73,6 +73,8 @@ struct MainView: View {
                             //x.background(Color.green.opacity(0.2))
                         Spacer(minLength: 0)
                     }
+                    .padding(.horizontal, C.w * 0.1)
+                    .padding(.vertical, C.h * 0.05)
                     SettingsIcon(isHidden: $displayColorful)
                         .padding(0)
                 }
@@ -80,7 +82,6 @@ struct MainView: View {
                 .accentColor(C.color.gray)
             }
         }
-        .padding()
     }
 }
 
