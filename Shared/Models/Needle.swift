@@ -17,46 +17,37 @@ class Needle: ObservableObject {
     // @EnvironmentObject was not an option, because all views that use Needle
     // would be invalidated on all value changes of Needle
     
-    @Published private(set) var value: Double = 0.5
+    @Published private(set) var noisyValue: Double = 0.5
     @Published private(set) var colorful = false
     
     static var shared = Needle()
     private init() {
     }
     
-    private var privateValue: Double = 0
+    private var _value: Double = 0
     private var needleNoiseTimer: Timer?
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
     private var strongNoise = false
 
     func setValue(_ newValue: Double) {
-        var checkedValue = newValue
-        if checkedValue > 1.0 { checkedValue = 1.0 }
-        if checkedValue < 0.0 { checkedValue = 0.0 }
-        setValueWithoutRangeCheck(checkedValue)
-    }
-    
-    func setValueWithoutRangeCheck(_ v: Double) {
-        withAnimation(.default) {
-            privateValue = v
-            value = v
-        }
+        _value = newValue
+        noisyValue = newValue
     }
 
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
         self.active(true, strongNoise: true)
         var delay = 0.25 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.setValue(self.privateValue + 0.3 * (newValue - self.privateValue))
+            self.setValue(self._value + 0.3 * (newValue - self._value))
         }
         delay = 0.5 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.setValue(self.privateValue + 0.6 * (newValue - self.privateValue))
+            self.setValue(self._value + 0.6 * (newValue - self._value))
         }
         delay = 0.675 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.active(true, strongNoise: false)
-            self.setValue(self.privateValue + 0.7 * (newValue - self.privateValue))
+            self.setValue(self._value + 0.7 * (newValue - self._value))
         }
         delay = 0.85 * totalTime
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -85,11 +76,24 @@ class Needle: ObservableObject {
     
     @objc private func addNoise() {
         let n = self.distribution.nextInt()
-        var noiseLevel = 0.0001
+        var noiseLevel = 0.001
         if strongNoise { noiseLevel *= 3 }
         let noise = noiseLevel * Double(n)
-        setValue(privateValue + noise)
+        noisyValue = _value + noise
+//        print("_value\(_value.f) noise=\(noise.f) noisyValue=\(noisyValue.f)")
     }
 
     
+}
+
+extension Double {
+    func format(f: String) -> String {
+        return String(format: "%\(f)f", self)
+    }
+}
+
+extension Double {
+    var f: String {
+        String(format: "%7.3f", self)
+    }
 }

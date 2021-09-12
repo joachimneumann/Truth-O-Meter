@@ -31,8 +31,6 @@ struct DisplayBackground: View {
     var activeColor: Color
 
     var body: some View {
-        let _ = print("s \(DisplayBackground.startAngle.degrees)")
-        let _ = print("e \(DisplayBackground.endAngle.degrees)")
         GeometryReader { geo in
             let lw1 = C.lw1(geo)
             let boldStrokeStyle = StrokeStyle(lineWidth: DisplayBackground.thickLineFactor*lw1, lineCap: .butt)

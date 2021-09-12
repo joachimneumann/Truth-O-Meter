@@ -12,7 +12,7 @@ let p2 = CGPoint(x: 100, y: 25)
 let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
-    @ObservedObject var needleValue = Needle.shared
+    @ObservedObject var needle = Needle.shared
     let activeColor:Color
     let passiveColor:Color
     var body: some View {
@@ -23,15 +23,16 @@ struct NeedleView: View {
                 let h = DisplayBackground.radius2(rect: rect)+w
                 let yo = DisplayBackground.displayCenter(rect: rect).y-h
                 let xo = geo.size.width/2-w/2
-                let x = needleValue.value
+                let x = needle.noisyValue
                 let a = DisplayBackground.completeAngle*(-0.5+x)
                 ZStack {
                     Capsule()
-                        .fill(needleValue.colorful ? activeColor : passiveColor)
+                        .fill(needle.colorful ? activeColor : passiveColor)
                         .frame(width: w, height: h)
                         .rotationEffect(a, anchor: .bottom)
                         .offset(y:yo)
                         .offset(x:xo)
+                        .animation(.linear(duration: 0.4))
                 }
             }
         }
