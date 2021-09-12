@@ -38,6 +38,7 @@ struct SmartButtonView: View {
         settings.precision = precision
         displayColorful = true
         showRing = false
+        showDisks = true
         showRingWithProgress = true
         
         // initially, set the needle a bit in the wrong direction
@@ -50,15 +51,15 @@ struct SmartButtonView: View {
     
     
     var body: some View {
+        let linewidth = C.w * C.button.outerRingWidth
         ZStack {
             Group {
-                let linewidth = C.w * C.button.outerRingWidth
                 if showRing {
                     Circle()
                         .stroke(C.color.lightGray, lineWidth: linewidth)
                 }
                 if showRingWithProgress {
-                    RingView(width: linewidth, totalTime: settings.listenTime, whenFinished: ringProgressFinished)
+                    RingView(width: linewidth, whenFinished: ringProgressFinished)
                 }
                 if showDisks {
                     AllDisksView(
@@ -79,9 +80,10 @@ struct SmartButtonView: View {
                     .onTapGesture {
                         stampTapped()
                     }
-                    //.background(Color.green.opacity(0.2))
+                //.background(Color.green.opacity(0.2))
             }
         }
+        .padding(linewidth/2)
     }
 }
 

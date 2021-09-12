@@ -18,9 +18,12 @@ struct Truth_O_MeterApp: App {
     var body: some Scene {
         let settings = Settings()
         return WindowGroup {
-            MainView()
+            RingView(width: 10, whenFinished: doNothing)
                 .environmentObject(settings)
-                .environmentObject(NavigationStack())
+//
+//            MainView()
+//                .environmentObject(settings)
+//                .environmentObject(NavigationStack())
             
         }
     }

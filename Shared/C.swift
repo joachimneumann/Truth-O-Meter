@@ -33,7 +33,7 @@ struct C {
     static let displayAspectRatio: CGFloat = 1.9
 
     struct button {
-        static let outerRingWidth: CGFloat = 0.05
+        static let outerRingWidth: CGFloat = 0.03
     }
     
     static var firstTime = true

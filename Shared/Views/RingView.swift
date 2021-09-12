@@ -11,7 +11,6 @@ import GameKit // for Audio
 struct RingView: View {
     @EnvironmentObject private var settings: Settings
     var width: CGFloat
-    var totalTime: Double
     var whenFinished: () -> Void
 
     @State private var value:CGFloat = 0.0
@@ -26,12 +25,16 @@ struct RingView: View {
                 .rotationEffect(Angle(degrees:-90))
                 .animation(.linear(duration: settings.listenTime))
         }
+        .padding()
         .onAppear {
-            value = 1.0
-            AudioServicesPlaySystemSound(C.sounds.startRecording)
+            DispatchQueue.main.async {
+                value = 1.0
+                AudioServicesPlaySystemSound(C.sounds.startRecording)
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + settings.listenTime) {
                 AudioServicesPlaySystemSound(C.sounds.stopRecording)
-                // this will not guarantee precise timing, but that might not be required here
+                // this will not guarantee precise timing,
+                // but that might not be required here
                 whenFinished()
             }
         }
@@ -42,6 +45,6 @@ struct RingView: View {
 struct RingView_Previews: PreviewProvider {
     static var previews: some View {
         func doNothing() {}
-        return RingView(width: 10, totalTime: 2, whenFinished: doNothing)
+        return RingView(width: 10, whenFinished: doNothing)
     }
 }

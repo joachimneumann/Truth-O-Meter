@@ -63,15 +63,20 @@ struct MainView: View {
                                 Text("Analysing...")
                                     .font(.analyseTitle)
                                     .foregroundColor(C.color.gray)
+//                            } else {
+//                                Rectangle()
+//                                    .frame(width: C.h * 0.05, height: C.h * 0.10, alignment: .center)
+//                                    .foregroundColor(.blue)
                             }
+                            Spacer(minLength: C.h * 0.05)
+                            SmartButtonView(
+                                displayColorful: $displayColorful,
+                                showAnalysisView: $showAnalysisView,
+                                showStampView: $showStampView)
+                                .background(Color.green.opacity(0.2))
+                                .aspectRatio(contentMode: .fit)
+                            Spacer(minLength: 0)
                         }
-                        Spacer()
-                        SmartButtonView(
-                            displayColorful: $displayColorful,
-                            showAnalysisView: $showAnalysisView,
-                            showStampView: $showStampView)
-                            //x.background(Color.green.opacity(0.2))
-                        Spacer(minLength: 0)
                     }
                     .padding(.horizontal, C.w * 0.1)
                     .padding(.vertical, C.h * 0.05)
