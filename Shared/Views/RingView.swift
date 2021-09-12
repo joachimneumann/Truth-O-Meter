@@ -25,13 +25,10 @@ struct RingView: View {
                 .rotationEffect(Angle(degrees:-90))
                 .animation(.linear(duration: settings.listenTime))
         }
-        .padding()
         .onAppear {
-            DispatchQueue.main.async {
-                value = 1.0
-                AudioServicesPlaySystemSound(C.sounds.startRecording)
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + settings.listenTime) {
+            value = 1.0
+            AudioServicesPlaySystemSound(C.sounds.startRecording)
+            DispatchQueue.global().asyncAfter(deadline: .now() + settings.listenTime) {
                 AudioServicesPlaySystemSound(C.sounds.stopRecording)
                 // this will not guarantee precise timing,
                 // but that might not be required here
