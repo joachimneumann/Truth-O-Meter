@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-let p1 = CGPoint(x: 50, y: 50)
-let p2 = CGPoint(x: 100, y: 25)
-let p3 = CGPoint(x: 100, y: 100)
-
 struct NeedleView: View {
-    let  measures: Measures
     @ObservedObject var needle = Needle.shared
+
+    let measures: Measures
     let activeColor:Color
     let passiveColor:Color
+    
     var body: some View {
         let w = measures.thickLineFactor * C.lw1()
         let h = measures.radius2+w
