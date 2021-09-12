@@ -21,7 +21,8 @@ struct NeedleView: View {
                 let rect = geo.frame(in: .local)
                 let w = DisplayBackground.thickLineFactor * C.lw1()
                 let h = DisplayBackground.radius2(rect: rect)+w
-                let o = DisplayBackground.displayCenter(rect: rect).y-h+w/2
+                let yo = DisplayBackground.displayCenter(rect: rect).y-h
+                let xo = geo.size.width/2-w/2
                 let x = needleValue.value
                 let a = DisplayBackground.completeAngle*(-0.5+x)
                 ZStack {
@@ -29,8 +30,8 @@ struct NeedleView: View {
                         .fill(needleValue.colorful ? activeColor : passiveColor)
                         .frame(width: w, height: h)
                         .rotationEffect(a, anchor: .bottom)
-                        .offset(y:o)
-                        .offset(x:geo.size.width/2)
+                        .offset(y:yo)
+                        .offset(x:xo)
                 }
             }
         }

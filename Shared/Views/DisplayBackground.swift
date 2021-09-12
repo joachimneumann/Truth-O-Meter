@@ -40,16 +40,13 @@ struct DisplayBackground: View {
                 ZStack {
                     MainArcBlack()
                         .stroke(colorful ? darkColor : lightColor, style: boldStrokeStyle)
-//                        .clipped()
                     MainArcRed()
                         .stroke(colorful ? activeColor : lightColor, style: boldStrokeStyle)
-//                        .clipped()
                     TopArcBlack()
                         .stroke(colorful ? darkColor : lightColor, style: fineStrokeStyle)
-//                        .clipped()
                     TopArcRed()
                         .stroke(colorful ? activeColor : lightColor, style: fineStrokeStyle)
-//                        .clipped()
+                        .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .stroke(lightColor, lineWidth: 2*lw1)
                 }
