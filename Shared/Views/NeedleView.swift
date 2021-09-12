@@ -12,19 +12,19 @@ let p2 = CGPoint(x: 100, y: 25)
 let p3 = CGPoint(x: 100, y: 100)
 
 struct NeedleView: View {
+   let  measures: Measures
     @ObservedObject var needle = Needle.shared
     let activeColor:Color
     let passiveColor:Color
     var body: some View {
         ZStack {
             GeometryReader { (geo) in
-                let rect = geo.frame(in: .local)
-                let w = DisplayBackground.thickLineFactor * C.lw1()
-                let h = DisplayBackground.radius2(rect: rect)+w
-                let yo = DisplayBackground.displayCenter(rect: rect).y-h
+                let w = measures.thickLineFactor * C.lw1()
+                let h = measures.radius2+w
+                let yo = measures.displayCenter.y-h
                 let xo = geo.size.width/2-w/2
                 let x = needle.noisyValue
-                let a = DisplayBackground.completeAngle*(-0.5+x)
+                let a = measures.completeAngle*(-0.5+x)
                 ZStack {
                     Capsule()
                         .fill(needle.colorful ? activeColor : passiveColor)
@@ -32,7 +32,7 @@ struct NeedleView: View {
                         .rotationEffect(a, anchor: .bottom)
                         .offset(y:yo)
                         .offset(x:xo)
-                        .animation(.linear(duration: 0.4))
+                        .animation(.linear(duration: 0.4), value: a)
                 }
             }
         }
@@ -65,10 +65,9 @@ struct AnimatedPath: Shape {
 
 struct NeedleView_Previews: PreviewProvider {
     static var previews: some View {
-        Needle.shared.active(false, strongNoise: false)
+        Needle.shared.active(true, strongNoise: false)
         Needle.shared.setValue(1.0)
-        return NeedleView(activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+        return NeedleView(measures: Measures(CGSize(width: 200,height: 200)), activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
             .background(Color.green.opacity(0.2))
-            .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
     }
 }

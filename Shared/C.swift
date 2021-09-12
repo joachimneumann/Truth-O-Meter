@@ -29,6 +29,8 @@ struct C {
     static func lw1() -> CGFloat {
         w / 320
     }
+    
+    static let displayAspectRatio: CGFloat = 1.9
 
     struct button {
         static let outerRingWidth: CGFloat = 0.05

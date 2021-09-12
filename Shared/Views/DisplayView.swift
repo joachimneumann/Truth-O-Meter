@@ -39,14 +39,17 @@ struct DisplayView: View {
     let darkColor: Color
 
     var body: some View {
+        let _ = print("redrawing Display, colorful = \(String(colorful))")
+        // I do not want to see this message very often.
+        // Specifically, it should not appear every time, the needle is redrawn
         GeometryReader { geo in
             ZStack {
                 Spacer()
-                DisplayBackground(colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor)
+                DisplayBackground(geo.size, colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor)
                 Spacer()
                 if editTitle {
                     // needle behind the text
-                    NeedleView(activeColor: activeColor, passiveColor: passiveColor)
+                    NeedleView(measures: Measures(geo.size), activeColor: activeColor, passiveColor: passiveColor)
                         .clipped()
                         .opacity(0.5)
                     TextField("", text: $settings.title, onEditingChanged: { edit in
@@ -62,16 +65,12 @@ struct DisplayView: View {
                         .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
                         .offset(y: geo.size.height*0.15)
                         .foregroundColor(colorful ? darkColor : passiveColor)
-                    NeedleView(activeColor: activeColor, passiveColor: passiveColor)
+                    NeedleView(measures: Measures(geo.size), activeColor: activeColor, passiveColor: passiveColor)
                         .clipped()
                 }
             }
         }
-        .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
-        // print("redrawing Display, colorful = \(String(colorful))")
-        // I do not want to see this message very often.
-        // Specifically, it should not appear every time, the needle is redrawn
-
+        .aspectRatio(C.displayAspectRatio, contentMode: .fit)
     }
 }
     
@@ -82,7 +81,7 @@ struct Display_Previews: PreviewProvider {
         return Group {
             VStack {
                 DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
-                    .padding(200)
+                    .padding()
                     .environmentObject(settings)
             }
             VStack {
