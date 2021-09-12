@@ -39,11 +39,11 @@ struct Measures {
 }
 
 struct DisplayBackground: View {
+    var measures: Measures
     var colorful: Bool
     var lightColor: Color
     var darkColor: Color
     var activeColor: Color
-    var measures: Measures
     var body: some View {
         let lw1 = C.lw1()
         let boldStrokeStyle = StrokeStyle(lineWidth: measures.thickLineFactor*lw1, lineCap: .butt)
