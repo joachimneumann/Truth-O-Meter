@@ -20,7 +20,7 @@ class Settings: ObservableObject {
         set {
             settingsData.setTitle(newValue)
             objectWillChange.send()
-            print("Settings title send()")
+            // print("Settings title send()")
         }
     }
     
@@ -35,7 +35,7 @@ class Settings: ObservableObject {
         set {
             settingsData.setTop(top: newValue, forPrecision: precision)
             objectWillChange.send()
-            print("Settings stampTop send()")
+            // print("Settings stampTop send()")
         }
     }
     

@@ -30,6 +30,7 @@ struct RingView: View {
             value = 1.0
             AudioServicesPlaySystemSound(C.sounds.startRecording)
             DispatchQueue.main.asyncAfter(deadline: .now() + settings.listenTime) {
+                AudioServicesPlaySystemSound(C.sounds.stopRecording)
                 // this will not guarantee precise timing, but that might not be required here
                 whenFinished()
             }
