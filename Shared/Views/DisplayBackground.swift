@@ -152,6 +152,9 @@ struct DisplayBackground: View {
 
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
-        DisplayBackground(CGSize(width: 200, height: 200), colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed)
+        GeometryReader { geo in
+            DisplayBackground(geo.size, colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed)
+        }
+        .aspectRatio(1.9, contentMode: .fit)
     }
 }
