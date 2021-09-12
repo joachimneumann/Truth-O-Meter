@@ -61,7 +61,7 @@ class Needle: ObservableObject {
         if onOff {
             colorful = true
             if needleNoiseTimer == nil {
-                needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
+                needleNoiseTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(addNoise), userInfo: nil, repeats: true)
                 needleNoiseTimer?.tolerance = 0.1
             }
         } else {
