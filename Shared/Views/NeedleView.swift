@@ -19,13 +19,19 @@ struct NeedleView: View {
         ZStack {
             GeometryReader { (geo) in
                 let rect = geo.frame(in: .local)
-                var temp = Path()
-                let _ = temp.addArc(center: DisplayBackground.displayCenter(rect: rect), radius: DisplayBackground.radius2(rect: rect), startAngle: DisplayBackground.startAngle, endAngle: DisplayBackground.proportionalAngle(proportion: self.needleValue.value), clockwise: true)
-                let a = temp.currentPoint!
-                let b = DisplayBackground.displayCenter(rect: rect)
-                AnimatedPath(from: a, to: b, c: b)
-                    .stroke(self.needleValue.colorful ? activeColor : passiveColor,
-                            style: StrokeStyle(lineWidth: DisplayBackground.thickLineFactor * C.lw1(geo), lineCap: .round))
+                let w = DisplayBackground.thickLineFactor * C.lw1()
+                let h = DisplayBackground.radius2(rect: rect)+w
+                let o = DisplayBackground.displayCenter(rect: rect).y-h+w/2
+                let x = needleValue.value
+                let a = DisplayBackground.completeAngle*(-0.5+x)
+                ZStack {
+                    Capsule()
+                        .fill(needleValue.colorful ? activeColor : passiveColor)
+                        .frame(width: w, height: h)
+                        .rotationEffect(a, anchor: .bottom)
+                        .offset(y:o)
+                        .offset(x:geo.size.width/2)
+                }
             }
         }
         .aspectRatio(DisplayBackground.aspectRatio, contentMode: .fit)
@@ -56,11 +62,11 @@ struct AnimatedPath: Shape {
     }
 }
 
-struct TruthView_Previews: PreviewProvider {
+struct NeedleView_Previews: PreviewProvider {
     static var previews: some View {
-        Needle.shared.active(true, strongNoise: false)
-        return VStack {
-            NeedleView(activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
-        }
+        Needle.shared.active(false, strongNoise: false)
+        Needle.shared.setValue(1.0)
+        return NeedleView(activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+            .background(Color.green.opacity(0.2))
     }
 }

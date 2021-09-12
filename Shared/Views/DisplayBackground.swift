@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct DisplayBackground: View {
-
-    static let startAngle = Angle(radians: .pi*2*(0.5+0.11))
-    static let endAngle = Angle(radians: .pi*2*(1.0-0.11))
-    static let midAngle = Angle(degrees: startAngle.degrees+0.7*(endAngle.degrees-startAngle.degrees))
+    static let completeAngle = Angle(degrees: 102.0)
+    static let startAngle = Angle(degrees: -90.0) - completeAngle/2
+    static let endAngle   = Angle(degrees: -90.0) + completeAngle/2
+    static let midAngle = startAngle+(endAngle-startAngle)*0.7
     static let aspectRatio: CGFloat = 1.9
     static let thickLineFactor: CGFloat = 7
 
@@ -31,6 +31,8 @@ struct DisplayBackground: View {
     var activeColor: Color
 
     var body: some View {
+        let _ = print("s \(DisplayBackground.startAngle.degrees)")
+        let _ = print("e \(DisplayBackground.endAngle.degrees)")
         GeometryReader { geo in
             let lw1 = C.lw1(geo)
             let boldStrokeStyle = StrokeStyle(lineWidth: DisplayBackground.thickLineFactor*lw1, lineCap: .butt)
@@ -38,16 +40,16 @@ struct DisplayBackground: View {
                 ZStack {
                     MainArcBlack()
                         .stroke(colorful ? darkColor : lightColor, style: boldStrokeStyle)
-                        .clipped()
+//                        .clipped()
                     MainArcRed()
                         .stroke(colorful ? activeColor : lightColor, style: boldStrokeStyle)
-                        .clipped()
+//                        .clipped()
                     TopArcBlack()
                         .stroke(colorful ? darkColor : lightColor, style: fineStrokeStyle)
-                        .clipped()
+//                        .clipped()
                     TopArcRed()
                         .stroke(colorful ? activeColor : lightColor, style: fineStrokeStyle)
-                        .clipped()
+//                        .clipped()
                     RoundedRectangle(cornerRadius: 25, style: .continuous)
                         .stroke(lightColor, lineWidth: 2*lw1)
                 }

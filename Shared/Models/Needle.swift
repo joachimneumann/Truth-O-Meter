@@ -29,13 +29,20 @@ class Needle: ObservableObject {
     private let distribution = GKGaussianDistribution(lowestValue: -100, highestValue: 100)
     private var strongNoise = false
 
-    func setValue(_ v: Double) {
+    func setValue(_ newValue: Double) {
+        var checkedValue = newValue
+        if checkedValue > 1.0 { checkedValue = 1.0 }
+        if checkedValue < 0.0 { checkedValue = 0.0 }
+        setValueWithoutRangeCheck(checkedValue)
+    }
+    
+    func setValueWithoutRangeCheck(_ v: Double) {
         withAnimation(.default) {
             privateValue = v
             value = v
         }
     }
-    
+
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
         self.active(true, strongNoise: true)
         var delay = 0.25 * totalTime
@@ -78,7 +85,7 @@ class Needle: ObservableObject {
     
     @objc private func addNoise() {
         let n = self.distribution.nextInt()
-        var noiseLevel = 0.001
+        var noiseLevel = 0.0001
         if strongNoise { noiseLevel *= 3 }
         let noise = noiseLevel * Double(n)
         setValue(privateValue + noise)

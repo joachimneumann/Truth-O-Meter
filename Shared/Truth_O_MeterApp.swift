@@ -17,7 +17,6 @@ struct Truth_O_MeterApp: App {
     
     var body: some Scene {
         let settings = Settings()
-        Needle.shared.active(true, strongNoise: false)
         return WindowGroup {
             MainView()
                 .environmentObject(settings)
