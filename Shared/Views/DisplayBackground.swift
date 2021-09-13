@@ -16,7 +16,7 @@ struct Measures {
     let aspectRatio = 1.9
     let thickLineFactor = 7.0
     
-    func proportionalAngle(proportion: Double) -> Angle {
+    func angle(forProportion proportion: Double) -> Angle {
         startAngle+(endAngle-startAngle)*proportion
     }
     
@@ -91,13 +91,14 @@ struct DisplayBackground: View {
     }
     
     struct TopArcBlack: Shape {
+        let proportions = [0.12, 0.2, 0.265, 0.32, 0.37, 0.42, 0.47, 0.52, 0.57, 0.62, 0.66]
         let measures: Measures
         func path(in rect: CGRect) -> Path {
             var temp = Path()
             let p: Path = Path { path in
                 path.addArc(center: measures.displayCenter, radius: measures.radius2, startAngle: measures.startAngle, endAngle: measures.midAngle, clockwise: false)
-                for proportion in [0.12, 0.2, 0.265, 0.32, 0.37, 0.42, 0.47, 0.52, 0.57, 0.62, 0.66] {
-                    let end = measures.proportionalAngle(proportion: proportion)
+                for proportion in proportions {
+                    let end = measures.angle(forProportion: proportion)
                     temp.addArc(center: measures.displayCenter, radius: measures.radius2, startAngle: measures.startAngle, endAngle: end, clockwise: false)
                     let a = temp.currentPoint!
                     temp.addArc(center: measures.displayCenter, radius: measures.radius3, startAngle: measures.startAngle, endAngle: end, clockwise: false)
@@ -121,7 +122,7 @@ struct DisplayBackground: View {
                 
                 // little red ticks on the right
                 for proportion in [0.79, 0.87, 0.94] {
-                    let end = measures.proportionalAngle(proportion: proportion)
+                    let end = measures.angle(forProportion: proportion)
                     temp.addArc(center: measures.displayCenter, radius: measures.radius2, startAngle: measures.startAngle, endAngle: end, clockwise: false)
                     path.move(to: temp.currentPoint!)
                     temp.addArc(center: measures.displayCenter, radius: measures.radius3, startAngle: measures.startAngle, endAngle: end, clockwise: false)

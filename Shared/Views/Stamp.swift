@@ -66,13 +66,13 @@ struct Stamp: View {
     
     var HorizontalStamp: some View {
         Group {
-            if let b = bottom {
+            if let bottom = bottom {
                 VStack {
                     Text(top)
                         .foregroundColor(color)
                         .font(.system(size: fontSize))
                         .lineLimit(1)
-                    Text(b)
+                    Text(bottom)
                         .foregroundColor(color)
                         .font(.system(size: fontSize))
                         .lineLimit(1)
@@ -110,8 +110,8 @@ struct Stamp: View {
             }
         }
         return ZStack {
-            if let i = stampImage.snapshot {
-                Image(uiImage: i)
+            if let snapshot = stampImage.snapshot {
+                Image(uiImage: snapshot)
                     .resizable()
                     .scaledToFit()
                     .clipped()
