@@ -14,77 +14,55 @@ struct SettingsDetailView: View {
     @Binding var displayTitle: String
     
     func callback(_ precision: Precision) {
-//        settings.precision = precision
-//        displayColorful = true
-//        showRing = false
-//        showRingWithProgress = true
-//
-//        /// initially, set the needle a bit in the wrong direction
-//        let newNeedleValue = settings.needleValue(forPrecision: precision)
-//        let wrongDirection = -0.15 * (newNeedleValue-0.5)
-//        Needle.shared.setValue(0.5 + wrongDirection)
-//        Needle.shared.setValueInSteps(newNeedleValue, totalTime: settings.listenAndAnalysisTime)
-//        Needle.shared.active(true, strongNoise: true)
+        settings.precision = precision
+        let newNeedleValue = settings.needleValue(forPrecision: precision)
+        Needle.shared.setValue(newNeedleValue)
     }
     
     var body: some View {
-        GeometryReader { geo in
-            ZStack (alignment: .topLeading) {
+        VStack {
+            VStack {
                 HStack(spacing: 0) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 20))
                     Text("Back")
+                    Spacer()
                 }
                 .foregroundColor(.blue)
+                .padding(.top)
                 .padding(.leading)
                 .onTapGesture {
-                    self.navigationStack.pop()
-                }
-                VStack(alignment: .leading) {
-                    DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
-                        .padding(.top, 40)
-                        .padding(.leading, 40)
-                        .padding(.trailing, 40)
-                    if settings.isCustom {
-                        EditableStampView()
-                    } else {
-                        VStack(alignment: .center) {
-                            Spacer(minLength: 0)
-                            HStack(alignment: .center) {
-                                Spacer(minLength: 0)
-//                                StampView(
-//                                    top: settings.stampTop,
-//                                    bottom: settings.stampBottom,
-//                                    rotated: true,
-//                                    color: C.color.bullshitRed)
-//                                    .padding(20)
-                                Spacer(minLength: 0)
-                            }
-                            Spacer(minLength: 0)
-                        }
-                    }
-                    HStack {
-                        Spacer()
-                        AllDisksView(
-                            isSetting: true,
-                            color: C.color.bullshitRed,
-                            grayColor: C.color.lightGray,
-                            callback: callback)
-                            .aspectRatio(contentMode: .fit)
-                        Spacer()
-                    }
+                    navigationStack.pop()
                 }
             }
-            .padding(.top, 10)
+            VStack {
+                Spacer(minLength: 20)
+                HStack {
+                    DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
+                        .background(Color.green.opacity(0.2))
+                    Stamp(
+                        top: settings.stampTop,
+                        bottom: settings.stampBottom,
+                        color: C.color.bullshitRed, angle: Angle(degrees: 0))
+                        .background(Color.yellow.opacity(0.2))
+                }
+                if settings.isCustom {
+                    EditableStampView()
+                } else {
+                    EmptyView()
+                }
+                Spacer(minLength: 0)
+                AllDisksView(
+                    isSetting: true,
+                    color: C.color.bullshitRed,
+                    grayColor: C.color.lightGray,
+                    callback: callback)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 600)
+                Spacer(minLength: 0)
+            }
+            .padding()
         }
-    }
-}
-
-struct SettingsDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let settings = Settings()
-        return SettingsDetailView(displayTitle: .constant("xx"))
-            .environmentObject(settings)
     }
 }
 
@@ -121,14 +99,23 @@ struct EditableStampView: View {
             TextField("Top", text: $settings.stampTop, onEditingChanged: { edit in
                 self.editingTop = edit
             })
-            .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
-            .padding(.top, 24)
+                .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
+                .padding(.top, 24)
             
             TextField("Bottom", text: $settings.nonNilStampBottom, onEditingChanged: { edit in
                 self.editingBottom = edit
             })
-            .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
-            .padding(.bottom, 12)
+                .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
+                .padding(.bottom, 12)
         }
+    }
+}
+
+
+struct SettingsDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        let settings = Settings()
+        return SettingsDetailView(displayTitle: .constant("xx"))
+            .environmentObject(settings)
     }
 }

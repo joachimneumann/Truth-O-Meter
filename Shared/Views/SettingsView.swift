@@ -115,20 +115,24 @@ struct SettingsView: View {
     @EnvironmentObject private var navigationStack: NavigationStack
     
     var body: some View {
-        ZStack (alignment: .topLeading) {
-            HStack(spacing: 0) {
-                Image(systemName: "chevron.backward")
-                    .font(.system(size: 20))
-                Text("Back")
+        VStack {
+            VStack {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.backward")
+                        .font(.system(size: 20))
+                    Text("Back")
+                    Spacer()
+                }
+                .foregroundColor(.blue)
+                .padding(.top)
+                .padding(.leading)
+                .onTapGesture {
+                    self.navigationStack.pop()
+                    Needle.shared.active(false, strongNoise: false)
+                    Needle.shared.setValue(0.5)
+                }
             }
-            .foregroundColor(.blue)
-            .padding(.leading)
-            .onTapGesture {
-                self.navigationStack.pop()
-                Needle.shared.active(false, strongNoise: false)
-                Needle.shared.setValue(0.5)
-            }
-            VStack(alignment: .leading) {
+            VStack {
                 HStack {
                     Spacer()
                     Text("Show Instructions")
@@ -140,8 +144,7 @@ struct SettingsView: View {
                         }
                     Spacer()
                 }
-                .padding(.top, 20)
-                .padding(.bottom, 40)
+                .padding(.vertical, 40)
                 TimePicker()
                 Rectangle().fill(C.color.lightGray)
                     .frame(height: 0.5)
@@ -149,10 +152,8 @@ struct SettingsView: View {
                 ThemesList(themeNames: settings.themeNames)
                 Spacer()
             }
-            .padding(.top, 40)
-            Spacer()
+            .frame(maxWidth: 600)
         }
-        .padding(.top, 10)
     }
 }
 

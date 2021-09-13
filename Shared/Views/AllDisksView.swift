@@ -22,8 +22,10 @@ struct AllDisksView: View {
     private let disks = Disks()
     
     func downPressed() {
-        if !pale {
-            if !isSetting {
+        if isSetting {
+            
+        } else {
+            if !pale {
                 pale = true
                 disksHidden = true
             }
@@ -31,13 +33,17 @@ struct AllDisksView: View {
     }
     
     func upPressed(_ precision: Precision) {
-        if circle {
-            DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
-                callback(precision)
+        if isSetting {
+            callback(precision)
+        } else {
+            if circle {
+                DispatchQueue.main.asyncAfter(deadline: .now() + C.timing.shapeShiftAnimationTime) {
+                    callback(precision)
+                }
+                pale = false
+                circle = false
+                disksHidden = true
             }
-            pale = false
-            circle = false
-            disksHidden = true
         }
     }
     
