@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import GameKit // for Audio
+import GameKit /// for Audio
 
 struct RingView: View {
     @EnvironmentObject private var settings: Settings
@@ -30,8 +30,8 @@ struct RingView: View {
             AudioServicesPlaySystemSound(C.sounds.startRecording)
             DispatchQueue.global().asyncAfter(deadline: .now() + settings.listenTime) {
                 AudioServicesPlaySystemSound(C.sounds.stopRecording)
-                // this will not guarantee precise timing,
-                // but that might not be required here
+                /// this will not guarantee precise timing,
+                /// but that might not be required here
                 whenFinished()
             }
         }

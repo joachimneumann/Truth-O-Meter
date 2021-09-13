@@ -12,9 +12,9 @@ struct Disks {
     var disks = [Disk]()
     
     init() {
-        // Instead of 0, 0.2, 0.4, 0.6, 0.8, 1.0
-        // I make the bulls eye and the out disk a bit larger
-        // This makes the edge results easier to hit.
+        /// Instead of 0, 0.2, 0.4, 0.6, 0.8, 1.0
+        /// I make the bulls eye and the out disk a bit larger
+        /// This makes the edge results easier to hit.
         let outer    = 0.8 - 0.05
         let middle   = 0.6 - 0.0125
         let inner    = 0.4 + 0.0125

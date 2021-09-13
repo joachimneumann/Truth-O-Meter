@@ -52,7 +52,7 @@ class FSAppDelegate: NSObject, UIApplicationDelegate {
         options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
         let sceneConfig = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
-        sceneConfig.delegateClass = FSSceneDelegate.self // 👈🏻
+        sceneConfig.delegateClass = FSSceneDelegate.self
         return sceneConfig
     }
 }

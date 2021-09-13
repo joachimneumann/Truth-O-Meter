@@ -22,7 +22,7 @@ struct C {
     static let h = UIScreen.main.bounds.height
     #endif
     
-    // the equivialent of linewith 1 on a small device with width 320
+    /// the equivialent of linewith 1 on a small device with width 320
     static func lw1(_ geo: GeometryProxy) -> Double {
         geo.size.width / 320.0
     }
@@ -43,7 +43,7 @@ struct C {
         static let analyseTimeIncrement    = 0.02
         static var shapeShiftAnimationTime: Double {
             get {
-                // this is hack, because the view was animated on MacOS
+                /// this is hack, because the view was animated on MacOS
                 if firstTime {
                     firstTime = false
                     return 0
@@ -58,7 +58,7 @@ struct C {
     struct sounds {
         static let startRecording:UInt32 = 1113
         static let stopRecording:UInt32 = 1114
-        // source: https://github.com/TUNER88/iOSSystemSoundsLibrary
+        /// source: https://github.com/TUNER88/iOSSystemSoundsLibrary
     }
     
     struct color {
@@ -72,8 +72,8 @@ struct C {
     }
     
     struct key {
-        // some key names might seem stange, but this is
-        // for compatibility with older app versions
+        /// some key names might seem stange, but this is
+        /// for compatibility with older app versions
         static let listenTiming         = "fastResponseTimeKey"
         static let analysisTiming       = "analysisTimingIndexkey"
         static let selectedTheme        = "selectedTheme"

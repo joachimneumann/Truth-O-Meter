@@ -30,9 +30,8 @@ struct HorizontalProgressBar: View {
         .onAppear {
             widthFactor = 1.0
             
-            // callback()
-            // The timing will be precise, but that
-            // might be good enough for most use cases
+            /// The timing of animationFinished() will not be precise,
+            /// but that might be good enough for most use cases
             DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
                 animationFinished()
             }

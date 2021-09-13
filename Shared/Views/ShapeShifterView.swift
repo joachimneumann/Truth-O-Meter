@@ -12,7 +12,6 @@ struct ShapeShifterView: View {
     var down: () -> Void
     var up: () -> Void
     var isCircle: Bool
-//    var geoSize: CGSize
     
     let color: Color
     let grayColor: Color

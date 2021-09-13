@@ -72,7 +72,7 @@ struct SettingsData {
     var listenTimingIndex: Int {
         get {
             if UserDefaults.standard.object(forKey: C.key.listenTiming) == nil {
-                // not set? use middle value of [0, 1, 2]
+                /// not set? use middle value of [0, 1, 2]
                 UserDefaults.standard.set(1, forKey: C.key.listenTiming)
             }
             return UserDefaults.standard.integer(forKey: C.key.listenTiming)

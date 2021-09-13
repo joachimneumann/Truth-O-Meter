@@ -117,10 +117,10 @@ struct DisplayBackground: View {
             var temp = Path()
             let p: Path = Path { path in
                 
-                // top arc
+                /// top arc
                 path.addArc(center: measures.displayCenter, radius: measures.radius2, startAngle: measures.midAngle, endAngle: measures.endAngle, clockwise: false)
                 
-                // little red ticks on the right
+                /// little red ticks on the right
                 for proportion in [0.79, 0.87, 0.94] {
                     let end = measures.angle(forProportion: proportion)
                     temp.addArc(center: measures.displayCenter, radius: measures.radius2, startAngle: measures.startAngle, endAngle: end, clockwise: false)
@@ -129,18 +129,18 @@ struct DisplayBackground: View {
                     path.addLine(to: temp.currentPoint!)
                 }
                 
-                // red divider line
+                /// red divider line
                 temp.addArc(center: measures.displayCenter, radius: measures.radius1, startAngle: measures.startAngle, endAngle: measures.midAngle, clockwise: false)
                 path.move(to: temp.currentPoint!)
                 temp.addArc(center: measures.displayCenter, radius: measures.radius3, startAngle: measures.startAngle, endAngle: measures.midAngle, clockwise: false)
                 path.addLine(to: temp.currentPoint!)
                 
-                // line at the beginning
+                /// line at the beginning
                 path.move(to: measures.displayCenter)
                 temp.addArc(center: measures.displayCenter, radius: measures.radius3, startAngle: measures.startAngle, endAngle: measures.startAngle, clockwise: false)
                 path.addLine(to: temp.currentPoint!)
                 
-                // line at the end
+                /// line at the end
                 path.move(to: measures.displayCenter)
                 temp.addArc(center: measures.displayCenter, radius: measures.radius3, startAngle: measures.startAngle, endAngle: measures.endAngle, clockwise: false)
                 path.addLine(to: temp.currentPoint!)

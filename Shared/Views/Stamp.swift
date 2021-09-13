@@ -151,18 +151,14 @@ extension UIImage {
                     rotationAngle: angle.radians))
             .size
         
-        // Trim off the extremely small float value to prevent core graphics from rounding it up
-        // newSize.width = floor(newSize.width)
-        // newSize.height = floor(newSize.height)
-        
         UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
         let context = UIGraphicsGetCurrentContext()!
         
-        // Move origin to middle
+        /// Move origin to middle
         context.translateBy(x: newSize.width/2, y: newSize.height/2)
-        // Rotate around middle
+        /// Rotate around middle
         context.rotate(by: Double(angle.radians))
-        // Draw the image at its center
+        /// Draw the image at its center
         self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -174,14 +170,11 @@ extension UIImage {
 
 struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
-        if #available(iOS 15.0, *) {
-            Stamp(
-                top: "Absolute",
-                bottom: "BullShit",
-                color: C.color.bullshitRed,
-                angle: Angle(degrees: -25.0))
-        } else {
-            // Fallback on earlier versions
+        Stamp(
+            top: "Absolute",
+            bottom: "BullShit",
+            color: C.color.bullshitRed,
+            angle: Angle(degrees: -25.0))
         }
     }
 }

@@ -40,13 +40,13 @@ struct DisplayView: View {
     
     var body: some View {
         // print("redrawing Display, colorful = \(String(colorful))")
-        // I do not want to see this message very often.
-        // Specifically, it should not appear every time, the needle is redrawn
+        /// I do not want to see this message very often.
+        /// Specifically, it should not appear every time, the needle is redrawn
         GeometryReader { geo in
             ZStack {
                 DisplayBackground(geo.size, colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor)
                 if editTitle {
-                    // needle behind the text
+                    /// needle behind the text
                     NeedleView(geo.size, activeColor: activeColor, passiveColor: passiveColor)
                         .opacity(0.5)
                     TextField("", text: $settings.title, onEditingChanged: { edit in
@@ -54,7 +54,7 @@ struct DisplayView: View {
                     })
                     .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
                 } else {
-                    // needle in front of the text
+                    /// needle in front of the text
                     Text(settings.title)
                         .lineLimit(1)
                         .font(.system(size: 500).bold())

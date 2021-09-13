@@ -19,7 +19,7 @@ struct SettingsDetailView: View {
 //        showRing = false
 //        showRingWithProgress = true
 //
-//        // initially, set the needle a bit in the wrong direction
+//        /// initially, set the needle a bit in the wrong direction
 //        let newNeedleValue = settings.needleValue(forPrecision: precision)
 //        let wrongDirection = -0.15 * (newNeedleValue-0.5)
 //        Needle.shared.setValue(0.5 + wrongDirection)
