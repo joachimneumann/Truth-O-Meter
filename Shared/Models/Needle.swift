@@ -32,26 +32,28 @@ class Needle: ObservableObject {
 
     func setValue(_ newValue: Double) {
         _value = newValue
-        noisyValue = newValue
+        DispatchQueue.main.async {
+            self.noisyValue = newValue
+        }
     }
 
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
         self.active(true, strongNoise: true)
         var delay = 0.25 * totalTime
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
             self.setValue(self._value + 0.3 * (newValue - self._value))
         }
         delay = 0.5 * totalTime
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
             self.setValue(self._value + 0.6 * (newValue - self._value))
         }
         delay = 0.675 * totalTime
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
             self.active(true, strongNoise: false)
             self.setValue(self._value + 0.7 * (newValue - self._value))
         }
         delay = 0.85 * totalTime
-        DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
             self.active(true, strongNoise: false)
             self.setValue(newValue)
         }
@@ -76,12 +78,13 @@ class Needle: ObservableObject {
     
     
     @objc private func addNoise() {
-        let n = self.distribution.nextInt()
-        var noiseLevel = 0.001
-        if strongNoise { noiseLevel *= 3 }
-        let noise = noiseLevel * Double(n)
-        noisyValue = _value + noise
-//        print("_value\(_value.f) noise=\(noise.f) noisyValue=\(noisyValue.f)")
+        DispatchQueue.main.async {
+            let n = self.distribution.nextInt()
+            var noiseLevel = 0.001
+            if self.strongNoise { noiseLevel *= 3 }
+            let noise = noiseLevel * Double(n)
+            self.noisyValue = self._value + noise
+        }
     }
 
     
