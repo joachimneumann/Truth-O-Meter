@@ -91,8 +91,8 @@ struct SettingsDetailView_Previews: PreviewProvider {
 
 struct CustomTextFieldStyle: TextFieldStyle {
     @Binding var focused: Bool
-    let fontsize: CGFloat = 40
-    let cornerRadius: CGFloat = 6
+    let fontsize = 40.0
+    let cornerRadius = 6.0
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)
@@ -115,7 +115,7 @@ struct EditableStampView: View {
     @EnvironmentObject private var settings: Settings
     @State private var editingTop = false
     @State private var editingBottom = false
-    let fontsize: CGFloat = 40
+    let fontsize = 40.0
     var body: some View {
         VStack {
             TextField("Top", text: $settings.stampTop, onEditingChanged: { edit in

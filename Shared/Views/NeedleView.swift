@@ -17,8 +17,8 @@ struct NeedleView: View {
     var body: some View {
         let w = measures.thickLineFactor * C.lw1()
         let h = measures.radius2+w
-        let yo:CGFloat = measures.displayCenter.y-h+2*w/3
-        let xo:CGFloat = 0.0
+        let yo = measures.displayCenter.y-h+2*w/3
+        let xo = 0.0
         let x = needle.noisyValue
         let a = measures.completeAngle*(-0.5+x)
         ZStack {

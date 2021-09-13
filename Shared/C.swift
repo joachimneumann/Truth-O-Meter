@@ -15,25 +15,25 @@ extension Font {
 
 struct C {
     #if targetEnvironment(macCatalyst)
-    static let w:CGFloat  = 375*1.5
-    static let h:CGFloat  = 667*1.5
+    static let w = 375*1.5
+    static let h = 667*1.5
     #else
     static let w = UIScreen.main.bounds.width
     static let h = UIScreen.main.bounds.height
     #endif
     
     // the equivialent of linewith 1 on a small device with width 320
-    static func lw1(_ geo: GeometryProxy) -> CGFloat {
-        geo.size.width / 320
+    static func lw1(_ geo: GeometryProxy) -> Double {
+        geo.size.width / 320.0
     }
-    static func lw1() -> CGFloat {
-        w / 320
+    static func lw1() -> Double {
+        w / 320.0
     }
     
-    static let displayAspectRatio: CGFloat = 1.9
+    static let displayAspectRatio = 1.9
 
     struct button {
-        static let outerRingWidth: CGFloat = 0.03
+        static let outerRingWidth = 0.03
     }
     
     static var firstTime = true

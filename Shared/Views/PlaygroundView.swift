@@ -9,9 +9,9 @@ import SwiftUI
 
 
 struct PlaygroundView: View {
-    private var privateFrameWidth: CGFloat = 175
-    @State private var frameWidth: CGFloat = 175
-    @State private var frameHeight: CGFloat = 175
+    private var privateFrameWidth = 175.0
+    @State private var frameWidth = 175.0
+    @State private var frameHeight = 175.0
     @State var angle = Angle(degrees: -25.0)
 
     var body: some View  {

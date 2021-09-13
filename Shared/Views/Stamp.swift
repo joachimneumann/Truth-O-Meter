@@ -17,13 +17,13 @@ class StampImage: ObservableObject {
         snapshot = nil
     }
         
-    func snap(image: UIImage, borderWidth: CGFloat, cornerRadius: CGFloat) {
+    func snap(image: UIImage, borderWidth: Double, cornerRadius: Double) {
         let rotatedImage = image.stampRotate(angle)
         
         let outerCornerRadius = cornerRadius + 0.5 * borderWidth
         let _45radiants = Angle(degrees: 45).radians
         let x1 = cos(_45radiants - abs(angle.radians))
-        let x2 = CGFloat(sqrt(2)*x1 - 1)
+        let x2 = sqrt(2)*x1 - 1
         let crop = x2 * outerCornerRadius
         let cropRect = CGRect(
             x: crop * rotatedImage.scale,
@@ -51,16 +51,16 @@ struct Stamp: View {
     var bottom: String?
     var color: Color
     var angle: Angle
-    let fontSize:CGFloat = 100.0
+    let fontSize = 100.0
     @StateObject var stampImage = StampImage()
     
-    var cornerRadius: CGFloat {
+    var cornerRadius: Double {
         fontSize * 0.4*1.5
     }
-    var borderWidth: CGFloat {
+    var borderWidth: Double {
         fontSize * 0.4 * 1.5
     }
-    var margin: CGFloat {
+    var margin: Double {
         fontSize * 0.4
     }
     
@@ -148,8 +148,7 @@ extension UIImage {
                 size: self.size)
             .applying(
                 CGAffineTransform(
-                    rotationAngle:
-                        CGFloat(angle.radians)))
+                    rotationAngle: angle.radians))
             .size
         
         // Trim off the extremely small float value to prevent core graphics from rounding it up
@@ -162,7 +161,7 @@ extension UIImage {
         // Move origin to middle
         context.translateBy(x: newSize.width/2, y: newSize.height/2)
         // Rotate around middle
-        context.rotate(by: CGFloat(angle.radians))
+        context.rotate(by: Double(angle.radians))
         // Draw the image at its center
         self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
         

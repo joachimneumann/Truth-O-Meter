@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DiskView: View {
     var isOpaque: Bool
-    var borderWidth: CGFloat
+    var borderWidth: Double
     var isGray: Bool
     var down: () -> Void
     var up: () -> Void

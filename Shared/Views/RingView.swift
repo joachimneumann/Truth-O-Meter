@@ -10,10 +10,10 @@ import GameKit // for Audio
 
 struct RingView: View {
     @EnvironmentObject private var settings: Settings
-    var width: CGFloat
+    var width: Double
     var whenFinished: () -> Void
 
-    @State private var value:CGFloat = 0.0
+    @State private var value = 0.0
     
     var body: some View {
         return ZStack {

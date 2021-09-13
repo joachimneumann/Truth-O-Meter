@@ -11,7 +11,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
     let activeColor:Color
     let darkColor: Color
     @Binding var focused: Bool
-    let cornerRadius: CGFloat = 5
+    let cornerRadius = 5.0
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)

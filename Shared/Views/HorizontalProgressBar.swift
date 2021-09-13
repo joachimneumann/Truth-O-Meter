@@ -14,7 +14,7 @@ struct HorizontalProgressBar: View {
     let passiveColor:Color
     let animationTime: Double
     
-    @State private var widthFactor: CGFloat = 0.0
+    @State private var widthFactor = 0.0
     var body: some View {
         GeometryReader { (geo) in
             ZStack(alignment: .leading) {

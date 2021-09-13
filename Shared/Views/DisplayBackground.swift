@@ -13,8 +13,8 @@ struct Measures {
     let startAngle: Angle
     let endAngle: Angle
     let midAngle: Angle
-    let aspectRatio: CGFloat = 1.9
-    let thickLineFactor: CGFloat = 7
+    let aspectRatio = 1.9
+    let thickLineFactor = 7.0
     
     func proportionalAngle(proportion: Double) -> Angle {
         startAngle+(endAngle-startAngle)*proportion
@@ -24,9 +24,9 @@ struct Measures {
         let r = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         return CGPoint(x: r.midX, y: r.origin.y + 1.2 * r.size.height)
     }
-    var radius1: CGFloat { size.height * 0.95 }
-    var radius2: CGFloat { radius1 * 1.07 }
-    var radius3: CGFloat { radius2 * 1.045 }
+    var radius1: Double { size.height * 0.95 }
+    var radius2: Double { radius1 * 1.07 }
+    var radius3: Double { radius2 * 1.045 }
     
     
     init(_ forSize: CGSize) {
