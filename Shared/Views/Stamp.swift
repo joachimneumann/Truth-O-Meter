@@ -7,64 +7,25 @@
 
 import SwiftUI
 
-
-class StampImage: ObservableObject {
-    var angle: Angle
-    @Published var snapshot: UIImage?
-    
-    init() {
-        self.angle = Angle(degrees: 5)
-        snapshot = nil
-    }
-        
-    func snap(image: UIImage, borderWidth: Double, cornerRadius: Double) {
-        let rotatedImage = image.stampRotate(angle)
-        
-        let outerCornerRadius = cornerRadius + 0.5 * borderWidth
-        let _45radiants = Angle(degrees: 45).radians
-        let x1 = cos(_45radiants - abs(angle.radians))
-        let x2 = sqrt(2)*x1 - 1
-        let crop = x2 * outerCornerRadius
-        let cropRect = CGRect(
-            x: crop * rotatedImage.scale,
-            y: crop * rotatedImage.scale,
-            width:  (rotatedImage.size.width  - 2 * crop) * rotatedImage.scale,
-            height: (rotatedImage.size.height - 2 * crop) * rotatedImage.scale
-        )
-        
-        let cgImage = rotatedImage.cgImage!
-        let croppedCGImage = cgImage.cropping(
-            to: cropRect
-        )!
-        
-        let croppedImage = UIImage(
-            cgImage: croppedCGImage,
-            scale: image.imageRendererFormat.scale,
-            orientation: image.imageOrientation
-        )
-        snapshot = croppedImage
-    }
-}
-
 struct Stamp: View {
     var top: String
     var bottom: String?
     var color: Color
     var angle: Angle
     let fontSize = 100.0
-    @StateObject var stampImage = StampImage()
+    @StateObject private var stampImage = StampImage()
     
-    var cornerRadius: Double {
+    private var cornerRadius: Double {
         fontSize * 0.4*1.5
     }
-    var borderWidth: Double {
+    private var borderWidth: Double {
         fontSize * 0.4 * 1.5
     }
-    var margin: Double {
+    private var margin: Double {
         fontSize * 0.4
     }
     
-    var HorizontalStamp: some View {
+    private var HorizontalStamp: some View {
         Group {
             if let bottom = bottom {
                 VStack {
@@ -121,6 +82,45 @@ struct Stamp: View {
         }
         //.background(Color.green.opacity(0.2))
     }
+    
+    
+    private class StampImage: ObservableObject {
+        var angle: Angle
+        @Published var snapshot: UIImage?
+        
+        init() {
+            self.angle = Angle(degrees: 5)
+            snapshot = nil
+        }
+        
+        func snap(image: UIImage, borderWidth: Double, cornerRadius: Double) {
+            let rotatedImage = image.stampRotate(angle)
+            
+            let outerCornerRadius = cornerRadius + 0.5 * borderWidth
+            let _45radiants = Angle(degrees: 45).radians
+            let x1 = cos(_45radiants - abs(angle.radians))
+            let x2 = sqrt(2)*x1 - 1
+            let crop = x2 * outerCornerRadius
+            let cropRect = CGRect(
+                x: crop * rotatedImage.scale,
+                y: crop * rotatedImage.scale,
+                width:  (rotatedImage.size.width  - 2 * crop) * rotatedImage.scale,
+                height: (rotatedImage.size.height - 2 * crop) * rotatedImage.scale
+            )
+            
+            let cgImage = rotatedImage.cgImage!
+            let croppedCGImage = cgImage.cropping(
+                to: cropRect
+            )!
+            
+            let croppedImage = UIImage(
+                cgImage: croppedCGImage,
+                scale: image.imageRendererFormat.scale,
+                orientation: image.imageOrientation
+            )
+            snapshot = croppedImage
+        }
+    }
 }
 
 extension View {
@@ -143,9 +143,9 @@ extension View {
 extension UIImage {
     func stampRotate(_ angle: Angle) -> UIImage {
         let newSize =
-            CGRect(
-                origin: CGPoint.zero,
-                size: self.size)
+        CGRect(
+            origin: CGPoint.zero,
+            size: self.size)
             .applying(
                 CGAffineTransform(
                     rotationAngle: angle.radians))
@@ -168,13 +168,12 @@ extension UIImage {
     }
 }
 
-struct Stamp_Previews: PreviewProvider {
+private struct Stamp_Previews: PreviewProvider {
     static var previews: some View {
         Stamp(
             top: "Absolute",
             bottom: "BullShit",
             color: C.color.bullshitRed,
             angle: Angle(degrees: -25.0))
-        }
     }
 }
