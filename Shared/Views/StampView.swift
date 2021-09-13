@@ -13,6 +13,7 @@ struct StampView: View {
     @State var frameSize: CGSize = CGSize(width: 100, height: 100)
     @State var textSize: CGSize = CGSize(width: 100, height: 100)
     var body: some View {
+//        let scaleHorizontal = frameSize.width / textSize.width
         let scaleHorizontal = frameSize.width / textSize.width
 
         ZStack {
@@ -38,12 +39,12 @@ struct StampView: View {
                         .foregroundColor(.green.opacity(0.2))
                         .frame(height: 310)
                         .background(
-                            Text("Bullshit")
+                            Text("iiiiiiiii")
                                 .font(.system(size: largeFontSize))
                                 .minimumScaleFactor(0.01)
                                 .captureSize(in: $textSize)
-                                .scaleEffect(scaleHorizontal)
                                 .background(Color.pink.opacity(0.2))
+                                .scaleEffect(scaleHorizontal)
                         )
                     Rectangle()
                         .foregroundColor(.yellow.opacity(0.2))
