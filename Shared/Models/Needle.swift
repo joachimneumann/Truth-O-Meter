@@ -91,13 +91,13 @@ class Needle: ObservableObject {
 }
 
 extension Double {
-    func format(_ f: String) -> String {
-        return String(format: "%\(f)f", self)
+    var s: String {
+        String(format: "%7.1f", self)
     }
 }
 
-extension Double {
+extension CGFloat {
     var s: String {
-        self.format("%7.3f")
+        String(format: "%5.1f", self)
     }
 }
