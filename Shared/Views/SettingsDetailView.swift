@@ -40,6 +40,7 @@ struct SettingsDetailView: View {
                 HStack {
                     DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
                         .background(Color.green.opacity(0.2))
+                        .padding(.trailing)
                     Stamp(
                         top: settings.stampTop,
                         bottom: settings.stampBottom,
