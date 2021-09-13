@@ -9,16 +9,18 @@ import SwiftUI
 
 struct StampView: View {
     let text: String
-    let largeFontSize = 150.0
+    let largeFontSize = 300.0
     @State var frameSize: CGSize = CGSize(width: 100, height: 100)
-//    @State var textSize: CGSize = CGSize(width: 100, height: 100)
-    
+    @State var textSize: CGSize = CGSize(width: 100, height: 100)
     var body: some View {
-        
+        let scaleHorizontal = frameSize.width / textSize.width
+
         ZStack {
             CaptureFrame(frameSize: $frameSize)
             VStack {
-    //            HStack {
+                Text("frame (\(frameSize.width.s), \(frameSize.height.s))\ntext  (\(textSize.width.s), \(textSize.height.s)),\nscale \(scaleHorizontal)")
+                    .font(.system(size: 14, design: .monospaced))
+                //            HStack {
     //                Text("This is a short string.")
     //                    .padding()
     //                    .frame(maxHeight: .infinity)
@@ -37,8 +39,11 @@ struct StampView: View {
                         .frame(height: 310)
                         .background(
                             Text("Bullshit")
-                                .font(.system(size: 300))
+                                .font(.system(size: largeFontSize))
                                 .minimumScaleFactor(0.01)
+                                .captureSize(in: $textSize)
+                                .scaleEffect(scaleHorizontal)
+                                .background(Color.pink.opacity(0.2))
                         )
                     Rectangle()
                         .foregroundColor(.yellow.opacity(0.2))
