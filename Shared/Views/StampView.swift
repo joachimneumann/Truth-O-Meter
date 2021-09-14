@@ -29,19 +29,38 @@ struct Calc {
     let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
-        let marginFactor      = 0.2
-        let borderwidthFactor = 0.1
+        let marginFactor = 0.2
+        let borderWidthFactor = 0.1
+
+        let tw = textSize.width
+        let th = textSize.height
         
-        let marginAndBorderFactor = marginFactor + borderwidthFactor
-        padding = textSize.height * marginFactor
-        borderwidth = textSize.height * borderwidthFactor
-        cornerRadius = borderwidth * 1.5
+        let m = th * marginFactor
+        let twm = tw + 2.0*m
+        let thm = th + 2.0*m
+
+        let fw = frameSize.width
+        let fh = frameSize.height
         
-        let horizontalScaleRaw = frameSize.width / textSize.width
-        let horizontalMarginCorrection = textSize.width / (textSize.width + 2.0 * marginAndBorderFactor * textSize.height)
-        let horizontalScale = horizontalScaleRaw * horizontalMarginCorrection
-        let verticalScale =  frameSize.height / (textSize.height*(1.0+2*marginAndBorderFactor))
-        scale = min(horizontalScale, verticalScale)
+        let sw = fw / twm
+        let sh = fh / thm
+        
+        assert(borderWidthFactor <= marginFactor)
+        // border is inside the margin
+
+        let b = th * borderWidthFactor
+        let alpha = abs(angle.radians)
+        let beta = atan(thm/twm)
+        
+        let thr = sin(alpha+beta)*sqrt(twm*twm+thm*thm)
+        
+        let rotationScalingFactor = thm/thr
+        print("rotationScalingFactor \(rotationScalingFactor)")
+
+        padding = m
+        borderwidth = b
+        cornerRadius = 1.5*b
+        scale = min(sw, sh)*rotationScalingFactor
     }
 }
 
@@ -60,10 +79,10 @@ struct StampView: View {
         
         ZStack {
             FrameCatcher(into: $frameSize)
-            let _ = print("frameSize = \(frameSize) textSize = \(textSize)")
-            let _ = print("scale \(calc.scale)")
+            //let _ = print("frameSize = \(frameSize) textSize = \(textSize)")
+            //let _ = print("scale \(calc.scale)")
             VStack {
-                let _ = print("StampView VStack")
+                //let _ = print("StampView VStack")
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)//green.opacity(0.2))
@@ -74,10 +93,10 @@ struct StampView: View {
                                 .fixedSize()
                                 .lineLimit(1)
                                 .captureSize(in: $textSize)
-                                .background(Color.red.opacity(0.2))
-                                .padding(calc.borderwidth/2+calc.padding)
-                                .overlay(RoundedRectangle(cornerRadius: calc.cornerRadius)
-                                            .stroke(color, lineWidth: calc.borderwidth))
+                                .padding(calc.padding-calc.borderwidth/2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: calc.cornerRadius)
+                                        .stroke(color, lineWidth: calc.borderwidth))
                                 .padding(calc.borderwidth/2)
                                 .background(Color.red.opacity(0.2))
                         )
@@ -85,7 +104,7 @@ struct StampView: View {
                 .fixedSize(horizontal: true, vertical: true)
             }
             .scaleEffect(calc.scale)
-            //            .rotationEffect(angle) // before or after scaling???
+            .rotationEffect(angle) // before or after scaling???
         }
     }
 }
@@ -96,7 +115,7 @@ struct StampView_Previews: PreviewProvider {
             top: "iiiiiii",
             color: C.color.bullshitRed,
             angle: Angle(degrees: -25))
-            .background(Color.yellow)
+//            .background(Color.yellow)
             .frame(width: 330, height: 400, alignment: .center)
     }
 }
