@@ -98,6 +98,6 @@ extension Double {
 
 extension CGFloat {
     var s: String {
-        String(format: "%5.1f", self)
+        String(format: "%10.5f", self)
     }
 }

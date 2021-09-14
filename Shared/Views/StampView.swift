@@ -42,8 +42,6 @@ struct Calc {
         let fw = frameSize.width
         let fh = frameSize.height
         
-        let sw = fw / twm
-        let sh = fh / thm
         
         assert(borderWidthFactor <= marginFactor)
         // border is inside the margin
@@ -54,20 +52,18 @@ struct Calc {
         let d = sqrt(twm*twm+thm*thm)
         
         let thr = sin(alpha+beta)*d
-        
-        let srv = thm/thr
-        let trw1 = sin(alpha)*thm
-        let trw2 = cos(alpha)*twm
-        let srh = twm / (trw1+trw2)
-        print("RotationFactor v=\(srv) h=\(srh)")
+
+        let twr1 = sin(alpha)*thm
+        let twr2 = cos(alpha)*twm
+        let twr = twr1 + twr2
+
+        let sh = fw / twr
+        let sv = fh / thr
+
         padding = m
         borderwidth = b
         cornerRadius = 1.5*b
-        if sw > sh {
-            scale = sh * srv
-        } else {
-            scale = sw * srh
-        }
+        scale = min(sh, sv)
     }
 }
 
