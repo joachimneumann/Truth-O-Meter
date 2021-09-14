@@ -31,12 +31,12 @@ struct Calc {
     init(frameSize: CGSize, textSize: CGSize) {
         let marginFactor      = 0.1
         let borderwidthFactor = 0.2
-
+        
         let marginAndBorderFactor = marginFactor + borderwidthFactor
         padding = textSize.height * marginFactor
         borderwidth = textSize.height * borderwidthFactor
         cornerRadius = borderwidth * 1.5
-
+        
         let scaleHorizontal = frameSize.width / textSize.width
         let marginCorrection = textSize.width / (textSize.width + 2.0 * marginAndBorderFactor * textSize.height)
         scale = scaleHorizontal * marginCorrection
@@ -51,11 +51,11 @@ struct StampView: View {
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
     
     let largeFontSize = 300.0
-
+    
     var body: some View {
         
         let calc = Calc(frameSize: frameSize, textSize: textSize)
-
+        
         ZStack {
             FrameCatcher(into: $frameSize)
             let _ = print("frameSize = \(frameSize) textSize = \(textSize)")
@@ -75,7 +75,7 @@ struct StampView: View {
                                 .background(Color.red.opacity(0.2))
                                 .padding(calc.borderwidth/2+calc.padding)
                                 .overlay(RoundedRectangle(cornerRadius: calc.cornerRadius)
-                                                    .stroke(color, lineWidth: calc.borderwidth))
+                                            .stroke(color, lineWidth: calc.borderwidth))
                                 .padding(calc.borderwidth/2)
                                 .background(Color.red.opacity(0.2))
                         )
@@ -83,7 +83,7 @@ struct StampView: View {
                 .fixedSize(horizontal: true, vertical: true)
             }
             .scaleEffect(calc.scale)
-//            .rotationEffect(angle) // before or after scaling???
+            //            .rotationEffect(angle) // before or after scaling???
         }
     }
 }
@@ -94,6 +94,7 @@ struct StampView_Previews: PreviewProvider {
             top: "iiiiiii",
             color: C.color.bullshitRed,
             angle: Angle(degrees: -25))
-            .padding(5)
+            .background(Color.yellow)
+            .frame(width: 330, height: 400, alignment: .center)
     }
 }
