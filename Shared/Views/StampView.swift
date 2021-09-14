@@ -26,6 +26,7 @@ struct FrameCatcher: View {
 struct Calc {
     let padding: Double
     let borderwidth: Double
+    let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize) {
         let marginFactor      = 0.2
@@ -34,7 +35,8 @@ struct Calc {
         let marginAndBorderFactor = marginFactor + borderwidthFactor
         padding = textSize.height * marginAndBorderFactor
         borderwidth = textSize.height * borderwidthFactor
-        
+        cornerRadius = borderwidth * 1.5
+
         let scaleHorizontal = frameSize.width / textSize.width
         let marginCorrection = textSize.width / (textSize.width + 2.0 * marginAndBorderFactor * textSize.height)
         scale = scaleHorizontal * marginCorrection
@@ -43,11 +45,11 @@ struct Calc {
 
 struct StampView: View {
     let top: String
-    let largeFontSize = 100.0
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
     
-    let debugInfo = false
+    let largeFontSize = 300.0
+
     var body: some View {
         
         let calc = Calc(frameSize: frameSize, textSize: textSize)
@@ -69,8 +71,9 @@ struct StampView: View {
                                 .captureSize(in: $textSize)
                                 .background(Color.red.opacity(0.2))
                                 .padding(calc.padding)
+                                .overlay(RoundedRectangle(cornerRadius: calc.cornerRadius)
+                                                    .stroke(Color.green.opacity(0.3), lineWidth: calc.borderwidth))
                                 .background(Color.red.opacity(0.2))
-                                .border(Color.green, width: calc.borderwidth)
                         )
                 }
                 .fixedSize(horizontal: true, vertical: true)
@@ -82,6 +85,7 @@ struct StampView: View {
 
 struct StampView_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "iiiiiiii")
+        StampView(top: "iiiiiii")
+            .padding(5)
     }
 }
