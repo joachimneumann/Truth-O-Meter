@@ -29,8 +29,8 @@ struct Calc {
     let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
-        let marginFactor = 0.2
-        let borderWidthFactor = 0.1
+        let marginFactor = 0.4
+        let borderWidthFactor = 0.3
 
         let tw = textSize.width
         let th = textSize.height
@@ -57,13 +57,13 @@ struct Calc {
         let twr2 = cos(alpha)*twm
         let twr = twr1 + twr2
 
-        let sh = fw / twr
-        let sv = fh / thr
+        let sw = fw / twr
+        let sh = fh / thr
 
         padding = m
         borderwidth = b
         cornerRadius = 1.5*b
-        scale = min(sh, sv)
+        scale = min(sw, sh)
     }
 }
 
