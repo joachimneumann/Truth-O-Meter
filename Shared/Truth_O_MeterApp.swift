@@ -17,7 +17,8 @@ struct Truth_O_MeterApp: App {
     
     var body: some Scene {
         return WindowGroup {
-            StampView(text: "Bullshit")
+            PlaygroundView()
+//            StampView(top: "WWWWWWWWWiiiiiiiiiiiii")
 
 //            RingView(width: 10, whenFinished: doNothing)
 //                .environmentObject(Settings())
