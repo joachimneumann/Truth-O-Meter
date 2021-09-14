@@ -73,7 +73,7 @@ struct MainView: View {
                                 displayColorful: $displayColorful,
                                 showAnalysisView: $showAnalysisView,
                                 showStampView: $showStampView)
-                                .background(Color.green.opacity(0.2))
+                                //.background(Color.green.opacity(0.2))
                                 .aspectRatio(contentMode: .fit)
                             Spacer(minLength: 0)
                         }

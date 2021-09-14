@@ -15,7 +15,7 @@ struct NeedleView: View {
     let passiveColor:Color
     
     var body: some View {
-        let w = measures.thickLineFactor * C.lw1()
+        let w = measures.thickLine
         let h = measures.radius2+w
         let yo = measures.displayCenter.y-h+2*w/3
         let xo = 0.0

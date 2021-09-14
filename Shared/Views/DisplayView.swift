@@ -78,5 +78,6 @@ struct Display_Previews: PreviewProvider {
         return DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
             .padding()
             .environmentObject(settings)
+            .frame(width: 390, height: 400, alignment: .center)
     }
 }

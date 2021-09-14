@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct Measures {
-    let size: CGSize
     let completeAngle = Angle(degrees: 102.0)
     let startAngle: Angle
     let endAngle: Angle
     let midAngle: Angle
-    let aspectRatio = 1.9
-    let thickLineFactor = 7.0
-    
+    let thinLine: Double
+    let thickLine: Double
+    let borderLine: Double
+
     func angle(forProportion proportion: Double) -> Angle {
         startAngle+(endAngle-startAngle)*proportion
     }
@@ -27,7 +27,9 @@ struct Measures {
     var radius1: Double { size.height * 0.95 }
     var radius2: Double { radius1 * 1.07 }
     var radius3: Double { radius2 * 1.045 }
-    
+
+    private let size: CGSize
+    private let thickLineFactor = 7.0
     
     init(_ forSize: CGSize) {
         self.size = forSize
@@ -35,6 +37,9 @@ struct Measures {
         startAngle = centerAngle - completeAngle/2
         endAngle   = centerAngle + completeAngle/2
         midAngle   = startAngle+(endAngle-startAngle)*0.7
+        thinLine = self.size.width / 320
+        thickLine = thickLineFactor * thinLine
+        borderLine = 2.0 * thinLine
     }
 }
 
@@ -45,9 +50,8 @@ struct DisplayBackground: View {
     var darkColor: Color
     var activeColor: Color
     var body: some View {
-        let lw1 = C.lw1()
-        let boldStrokeStyle = StrokeStyle(lineWidth: measures.thickLineFactor*lw1, lineCap: .butt)
-        let fineStrokeStyle = StrokeStyle(lineWidth: lw1, lineCap: .butt)
+        let boldStrokeStyle = StrokeStyle(lineWidth: measures.thickLine, lineCap: .butt)
+        let fineStrokeStyle = StrokeStyle(lineWidth: measures.thinLine, lineCap: .butt)
         ZStack {
             MainArcBlack(measures: measures)
                 .stroke(colorful ? darkColor : lightColor, style: boldStrokeStyle)
@@ -59,7 +63,7 @@ struct DisplayBackground: View {
                 .stroke(colorful ? activeColor : lightColor, style: fineStrokeStyle)
                 .clipped()
             RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .stroke(lightColor, lineWidth: 2*lw1)
+                .stroke(lightColor, lineWidth: measures.borderLine)
         }
         .aspectRatio(C.displayAspectRatio, contentMode: .fit)
     }
@@ -156,6 +160,7 @@ struct DisplayBackground_Previews: PreviewProvider {
         GeometryReader { geo in
             DisplayBackground(geo.size, colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed)
         }
-        .aspectRatio(1.9, contentMode: .fit)
+        .aspectRatio(C.displayAspectRatio, contentMode: .fit)
+        .frame(width: 100, height: 100, alignment: .center)
     }
 }
