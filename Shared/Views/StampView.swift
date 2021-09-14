@@ -31,7 +31,9 @@ struct Calc {
     let expandedTextSize: CGSize
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
         let marginFactor = 0.4
-        let borderWidthFactor = 0.3
+        let borderWidthFactor = 0.25
+        assert(borderWidthFactor <= marginFactor)
+        // border is inside the margin, see rectangleRotation.pptx
         
         let tw = textSize.width
         let th = textSize.height
@@ -43,9 +45,6 @@ struct Calc {
         let fw = frameSize.width
         let fh = frameSize.height
         
-        
-        assert(borderWidthFactor <= marginFactor)
-        // border is inside the margin
         
         let b = th * borderWidthFactor
         let alpha = abs(angle.radians)
@@ -107,17 +106,17 @@ struct StampView: View {
                                     Text(bottom)
                                 }
                             }
-                                .font(.system(size: largeFontSize))
+                                .font(.system(size: largeFontSize).bold())
                                 .foregroundColor(color)
                                 .fixedSize()
                                 .lineLimit(1)
+                                //.background(Color.red.opacity(0.2))
                                 .captureSize(in: $textSize)
                                 .padding(calc.padding-calc.borderWidth/2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: calc.cornerRadius)
                                         .stroke(color, lineWidth: calc.borderWidth))
                                 .padding(calc.borderWidth/2)
-                            //.background(Color.red.opacity(0.2))
                         )
                         .mask(Image(uiImage: UIImage(named: "mask")!)
                                 .resizable()
