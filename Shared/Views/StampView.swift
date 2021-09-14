@@ -21,10 +21,11 @@ struct StampView: View {
     let debugInfo = false
     var body: some View {
 
+//        let scale = frameSize.width / textSize.width
         let scaleHorizontal = frameSize.width / textSize.width
-        let borderwidth = 0.5
-        let margin = borderwidth + 0.25
-        let marginFactor = textSize.width / (textSize.width + 2.0 * margin * textSize.height)
+//        let borderwidth = 0.5
+        let marginX = 0.4//borderwidth + 0.25
+        let marginFactor = textSize.width / (textSize.width + 2.0 * marginX * textSize.height)
         let scale = scaleHorizontal * marginFactor
         ZStack {
             if true{//}!frameCaptured {
@@ -37,7 +38,8 @@ struct StampView: View {
                     )
             }
             //let _ = print("StampView VStack scaleHorizontal = \(scaleHorizontal.s) frameSize = \(frameSize) textSize = \(textSize)")
-            let _ = print("StampView VStack frameSize = \(frameSize) textSize = \(textSize) fc \(frameCaptured) \(frameCapturedBinding) tc \(textCaptured) \(textCapturedBinding)")
+            let _ = print("frameSize = \(frameSize) textSize = \(textSize) fc \(frameCaptured) \(frameCapturedBinding) tc \(textCaptured) \(textCapturedBinding)")
+            let _ = print("scaleHorizontal = \(scaleHorizontal) marginFactor = \(marginFactor) scale \(scale)")
             if true { //}!frameCaptured || !textCaptured {
                 VStack {
                     let _ = print("StampView VStack")
@@ -50,45 +52,17 @@ struct StampView: View {
                                     .fixedSize()
                                     .lineLimit(1)
                                     .captureSize(in: $textSize, description: "text", captured: &textCaptured, capturedBinding: $textCapturedBinding)
-                                    .padding(textSize.height*margin)
-//                                    .padding(textSize.height*margin)
+                                    .background(Color.red.opacity(0.2))
+                                    .padding(textSize.height*0.4)
+                                    .background(Color.red.opacity(0.2))
+//                                    .border(Color.green, width: borderwidth)
                                     //.animation(.linear(duration: 0.0))
-                                    .background(Color.green.opacity(0.2))
+//                                    .background(Color.green.opacity(0.2))
                             )
                     }
                     .fixedSize(horizontal: true, vertical: true)
                 }
                 .scaleEffect(scale)
-            } else {
-//                Text("done")
-                VStack {
-                    ZStack {
-                        GeometryReader { geo in
-                                Text("xx")
-                        }
-//                        Rectangle()
-//                            .foregroundColor(.clear)//green.opacity(0.2))
-//                            .background(
-//                                Text(top)
-//                                    .font(.system(size: largeFontSize))
-//                                    .fixedSize()
-//                                    .lineLimit(1)
-//                                    .background(Color.pink.opacity(0.2))
-//                                    .padding(textSize.height*margin)
-//                                    .border(Color.green, width: textSize.height*borderwidth)
-//                                    .scaleEffect(scale)
-////                                    .rotationEffect(Angle(degrees: 0))
-//                            )
-                        /// A rectangle that fills the frame
-                        /// The fixedSize modifier foreces the Text and this Rectangle to be the same size
-                        /// In order to make the Text follow the Rectangle and not the other way round
-                        /// I set the frame of the Rectangle to the previously captured frameSize
-                        Rectangle()
-                            .foregroundColor(.yellow.opacity(0.2))
-                            .frame(width: frameSize.width, height: frameSize.height)
-                    }
-//                    .fixedSize(horizontal: true, vertical: true)
-                }
             }
         }
     }
