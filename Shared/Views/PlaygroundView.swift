@@ -21,7 +21,7 @@ struct PlaygroundView: View {
                 color: C.color.bullshitRed,
                 angle: angle)
                 .frame(width: frameWidth, height: frameHeight)
-                .background(Color.blue.opacity(0.1))
+                //.background(Color.blue.opacity(0.1))
                 .border(Color.blue, width: 1)
             VStack {
                 Spacer()

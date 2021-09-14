@@ -41,10 +41,10 @@ struct SettingsDetailView: View {
                     DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
                         .background(Color.green.opacity(0.2))
                         .padding(.trailing)
-                    Stamp(
+                    StampView(
                         top: settings.stampTop,
-                        bottom: settings.stampBottom,
-                        color: C.color.bullshitRed, angle: Angle(degrees: 0))
+                        color: C.color.bullshitRed,
+                        angle: Angle(degrees: 0))
                         .background(Color.yellow.opacity(0.2))
                 }
                 if settings.isCustom {

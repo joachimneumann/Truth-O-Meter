@@ -17,15 +17,15 @@ struct Truth_O_MeterApp: App {
     
     var body: some Scene {
         return WindowGroup {
-            PlaygroundView()
+//            PlaygroundView()
 //            StampView(top: "WWWWWWWWWiiiiiiiiiiiii")
 
 //            RingView(width: 10, whenFinished: doNothing)
 //                .environmentObject(Settings())
 //
-//            MainView()
-//                .environmentObject(Settings())
-//                .environmentObject(NavigationStack())
+            MainView()
+                .environmentObject(Settings())
+                .environmentObject(NavigationStack())
             
         }
     }
