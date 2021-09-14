@@ -15,8 +15,6 @@ struct StampView: View {
     let largeFontSize = 100.0
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
-    @State var frameCapturedBinding = false
-    @State var textCapturedBinding = false
 
     let debugInfo = false
     var body: some View {
@@ -34,11 +32,11 @@ struct StampView: View {
                     .background(
                         Rectangle()
                             .foregroundColor(.clear)
-                            .captureSize(in: $frameSize, description: "frame", captured: &frameCaptured, capturedBinding: $frameCapturedBinding)
+                            .captureSize(in: $frameSize)
                     )
             }
             //let _ = print("StampView VStack scaleHorizontal = \(scaleHorizontal.s) frameSize = \(frameSize) textSize = \(textSize)")
-            let _ = print("frameSize = \(frameSize) textSize = \(textSize) fc \(frameCaptured) \(frameCapturedBinding) tc \(textCaptured) \(textCapturedBinding)")
+            let _ = print("frameSize = \(frameSize) textSize = \(textSize)")
             let _ = print("scaleHorizontal = \(scaleHorizontal) marginFactor = \(marginFactor) scale \(scale)")
             if true { //}!frameCaptured || !textCaptured {
                 VStack {
@@ -51,7 +49,7 @@ struct StampView: View {
                                     .font(.system(size: largeFontSize))
                                     .fixedSize()
                                     .lineLimit(1)
-                                    .captureSize(in: $textSize, description: "text", captured: &textCaptured, capturedBinding: $textCapturedBinding)
+                                    .captureSize(in: $textSize)
                                     .background(Color.red.opacity(0.2))
                                     .padding(textSize.height*0.4)
                                     .background(Color.red.opacity(0.2))

@@ -16,19 +16,16 @@ private struct StampSizeKey: PreferenceKey {
 }
 
 extension View {
-    func captureSize(in binding: Binding<CGSize>, description: String, captured: inout Bool, capturedBinding: Binding<Bool>) -> some View {
-        let _ = print("\(description) captured=\(captured) \(capturedBinding.wrappedValue)")
-        captured = true
-        capturedBinding.wrappedValue = true
+    func captureSize(in binding: Binding<CGSize>) -> some View {
+        let _ = print("captured")
         return overlay(GeometryReader { proxy in
-            // let _ = print("\(description): Color.clear.preference size=\(proxy.size)")
+             let _ = print("Color.clear.preference size=\(proxy.size)")
             Color.clear.preference(key: StampSizeKey.self, value: proxy.size)
         })
             .onPreferenceChange(StampSizeKey.self) { size in
-                print("\(description): onPreferenceChange size=\(size)")
+                print("onPreferenceChange size=\(size)")
                 DispatchQueue.main.async {
                     binding.wrappedValue = size
-                    capturedBinding.wrappedValue = false
                 }
             }
     }
