@@ -28,7 +28,7 @@ struct Calc {
     let borderwidth: Double
     let cornerRadius: Double
     let scale: Double
-    init(frameSize: CGSize, textSize: CGSize) {
+    init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
         let marginFactor      = 0.2
         let borderwidthFactor = 0.1
         
@@ -56,7 +56,7 @@ struct StampView: View {
     
     var body: some View {
         
-        let calc = Calc(frameSize: frameSize, textSize: textSize)
+        let calc = Calc(frameSize: frameSize, textSize: textSize, angle: angle)
         
         ZStack {
             FrameCatcher(into: $frameSize)

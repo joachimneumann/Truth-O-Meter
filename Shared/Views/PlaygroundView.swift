@@ -9,17 +9,17 @@ import SwiftUI
 
 
 struct PlaygroundView: View {
-    private var privateFrameWidth = 175.0
-    @State private var frameWidth = 175.0
-    @State private var frameHeight = 175.0
-    @State var angle = Angle(degrees: -25.0)
+    private var privateFrameWidth = 100.0
+    @State private var frameWidth = 100.0
+    @State private var frameHeight = 100.0
+    @State var angle = Angle(degrees: 0.0)
 
     var body: some View  {
         ZStack {
             StampView(
                 top: "Éjsd",
                 color: C.color.bullshitRed,
-                angle: Angle(degrees: -25))
+                angle: angle)
                 .frame(width: frameWidth, height: frameHeight)
                 .background(Color.blue.opacity(0.1))
                 .border(Color.blue, width: 1)
