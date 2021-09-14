@@ -29,17 +29,19 @@ struct Calc {
     let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize) {
-        let marginFactor      = 0.1
-        let borderwidthFactor = 0.2
+        let marginFactor      = 0.2
+        let borderwidthFactor = 0.1
         
         let marginAndBorderFactor = marginFactor + borderwidthFactor
         padding = textSize.height * marginFactor
         borderwidth = textSize.height * borderwidthFactor
         cornerRadius = borderwidth * 1.5
         
-        let scaleHorizontal = frameSize.width / textSize.width
-        let marginCorrection = textSize.width / (textSize.width + 2.0 * marginAndBorderFactor * textSize.height)
-        scale = scaleHorizontal * marginCorrection
+        let horizontalScaleRaw = frameSize.width / textSize.width
+        let horizontalMarginCorrection = textSize.width / (textSize.width + 2.0 * marginAndBorderFactor * textSize.height)
+        let horizontalScale = horizontalScaleRaw * horizontalMarginCorrection
+        let verticalScale =  frameSize.height / (textSize.height*(1.0+2*marginAndBorderFactor))
+        scale = min(horizontalScale, verticalScale)
     }
 }
 
