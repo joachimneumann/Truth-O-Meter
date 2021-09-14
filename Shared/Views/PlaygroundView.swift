@@ -16,7 +16,10 @@ struct PlaygroundView: View {
 
     var body: some View  {
         ZStack {
-            StampView(top: "Éjsdf23842397")
+            StampView(
+                top: "Éjsdf23842397",
+                color: C.color.bullshitRed,
+                angle: Angle(degrees: -25))
                 .frame(width: frameWidth, height: frameHeight)
                 .background(Color.blue.opacity(0.1))
                 .border(Color.blue, width: 1)

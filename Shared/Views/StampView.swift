@@ -29,11 +29,11 @@ struct Calc {
     let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize) {
-        let marginFactor      = 0.2
+        let marginFactor      = 0.1
         let borderwidthFactor = 0.2
 
         let marginAndBorderFactor = marginFactor + borderwidthFactor
-        padding = textSize.height * marginAndBorderFactor
+        padding = textSize.height * marginFactor
         borderwidth = textSize.height * borderwidthFactor
         cornerRadius = borderwidth * 1.5
 
@@ -45,6 +45,8 @@ struct Calc {
 
 struct StampView: View {
     let top: String
+    let color: Color
+    let angle: Angle
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
     
@@ -66,26 +68,32 @@ struct StampView: View {
                         .background(
                             Text(top)
                                 .font(.system(size: largeFontSize))
+                                .foregroundColor(color)
                                 .fixedSize()
                                 .lineLimit(1)
                                 .captureSize(in: $textSize)
                                 .background(Color.red.opacity(0.2))
-                                .padding(calc.padding)
+                                .padding(calc.borderwidth/2+calc.padding)
                                 .overlay(RoundedRectangle(cornerRadius: calc.cornerRadius)
-                                                    .stroke(Color.green.opacity(0.3), lineWidth: calc.borderwidth))
+                                                    .stroke(color, lineWidth: calc.borderwidth))
+                                .padding(calc.borderwidth/2)
                                 .background(Color.red.opacity(0.2))
                         )
                 }
                 .fixedSize(horizontal: true, vertical: true)
             }
             .scaleEffect(calc.scale)
+//            .rotationEffect(angle) // before or after scaling???
         }
     }
 }
 
 struct StampView_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(top: "iiiiiii")
+        StampView(
+            top: "iiiiiii",
+            color: C.color.bullshitRed,
+            angle: Angle(degrees: -25))
             .padding(5)
     }
 }
