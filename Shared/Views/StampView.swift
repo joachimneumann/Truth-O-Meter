@@ -25,7 +25,7 @@ struct FrameCatcher: View {
 
 struct Calc {
     let padding: Double
-    let borderwidth: Double
+    let borderWidth: Double
     let cornerRadius: Double
     let scale: Double
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
@@ -57,12 +57,18 @@ struct Calc {
         let twr2 = cos(alpha)*twm
         let twr = twr1 + twr2
 
-        let sw = fw / twr
-        let sh = fh / thr
-
         padding = m
-        borderwidth = b
+        borderWidth = b
         cornerRadius = 1.5*b
+
+        let outerCornerRadius = cornerRadius + 0.5 * borderWidth
+        let beta2 = Angle.degrees(45).radians - abs(angle.radians)
+        let offset = outerCornerRadius * ( sqrt(2.0) * cos(beta2) - 1.0)
+
+        let sw = fw / (twr - 2*offset)
+        let sh = fh / (thr - 2*offset)
+
+
         scale = min(sw, sh)
     }
 }
@@ -96,11 +102,11 @@ struct StampView: View {
                                 .fixedSize()
                                 .lineLimit(1)
                                 .captureSize(in: $textSize)
-                                .padding(calc.padding-calc.borderwidth/2)
+                                .padding(calc.padding-calc.borderWidth/2)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: calc.cornerRadius)
-                                        .stroke(color, lineWidth: calc.borderwidth))
-                                .padding(calc.borderwidth/2)
+                                        .stroke(color, lineWidth: calc.borderWidth))
+                                .padding(calc.borderWidth/2)
                                 .background(Color.red.opacity(0.2))
                         )
                 }
