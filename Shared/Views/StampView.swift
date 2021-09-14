@@ -79,6 +79,7 @@ struct Calc {
 
 struct StampView: View {
     let top: String
+    let bottom: String?
     let color: Color
     let angle: Angle
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
@@ -100,7 +101,12 @@ struct StampView: View {
                     Rectangle()
                         .foregroundColor(.clear)//green.opacity(0.2))
                         .background(
-                            Text(top)
+                            VStack {
+                                Text(top)
+                                if let bottom = bottom {
+                                    Text(bottom)
+                                }
+                            }
                                 .font(.system(size: largeFontSize))
                                 .foregroundColor(color)
                                 .fixedSize()
@@ -131,6 +137,7 @@ struct StampView_Previews: PreviewProvider {
     static var previews: some View {
         StampView(
             top: "iiiiiii",
+            bottom: nil,//"bottom2",
             color: C.color.bullshitRed,
             angle: Angle(degrees: -25))
         //            .background(Color.yellow)

@@ -22,7 +22,6 @@
 		AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152926E8CB6D0041C045 /* PlaygroundView.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
-		AA813B8826EC4DAD00DE4290 /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA813B8726EC4DAD00DE4290 /* Stamp.swift */; };
 		AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
 		AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */; };
 		AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */; };
@@ -58,7 +57,6 @@
 		AA48152926E8CB6D0041C045 /* PlaygroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundView.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AA813B8726EC4DAD00DE4290 /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
 		AA8F3CB926DC6B4100C82E56 /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
 		AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDisksView.swift; sourceTree = "<group>"; };
 		AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifterView.swift; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 				AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */,
 				AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */,
 				AA8F3CC526DC9F3600C82E56 /* RingView.swift */,
-				AA813B8726EC4DAD00DE4290 /* Stamp.swift */,
 				AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
 				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
@@ -256,7 +253,6 @@
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
-				AA813B8826EC4DAD00DE4290 /* Stamp.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,

@@ -72,7 +72,7 @@ struct SmartButtonView: View {
                 }
             }
             if showStampView {
-                Stamp(top: settings.stampTop,
+                StampView(top: settings.stampTop,
                       bottom: settings.stampBottom,
                       color: C.color.bullshitRed,
                       angle: settings.stampBottom == nil ? Angle(degrees: -25.0) : Angle(degrees: -18.0))
