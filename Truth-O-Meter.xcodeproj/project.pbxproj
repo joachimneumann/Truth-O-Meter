@@ -415,6 +415,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.8;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.bullshitdetector;
 				PRODUCT_NAME = "Truth-O-Meter";
 				SDKROOT = iphoneos;
