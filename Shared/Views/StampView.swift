@@ -51,16 +51,23 @@ struct Calc {
         let b = th * borderWidthFactor
         let alpha = abs(angle.radians)
         let beta = atan(thm/twm)
+        let d = sqrt(twm*twm+thm*thm)
         
-        let thr = sin(alpha+beta)*sqrt(twm*twm+thm*thm)
+        let thr = sin(alpha+beta)*d
         
-        let rotationScalingFactor = thm/thr
-        print("rotationScalingFactor \(rotationScalingFactor)")
-
+        let srv = thm/thr
+        let trw1 = sin(alpha)*thm
+        let trw2 = cos(alpha)*twm
+        let srh = twm / (trw1+trw2)
+        print("RotationFactor v=\(srv) h=\(srh)")
         padding = m
         borderwidth = b
         cornerRadius = 1.5*b
-        scale = min(sw, sh)*rotationScalingFactor
+        if sw > sh {
+            scale = sh * srv
+        } else {
+            scale = sw * srh
+        }
     }
 }
 
