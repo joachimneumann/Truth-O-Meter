@@ -27,6 +27,7 @@ struct HorizontalProgressBar: View {
                     .animation(.linear(duration: animationTime), value: widthFactor)
             }
         }
+        .frame(height: 2)
         .onAppear {
             widthFactor = 1.0
             

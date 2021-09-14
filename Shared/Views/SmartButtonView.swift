@@ -50,8 +50,10 @@ struct SmartButtonView: View {
     }
     
     
+    @State var ringSize: CGSize = CGSize(width: 10, height: 10)
+
     var body: some View {
-        let linewidth = C.w * C.button.outerRingWidth
+        let linewidth = ringSize.width * 0.05
         ZStack {
             Group {
                 if showRing {
@@ -67,6 +69,7 @@ struct SmartButtonView: View {
                         color: C.color.bullshitRed,
                         grayColor: C.color.lightGray,
                         callback: callback)
+                        .captureSize(in: $ringSize)
                         .padding(linewidth * 1.5)
                         .aspectRatio(contentMode: .fit)
                 }

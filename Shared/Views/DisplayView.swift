@@ -38,13 +38,16 @@ struct DisplayView: View {
     let passiveColor:Color
     let darkColor: Color
     
+    private let aspectRatio = 1.9
+    
     var body: some View {
         // print("redrawing Display, colorful = \(String(colorful))")
         /// I do not want to see this message very often.
         /// Specifically, it should not appear every time, the needle is redrawn
         GeometryReader { geo in
             ZStack {
-                DisplayBackground(geo.size, colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor)
+                DisplayBackground(
+                    colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor, aspectRatio: aspectRatio)
                 if editTitle {
                     /// needle behind the text
                     NeedleView(geo.size, activeColor: activeColor, passiveColor: passiveColor)
@@ -67,7 +70,7 @@ struct DisplayView: View {
                 }
             }
         }
-        .aspectRatio(C.displayAspectRatio, contentMode: .fit)
+        .aspectRatio(aspectRatio, contentMode: .fit)
     }
 }
 

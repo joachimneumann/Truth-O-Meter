@@ -8,34 +8,12 @@
 import SwiftUI
 
 extension Font {
-    static var displayTitle: Font { return Font.system(size: C.w * 0.07).bold() }
-    static var analyseTitle: Font { return Font.system(size: C.w * 0.04).bold() }
+    static var displayTitle: Font { return Font.system(size: UIScreen.main.bounds.width * 0.07).bold() }
+    static var analyseTitle: Font { return Font.system(size: UIScreen.main.bounds.width * 0.04).bold() }
 }
 
-
 struct C {
-    #if targetEnvironment(macCatalyst)
-    static let w = 375*1.5
-    static let h = 667*1.5
-    #else
-    static let w = UIScreen.main.bounds.width
-    static let h = UIScreen.main.bounds.height
-    #endif
-    
-    /// the equivialent of linewith 1 on a small device with width 320
-    static func lw1(_ geo: GeometryProxy) -> Double {
-        geo.size.width / 320.0
-    }
-    static func lw1() -> Double {
-        w / 320.0
-    }
-    
-    static let displayAspectRatio = 1.9
 
-    struct button {
-        static let outerRingWidth = 0.03
-    }
-    
     static var firstTime = true
     
     struct timing {

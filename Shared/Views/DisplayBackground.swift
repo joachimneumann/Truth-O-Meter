@@ -44,15 +44,21 @@ struct Measures {
 }
 
 struct DisplayBackground: View {
-    var measures: Measures
     var colorful: Bool
     var lightColor: Color
     var darkColor: Color
     var activeColor: Color
+    var aspectRatio: Double
+    
+    @State var size: CGSize = CGSize(width: 10, height: 10)
     var body: some View {
+        let measures = Measures(size)
         let boldStrokeStyle = StrokeStyle(lineWidth: measures.thickLine, lineCap: .butt)
         let fineStrokeStyle = StrokeStyle(lineWidth: measures.thinLine, lineCap: .butt)
-        ZStack {
+        return ZStack {
+            Rectangle()
+                .foregroundColor(.clear)
+                .captureSize(in: $size)
             MainArcBlack(measures: measures)
                 .stroke(colorful ? darkColor : lightColor, style: boldStrokeStyle)
             MainArcRed(measures: measures)
@@ -65,16 +71,9 @@ struct DisplayBackground: View {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .stroke(lightColor, lineWidth: measures.borderLine)
         }
-        .aspectRatio(C.displayAspectRatio, contentMode: .fit)
+        .aspectRatio(aspectRatio, contentMode: .fit)
     }
     
-    init(_ forSize: CGSize, colorful: Bool, lightColor: Color, darkColor: Color, activeColor: Color) {
-        measures = Measures(forSize)
-        self.colorful = colorful
-        self.lightColor = lightColor
-        self.darkColor = darkColor
-        self.activeColor = activeColor
-    }
     struct MainArcBlack: Shape {
         let measures: Measures
         func path(in rect: CGRect) -> Path {
@@ -158,9 +157,9 @@ struct DisplayBackground: View {
 struct DisplayBackground_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            DisplayBackground(geo.size, colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed)
+            DisplayBackground(colorful: true, lightColor: C.color.lightGray, darkColor: C.color.gray, activeColor: C.color.bullshitRed, aspectRatio: 1.9)
         }
-        .aspectRatio(C.displayAspectRatio, contentMode: .fit)
-        .frame(width: 100, height: 100, alignment: .center)
+        .background(Color.yellow.opacity(0.2))
+        .frame(width: 300, height: 200, alignment: .center)
     }
 }
