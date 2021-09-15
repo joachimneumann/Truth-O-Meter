@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 @main
 struct Truth_O_MeterApp: App {
@@ -25,7 +24,6 @@ struct Truth_O_MeterApp: App {
 //
             MainView()
                 .environmentObject(Settings())
-                .environmentObject(NavigationStack())
             
         }
     }

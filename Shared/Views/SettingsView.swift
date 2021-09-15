@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct TimePicker: View {
     @EnvironmentObject private var settings: Settings
@@ -44,8 +43,6 @@ struct TimePicker: View {
 
 struct ThemeCell: View {
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var navigationStack: NavigationStack
-    private static let childID = "SetingsDetailView"
     var name: String
     var isSelected: Bool
     var isCustom: Bool
@@ -68,9 +65,8 @@ struct ThemeCell: View {
                 .foregroundColor(C.color.bullshitRed)
                 .onTapGesture {
                     Needle.shared.active(true, strongNoise: false)
-                    DispatchQueue.main.async {
-                        self.navigationStack.push(SettingsDetailView(displayTitle: $settings.title), withId: Self.childID)
-                    }
+                    //                    DispatchQueue.main.async {
+                    //                    }
                 }
             } else {
                 Text(name == "" ? "Custom" :  name)
@@ -112,48 +108,29 @@ struct ThemesList: View {
 
 struct SettingsView: View {
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var navigationStack: NavigationStack
     
     var body: some View {
         VStack {
-            VStack {
-                HStack(spacing: 0) {
-                    Image(systemName: "chevron.backward")
-                        .font(.system(size: 20))
-                    Text("Back")
-                    Spacer()
-                }
-                .foregroundColor(.blue)
-                .padding(.top)
-                .padding(.leading)
-                .onTapGesture {
-                    self.navigationStack.pop()
-                    Needle.shared.active(false, strongNoise: false)
-                    Needle.shared.setValue(0.5)
-                }
-            }
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("Show Instructions")
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            DispatchQueue.main.async {
-                                self.navigationStack.push(InstructionView(), withId: "InstructionView")
-                            }
+            HStack {
+                Spacer()
+                Text("Show Instructions")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        DispatchQueue.main.async {
+                            //                                self.navigationStack.push(InstructionView(), withId: "InstructionView")
                         }
-                    Spacer()
-                }
-                .padding(.vertical, 40)
-                TimePicker()
-                Rectangle().fill(C.color.lightGray)
-                    .frame(height: 0.5)
-                    .padding(.leading)
-                ThemesList(themeNames: settings.themeNames)
+                    }
                 Spacer()
             }
-            .frame(maxWidth: 600)
+            .padding(.vertical, 40)
+            TimePicker()
+            Rectangle().fill(C.color.lightGray)
+                .frame(height: 0.5)
+                .padding(.leading)
+            ThemesList(themeNames: settings.themeNames)
+            Spacer()
         }
+        .frame(maxWidth: 600)
     }
 }
 

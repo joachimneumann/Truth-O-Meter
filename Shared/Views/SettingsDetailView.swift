@@ -6,11 +6,9 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct SettingsDetailView: View {
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var navigationStack: NavigationStack
     @Binding var displayTitle: String
     
     func callback(_ precision: Precision) {
@@ -21,49 +19,33 @@ struct SettingsDetailView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                HStack(spacing: 0) {
-                    Image(systemName: "chevron.backward")
-                        .font(.system(size: 20))
-                    Text("Back")
-                    Spacer()
-                }
-                .foregroundColor(.blue)
-                .padding(.top)
-                .padding(.leading)
-                .onTapGesture {
-                    navigationStack.pop()
-                }
+            Spacer(minLength: 20)
+            HStack {
+                DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
+                //.background(Color.green.opacity(0.2))
+                    .padding(.trailing, 5)
+                Stamp(settings.stampTop,
+                      settings.stampBottom,
+                      angle: Angle(degrees: 0))
+                //.background(Color.yellow.opacity(0.2))
             }
-            VStack {
-                Spacer(minLength: 20)
-                HStack {
-                    DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
-                        //.background(Color.green.opacity(0.2))
-                        .padding(.trailing, 5)
-                    Stamp(settings.stampTop,
-                              settings.stampBottom,
-                              angle: Angle(degrees: 0))
-                        //.background(Color.yellow.opacity(0.2))
-                }
-                .fixedSize(horizontal: false, vertical: true)
-                if settings.isCustom {
-                    EditableStampView()
-                } else {
-                    EmptyView()
-                }
-                Spacer(minLength: 0)
-                AllDisksView(
-                    isSetting: true,
-                    color: C.color.bullshitRed,
-                    grayColor: C.color.lightGray,
-                    callback: callback)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxWidth: 600)
-                Spacer(minLength: 0)
+            .fixedSize(horizontal: false, vertical: true)
+            if settings.isCustom {
+                EditableStampView()
+            } else {
+                EmptyView()
             }
-            .padding()
+            Spacer(minLength: 0)
+            AllDisksView(
+                isSetting: true,
+                color: C.color.bullshitRed,
+                grayColor: C.color.lightGray,
+                callback: callback)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 600)
+            Spacer(minLength: 0)
         }
+        .padding()
     }
 }
 

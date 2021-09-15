@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA01051F26E284CC00AAA18A /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = AA01051E26E284CC00AAA18A /* NavigationStack */; };
 		AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
@@ -76,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA01051F26E284CC00AAA18A /* NavigationStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +192,6 @@
 			);
 			name = "Truth-O-Meter (iOS)";
 			packageProductDependencies = (
-				AA01051E26E284CC00AAA18A /* NavigationStack */,
 			);
 			productName = "Truth-O-Meter (iOS)";
 			productReference = AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */;
@@ -224,7 +221,6 @@
 			);
 			mainGroup = AA2B352C255AA99300AD0B14;
 			packageReferences = (
-				AA01051D26E284CC00AAA18A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 			);
 			productRefGroup = AA2B353A255AA99400AD0B14 /* Products */;
 			projectDirPath = "";
@@ -469,25 +465,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AA01051D26E284CC00AAA18A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/matteopuc/swiftui-navigation-stack.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AA01051E26E284CC00AAA18A /* NavigationStack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AA01051D26E284CC00AAA18A /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
-			productName = NavigationStack;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA2B352D255AA99300AD0B14 /* Project object */;
 }
