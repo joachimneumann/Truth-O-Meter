@@ -75,7 +75,7 @@ struct SmartButtonView: View {
                 }
             }
             if showStampView {
-                StampView(settings.stampTop,
+                Stamp(settings.stampTop,
                           settings.stampBottom,
                       angle: settings.stampBottom == nil ? Angle(degrees: -25.0) : Angle(degrees: -18.0))
                     .contentShape(Rectangle())

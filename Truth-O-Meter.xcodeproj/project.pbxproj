@@ -29,7 +29,7 @@
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
 		AA97067626D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
 		AAB2F31526EF4A2C0052858F /* CaptureSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F31426EF4A2C0052858F /* CaptureSize.swift */; };
-		AAB2F31726EF4A5E0052858F /* StampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F31626EF4A5E0052858F /* StampView.swift */; };
+		AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F31626EF4A5E0052858F /* Stamp.swift */; };
 		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AAE4C2E226E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
@@ -64,7 +64,7 @@
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
 		AA97067526D202B40090FA67 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		AAB2F31426EF4A2C0052858F /* CaptureSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSize.swift; sourceTree = "<group>"; };
-		AAB2F31626EF4A5E0052858F /* StampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampView.swift; sourceTree = "<group>"; };
+		AAB2F31626EF4A5E0052858F /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
 		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AAE4C2E126E06F6900FE043B /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				AA27B53A26E4E4E800382215 /* MaskView.swift */,
 				AA48152926E8CB6D0041C045 /* PlaygroundView.swift */,
 				AAB2F31426EF4A2C0052858F /* CaptureSize.swift */,
-				AAB2F31626EF4A5E0052858F /* StampView.swift */,
+				AAB2F31626EF4A5E0052858F /* Stamp.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,7 +262,7 @@
 				AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */,
 				AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */,
 				AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */,
-				AAB2F31726EF4A5E0052858F /* StampView.swift in Sources */,
+				AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */,

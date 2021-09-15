@@ -30,10 +30,17 @@ struct Calc {
     let scale: Double
     let maskSize: CGSize
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
+
+        ///
+        /// for the math, see rectangleRotation.pptx
+        ///
+
         let marginFactor = 0.4
         let borderWidthFactor = 0.25
+
+        /// assert that border is smaller than the marding,
+        /// because the border is drawn inside the margin
         assert(borderWidthFactor <= marginFactor)
-        // border is inside the margin, see rectangleRotation.pptx
         
         let tw = textSize.width
         let th = textSize.height
@@ -57,29 +64,27 @@ struct Calc {
         let twr2 = cos(alpha)*twm
         let twr = twr1 + twr2
         
-        padding = m
-        borderWidth = b
-        cornerRadius = 1.5*b
-        
         let outerCornerRadius = cornerRadius + 0.5 * borderWidth
         let beta2 = Angle.degrees(45).radians - abs(angle.radians)
         let offset = outerCornerRadius * ( sqrt(2.0) * cos(beta2) - 1.0)
         
+        let sw = fw / (twr - 2 * offset)
+        let sh = fh / (thr - 2 * offset)
+
+        padding = m
+        borderWidth = b
+        cornerRadius = 1.5*b
         /// set the mask size large
         /// this alloes me to handle single characters
         /// with angles like 80 degrees
         maskSize = CGSize(
             width:  max(twr, thr),
             height: max(twr, thr))
-
-        let sw = fw / (twr - 2 * offset)
-        let sh = fh / (thr - 2 * offset)
-        
         scale = min(sw, sh)
     }
 }
 
-struct StampView: View {
+struct Stamp: View {
     let firstLine: String
     let secondLine: String?
     let color: Color
@@ -149,7 +154,7 @@ struct StampView: View {
 
 struct StampView_Previews: PreviewProvider {
     static var previews: some View {
-        StampView("Stamp Text")
+        Stamp("Stamp Text")
             .frame(width: 330, height: 400, alignment: .center)
     }
 }
