@@ -32,67 +32,6 @@ struct Stamp: View {
         }
     }
 
-    private struct Calc {
-        let padding: Double
-        let borderWidth: Double
-        let cornerRadius: Double
-        let scale: Double
-        let maskSize: CGSize
-        init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
-
-            ///
-            /// for the math, see rectangleRotation.pptx
-            ///
-
-            let marginFactor = 0.4
-            let borderWidthFactor = 0.25
-
-            /// assert that border is smaller than the marding,
-            /// because the border is drawn inside the margin
-            assert(borderWidthFactor <= marginFactor)
-            
-            let tw = textSize.width
-            let th = textSize.height
-            
-            let m = th * marginFactor
-            let twm = tw + 2.0*m
-            let thm = th + 2.0*m
-            
-            let fw = frameSize.width
-            let fh = frameSize.height
-            
-            
-            let b = th * borderWidthFactor
-            let alpha = abs(angle.radians)
-            let beta = atan(thm/twm)
-            let d = sqrt(twm*twm+thm*thm)
-            
-            let thr = sin(alpha+beta)*d
-            
-            let twr1 = sin(alpha)*thm
-            let twr2 = cos(alpha)*twm
-            let twr = twr1 + twr2
-            
-            padding = m
-            borderWidth = b
-            cornerRadius = 1.5*b
-
-            let outerCornerRadius = cornerRadius + 0.5 * borderWidth
-            let beta2 = Angle.degrees(45).radians - abs(angle.radians)
-            let offset = outerCornerRadius * ( sqrt(2.0) * cos(beta2) - 1.0)
-            
-            let sw = fw / (twr - 2 * offset)
-            let sh = fh / (thr - 2 * offset)
-
-            /// set the mask size large
-            /// this alloes me to handle single characters
-            /// with angles like 80 degrees
-            maskSize = CGSize(
-                width:  max(twr, thr),
-                height: max(twr, thr))
-            scale = min(sw, sh)
-        }
-    }
     init(
         _ firstLine: String,
         _ secondLine: String? = nil,
@@ -107,7 +46,7 @@ struct Stamp: View {
     
     var body: some View {
         
-        let calc = Calc(frameSize: frameSize, textSize: textSize, angle: angle)
+        let stampModel = StampModel(frameSize: frameSize, textSize: textSize, angle: angle.radians)
         
         ZStack {
             FrameCatcher(into: $frameSize)
@@ -131,21 +70,21 @@ struct Stamp: View {
                                 .lineLimit(1)
                                 //.background(Color.red.opacity(0.2))
                                 .stampCaptureSize(in: $textSize)
-                                .padding(calc.padding-calc.borderWidth/2)
+                                .padding(stampModel.padding-stampModel.borderWidth/2)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: calc.cornerRadius)
-                                        .stroke(color, lineWidth: calc.borderWidth))
-                                .padding(calc.borderWidth/2)
+                                    RoundedRectangle(cornerRadius: stampModel.cornerRadius)
+                                        .stroke(color, lineWidth: stampModel.borderWidth))
+                                .padding(stampModel.borderWidth/2)
                         )
                         .mask(Image(uiImage: UIImage(named: "mask")!)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: calc.maskSize.width, height: calc.maskSize.height, alignment: SwiftUI.Alignment.center)
+                                .frame(width: stampModel.maskSize.width, height: stampModel.maskSize.height, alignment: SwiftUI.Alignment.center)
                         )
                 }
                 .fixedSize(horizontal: true, vertical: true)
             }
-            .scaleEffect(calc.scale)
+            .scaleEffect(stampModel.scale)
             .rotationEffect(angle) // before or after scaling???
         }
     }
