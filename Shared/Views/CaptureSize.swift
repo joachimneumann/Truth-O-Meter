@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private struct StampSizeKey: PreferenceKey {
+private struct SizeKey: PreferenceKey {
     static let defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
         value = nextValue()
@@ -17,9 +17,9 @@ private struct StampSizeKey: PreferenceKey {
 extension View {
     func captureSize(in binding: Binding<CGSize>) -> some View {
         return overlay(GeometryReader { proxy in
-            Color.clear.preference(key: StampSizeKey.self, value: proxy.size)
+            Color.clear.preference(key: SizeKey.self, value: proxy.size)
         })
-            .onPreferenceChange(StampSizeKey.self) { size in
+            .onPreferenceChange(SizeKey.self) { size in
                 DispatchQueue.main.async {
                     binding.wrappedValue = size
                 }
