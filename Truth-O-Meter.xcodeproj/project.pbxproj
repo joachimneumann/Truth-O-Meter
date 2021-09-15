@@ -11,6 +11,8 @@
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
+		AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */; };
+		AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
@@ -43,6 +45,8 @@
 		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
 		AA18AD4726ECE28100C26F56 /* Truth-O-Meter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Truth-O-Meter.entitlements"; sourceTree = "<group>"; };
 		AA27B53A26E4E4E800382215 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
+		AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMeasures.swift; sourceTree = "<group>"; };
+		AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModel.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +129,8 @@
 				AAE4C2E126E06F6900FE043B /* Needle.swift */,
 				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
 				AA812ED826F1B43300F7F092 /* StampModel.swift */,
+				AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */,
+				AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,8 +257,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
+				AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */,
 				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
+				AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
 				AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */,
@@ -411,7 +419,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.8;
-				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies";
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-Xfrontend -debug-time-function-bodies -Xfrontend -warn-long-expression-type-checking=100 -Xfrontend -warn-long-function-bodies=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joachimneumann.bullshitdetector;
 				PRODUCT_NAME = "Truth-O-Meter";
 				SDKROOT = iphoneos;

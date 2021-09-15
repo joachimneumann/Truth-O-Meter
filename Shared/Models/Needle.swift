@@ -39,21 +39,23 @@ class Needle: ObservableObject {
 
     func setValueInSteps(_ newValue: Double, totalTime: Double) {
         self.active(true, strongNoise: true)
-        var delay = 0.25 * totalTime
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
+        let now = DispatchTime.now()
+        var whenWhen: DispatchTime
+        whenWhen = now + DispatchTimeInterval.milliseconds(Int(1000.0 * 0.25 * totalTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             self.setValue(self._value + 0.3 * (newValue - self._value))
         }
-        delay = 0.5 * totalTime
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
+        whenWhen = now + DispatchTimeInterval.milliseconds(Int(1000.0 * 0.5 * totalTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             self.setValue(self._value + 0.6 * (newValue - self._value))
         }
-        delay = 0.675 * totalTime
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
+        whenWhen = now + DispatchTimeInterval.milliseconds(Int(1000.0 * 0.675 * totalTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             self.active(true, strongNoise: false)
             self.setValue(self._value + 0.7 * (newValue - self._value))
         }
-        delay = 0.85 * totalTime
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + delay) {
+        whenWhen = now + DispatchTimeInterval.milliseconds(Int(1000.0 * 0.85 * totalTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             self.active(true, strongNoise: false)
             self.setValue(newValue)
         }

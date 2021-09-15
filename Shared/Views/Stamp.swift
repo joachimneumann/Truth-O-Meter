@@ -13,11 +13,15 @@ struct Stamp: View {
     let secondLine: String?
     let color: Color
     let angle: Angle
-    
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
     
-    let largeFontSize = 300.0
+    static let defaultColor = Color(
+        red: 255.0/255.0,
+        green: 83.0/255.0,
+        blue: 77.0/255.0)
+    static let singleLineDefaultAngle = Angle(degrees: -25)
+    static let doubleLineDefaultAngle = Angle(degrees: -18)
     
     private struct FrameCatcher: View {
         @Binding var into: CGSize
@@ -31,17 +35,51 @@ struct Stamp: View {
                 )
         }
     }
-
+    
     init(
         _ firstLine: String,
         _ secondLine: String? = nil,
-        color: Color = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0),
-        angle: Angle = Angle(degrees: -25)
+        color: Color = Self.defaultColor,
+        angle userDefinedAngle: Angle? = nil
     ) {
         self.firstLine = firstLine
         self.secondLine = secondLine
         self.color = color
-        self.angle = angle
+        if let userDefinedAngle = userDefinedAngle {
+            self.angle = userDefinedAngle
+        } else {
+            if secondLine != nil {
+                self.angle = Self.doubleLineDefaultAngle
+            } else {
+                self.angle = Self.singleLineDefaultAngle
+            }
+        }
+    }
+    
+    struct OneOrTwoLines: View {
+        let firstLine: String
+        let secondLine: String?
+        let color: Color
+        let stampModel: StampModel
+        @Binding var textSize: CGSize
+        var body: some View {
+            VStack {
+                Text(firstLine)
+                if let secondLine = secondLine {
+                    Text(secondLine)
+                }
+            }
+            .font(.system(size: stampModel.largeFontSize).bold())
+            .foregroundColor(color)
+            .fixedSize()
+            .lineLimit(1)
+            .stampCaptureSize(in: $textSize)
+            .padding(stampModel.padding-stampModel.borderWidth/2)
+            .overlay(
+                RoundedRectangle(cornerRadius: stampModel.cornerRadius)
+                    .stroke(color, lineWidth: stampModel.borderWidth))
+            .padding(stampModel.borderWidth/2)
+        }
     }
     
     var body: some View {
@@ -50,31 +88,17 @@ struct Stamp: View {
         
         ZStack {
             FrameCatcher(into: $frameSize)
-            //let _ = print("frameSize = \(frameSize) textSize = \(textSize)")
-            //let _ = print("scale \(calc.scale)")
             VStack {
-                //let _ = print("StampView VStack")
                 ZStack {
                     Rectangle()
                         .foregroundColor(.clear)//green.opacity(0.2))
                         .background(
-                            VStack {
-                                Text(firstLine)
-                                if let secondLine = secondLine {
-                                    Text(secondLine)
-                                }
-                            }
-                                .font(.system(size: largeFontSize).bold())
-                                .foregroundColor(color)
-                                .fixedSize()
-                                .lineLimit(1)
-                                //.background(Color.red.opacity(0.2))
-                                .stampCaptureSize(in: $textSize)
-                                .padding(stampModel.padding-stampModel.borderWidth/2)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: stampModel.cornerRadius)
-                                        .stroke(color, lineWidth: stampModel.borderWidth))
-                                .padding(stampModel.borderWidth/2)
+                            OneOrTwoLines(
+                                firstLine: firstLine,
+                                secondLine: secondLine,
+                                color: color,
+                                stampModel: stampModel,
+                                textSize: $textSize)
                         )
                         .mask(Image(uiImage: UIImage(named: "mask")!)
                                 .resizable()
@@ -85,7 +109,7 @@ struct Stamp: View {
                 .fixedSize(horizontal: true, vertical: true)
             }
             .scaleEffect(stampModel.scale)
-            .rotationEffect(angle) // before or after scaling???
+            .rotationEffect(angle)
         }
     }
 }
@@ -98,14 +122,12 @@ struct Stamp_Previews: PreviewProvider {
 }
 
 //  from https://newbedev.com/swiftui-rotationeffect-framing-and-offsetting
-
 private struct StampSizeKey: PreferenceKey {
     static let defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
         value = nextValue()
     }
 }
-
 private extension View {
     func stampCaptureSize(in binding: Binding<CGSize>) -> some View {
         return overlay(GeometryReader { proxy in

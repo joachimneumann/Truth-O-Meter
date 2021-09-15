@@ -45,12 +45,21 @@ struct DisplayView: View {
         /// I do not want to see this message very often.
         /// Specifically, it should not appear every time, the needle is redrawn
         GeometryReader { geo in
+            let model = DisplayModel(size: geo.size)
             ZStack {
                 DisplayBackground(
-                    colorful: true, lightColor: passiveColor, darkColor: darkColor, activeColor: activeColor, aspectRatio: aspectRatio)
+                    model: model,
+                    colorful: true,
+                    lightColor: passiveColor,
+                    darkColor: darkColor,
+                    activeColor: activeColor,
+                    aspectRatio: aspectRatio)
                 if editTitle {
                     /// needle behind the text
-                    NeedleView(geo.size, activeColor: activeColor, passiveColor: passiveColor)
+                    NeedleView(
+                        displayMeasures:model.measures,
+                        activeColor: activeColor,
+                        passiveColor: passiveColor)
                         .opacity(0.5)
                     TextField("", text: $settings.title, onEditingChanged: { edit in
                         self.editing = edit
@@ -65,7 +74,10 @@ struct DisplayView: View {
                         .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
                         .offset(y: geo.size.height*0.15)
                         .foregroundColor(colorful ? darkColor : passiveColor)
-                    NeedleView(geo.size, activeColor: activeColor, passiveColor: passiveColor)
+                    NeedleView(
+                        displayMeasures:model.measures,
+                        activeColor: activeColor,
+                        passiveColor: passiveColor)
                         //.background(Color.green.opacity(0.2))
                 }
             }

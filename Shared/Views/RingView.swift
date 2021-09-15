@@ -15,8 +15,15 @@ struct RingView: View {
 
     @State private var value = 0.0
     
+    func startSound() {
+        AudioServicesPlaySystemSound(C.sounds.startRecording)
+    }
+    func endSound() {
+        AudioServicesPlaySystemSound(C.sounds.stopRecording)
+    }
+    
     var body: some View {
-        return ZStack {
+        Group {
             Circle()
                 .stroke(C.color.lightGray, lineWidth: width)
             Circle()
@@ -27,9 +34,10 @@ struct RingView: View {
         }
         .onAppear {
             value = 1.0
-            AudioServicesPlaySystemSound(C.sounds.startRecording)
-            DispatchQueue.global().asyncAfter(deadline: .now() + settings.listenTime) {
-                AudioServicesPlaySystemSound(C.sounds.stopRecording)
+            startSound()
+            let delay = DispatchTime.now() + settings.listenTime
+            DispatchQueue.global().asyncAfter(deadline: delay) {
+                endSound()
                 /// this will not guarantee precise timing,
                 /// but that might not be required here
                 whenFinished()

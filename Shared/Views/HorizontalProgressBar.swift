@@ -10,33 +10,36 @@ import SwiftUI
 
 struct HorizontalProgressBar: View {
     var animationFinished: () -> Void
-    let activeColor:Color
-    let passiveColor:Color
+    let activeColor: Color
+    let passiveColor: Color
     let animationTime: Double
     
-    @State private var widthFactor = 0.0
+    @State var animate = false
+
+    
+    @State private var width = 0.0
     var body: some View {
-        GeometryReader { (geo) in
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .foregroundColor(passiveColor)
-                    .opacity(0.2)
-                Rectangle()
-                    .foregroundColor(activeColor)
-                    .frame(width:geo.size.width*widthFactor, height: geo.size.height)
-                    .animation(.linear(duration: animationTime), value: widthFactor)
-            }
+        Group {
+        ZStack(alignment: Alignment.leading) {
+            Rectangle()
+                .foregroundColor(passiveColor)
+                .opacity(0.2)
+            Rectangle()
+                .foregroundColor(activeColor)
+                .frame(width: animate ? .infinity : 0)
+                .animation(.easeIn(duration: animationTime), value: animate)
         }
         .frame(height: 2)
         .onAppear {
-            widthFactor = 1.0
+            animate = true
             
             /// The timing of animationFinished() will not be precise,
             /// but that might be good enough for most use cases
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
+            let delay: DispatchTime = DispatchTime.now() + animationTime
+            DispatchQueue.main.asyncAfter(deadline: delay) {
                 animationFinished()
             }
-        }
+        }}
     }
 }
 

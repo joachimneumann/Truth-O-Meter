@@ -13,6 +13,8 @@ struct StampModel {
     let cornerRadius: Double
     let scale: Double
     let maskSize: CGSize
+    let largeFontSize = 300.0
+    
     init(frameSize: CGSize, textSize: CGSize, angle: Double) {
         
         ///
@@ -26,20 +28,20 @@ struct StampModel {
         /// because the border is drawn inside the margin
         assert(borderWidthFactor <= marginFactor)
         
-        let tw = textSize.width
-        let th = textSize.height
+        let tw: Double = textSize.width
+        let th: Double = textSize.height
         
         let m = th * marginFactor
-        let twm = tw + 2.0*m
-        let thm = th + 2.0*m
+        let twm = tw + 2.0 * m
+        let thm = th + 2.0 * m
         
-        let fw = frameSize.width
-        let fh = frameSize.height
+        let fw: Double = frameSize.width
+        let fh: Double = frameSize.height
         
         
-        let b = th * borderWidthFactor
-        let alpha = abs(angle)
-        let beta = atan(thm/twm)
+        let b:Double = th * borderWidthFactor
+        let alpha:Double = abs(angle)
+        let beta:Double = atan(thm / twm)
         let d = sqrt(twm*twm+thm*thm)
         
         let thr = sin(alpha+beta)*d

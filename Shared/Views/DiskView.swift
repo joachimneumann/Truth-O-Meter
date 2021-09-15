@@ -49,13 +49,12 @@ struct DiskView: View {
 
 struct Disk_Previews: PreviewProvider {
     static var previews: some View {
-        func f() {}
-        return DiskView(
+        DiskView(
             isOpaque: true,
             borderWidth: 20.0,
             isGray: false,
-            down: f,
-            up: f,
+            down: {},
+            up: {},
             color: C.color.bullshitRed,
             grayColor: C.color.lightGray)
     }

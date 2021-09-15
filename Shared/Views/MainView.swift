@@ -13,8 +13,6 @@ struct ContentView: View {
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showStampView = false
-    let activeColor = C.color.bullshitRed
-    let passiveColor = C.color.lightGray
     
     func analysisFinished() {
         showAnalysisView = false
