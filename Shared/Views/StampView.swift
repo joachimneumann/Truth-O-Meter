@@ -77,8 +77,8 @@ struct Calc {
 }
 
 struct StampView: View {
-    let top: String
-    let bottom: String?
+    let firstLine: String
+    let secondLine: String?
     let color: Color
     let angle: Angle
     @State var frameSize = CGSize(width: 1.0, height: 1.0)
@@ -87,13 +87,13 @@ struct StampView: View {
     let largeFontSize = 300.0
     
     init(
-        _ top: String,
-        _ bottom: String? = nil,
+        _ firstLine: String,
+        _ secondLine: String? = nil,
         color: Color = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0),
         angle: Angle = Angle(degrees: -25)
     ) {
-        self.top = top
-        self.bottom = bottom
+        self.firstLine = firstLine
+        self.secondLine = secondLine
         self.color = color
         self.angle = angle
     }
@@ -113,9 +113,9 @@ struct StampView: View {
                         .foregroundColor(.clear)//green.opacity(0.2))
                         .background(
                             VStack {
-                                Text(top)
-                                if let bottom = bottom {
-                                    Text(bottom)
+                                Text(firstLine)
+                                if let secondLine = secondLine {
+                                    Text(secondLine)
                                 }
                             }
                                 .font(.system(size: largeFontSize).bold())
