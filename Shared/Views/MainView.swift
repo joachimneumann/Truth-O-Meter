@@ -43,7 +43,7 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
             Spacer()
         }
-            .padding()
+        .padding()
     }
 }
 
@@ -54,15 +54,14 @@ struct MainView: View {
             .navigationBarItems(
                 trailing:
                     NavigationLink(destination: SettingsView()) {
-                        Image(systemName: "gear")
+                        Image("settings")
+                            .resizable()
+                            .frame(width: 30, height: 30)
                             .padding(10)
-                            .padding(.trailing, 10)
-                            .foregroundColor(C.color.lightGray)
-                            .edgesIgnoringSafeArea(.all)
+                            .padding(.trailing, 5)
                     }
             )
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
