@@ -28,7 +28,7 @@ struct Calc {
     let borderWidth: Double
     let cornerRadius: Double
     let scale: Double
-    let expandedTextSize: CGSize
+    let maskSize: CGSize
     init(frameSize: CGSize, textSize: CGSize, angle: Angle) {
         let marginFactor = 0.4
         let borderWidthFactor = 0.25
@@ -65,12 +65,15 @@ struct Calc {
         let beta2 = Angle.degrees(45).radians - abs(angle.radians)
         let offset = outerCornerRadius * ( sqrt(2.0) * cos(beta2) - 1.0)
         
-        expandedTextSize = CGSize(
-            width:  twr - 2 * offset,
-            height: thr - 2 * offset)
-        
-        let sw = fw / expandedTextSize.width
-        let sh = fh / expandedTextSize.height
+        /// set the mask size large
+        /// this alloes me to handle single characters
+        /// with angles like 80 degrees
+        maskSize = CGSize(
+            width:  max(twr, thr),
+            height: max(twr, thr))
+
+        let sw = fw / (twr - 2 * offset)
+        let sh = fh / (thr - 2 * offset)
         
         scale = min(sw, sh)
     }
@@ -133,7 +136,7 @@ struct StampView: View {
                         .mask(Image(uiImage: UIImage(named: "mask")!)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: calc.expandedTextSize.width, height: calc.expandedTextSize.height, alignment: SwiftUI.Alignment.center)
+                                .frame(width: calc.maskSize.width, height: calc.maskSize.height, alignment: SwiftUI.Alignment.center)
                         )
                 }
                 .fixedSize(horizontal: true, vertical: true)
