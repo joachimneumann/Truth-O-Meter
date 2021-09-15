@@ -34,34 +34,33 @@ struct ContentView: View {
                     .font(.analyseTitle)
                     .foregroundColor(C.color.gray)
             }
-            //                Spacer()
+            Spacer()
             SmartButtonView(
                 displayColorful: $displayColorful,
                 showAnalysisView: $showAnalysisView,
                 showStampView: $showStampView)
             //.background(Color.green.opacity(0.2))
                 .aspectRatio(contentMode: .fit)
-            //                Spacer()
+            Spacer()
         }
+            .padding()
     }
-    //        .padding()
-    //        .edgesIgnoringSafeArea(.all)
 }
 
 struct MainView: View {
     var body: some View {
         NavigationView {
-            VStack{
-                ContentView()
-            }
-                .navigationBarItems(trailing:
-                                        NavigationLink(destination: SettingsView()) {
-                    Image(systemName: "gear")
-                        .padding(.trailing, 10)
-                        .foregroundColor(C.color.gray)
-                        .edgesIgnoringSafeArea(.all)
-                }
-                )
+            ContentView()
+            .navigationBarItems(
+                trailing:
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gear")
+                            .padding(10)
+                            .padding(.trailing, 10)
+                            .foregroundColor(C.color.lightGray)
+                            .edgesIgnoringSafeArea(.all)
+                    }
+            )
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
