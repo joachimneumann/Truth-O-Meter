@@ -51,22 +51,17 @@ struct ThemeCell: View {
             if isSelected {
                 Text(name == "" ? "Custom" :  name)
                     .font(.headline)
-                Group {
-                    if isCustom {
-                        Text("Edit")
-                            .padding(.leading, 10)
-                            .font(.headline)
-                    } else {
-                        Image(systemName: "info.circle")
-                            .font(.title2.weight(.semibold))
+                NavigationLink(destination: SettingsDetailView(displayTitle: $settings.title)) {
+                    Group {
+                        if isCustom {
+                            Text("Edit")
+                                .padding(.leading, 10)
+                                .font(.headline)
+                        } else {
+                            Image(systemName: "info.circle")
+                                .font(.title2.weight(.semibold))
+                        }
                     }
-                }
-                .contentShape(Rectangle())
-                .foregroundColor(C.color.bullshitRed)
-                .onTapGesture {
-                    Needle.shared.active(true, strongNoise: false)
-                    //                    DispatchQueue.main.async {
-                    //                    }
                 }
             } else {
                 Text(name == "" ? "Custom" :  name)
@@ -113,13 +108,9 @@ struct SettingsView: View {
         VStack {
             HStack {
                 Spacer()
-                Text("Show Instructions")
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        DispatchQueue.main.async {
-                            //                                self.navigationStack.push(InstructionView(), withId: "InstructionView")
-                        }
-                    }
+                NavigationLink(destination: InstructionView()) {
+                    Text("Show Instructions")
+                }
                 Spacer()
             }
             .padding(.vertical, 40)
