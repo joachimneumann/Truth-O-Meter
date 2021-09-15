@@ -47,7 +47,7 @@ struct Calc {
         
         
         let b = th * borderWidthFactor
-        let alpha = angle.radians
+        let alpha = abs(angle.radians)
         let beta = atan(thm/twm)
         let d = sqrt(twm*twm+thm*thm)
         
@@ -146,7 +146,7 @@ struct StampView: View {
 
 struct StampView_Previews: PreviewProvider {
     static var previews: some View {
-        StampView("first line")
+        StampView("Stamp Text")
             .frame(width: 330, height: 400, alignment: .center)
     }
 }
