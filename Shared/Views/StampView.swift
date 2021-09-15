@@ -47,7 +47,7 @@ struct Calc {
         
         
         let b = th * borderWidthFactor
-        let alpha = abs(angle.radians)
+        let alpha = angle.radians
         let beta = atan(thm/twm)
         let d = sqrt(twm*twm+thm*thm)
         
@@ -85,6 +85,18 @@ struct StampView: View {
     @State var textSize  = CGSize(width: 1.0, height: 1.0)
     
     let largeFontSize = 300.0
+    
+    init(
+        _ top: String,
+        _ bottom: String? = nil,
+        color: Color = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0),
+        angle: Angle = Angle(degrees: -25)
+    ) {
+        self.top = top
+        self.bottom = bottom
+        self.color = color
+        self.angle = angle
+    }
     
     var body: some View {
         
@@ -134,12 +146,7 @@ struct StampView: View {
 
 struct StampView_Previews: PreviewProvider {
     static var previews: some View {
-        StampView(
-            top: "iiiiiii",
-            bottom: nil,//"bottom2",
-            color: C.color.bullshitRed,
-            angle: Angle(degrees: -25))
-        //            .background(Color.yellow)
+        StampView("first line")
             .frame(width: 330, height: 400, alignment: .center)
     }
 }

@@ -41,11 +41,9 @@ struct SettingsDetailView: View {
                     DisplayView(colorful: true, editTitle: settings.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
                         //.background(Color.green.opacity(0.2))
                         .padding(.trailing, 5)
-                    StampView(
-                        top: settings.stampTop,
-                        bottom: settings.stampBottom,
-                        color: C.color.bullshitRed,
-                        angle: Angle(degrees: 0))
+                    StampView(settings.stampTop,
+                              settings.stampBottom,
+                              angle: Angle(degrees: 0))
                         //.background(Color.yellow.opacity(0.2))
                 }
                 .fixedSize(horizontal: false, vertical: true)
