@@ -26,8 +26,9 @@ struct FiveDisks: View {
     struct Config {
         let cr: Double
         let p: Double
-        let fc: Color
+        let c: Color
         let settingsPrecision: Precision?
+        let gray = Color(white: 0.7)
         let down: () -> Void
         let up: (Precision) -> Void
         init(isTapped: Bool,
@@ -40,19 +41,21 @@ struct FiveDisks: View {
              up: @escaping (Precision) -> Void) {
             cr = isTapped ? radius/14.0 : radius*0.5
             p  = isTapped ? radius*0.25 : 0.0
-            fc = pale ? paleColor : color
+            c = pale ? paleColor : color
             self.settingsPrecision = settingsPrecision
             self.down = down
             self.up = up
+        }
+        func fc(for precision: Precision) -> Color {
+            settingsPrecision == precision ? gray : c
         }
     }
     
     private struct Edge: View {
         let config: Config
-        let gray = Color(white: 0.7)
         var body: some View {
             Rectangle()
-                .fill(config.settingsPrecision == .edge ? gray : config.fc)
+                .fill(config.fc(for: .edge))
                 .cornerRadius(config.cr)
                 .padding(config.p)
                 .gesture(
@@ -70,10 +73,9 @@ struct FiveDisks: View {
     private struct Disk: View {
         let config: Config
         let precision: Precision
-        let gray = Color(white: 0.7)
         var body: some View {
             Circle()
-                .fill(config.settingsPrecision == precision ? gray : config.fc)
+                .fill(config.fc(for: precision))
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -85,7 +87,7 @@ struct FiveDisks: View {
                 )
             if config.settingsPrecision != nil {
                 Circle()
-                    .stroke(gray, lineWidth: 1)
+                    .stroke(config.gray, lineWidth: 1)
             }
         }
     }
@@ -106,44 +108,20 @@ struct FiveDisks: View {
     }
     
     var body: some View {
+        let config = Config(
+            isTapped: isTapped,
+            radius: radius,
+            color: color,
+            pale: pale,
+            paleColor: paleColor,
+            settingsPrecision: settingsPrecision,
+            down: down,
+            up: up)
+
         ZStack {
-            let config = Config(
-                isTapped: isTapped,
-                radius: radius,
-                color: color,
-                pale: pale,
-                paleColor: paleColor,
-                settingsPrecision: settingsPrecision,
-                down: down,
-                up: up)
             Edge(config: config)
             ForEach(diskData) { data in
-                ZStack { /// disk and border
-                    Disk(config: config, precision: data.precision)
-//                    Circle()
-//                        .fill(grayPrecision == data.precision ? Color(white: 0.7) : c)
-//                        .gesture(
-//                            DragGesture(minimumDistance: 0)
-//                                .onChanged { value in
-//                                    if !settingsMode && !pale {
-//                                        pale = true
-//                                    }
-//                                }
-//                                .onEnded { value in
-//                                    if settingsMode {
-//                                        grayPrecision = .edge
-//                                    } else {
-//                                        isTapped = true
-//                                        pale = false
-//                                    }
-//                                    callback(data.precision)
-//                                }
-//                        )
-//                    if settingsMode {
-//                        Circle()
-//                            .stroke(Color(white: 0.7), lineWidth: 1)
-//                    }
-                }
+                Disk(config: config, precision: data.precision)
                 .padding(data.padding*radius)
             }
             .isHidden(isTapped)

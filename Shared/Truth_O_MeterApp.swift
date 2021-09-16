@@ -26,7 +26,7 @@ struct Truth_O_MeterApp: App {
                     isTapped: $isTapped,
                     settingsPrecision: $settingsPrecision,
                     radius: 200,
-                    color: C.color.bullshitRed,//.opacity(0.2),
+                    color: C.color.bullshitRed.opacity(0.2),
                     paleColor: C.color.paleBullshitRed,
                     callback: ff)
             }
