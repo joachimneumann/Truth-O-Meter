@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
-		AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6626DCC9F1004BF2C8 /* Disks.swift */; };
 		AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
 		AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */; };
 		AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */; };
@@ -27,9 +26,6 @@
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
 		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
 		AA812ED926F1B43300F7F092 /* StampModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA812ED826F1B43300F7F092 /* StampModel.swift */; };
-		AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CB926DC6B4100C82E56 /* DiskView.swift */; };
-		AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */; };
-		AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */; };
 		AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC526DC9F3600C82E56 /* RingView.swift */; };
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
 		AA97067626D202B40090FA67 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA97067526D202B40090FA67 /* Theme.swift */; };
@@ -45,7 +41,6 @@
 		AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
-		AA161D6626DCC9F1004BF2C8 /* Disks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disks.swift; sourceTree = "<group>"; };
 		AA18AD4726ECE28100C26F56 /* Truth-O-Meter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Truth-O-Meter.entitlements"; sourceTree = "<group>"; };
 		AA27B53A26E4E4E800382215 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMeasures.swift; sourceTree = "<group>"; };
@@ -68,9 +63,6 @@
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
 		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA812ED826F1B43300F7F092 /* StampModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampModel.swift; sourceTree = "<group>"; };
-		AA8F3CB926DC6B4100C82E56 /* DiskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskView.swift; sourceTree = "<group>"; };
-		AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDisksView.swift; sourceTree = "<group>"; };
-		AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifterView.swift; sourceTree = "<group>"; };
 		AA8F3CC526DC9F3600C82E56 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
 		AA97067526D202B40090FA67 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -109,9 +101,6 @@
 				AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */,
 				AAB2F31626EF4A5E0052858F /* Stamp.swift */,
 				AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */,
-				AA8F3CB926DC6B4100C82E56 /* DiskView.swift */,
-				AA8F3CC226DC83B300C82E56 /* ShapeShifterView.swift */,
-				AA8F3CBF26DC766B00C82E56 /* AllDisksView.swift */,
 				AA8F3CC526DC9F3600C82E56 /* RingView.swift */,
 				AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
@@ -136,7 +125,6 @@
 				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
 				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
 				AAE4C2E126E06F6900FE043B /* Needle.swift */,
-				AA161D6626DCC9F1004BF2C8 /* Disks.swift */,
 				AA812ED826F1B43300F7F092 /* StampModel.swift */,
 				AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */,
 				AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */,
@@ -268,18 +256,14 @@
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */,
 				AA2AC26926F312B100ABFA20 /* InnerButton.swift in Sources */,
-				AA8F3CBA26DC6B4100C82E56 /* DiskView.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
 				AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */,
 				AA2AC26726F3068400ABFA20 /* FiveDisks.swift in Sources */,
 				AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */,
 				AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */,
-				AA161D6726DCC9F1004BF2C8 /* Disks.swift in Sources */,
 				AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */,
 				AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */,
-				AA8F3CC026DC766B00C82E56 /* AllDisksView.swift in Sources */,
 				AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */,
-				AA8F3CC326DC83B300C82E56 /* ShapeShifterView.swift in Sources */,
 				AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,

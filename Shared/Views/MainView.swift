@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @State private var isTapped = false
     @EnvironmentObject private var settings: Settings
     @State private var displayColorful = false
     @State private var showAnalysisView = false
@@ -33,12 +34,13 @@ struct ContentView: View {
                     .foregroundColor(C.color.gray)
             }
             Spacer()
-            SmartButtonView(
-                displayColorful: $displayColorful,
-                showAnalysisView: $showAnalysisView,
-                showStampView: $showStampView)
-            //.background(Color.green.opacity(0.2))
-                .aspectRatio(contentMode: .fit)
+            SmartButtonView(isTapped: $isTapped,
+                            settingsPrecision: .constant(.middle),
+                            radius: 200,
+                            color: C.color.bullshitRed,
+                            paleColor: C.color.paleBullshitRed) { p in
+            }
+            .aspectRatio(contentMode: .fit)
             Spacer()
         }
         .padding()

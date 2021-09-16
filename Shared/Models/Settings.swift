@@ -11,7 +11,7 @@ import SwiftUI
 class Settings: ObservableObject {
     private var settingsData = SettingsData()
     
-    @Published var precision: Precision
+    @Published var precision: Precision?
 
     var title: String {
         get {
@@ -30,10 +30,10 @@ class Settings: ObservableObject {
     
     var stampTop: String {
         get {
-            settingsData.seletedTheme.top(forPrecision: precision)
+            settingsData.seletedTheme.top(forPrecision: precision!)
         }
         set {
-            settingsData.setTop(top: newValue, forPrecision: precision)
+            settingsData.setTop(top: newValue, forPrecision: precision!)
             objectWillChange.send()
             // print("Settings stampTop send()")
         }
@@ -50,13 +50,13 @@ class Settings: ObservableObject {
     }
     var stampBottom: String? {
         get {
-            settingsData.seletedTheme.bottom(forPrecision: precision)
+            settingsData.seletedTheme.bottom(forPrecision: precision!)
         }
         set {
             if newValue == "" {
-                settingsData.setBottom(bottom: nil, forPrecision: precision)
+                settingsData.setBottom(bottom: nil, forPrecision: precision!)
             } else {
-                settingsData.setBottom(bottom: newValue, forPrecision: precision)
+                settingsData.setBottom(bottom: newValue, forPrecision: precision!)
             }
             objectWillChange.send()
             print("Settings stampBottom send()")
@@ -140,6 +140,6 @@ class Settings: ObservableObject {
 
     init() {
         precision = .middle
-        Needle.shared.setValue(needleValue(forPrecision: precision))
+        Needle.shared.setValue(needleValue(forPrecision: precision!))
     }
 }

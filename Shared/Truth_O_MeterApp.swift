@@ -22,19 +22,21 @@ struct Truth_O_MeterApp: App {
         return WindowGroup {
             VStack {
                 Button("back") { isTapped.toggle() }
-                FiveDisks(
-                    isTapped: $isTapped,
-                    settingsPrecision: $settingsPrecision,
-                    radius: 200,
-                    color: C.color.bullshitRed.opacity(0.2),
-                    paleColor: C.color.paleBullshitRed,
-                    callback: ff)
+                SmartButtonView(isTapped: $isTapped,
+                                settingsPrecision: $settingsPrecision,
+                                radius: 200,
+                                color: C.color.bullshitRed.opacity(0.2),
+                                paleColor: C.color.paleBullshitRed,
+                                callback: ff)
+                                .environmentObject(Settings())
+                //                FiveDisks(
+                //                    isTapped: $isTapped,
+                //                    settingsPrecision: $settingsPrecision,
+                //                    radius: 200,
+                //                    color: C.color.bullshitRed.opacity(0.2),
+                //                    paleColor: C.color.paleBullshitRed,
+                //                    callback: ff)
             }
-            //            FiveDisks(
-            //                radius: 300,
-            //                color: C.color.bullshitRed,
-            //                settingsMode: true,
-            //                callback: ff)
             //            MainView()
             //                .environmentObject(Settings())
             

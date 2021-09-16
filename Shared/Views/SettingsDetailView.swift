@@ -36,11 +36,12 @@ struct SettingsDetailView: View {
                 EmptyView()
             }
             Spacer(minLength: 0)
-            AllDisksView(
+            FiveDisks(
+                isTapped: .constant(false),
+                settingsPrecision: $settings.precision,
                 radius: 200,
-                isSetting: true,
                 color: C.color.bullshitRed,
-                grayColor: C.color.lightGray,
+                paleColor: Color.white,
                 callback: callback)
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: 600)
