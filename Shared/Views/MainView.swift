@@ -48,17 +48,21 @@ struct ContentView: View {
 struct MainView: View {
     var body: some View {
         NavigationView {
-            ContentView()
-            .navigationBarItems(
-                trailing:
-                    NavigationLink(destination: SettingsView()) {
-                        Image("settings")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .padding(10)
-                            .padding(.trailing, 5)
-                    }
-            )
+            VStack(alignment: .trailing) {
+                NavigationLink(destination: SettingsView()) {
+                    Image("settings")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .padding(.trailing, 5)
+                }
+                .padding()
+                .padding(.trailing, UIDevice.current.hasNotch ? 50 : 0)
+                .padding(.top, UIDevice.current.hasNotch ? 0 : 20)
+                .background(Color.yellow.opacity(0.2))
+                ContentView()
+            }
+            .ignoresSafeArea()
+            .navigationBarHidden(true)
         }
     }
 }
@@ -67,5 +71,13 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .environmentObject(Settings())
+    }
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        let bottom = keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
     }
 }

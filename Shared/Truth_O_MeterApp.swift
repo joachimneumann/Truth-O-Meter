@@ -13,17 +13,30 @@ struct Truth_O_MeterApp: App {
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
 #endif
     func doNothing() {}
-    
+    func ff(_ precision: Precision) {
+        print(precision)
+    }
+    @State private var isTapped = false
+    @State private var settingsPrecision: Precision? = nil//Precision.bullsEye
     var body: some Scene {
         return WindowGroup {
-//            PlaygroundView()
-//            StampView(top: "WWWWWWWWWiiiiiiiiiiiii")
-
-//            RingView(width: 10, whenFinished: doNothing)
-//                .environmentObject(Settings())
-//
-            MainView()
-                .environmentObject(Settings())
+            VStack {
+                Button("back") { isTapped.toggle() }
+                FiveDisks(
+                    isTapped: $isTapped,
+                    settingsPrecision: $settingsPrecision,
+                    radius: 200,
+                    color: C.color.bullshitRed,//.opacity(0.2),
+                    paleColor: C.color.paleBullshitRed,
+                    callback: ff)
+            }
+            //            FiveDisks(
+            //                radius: 300,
+            //                color: C.color.bullshitRed,
+            //                settingsMode: true,
+            //                callback: ff)
+            //            MainView()
+            //                .environmentObject(Settings())
             
         }
     }

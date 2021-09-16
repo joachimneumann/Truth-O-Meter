@@ -27,11 +27,11 @@ struct DisplayMeasures {
     }
     
     private let size: CGSize
-    private let thickLineFactor = 7.0
+    private let thickLineFactor: Double = 7.0
     
     init(_ forSize: CGSize) {
         self.size = forSize
-        let centerAngle = -90.0 * .pi / 180.0
+        let centerAngle: Double = -90.0 * .pi / 180.0
         startAngle = centerAngle - completeAngle/2
         endAngle   = centerAngle + completeAngle/2
         midAngle   = startAngle+(endAngle-startAngle)*0.7
@@ -45,8 +45,8 @@ struct DisplayMeasures {
         let r = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         displayCenter = CGPoint(x: r.midX, y: r.origin.y + 1.2 * r.size.height)
 
-        let w = thickLine
-        let h = radius2 + thickLine
-        needleYOffset = displayCenter.y - h + 2 * w / 3
+        let w: Double = thickLine
+        let h: Double = radius2 + thickLine
+        needleYOffset = Double(displayCenter.y) - h + 2.0 * w / 3.0
     }
 }

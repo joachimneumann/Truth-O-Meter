@@ -37,6 +37,7 @@ struct SettingsDetailView: View {
             }
             Spacer(minLength: 0)
             AllDisksView(
+                radius: 200,
                 isSetting: true,
                 color: C.color.bullshitRed,
                 grayColor: C.color.lightGray,

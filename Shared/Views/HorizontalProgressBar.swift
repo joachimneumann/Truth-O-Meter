@@ -15,11 +15,10 @@ struct HorizontalProgressBar: View {
     let animationTime: Double
     
     @State var animate = false
-
+    
     
     @State private var width = 0.0
     var body: some View {
-        Group {
         ZStack(alignment: Alignment.leading) {
             Rectangle()
                 .foregroundColor(passiveColor)
@@ -39,7 +38,7 @@ struct HorizontalProgressBar: View {
             DispatchQueue.main.asyncAfter(deadline: delay) {
                 animationFinished()
             }
-        }}
+        }
     }
 }
 

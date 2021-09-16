@@ -50,29 +50,42 @@ struct SmartButtonView: View {
     }
     
     
-    @State var ringSize: CGSize = CGSize(width: 10, height: 10)
+    @State var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
 
+    private struct FrameCatcher: View {
+        @Binding var into: CGSize
+        var body: some View {
+            Rectangle()
+                .foregroundColor(.clear)//.blue.opacity(0.2))
+                .background(
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .captureSize(in: $into)
+                )
+        }
+    }
+    
     var body: some View {
-        let linewidth = ringSize.width * 0.05
         ZStack {
-            Group {
-                if showRing {
-                    Circle()
-                        .stroke(C.color.lightGray, lineWidth: linewidth)
-                }
-                if showRingWithProgress {
-                    RingView(width: linewidth, whenFinished: ringProgressFinished)
-                }
-                if showDisks {
-                    AllDisksView(
-                        isSetting: false,
-                        color: C.color.bullshitRed,
-                        grayColor: C.color.lightGray,
-                        callback: callback)
-                        .captureSize(in: $ringSize)
-                        .padding(linewidth * 1.5)
-                        .aspectRatio(contentMode: .fit)
-                }
+            let linewidth: Double = smartButtonSize.width * 0.05
+            FrameCatcher(into: $smartButtonSize)
+            
+            if showRing {
+                Circle()
+                    .stroke(C.color.lightGray, lineWidth: linewidth)
+            }
+            if showRingWithProgress {
+                RingView(width: linewidth, whenFinished: ringProgressFinished)
+            }
+            if showDisks {
+                AllDisksView(
+                    radius: min(smartButtonSize.width, smartButtonSize.height) / 2,
+                    isSetting: false,
+                    color: C.color.bullshitRed,
+                    grayColor: C.color.lightGray,
+                    callback: callback)
+                    .padding(linewidth * 1.5)
+                    .aspectRatio(contentMode: .fit)
             }
             if showStampView {
                 Stamp(settings.stampTop, settings.stampBottom)
@@ -83,7 +96,7 @@ struct SmartButtonView: View {
                 //.background(Color.green.opacity(0.2))
             }
         }
-        .padding(linewidth/2)
+        .padding(smartButtonSize.width * 0.05/2.0)
     }
 }
 

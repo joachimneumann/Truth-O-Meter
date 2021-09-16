@@ -46,7 +46,7 @@ struct ShapeShifterView: View {
     }
 }
 
-struct ShapeShifter_Previews: PreviewProvider {
+struct ShapeShifterView_Previews: PreviewProvider {
     static var previews: some View {
         ShapeShifterView(
             isGray: false,

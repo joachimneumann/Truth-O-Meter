@@ -15,7 +15,7 @@ struct NeedleView: View {
     let passiveColor:Color
     
     var body: some View {
-        let rad = displayMeasures.completeAngle * (-0.5 + needle.noisyValue)
+        let rad: Double = displayMeasures.completeAngle * (-0.5 + needle.noisyValue)
         let angle = Angle(radians: rad)
         return ZStack {
             Rectangle()
