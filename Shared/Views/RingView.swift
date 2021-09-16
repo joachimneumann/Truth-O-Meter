@@ -9,7 +9,7 @@ import SwiftUI
 import GameKit /// for Audio
 
 struct RingView: View {
-    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var preferences: Preferences
     var width: Double
     var whenFinished: () -> Void
 
@@ -30,12 +30,12 @@ struct RingView: View {
                 .trim(from: 0, to: value)
                 .stroke(C.color.bullshitRed, lineWidth: width)
                 .rotationEffect(Angle(degrees:-90))
-                .animation(.linear(duration: settings.listenTime))
+                .animation(.linear(duration: preferences.listenTime))
         }
         .onAppear {
             value = 1.0
             startSound()
-            let delay = DispatchTime.now() + settings.listenTime
+            let delay = DispatchTime.now() + preferences.listenTime
             DispatchQueue.global().asyncAfter(deadline: delay) {
                 endSound()
                 /// this will not guarantee precise timing,

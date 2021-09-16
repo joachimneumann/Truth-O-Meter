@@ -1,5 +1,5 @@
 //
-//  SettingsData.swift
+//  PreferencesData.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 01/09/2021.
@@ -13,7 +13,7 @@ struct ThemeName: Identifiable {
     let isCustom: Bool
 }
 
-struct SettingsData {
+struct PreferencesData {
     
     mutating func setTop(top: String, forPrecision precision: Precision) {
         custom.setTop(top, forPrecision: precision)

@@ -30,7 +30,7 @@ struct CustomTitleTextFieldStyle: TextFieldStyle {
 }
 
 struct DisplayView: View {
-    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var preferences: Preferences
     var colorful: Bool
     var editTitle: Bool
     @State private var editing = false
@@ -61,13 +61,13 @@ struct DisplayView: View {
                         activeColor: activeColor,
                         passiveColor: passiveColor)
                         .opacity(0.5)
-                    TextField("", text: $settings.title, onEditingChanged: { edit in
+                    TextField("", text: $preferences.title, onEditingChanged: { edit in
                         self.editing = edit
                     })
                     .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
                 } else {
                     /// needle in front of the text
-                    Text(settings.title)
+                    Text(preferences.title)
                         .lineLimit(1)
                         .font(.system(size: 500).bold())
                         .minimumScaleFactor(0.01)
@@ -88,11 +88,11 @@ struct DisplayView: View {
 
 struct Display_Previews: PreviewProvider {
     static var previews: some View {
-        let settings = Settings()
+        let preferences = Preferences()
         Needle.shared.active(true, strongNoise: false)
         return DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
             .padding()
-            .environmentObject(settings)
+            .environmentObject(preferences)
             .frame(width: 390, height: 400, alignment: .center)
     }
 }

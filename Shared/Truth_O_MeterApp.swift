@@ -17,28 +17,28 @@ struct Truth_O_MeterApp: App {
         print(precision)
     }
     @State private var isTapped = false
-    @State private var settingsPrecision: Precision? = nil//Precision.bullsEye
+    @State private var preferencesPrecision: Precision? = nil//Precision.bullsEye
     var body: some Scene {
         return WindowGroup {
             VStack {
                 Button("back") { isTapped.toggle() }
                 SmartButtonView(isTapped: $isTapped,
-                                settingsPrecision: $settingsPrecision,
+                                preferencesPrecision: $preferencesPrecision,
                                 radius: 200,
                                 color: C.color.bullshitRed.opacity(0.2),
                                 paleColor: C.color.paleBullshitRed,
                                 callback: ff)
-                                .environmentObject(Settings())
+                                .environmentObject(Preferences())
                 //                FiveDisks(
                 //                    isTapped: $isTapped,
-                //                    settingsPrecision: $settingsPrecision,
+                //                    preferencesPrecision: $preferencesPrecision,
                 //                    radius: 200,
                 //                    color: C.color.bullshitRed.opacity(0.2),
                 //                    paleColor: C.color.paleBullshitRed,
                 //                    callback: ff)
             }
             //            MainView()
-            //                .environmentObject(Settings())
+            //                .environmentObject(Preferences())
             
         }
     }

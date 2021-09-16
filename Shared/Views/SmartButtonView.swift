@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SmartButtonView: View {
     @Binding var isTapped: Bool
-    @Binding var settingsPrecision: Precision?
+    @Binding var preferencesPrecision: Precision?
     let radius: Double
     let color: Color
     let paleColor: Color
@@ -51,7 +51,7 @@ struct SmartButtonView: View {
                     .stroke(C.color.lightGray, lineWidth: linewidth)
             }
             FiveDisks(isTapped: .constant(false),
-                      settingsPrecision: .constant(nil),
+                      preferencesPrecision: .constant(nil),
                       radius: 200,
                       color: C.color.bullshitRed,
                       paleColor: C.color.paleBullshitRed,
@@ -64,7 +64,7 @@ struct SmartButtonView: View {
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
         SmartButtonView(isTapped: .constant(false),
-                        settingsPrecision: .constant(.middle),
+                        preferencesPrecision: .constant(.middle),
                         radius: 200,
                         color: C.color.bullshitRed,
                         paleColor: C.color.paleBullshitRed) { p in

@@ -7,24 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */; };
+		AA0C217A26DF36EF00D7BBB7 /* PreferencesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0C217926DF36EF00D7BBB7 /* PreferencesData.swift */; };
 		AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */; };
 		AA27B53B26E4E4E800382215 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27B53A26E4E4E800382215 /* MaskView.swift */; };
 		AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */; };
 		AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */; };
 		AA2AC26726F3068400ABFA20 /* FiveDisks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26626F3068400ABFA20 /* FiveDisks.swift */; };
-		AA2AC26926F312B100ABFA20 /* InnerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26826F312B100ABFA20 /* InnerButton.swift */; };
 		AA2AC26B26F316BB00ABFA20 /* ShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
 		AA2DA6C626D8BB44007064E3 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2DA6C526D8BB44007064E3 /* MainView.swift */; };
-		AA30E3AD26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */; };
-		AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Settings.swift */; };
+		AA30E3AD26D3BE1900BC5F20 /* PreferencesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA30E3AC26D3BE1900BC5F20 /* PreferencesDetailView.swift */; };
+		AA40FD5E26D60470006DBFD8 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD5D26D60470006DBFD8 /* Preferences.swift */; };
 		AA40FD6126D611C9006DBFD8 /* Precision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA40FD6026D611C9006DBFD8 /* Precision.swift */; };
 		AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA48152926E8CB6D0041C045 /* PlaygroundView.swift */; };
 		AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */; };
-		AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */; };
+		AA7A6B19255D8E4B008BAE2D /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7A6B18255D8E4B008BAE2D /* PreferencesView.swift */; };
 		AA812ED926F1B43300F7F092 /* StampModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA812ED826F1B43300F7F092 /* StampModel.swift */; };
 		AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8F3CC526DC9F3600C82E56 /* RingView.swift */; };
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
@@ -38,7 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
+		AA0C217926DF36EF00D7BBB7 /* PreferencesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesData.swift; sourceTree = "<group>"; };
 		AA12980826189D0600554F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartButtonView.swift; sourceTree = "<group>"; };
 		AA18AD4726ECE28100C26F56 /* Truth-O-Meter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Truth-O-Meter.entitlements"; sourceTree = "<group>"; };
@@ -46,7 +45,6 @@
 		AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMeasures.swift; sourceTree = "<group>"; };
 		AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModel.swift; sourceTree = "<group>"; };
 		AA2AC26626F3068400ABFA20 /* FiveDisks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDisks.swift; sourceTree = "<group>"; };
-		AA2AC26826F312B100ABFA20 /* InnerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerButton.swift; sourceTree = "<group>"; };
 		AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifter.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,12 +54,12 @@
 		AA2B3544255AA99400AD0B14 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBackground.swift; sourceTree = "<group>"; };
 		AA2DA6C526D8BB44007064E3 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDetailView.swift; sourceTree = "<group>"; };
-		AA40FD5D26D60470006DBFD8 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		AA30E3AC26D3BE1900BC5F20 /* PreferencesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesDetailView.swift; sourceTree = "<group>"; };
+		AA40FD5D26D60470006DBFD8 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		AA40FD6026D611C9006DBFD8 /* Precision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precision.swift; sourceTree = "<group>"; };
 		AA48152926E8CB6D0041C045 /* PlaygroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundView.swift; sourceTree = "<group>"; };
 		AA6011E726D0028C00C743F6 /* HorizontalProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalProgressBar.swift; sourceTree = "<group>"; };
-		AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA7A6B18255D8E4B008BAE2D /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		AA812ED826F1B43300F7F092 /* StampModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StampModel.swift; sourceTree = "<group>"; };
 		AA8F3CC526DC9F3600C82E56 /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
@@ -104,14 +102,13 @@
 				AA8F3CC526DC9F3600C82E56 /* RingView.swift */,
 				AA161D6326DCBB45004BF2C8 /* SmartButtonView.swift */,
 				AA2DA6C526D8BB44007064E3 /* MainView.swift */,
-				AA7A6B18255D8E4B008BAE2D /* SettingsView.swift */,
-				AA30E3AC26D3BE1900BC5F20 /* SettingsDetailView.swift */,
+				AA7A6B18255D8E4B008BAE2D /* PreferencesView.swift */,
+				AA30E3AC26D3BE1900BC5F20 /* PreferencesDetailView.swift */,
 				AAE4C2E826E2281F00FE043B /* InstructionView.swift */,
 				AA27B53A26E4E4E800382215 /* MaskView.swift */,
 				AA48152926E8CB6D0041C045 /* PlaygroundView.swift */,
 				AAB2F31426EF4A2C0052858F /* CaptureSize.swift */,
 				AA2AC26626F3068400ABFA20 /* FiveDisks.swift */,
-				AA2AC26826F312B100ABFA20 /* InnerButton.swift */,
 				AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */,
 			);
 			path = Views;
@@ -122,8 +119,8 @@
 			children = (
 				AA97067526D202B40090FA67 /* Theme.swift */,
 				AA40FD6026D611C9006DBFD8 /* Precision.swift */,
-				AA40FD5D26D60470006DBFD8 /* Settings.swift */,
-				AA0C217926DF36EF00D7BBB7 /* SettingsData.swift */,
+				AA40FD5D26D60470006DBFD8 /* Preferences.swift */,
+				AA0C217926DF36EF00D7BBB7 /* PreferencesData.swift */,
 				AAE4C2E126E06F6900FE043B /* Needle.swift */,
 				AA812ED826F1B43300F7F092 /* StampModel.swift */,
 				AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */,
@@ -255,7 +252,6 @@
 			files = (
 				AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */,
 				AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */,
-				AA2AC26926F312B100ABFA20 /* InnerButton.swift in Sources */,
 				AA8F3CC626DC9F3600C82E56 /* RingView.swift in Sources */,
 				AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */,
 				AA2AC26726F3068400ABFA20 /* FiveDisks.swift in Sources */,
@@ -267,19 +263,19 @@
 				AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
 				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
-				AA0C217A26DF36EF00D7BBB7 /* SettingsData.swift in Sources */,
-				AA7A6B19255D8E4B008BAE2D /* SettingsView.swift in Sources */,
+				AA0C217A26DF36EF00D7BBB7 /* PreferencesData.swift in Sources */,
+				AA7A6B19255D8E4B008BAE2D /* PreferencesView.swift in Sources */,
 				AAB2F31526EF4A2C0052858F /* CaptureSize.swift in Sources */,
 				AA812ED926F1B43300F7F092 /* StampModel.swift in Sources */,
 				AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */,
 				AAE4C2E226E06F6900FE043B /* Needle.swift in Sources */,
-				AA30E3AD26D3BE1900BC5F20 /* SettingsDetailView.swift in Sources */,
+				AA30E3AD26D3BE1900BC5F20 /* PreferencesDetailView.swift in Sources */,
 				AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
 				AA97067626D202B40090FA67 /* Theme.swift in Sources */,
 				AA2AC26B26F316BB00ABFA20 /* ShapeShifter.swift in Sources */,
 				AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
-				AA40FD5E26D60470006DBFD8 /* Settings.swift in Sources */,
+				AA40FD5E26D60470006DBFD8 /* Preferences.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

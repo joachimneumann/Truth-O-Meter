@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FiveDisks: View {
     @Binding var isTapped: Bool
-    @Binding var settingsPrecision: Precision?
+    @Binding var preferencesPrecision: Precision?
     let radius: Double
     let color: Color
     let paleColor: Color
@@ -27,7 +27,7 @@ struct FiveDisks: View {
         let cr: Double
         let p: Double
         let c: Color
-        let settingsPrecision: Precision?
+        let preferencesPrecision: Precision?
         let gray = Color(white: 0.7)
         let down: () -> Void
         let up: (Precision) -> Void
@@ -36,18 +36,18 @@ struct FiveDisks: View {
              color: Color,
              pale: Bool,
              paleColor: Color,
-             settingsPrecision: Precision?,
+             preferencesPrecision: Precision?,
              down: @escaping () -> Void,
              up: @escaping (Precision) -> Void) {
             cr = isTapped ? radius/14.0 : radius*0.5
             p  = isTapped ? radius*0.25 : 0.0
             c = pale ? paleColor : color
-            self.settingsPrecision = settingsPrecision
+            self.preferencesPrecision = preferencesPrecision
             self.down = down
             self.up = up
         }
         func fc(for precision: Precision) -> Color {
-            settingsPrecision == precision ? gray : c
+            preferencesPrecision == precision ? gray : c
         }
     }
     
@@ -85,7 +85,7 @@ struct FiveDisks: View {
                             config.up(precision)
                         }
                 )
-            if config.settingsPrecision != nil {
+            if config.preferencesPrecision != nil {
                 Circle()
                     .stroke(config.gray, lineWidth: 1)
             }
@@ -93,13 +93,13 @@ struct FiveDisks: View {
     }
     
     func down() {
-        if settingsPrecision == nil && !pale {
+        if preferencesPrecision == nil && !pale {
             pale = true
         }
     }
     func up(_ precision: Precision) {
-        if settingsPrecision != nil {
-            settingsPrecision = precision
+        if preferencesPrecision != nil {
+            preferencesPrecision = precision
         } else {
             isTapped = true
             pale = false
@@ -114,7 +114,7 @@ struct FiveDisks: View {
             color: color,
             pale: pale,
             paleColor: paleColor,
-            settingsPrecision: settingsPrecision,
+            preferencesPrecision: preferencesPrecision,
             down: down,
             up: up)
 
@@ -152,7 +152,7 @@ struct FiveDisks_Previews: PreviewProvider {
             Button("back") { }
             FiveDisks(
                 isTapped: .constant(false),
-                settingsPrecision: .constant(nil),
+                preferencesPrecision: .constant(nil),
                 radius: 200,
                 color: C.color.bullshitRed,//.opacity(0.2),
                 paleColor: C.color.paleBullshitRed,

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isTapped = false
-    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var preferences: Preferences
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showStampView = false
@@ -28,14 +28,14 @@ struct ContentView: View {
                     animationFinished: analysisFinished,
                     activeColor: C.color.lightGray,
                     passiveColor: C.color.lightGray.opacity(0.7),
-                    animationTime: settings.analysisTime)
+                    animationTime: preferences.analysisTime)
                 Text("Analysing...")
                     .font(.analyseTitle)
                     .foregroundColor(C.color.gray)
             }
             Spacer()
             SmartButtonView(isTapped: $isTapped,
-                            settingsPrecision: .constant(.middle),
+                            preferencesPrecision: .constant(nil),
                             radius: 200,
                             color: C.color.bullshitRed,
                             paleColor: C.color.paleBullshitRed) { p in
@@ -51,7 +51,7 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .trailing) {
-                NavigationLink(destination: SettingsView()) {
+                NavigationLink(destination: PreferencesView()) {
                     Image("settings")
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -72,7 +72,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(Settings())
+            .environmentObject(Preferences())
     }
 }
 

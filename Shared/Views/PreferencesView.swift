@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  PreferencesView.swift
 //  Truth-O-Meter
 //
 //  Created by Joachim Neumann on 11/12/20.
@@ -9,11 +9,11 @@ import SwiftUI
 
 
 
-struct SettingsView: View {
-    @EnvironmentObject private var settings: Settings
+struct PreferencesView: View {
+    @EnvironmentObject private var preferences: Preferences
     
     private struct ThemeCell: View {
-        @EnvironmentObject private var settings: Settings
+        @EnvironmentObject private var preferences: Preferences
         var name: String
         var isSelected: Bool
         var isCustom: Bool
@@ -22,7 +22,7 @@ struct SettingsView: View {
                 if isSelected {
                     Text(name == "" ? "Custom" :  name)
                         .font(.headline)
-                    NavigationLink(destination: SettingsDetailView(displayTitle: $settings.title)) {
+                    NavigationLink(destination: PreferencesDetailView(displayTitle: $preferences.title)) {
                         Group {
                             if isCustom {
                                 Text("Edit")
@@ -51,18 +51,18 @@ struct SettingsView: View {
     }
 
     private struct ThemesList: View {
-        @EnvironmentObject private var settings: Settings
+        @EnvironmentObject private var preferences: Preferences
         var themeNames: [ThemeName]
         var body: some View {
             VStack {
                 ForEach(themeNames) { themeName in
                     ThemeCell(
                         name: themeName.name,
-                        isSelected: themeName.id == settings.selectedThemeIndex,
+                        isSelected: themeName.id == preferences.selectedThemeIndex,
                         isCustom: themeName.isCustom)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            settings.selectedThemeIndex = themeName.id
+                            preferences.selectedThemeIndex = themeName.id
                         }
                     Rectangle().fill(C.color.lightGray)
                         .frame(height: 0.5)
@@ -73,16 +73,16 @@ struct SettingsView: View {
     }
     
     private struct TimePicker: View {
-        @EnvironmentObject private var settings: Settings
+        @EnvironmentObject private var preferences: Preferences
         var body: some View {
             VStack(alignment: .leading) {
                 HStack  {
                     Text("Listening time")
                         .frame(width:150, alignment: .leading)
-                    Picker(selection: $settings.listenTimingIndex, label: Text("")) {
-                        Text(settings.listenTimeStrings[0]).tag(0)
-                        Text(settings.listenTimeStrings[1]).tag(1)
-                        Text(settings.listenTimeStrings[2]).tag(2)
+                    Picker(selection: $preferences.listenTimingIndex, label: Text("")) {
+                        Text(preferences.listenTimeStrings[0]).tag(0)
+                        Text(preferences.listenTimeStrings[1]).tag(1)
+                        Text(preferences.listenTimeStrings[2]).tag(2)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 150)
@@ -91,10 +91,10 @@ struct SettingsView: View {
                 HStack {
                     Text("Analysis time")
                         .frame(width:150, alignment: .leading)
-                    Picker(selection: $settings.analysisTimingIndex, label: Text("")) {
-                        Text(settings.analysisTimeStrings[0]).tag(0)
-                        Text(settings.analysisTimeStrings[1]).tag(1)
-                        Text(settings.analysisTimeStrings[2]).tag(2)
+                    Picker(selection: $preferences.analysisTimingIndex, label: Text("")) {
+                        Text(preferences.analysisTimeStrings[0]).tag(0)
+                        Text(preferences.analysisTimeStrings[1]).tag(1)
+                        Text(preferences.analysisTimeStrings[2]).tag(2)
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .frame(width: 150)
@@ -120,17 +120,17 @@ struct SettingsView: View {
             Rectangle().fill(C.color.lightGray)
                 .frame(height: 0.5)
                 .padding(.leading)
-            ThemesList(themeNames: settings.themeNames)
+            ThemesList(themeNames: preferences.themeNames)
             Spacer()
         }
         .frame(maxWidth: 600)
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
-            .environmentObject(Settings())
+        PreferencesView()
+            .environmentObject(Preferences())
             .padding(.top, 70)
     }
 }
