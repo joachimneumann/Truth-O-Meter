@@ -73,9 +73,7 @@ struct MainView: View {
                         .padding(.trailing, 5)
                 }
                 .padding()
-                .padding(.trailing, UIDevice.current.hasNotch ? 50 : 0)
-                .padding(.top, UIDevice.current.hasNotch ? 0 : 20)
-                .background(Color.yellow.opacity(0.2))
+                .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
                 ContentView()
             }
             .ignoresSafeArea()
