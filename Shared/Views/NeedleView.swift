@@ -45,7 +45,7 @@ struct NeedleView_Previews: PreviewProvider {
         Needle.shared.active(true, strongNoise: false)
         Needle.shared.setValue(1.0)
         return GeometryReader { geo in
-            NeedleView(displayMeasures: DisplayMeasures(geo.size), activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray)
+            NeedleView(displayMeasures: DisplayMeasures(geo.size), activeColor: Color.red, passiveColor: Color.gray)
                 .background(Color.green.opacity(0.2))
         }
     }

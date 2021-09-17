@@ -90,7 +90,7 @@ struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let preferences = Preferences()
         Needle.shared.active(true, strongNoise: false)
-        return DisplayView(colorful: true, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
+        return DisplayView(colorful: true, editTitle: false, activeColor: Color.red, passiveColor: Color(white: 0.7), darkColor: Color.gray)
             .padding()
             .environmentObject(preferences)
             .frame(width: 390, height: 400, alignment: .center)

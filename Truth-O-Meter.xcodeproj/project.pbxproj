@@ -13,7 +13,6 @@
 		AA2AC26326F1D9D700ABFA20 /* DisplayMeasures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */; };
 		AA2AC26526F1E51D00ABFA20 /* DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */; };
 		AA2AC26726F3068400ABFA20 /* FiveDisks.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26626F3068400ABFA20 /* FiveDisks.swift */; };
-		AA2AC26B26F316BB00ABFA20 /* ShapeShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */; };
 		AA2B3545255AA99400AD0B14 /* Truth_O_MeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */; };
 		AA2B3549255AA99400AD0B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA2B3534255AA99400AD0B14 /* Assets.xcassets */; };
 		AA2B355C255AAAB800AD0B14 /* DisplayBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2B355B255AAAB800AD0B14 /* DisplayBackground.swift */; };
@@ -29,7 +28,6 @@
 		AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9014D126CA62BD00B4EA2C /* NeedleView.swift */; };
 		AAB2F31526EF4A2C0052858F /* CaptureSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F31426EF4A2C0052858F /* CaptureSize.swift */; };
 		AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB2F31626EF4A5E0052858F /* Stamp.swift */; };
-		AACB1EB4255BB18600BA34B5 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EB3255BB18600BA34B5 /* C.swift */; };
 		AACB1EBB255BC5BF00BA34B5 /* DisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */; };
 		AAE4C2E226E06F6900FE043B /* Needle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E126E06F6900FE043B /* Needle.swift */; };
 		AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4C2E826E2281F00FE043B /* InstructionView.swift */; };
@@ -44,7 +42,6 @@
 		AA2AC26226F1D9D700ABFA20 /* DisplayMeasures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMeasures.swift; sourceTree = "<group>"; };
 		AA2AC26426F1E51D00ABFA20 /* DisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModel.swift; sourceTree = "<group>"; };
 		AA2AC26626F3068400ABFA20 /* FiveDisks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDisks.swift; sourceTree = "<group>"; };
-		AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeShifter.swift; sourceTree = "<group>"; };
 		AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truth_O_MeterApp.swift; sourceTree = "<group>"; };
 		AA2B3534255AA99400AD0B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA2B3539255AA99400AD0B14 /* Truth-O-Meter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Truth-O-Meter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,7 +61,6 @@
 		AA9014D126CA62BD00B4EA2C /* NeedleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedleView.swift; sourceTree = "<group>"; };
 		AAB2F31426EF4A2C0052858F /* CaptureSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSize.swift; sourceTree = "<group>"; };
 		AAB2F31626EF4A5E0052858F /* Stamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stamp.swift; sourceTree = "<group>"; };
-		AACB1EB3255BB18600BA34B5 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		AACB1EBA255BC5BF00BA34B5 /* DisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayView.swift; sourceTree = "<group>"; };
 		AAE4C2E126E06F6900FE043B /* Needle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Needle.swift; sourceTree = "<group>"; };
 		AAE4C2E826E2281F00FE043B /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
@@ -107,7 +103,6 @@
 				AA48152926E8CB6D0041C045 /* PlaygroundView.swift */,
 				AAB2F31426EF4A2C0052858F /* CaptureSize.swift */,
 				AA2AC26626F3068400ABFA20 /* FiveDisks.swift */,
-				AA2AC26A26F316BB00ABFA20 /* ShapeShifter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -142,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				AA2B3532255AA99300AD0B14 /* Truth_O_MeterApp.swift */,
-				AACB1EB3255BB18600BA34B5 /* C.swift */,
 				AA27BEB126DE975700E7C092 /* Models */,
 				AA27BEAD26DE954400E7C092 /* Views */,
 				AA2B3534255AA99400AD0B14 /* Assets.xcassets */,
@@ -259,7 +253,6 @@
 				AAE4C2E926E2281F00FE043B /* InstructionView.swift in Sources */,
 				AAB2F31726EF4A5E0052858F /* Stamp.swift in Sources */,
 				AA9014D226CA62BD00B4EA2C /* NeedleView.swift in Sources */,
-				AACB1EB4255BB18600BA34B5 /* C.swift in Sources */,
 				AA0C217A26DF36EF00D7BBB7 /* PreferencesData.swift in Sources */,
 				AA7A6B19255D8E4B008BAE2D /* PreferencesView.swift in Sources */,
 				AAB2F31526EF4A2C0052858F /* CaptureSize.swift in Sources */,
@@ -269,7 +262,6 @@
 				AA30E3AD26D3BE1900BC5F20 /* PreferencesDetailView.swift in Sources */,
 				AA48152A26E8CB6D0041C045 /* PlaygroundView.swift in Sources */,
 				AA6011E826D0028C00C743F6 /* HorizontalProgressBar.swift in Sources */,
-				AA2AC26B26F316BB00ABFA20 /* ShapeShifter.swift in Sources */,
 				AA161D6426DCBB45004BF2C8 /* SmartButtonView.swift in Sources */,
 				AA40FD5E26D60470006DBFD8 /* Preferences.swift in Sources */,
 			);

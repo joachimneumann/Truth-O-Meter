@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
-    @State var preferences = Preferences()
+    @State private var preferences = Preferences()
 #if targetEnvironment(macCatalyst)
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
 #endif

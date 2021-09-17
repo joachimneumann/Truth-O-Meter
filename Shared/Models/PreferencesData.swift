@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct Key {
     /// some key names might seem stange, but this is
     /// for compatibility with older app versions

@@ -21,8 +21,12 @@ struct PreferencesDetailView: View {
         VStack {
             Spacer(minLength: 20)
             HStack {
-                DisplayView(colorful: true, editTitle: preferences.isCustom, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
-                //.background(Color.green.opacity(0.2))
+                DisplayView(
+                    colorful: true,
+                    editTitle: preferences.isCustom,
+                    activeColor: preferences.colors.bullshitRed,
+                    passiveColor: preferences.colors.lightGray,
+                    darkColor: preferences.colors.gray)
                     .padding(.trailing, 5)
                 Stamp(preferences.stampTop,
                       preferences.stampBottom,
@@ -40,7 +44,7 @@ struct PreferencesDetailView: View {
                 isTapped: .constant(false),
                 preferencesPrecision: $preferences.precision,
                 radius: 200,
-                color: C.color.bullshitRed,
+                color: preferences.colors.bullshitRed,
                 paleColor: Color.white,
                 callback: callback)
                 .aspectRatio(contentMode: .fit)
@@ -53,24 +57,25 @@ struct PreferencesDetailView: View {
 
 
 struct CustomTextFieldStyle: TextFieldStyle {
+    @EnvironmentObject private var preferences: Preferences
     @Binding var focused: Bool
     let fontsize = 40.0
     let cornerRadius = 6.0
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)
-            .accentColor(C.color.bullshitRed)
+            .accentColor(preferences.colors.bullshitRed)
             .mask(MaskView())
             .autocapitalization(.none)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(C.color.bullshitRed, lineWidth: focused ? 3 : 0))
-            .background(C.color.bullshitRed.opacity(0.1))
+                    .strokeBorder(preferences.colors.bullshitRed, lineWidth: focused ? 3 : 0))
+            .background(preferences.colors.bullshitRed.opacity(0.1))
             .multilineTextAlignment(.center)
             .lineLimit(1)
             .cornerRadius(cornerRadius)
             .font(.system(size: fontsize, weight: .bold))
-            .foregroundColor(C.color.bullshitRed)
+            .foregroundColor(preferences.colors.bullshitRed)
     }
 }
 

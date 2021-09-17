@@ -13,8 +13,8 @@ struct Stamp: View {
     let secondLine: String?
     let color: Color
     let angle: Angle
-    @State var frameSize = CGSize(width: 1.0, height: 1.0)
-    @State var textSize  = CGSize(width: 1.0, height: 1.0)
+    @State private var frameSize = CGSize(width: 1.0, height: 1.0)
+    @State private var textSize  = CGSize(width: 1.0, height: 1.0)
     
     static let defaultColor = Color(
         red: 255.0/255.0,

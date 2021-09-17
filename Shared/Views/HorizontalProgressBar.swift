@@ -14,21 +14,19 @@ struct HorizontalProgressBar: View {
     let passiveColor: Color
     let animationTime: Double
     
-    @State var animate = false
-    
-    
-    @State private var width = 0.0
+    @State private var animate = false
+
     var body: some View {
         ZStack(alignment: Alignment.leading) {
             Rectangle()
                 .foregroundColor(passiveColor)
+                .frame(height: 2)
                 .opacity(0.2)
             Rectangle()
                 .foregroundColor(activeColor)
-                .frame(width: animate ? .infinity : 0)
+                .frame(width: animate ? .infinity : 0, height: 2)
                 .animation(.easeIn(duration: animationTime), value: animate)
         }
-        .frame(height: 2)
         .onAppear {
             animate = true
             
@@ -46,8 +44,8 @@ struct HorizontalProgressbar_Previews: PreviewProvider {
     static var previews: some View {
         func doNothing() {}
         return HorizontalProgressBar(animationFinished: doNothing,
-                                     activeColor: C.color.bullshitRed,
-                                     passiveColor: C.color.lightGray,
+                                     activeColor: Color.red,
+                                     passiveColor: Color.gray,
                                      animationTime: 2)
     }
 }

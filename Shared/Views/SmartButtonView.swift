@@ -10,6 +10,7 @@ import SwiftUI
 struct SmartButtonView: View {
     @Binding var isTapped: Bool
     let color: Color
+    let gray: Color
     let paleColor: Color
     let callback: (Precision) -> Void
     
@@ -52,10 +53,10 @@ struct SmartButtonView: View {
         ZStack {
             FrameCatcher(into: $smartButtonSize)
             if isTapped {
-                RingView(width: config.ringWidth, whenFinished: ringProgressFinished)
+                RingView(width: config.ringWidth, activeColor: color, passiveColor: gray, whenFinished: ringProgressFinished)
             } else {
                 Circle()
-                    .stroke(C.color.lightGray, lineWidth: config.ringWidth)
+                    .stroke(gray, lineWidth: config.ringWidth)
             }
             FiveDisks(isTapped: $isTapped,
                       preferencesPrecision: .constant(nil),
@@ -71,8 +72,9 @@ struct SmartButtonView: View {
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
         SmartButtonView(isTapped: .constant(false),
-                        color: C.color.bullshitRed,
-                        paleColor: C.color.paleBullshitRed) { p in
+                        color: Color.red,
+                        gray: Color.gray,
+                        paleColor: Color.orange) { p in
         }
     }
 }

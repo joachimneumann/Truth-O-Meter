@@ -11,12 +11,11 @@ import SwiftUI
 
 struct PreferencesView: View {
     @EnvironmentObject private var preferences: Preferences
-    
     private struct ThemeCell: View {
         @EnvironmentObject private var preferences: Preferences
-        var name: String
-        var isSelected: Bool
-        var isCustom: Bool
+        let name: String
+        let isSelected: Bool
+        let isCustom: Bool
         var body: some View {
             HStack {
                 if isSelected {
@@ -64,7 +63,7 @@ struct PreferencesView: View {
                         .onTapGesture {
                             preferences.selectedThemeIndex = themeName.id
                         }
-                    Rectangle().fill(C.color.lightGray)
+                    Rectangle().fill(preferences.colors.lightGray)
                         .frame(height: 0.5)
                         .padding(.leading)
                 }
@@ -117,7 +116,7 @@ struct PreferencesView: View {
             }
             .padding(.vertical, 40)
             TimePicker()
-            Rectangle().fill(C.color.lightGray)
+            Rectangle().fill(preferences.colors.lightGray)
                 .frame(height: 0.5)
                 .padding(.leading)
             ThemesList(themeNames: preferences.themeNames)

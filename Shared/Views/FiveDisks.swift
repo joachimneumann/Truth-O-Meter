@@ -154,8 +154,8 @@ struct FiveDisks_Previews: PreviewProvider {
                 isTapped: .constant(false),
                 preferencesPrecision: .constant(nil),
                 radius: 200,
-                color: C.color.bullshitRed,//.opacity(0.2),
-                paleColor: C.color.paleBullshitRed,
+                color: Color.red,
+                paleColor: Color.orange,
                 callback: ff)
         }
     }

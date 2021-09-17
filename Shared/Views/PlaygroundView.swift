@@ -12,7 +12,8 @@ struct PlaygroundView: View {
     private var privateFrameWidth = 100.0
     @State private var frameWidth = 100.0
     @State private var frameHeight = 100.0
-    @State var angle = Angle(degrees: 0.0)
+    
+    @State private var angle = Angle(degrees: 0.0)
 
     var body: some View  {
         ZStack {
