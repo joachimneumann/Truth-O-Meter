@@ -19,7 +19,7 @@ struct SmartButtonView: View {
     
     @State private var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
     @State private var tappedPrecision: Precision = .bullsEye
-
+    
     private struct FrameCatcher: View {
         @Binding var into: CGSize
         var body: some View {
@@ -41,7 +41,7 @@ struct SmartButtonView: View {
         DispatchQueue.main.async {
             AudioServicesPlaySystemSound(startRecording)
         }
-
+        
         Needle.shared.active(true, strongNoise: true)
         let v: Double
         switch precision {
@@ -60,7 +60,9 @@ struct SmartButtonView: View {
         displayColorful = true
         tappedPrecision = precision
         animateRingView = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + listenTime) {
+        let whenWhen: DispatchTime = DispatchTime.now() +
+            DispatchTimeInterval.milliseconds(Int(1000.0 * listenTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             AudioServicesPlaySystemSound(stopRecording)
             callback(tappedPrecision)
         }
@@ -76,9 +78,9 @@ struct SmartButtonView: View {
             padding = 0.5 * ringWidth
         }
     }
-
+    
     @State private var animateRingView: Bool = false
-
+    
     var body: some View {
         let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
         ZStack {
@@ -112,6 +114,6 @@ struct SmartButton_Previews: PreviewProvider {
             listenTime: 1.0,
             analysisTime: 1.0,
             displayColorful: .constant(true)) { p in
-        }
+            }
     }
 }
