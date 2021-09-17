@@ -56,12 +56,9 @@ struct Stamp: View {
         }
     }
     
-    struct OneOrTwoLines: View {
+    struct Lines : View {
         let firstLine: String
         let secondLine: String?
-        let color: Color
-        let stampModel: StampModel
-        @Binding var textSize: CGSize
         var body: some View {
             VStack {
                 Text(firstLine)
@@ -69,6 +66,17 @@ struct Stamp: View {
                     Text(secondLine)
                 }
             }
+        }
+    }
+    
+    struct OneOrTwoLines: View {
+        let firstLine: String
+        let secondLine: String?
+        let color: Color
+        let stampModel: StampModel
+        @Binding var textSize: CGSize
+        var body: some View {
+            Lines(firstLine: firstLine, secondLine: secondLine)
             .font(.system(size: stampModel.largeFontSize).bold())
             .foregroundColor(color)
             .fixedSize()
