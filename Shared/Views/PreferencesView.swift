@@ -40,7 +40,8 @@ struct PreferencesView: View {
                 if isSelected {
                     Image(systemName: "checkmark")
                         .font(.title2.weight(.bold))
-                        .foregroundColor(.blue)
+                        .foregroundColor(.accentColor)
+                    
                 }
             }
             .padding(.leading)

@@ -75,7 +75,7 @@ struct MainView: View {
         NavigationView {
             VStack(alignment: .trailing) {
                 NavigationLink(destination: PreferencesView()) {
-                    Image("settings")
+                    Image(colorScheme == .light ? "settings" : "settings.dark")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .padding(.trailing, 5)
@@ -83,11 +83,12 @@ struct MainView: View {
                 .padding()
                 .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
                 ContentView()
-                    .environmentObject(preferences)
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
         }
+        .environmentObject(preferences)
+        .accentColor(colorScheme == .light ? .blue : .white)
     }
 }
 

@@ -147,7 +147,7 @@ class Preferences: ObservableObject {
             lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         } else {
             // dark
-            primaryColor = Color(white: 1.0)
+            primaryColor = Color(red: 242.0/255.0, green: 224.0/255.0, blue: 136.0/255.0)
             secondaryColor = Color(white: 0.7)
             gray = Color(white: 0.5)
             lightGray = Color(white: 0.7)
