@@ -92,7 +92,12 @@ struct Stamp: View {
     
     var body: some View {
         
-        let stampModel = StampModel(frameSize: frameSize, textSize: textSize, angle: angle.radians)
+        let stampModel = StampModel(
+            tw: Float(frameSize.width),
+            th: Float(frameSize.height),
+            fw: Float(textSize.width),
+            fh: Float(textSize.height),
+            angle: Float(angle.radians))
         
         ZStack {
             FrameCatcher(into: $frameSize)
@@ -111,7 +116,7 @@ struct Stamp: View {
                         .mask(Image(uiImage: UIImage(named: "mask")!)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: stampModel.maskSize.width, height: stampModel.maskSize.height, alignment: SwiftUI.Alignment.center)
+                                .frame(width: stampModel.maskSize, height: stampModel.maskSize, alignment: SwiftUI.Alignment.center)
                         )
                 }
                 .fixedSize(horizontal: true, vertical: true)
