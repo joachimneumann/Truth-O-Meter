@@ -9,15 +9,12 @@ import SwiftUI
 
 struct SmartButtonView: View {
     @Binding var isTapped: Bool
-    @Binding var preferencesPrecision: Precision?
-    let radius: Double
     let color: Color
     let paleColor: Color
     let callback: (Precision) -> Void
-
-    @State var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
-    @State var showRingProgress = false
-    @State var tappedPrecision: Precision = .bullsEye
+    
+    @State private var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
+    @State private var tappedPrecision: Precision = .bullsEye
 
     private struct FrameCatcher: View {
         @Binding var into: CGSize
@@ -33,39 +30,47 @@ struct SmartButtonView: View {
     }
     
     func startRingAnimation(_ precision: Precision) {
-        showRingProgress = true
         tappedPrecision = precision
     }
     
     func ringProgressFinished() {
         callback(tappedPrecision)
     }
+    struct Config {
+        let padding: Double
+        let ringWidth: Double
+        let fiveDisksRadius: Double
+        init(radius: Double) {
+            ringWidth = 0.05 * radius
+            fiveDisksRadius = radius - 3.0 * ringWidth
+            padding = 0.5 * ringWidth
+        }
+    }
+
     var body: some View {
+        let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
         ZStack {
-            let linewidth: Double = smartButtonSize.width * 0.05
             FrameCatcher(into: $smartButtonSize)
-            if showRingProgress {
-                RingView(width: linewidth, whenFinished: ringProgressFinished)
+            if isTapped {
+                RingView(width: config.ringWidth, whenFinished: ringProgressFinished)
             } else {
                 Circle()
-                    .stroke(C.color.lightGray, lineWidth: linewidth)
+                    .stroke(C.color.lightGray, lineWidth: config.ringWidth)
             }
-            FiveDisks(isTapped: .constant(false),
+            FiveDisks(isTapped: $isTapped,
                       preferencesPrecision: .constant(nil),
-                      radius: 200,
-                      color: C.color.bullshitRed,
-                      paleColor: C.color.paleBullshitRed,
+                      radius: config.fiveDisksRadius,
+                      color: color,
+                      paleColor: paleColor,
                       callback: startRingAnimation)
-            .padding(smartButtonSize.width * 0.05/2.0)
         }
+        .padding(config.padding)
     }
 }
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
         SmartButtonView(isTapped: .constant(false),
-                        preferencesPrecision: .constant(.middle),
-                        radius: 200,
                         color: C.color.bullshitRed,
                         paleColor: C.color.paleBullshitRed) { p in
         }

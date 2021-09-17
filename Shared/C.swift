@@ -7,23 +7,8 @@
 
 import SwiftUI
 
-extension Font {
-    static var displayTitle: Font { return Font.system(size: UIScreen.main.bounds.width * 0.07).bold() }
-    static var analyseTitle: Font { return Font.system(size: UIScreen.main.bounds.width * 0.04).bold() }
-}
 
-struct C {
-    struct timing {
-        static var shapeShiftAnimationTime = 0.25
-        static let paleAnimationTime       = 0.10
-    }
-    
-    struct sounds {
-        static let startRecording:UInt32 = 1113
-        static let stopRecording:UInt32 = 1114
-        /// source: https://github.com/TUNER88/iOSSystemSoundsLibrary
-    }
-    
+struct C {    
     struct color {
         static let frameColor = Color(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0)
         static let bullshitRed = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
@@ -32,37 +17,6 @@ struct C {
         static let lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         static let paleLightGray = Color(red:  210.0/255.0, green: 210.0/255.0, blue: 210.0/255.0)
         static let lightGreen = Color(red:  212/255.0, green: 251/255.0, blue: 121/255.0)
-    }
-    
-    struct key {
-        /// some key names might seem stange, but this is
-        /// for compatibility with older app versions
-        static let listenTiming         = "fastResponseTimeKey"
-        static let analysisTiming       = "analysisTimingIndexkey"
-        static let selectedTheme        = "selectedTheme"
-        struct custom {
-            static let title          = "CustomiseddisplayTextkey"
-            struct edge {
-                static let top        = "CustomisedfarLeftText1key"
-                static let bottom     = "CustomisedfarLeftText2key"
-            }
-            struct outer {
-                static let top       = "CustomisedleftText1key"
-                static let bottom    = "CustomisedleftText2key"
-            }
-            struct middle {
-                static let top      = "CustomisedcenterText1key"
-                static let bottom   = "CustomisedcenterText2key"
-            }
-            struct inner {
-                static let top       = "CustomisedrightText1key"
-                static let bottom    = "CustomisedrightText2key"
-            }
-            struct bullsEye {
-                static let top    = "CustomisedfarRightText1key"
-                static let bottom = "CustomisedfarRightText2key"
-            }
-        }
     }
     
 }

@@ -15,11 +15,15 @@ struct RingView: View {
 
     @State private var value = 0.0
     
+    let startRecording:UInt32 = 1113
+    let stopRecording:UInt32 = 1114
+    /// source: https://github.com/TUNER88/iOSSystemSoundsLibrary
+
     func startSound() {
-        AudioServicesPlaySystemSound(C.sounds.startRecording)
+        AudioServicesPlaySystemSound(startRecording)
     }
     func endSound() {
-        AudioServicesPlaySystemSound(C.sounds.stopRecording)
+        AudioServicesPlaySystemSound(stopRecording)
     }
     
     var body: some View {

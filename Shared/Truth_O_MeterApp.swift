@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
+    @State var preferences = Preferences()
 #if targetEnvironment(macCatalyst)
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
 #endif
@@ -17,18 +18,15 @@ struct Truth_O_MeterApp: App {
         print(precision)
     }
     @State private var isTapped = false
-    @State private var preferencesPrecision: Precision? = nil//Precision.bullsEye
     var body: some Scene {
         return WindowGroup {
             VStack {
-                Button("back") { isTapped.toggle() }
-                SmartButtonView(isTapped: $isTapped,
-                                preferencesPrecision: $preferencesPrecision,
-                                radius: 200,
-                                color: C.color.bullshitRed.opacity(0.2),
-                                paleColor: C.color.paleBullshitRed,
-                                callback: ff)
-                                .environmentObject(Preferences())
+//                Button("back") { isTapped.toggle() }
+//                SmartButtonView(isTapped: $isTapped,
+//                                color: C.color.bullshitRed,
+//                                paleColor: C.color.paleBullshitRed,
+//                                callback: ff)
+//                                .environmentObject(preferences)
                 //                FiveDisks(
                 //                    isTapped: $isTapped,
                 //                    preferencesPrecision: $preferencesPrecision,
@@ -37,8 +35,8 @@ struct Truth_O_MeterApp: App {
                 //                    paleColor: C.color.paleBullshitRed,
                 //                    callback: ff)
             }
-            //            MainView()
-            //                .environmentObject(Preferences())
+                        MainView()
+                            .environmentObject(Preferences())
             
         }
     }

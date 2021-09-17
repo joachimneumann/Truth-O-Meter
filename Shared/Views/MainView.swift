@@ -20,6 +20,8 @@ struct ContentView: View {
         showStampView = true
     }
     
+    let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
+    
     var body: some View {
         VStack {
             DisplayView(colorful: displayColorful, editTitle: false, activeColor: C.color.bullshitRed, passiveColor: C.color.lightGray, darkColor: C.color.gray)
@@ -30,15 +32,14 @@ struct ContentView: View {
                     passiveColor: C.color.lightGray.opacity(0.7),
                     animationTime: preferences.analysisTime)
                 Text("Analysing...")
-                    .font(.analyseTitle)
+                    .font(analyseTitleFont)
                     .foregroundColor(C.color.gray)
             }
             Spacer()
             SmartButtonView(isTapped: $isTapped,
-                            preferencesPrecision: .constant(nil),
-                            radius: 200,
                             color: C.color.bullshitRed,
                             paleColor: C.color.paleBullshitRed) { p in
+                showAnalysisView = true
             }
             .aspectRatio(contentMode: .fit)
             Spacer()
