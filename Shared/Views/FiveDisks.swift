@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct FiveDisks: View {
-    @Binding var isTapped: Bool
     @Binding var preferencesPrecision: Precision?
     let radius: Double
     let color: Color
     let paleColor: Color
     let callback: (Precision) -> Void
+
+    @State var isTapped: Bool = false
 
     let diskData = [
         DiskData(.outer,    0.8 - 0.05),
@@ -151,7 +152,6 @@ struct FiveDisks_Previews: PreviewProvider {
         return VStack {
             Button("back") { }
             FiveDisks(
-                isTapped: .constant(false),
                 preferencesPrecision: .constant(nil),
                 radius: 200,
                 color: Color.red,

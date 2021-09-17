@@ -8,25 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isTapped = false
     @EnvironmentObject private var preferences: Preferences
     @State private var displayColorful = false
     @State private var showAnalysisView = false
+    @State private var showSmartButton = true
     @State private var showStampView = false
     
-    func analysisFinished() {
-        showAnalysisView = false
-        showStampView = true
-    }
-    
     let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
-
+    
     var body: some View {
         VStack {
             DisplayView(colorful: displayColorful, editTitle: false, activeColor: preferences.colors.bullshitRed, passiveColor: preferences.colors.lightGray, darkColor: preferences.colors.gray)
             if showAnalysisView {
                 HorizontalProgressBar(
-                    animationFinished: analysisFinished,
                     activeColor: preferences.colors.lightGray,
                     passiveColor: preferences.colors.lightGray.opacity(0.7),
                     animationTime: preferences.analysisTime)
@@ -35,13 +29,33 @@ struct ContentView: View {
                     .foregroundColor(preferences.colors.gray)
             }
             Spacer()
-            SmartButtonView(isTapped: $isTapped,
-                            color: preferences.colors.bullshitRed,
-                            gray: preferences.colors.lightGray,
-                            paleColor: preferences.colors.paleBullshitRed) { p in
-                showAnalysisView = true
+            if showSmartButton {
+                SmartButtonView(
+                    color: preferences.colors.bullshitRed,
+                    gray: preferences.colors.lightGray,
+                    paleColor: preferences.colors.paleBullshitRed) { p in
+                        Needle.shared.active(true, strongNoise: true)
+                        displayColorful = true
+                        showAnalysisView = true
+                        showSmartButton = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + preferences.analysisTime) {
+                            Needle.shared.active(true, strongNoise: false)
+                            showAnalysisView = false
+                            showStampView = true
+                        }
+                    }
+                    .padding()
             }
-            .aspectRatio(contentMode: .fit)
+            if showStampView {
+                Stamp(preferences.stampTop, preferences.stampBottom)
+                    .onTapGesture {
+                        Needle.shared.setValue(0.5)
+                        Needle.shared.active(false, strongNoise: false)
+                        showStampView = false
+                        showSmartButton = true
+                        displayColorful = false
+                    }
+            }
             Spacer()
         }
         .padding()

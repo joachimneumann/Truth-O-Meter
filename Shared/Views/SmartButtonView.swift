@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import GameKit /// for Audio
 
 struct SmartButtonView: View {
-    @Binding var isTapped: Bool
+    @EnvironmentObject private var preferences: Preferences
     let color: Color
     let gray: Color
     let paleColor: Color
@@ -30,13 +31,38 @@ struct SmartButtonView: View {
         }
     }
     
-    func startRingAnimation(_ precision: Precision) {
+    func tapped(_ precision: Precision) {
+        let startRecording:UInt32 = 1113
+        let stopRecording:UInt32 = 1114
+        /// source: https://github.com/TUNER88/iOSSystemSoundsLibrary
+        
+        DispatchQueue.main.async {
+            AudioServicesPlaySystemSound(startRecording)
+        }
+
+        Needle.shared.active(true, strongNoise: true)
+        let v: Double
+        switch precision {
+        case .edge:
+            v = 1.0
+        case .outer:
+            v = 0.75
+        case .middle:
+            v = 0.5
+        case .inner:
+            v = 0.25
+        case .bullsEye:
+            v = 0.0
+        }
+        Needle.shared.setValueInSteps(v, totalTime: preferences.listenTime + preferences.analysisTime)
         tappedPrecision = precision
+        animateRingView = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + preferences.listenTime) {
+            AudioServicesPlaySystemSound(stopRecording)
+            callback(tappedPrecision)
+        }
     }
     
-    func ringProgressFinished() {
-        callback(tappedPrecision)
-    }
     struct Config {
         let padding: Double
         let ringWidth: Double
@@ -48,22 +74,26 @@ struct SmartButtonView: View {
         }
     }
 
+    @State private var animateRingView: Bool = false
+
     var body: some View {
         let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
         ZStack {
             FrameCatcher(into: $smartButtonSize)
-            if isTapped {
-                RingView(width: config.ringWidth, activeColor: color, passiveColor: gray, whenFinished: ringProgressFinished)
+            if animateRingView {
+                RingView(
+                    width: config.ringWidth,
+                    activeColor: color,
+                    passiveColor: gray)
             } else {
                 Circle()
                     .stroke(gray, lineWidth: config.ringWidth)
             }
-            FiveDisks(isTapped: $isTapped,
-                      preferencesPrecision: .constant(nil),
+            FiveDisks(preferencesPrecision: .constant(nil),
                       radius: config.fiveDisksRadius,
                       color: color,
                       paleColor: paleColor,
-                      callback: startRingAnimation)
+                      callback: tapped)
         }
         .padding(config.padding)
     }
@@ -71,8 +101,7 @@ struct SmartButtonView: View {
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmartButtonView(isTapped: .constant(false),
-                        color: Color.red,
+        SmartButtonView(color: Color.red,
                         gray: Color.gray,
                         paleColor: Color.orange) { p in
         }

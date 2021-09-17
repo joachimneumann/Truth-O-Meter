@@ -54,19 +54,7 @@ struct DisplayView: View {
                     darkColor: darkColor,
                     activeColor: activeColor,
                     aspectRatio: aspectRatio)
-                if editTitle {
-                    /// needle behind the text
-                    NeedleView(
-                        displayMeasures:model.measures,
-                        activeColor: activeColor,
-                        passiveColor: passiveColor)
-                        .opacity(0.5)
-                    TextField("", text: $preferences.title, onEditingChanged: { edit in
-                        self.editing = edit
-                    })
-                    .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
-                } else {
-                    /// needle in front of the text
+                if !editTitle {
                     Text(preferences.title)
                         .lineLimit(1)
                         .font(.system(size: 500).bold())
@@ -74,11 +62,17 @@ struct DisplayView: View {
                         .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
                         .offset(y: geo.size.height*0.15)
                         .foregroundColor(colorful ? darkColor : passiveColor)
-                    NeedleView(
-                        displayMeasures:model.measures,
-                        activeColor: activeColor,
-                        passiveColor: passiveColor)
-                        //.background(Color.green.opacity(0.2))
+                }
+                NeedleView(
+                    displayMeasures:model.measures,
+                    activeColor: activeColor,
+                    passiveColor: passiveColor)
+                    .opacity(editTitle ? 0.5 : 1.0)
+                if editTitle {
+                    TextField("", text: $preferences.title, onEditingChanged: { edit in
+                        self.editing = edit
+                    })
+                    .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
                 }
             }
         }
