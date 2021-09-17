@@ -60,7 +60,9 @@ struct SmartButtonView: View {
         displayColorful = true
         tappedPrecision = precision
         animateRingView = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + listenTime) {
+        let whenWhen: DispatchTime = DispatchTime.now() +
+            DispatchTimeInterval.milliseconds(Int(1000.0 * listenTime))
+        DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             AudioServicesPlaySystemSound(stopRecording)
             callback(tappedPrecision)
         }
