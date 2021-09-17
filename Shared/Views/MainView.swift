@@ -31,8 +31,8 @@ struct ContentView: View {
                     passiveColor: preferences.lightGray.opacity(0.7),
                     animationTime: preferences.analysisTime)
                 Text("Analysing...")
-                    .font(analyseTitleFont)
-                    .foregroundColor(preferences.gray)
+                    .font(.title)
+                    .foregroundColor(preferences.lightGray)
             }
             Spacer()
             if showSmartButton {
