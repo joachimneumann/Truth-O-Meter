@@ -9,17 +9,15 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
+    
+// force window size on Mac
 #if targetEnvironment(macCatalyst)
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
 #endif
-    func doNothing() {}
-    func ff(_ precision: Precision) {
-        print(precision)
-    }
+    
     @State private var isTapped = false
     var body: some Scene {
         return WindowGroup {
-//            FiveDisks(precision: .constant(nil), radius: 300, color: Color.green, paleColor: Color.yellow) {x in }
             MainView()
         }
     }
