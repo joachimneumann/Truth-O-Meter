@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesDetailView: View {
-    @EnvironmentObject private var preferences: Preferences
+    @Binding var preferences: Preferences
     @Binding var displayTitle: String
     
     func callback(_ precision: Precision) {
@@ -22,6 +22,7 @@ struct PreferencesDetailView: View {
             Spacer(minLength: 20)
             HStack {
                 DisplayView(
+                    title: $preferences.title,
                     colorful: true,
                     editTitle: preferences.isCustom,
                     activeColor: preferences.primaryColor,
@@ -36,13 +37,13 @@ struct PreferencesDetailView: View {
             }
             .fixedSize(horizontal: false, vertical: true)
             if preferences.isCustom {
-                EditableStampView()
+                EditableStampView(preferences: $preferences)
             } else {
                 EmptyView()
             }
             Spacer(minLength: 0)
             FiveDisks(
-                preferencesPrecision: $preferences.precision,
+                precision: $preferences.precision,
                 radius: 200,
                 color: preferences.primaryColor,
                 paleColor: Color.white,
@@ -57,7 +58,7 @@ struct PreferencesDetailView: View {
 
 
 struct CustomTextFieldStyle: TextFieldStyle {
-    @EnvironmentObject private var preferences: Preferences
+    @Binding var preferences: Preferences
     @Binding var focused: Bool
     let fontsize = 40.0
     let cornerRadius = 6.0
@@ -80,7 +81,7 @@ struct CustomTextFieldStyle: TextFieldStyle {
 }
 
 struct EditableStampView: View {
-    @EnvironmentObject private var preferences: Preferences
+    @Binding var preferences: Preferences
     @State private var editingTop = false
     @State private var editingBottom = false
     let fontsize = 40.0
@@ -89,13 +90,13 @@ struct EditableStampView: View {
             TextField("Top", text: $preferences.stampTop, onEditingChanged: { edit in
                 self.editingTop = edit
             })
-                .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
+                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingTop))
                 .padding(.top, 24)
             
             TextField("Bottom", text: $preferences.nonNilStampBottom, onEditingChanged: { edit in
                 self.editingBottom = edit
             })
-                .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
+                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingBottom))
                 .padding(.bottom, 12)
         }
     }
@@ -104,8 +105,6 @@ struct EditableStampView: View {
 
 struct PreferencesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let preferences = Preferences()
-        return PreferencesDetailView(displayTitle: .constant("xx"))
-            .environmentObject(preferences)
+        return PreferencesDetailView(preferences: .constant(Preferences()), displayTitle: .constant("xx"))
     }
 }

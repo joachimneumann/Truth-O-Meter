@@ -14,7 +14,7 @@ class Needle: ObservableObject {
     /// Views that change the value use the singleton, but do not use @ObservedObject
     /// to avoid invalidating these views when the needle value changes
     /// The class is implemented as singleton for easy access in these Views
-    /// @EnvironmentObject was not an option, because all views that use Needle
+    /// Using Environment Object was not a good option, because all views that use Needle
     /// would be invalidated on all value changes of Needle
     
     @Published private(set) var noisyValue: Double = 0.5

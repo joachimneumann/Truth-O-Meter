@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FiveDisks: View {
-    @Binding var preferencesPrecision: Precision?
+    @Binding var precision: Precision?
     let radius: Double
     let color: Color
     let paleColor: Color
@@ -28,7 +28,7 @@ struct FiveDisks: View {
         let cr: Double
         let p: Double
         let c: Color
-        let preferencesPrecision: Precision?
+        let precision: Precision?
         let gray = Color(white: 0.7)
         let down: () -> Void
         let up: (Precision) -> Void
@@ -37,18 +37,18 @@ struct FiveDisks: View {
              color: Color,
              pale: Bool,
              paleColor: Color,
-             preferencesPrecision: Precision?,
+             precision: Precision?,
              down: @escaping () -> Void,
              up: @escaping (Precision) -> Void) {
             cr = isTapped ? radius/14.0 : radius*0.5
             p  = isTapped ? radius*0.25 : 0.0
             c = pale ? paleColor : color
-            self.preferencesPrecision = preferencesPrecision
+            self.precision = precision
             self.down = down
             self.up = up
         }
-        func fc(for precision: Precision) -> Color {
-            preferencesPrecision == precision ? gray : c
+        func fc(for grayPrecision: Precision) -> Color {
+            self.precision == grayPrecision ? gray : c
         }
     }
     
@@ -86,7 +86,7 @@ struct FiveDisks: View {
                             config.up(precision)
                         }
                 )
-            if config.preferencesPrecision != nil {
+            if config.precision != nil {
                 Circle()
                     .stroke(config.gray, lineWidth: 1)
             }
@@ -94,18 +94,18 @@ struct FiveDisks: View {
     }
     
     func down() {
-        if preferencesPrecision == nil && !pale {
+        if precision == nil && !pale {
             pale = true
         }
     }
-    func up(_ precision: Precision) {
-        if preferencesPrecision != nil {
-            preferencesPrecision = precision
+    func up(_ precision: Precision?) {
+        if precision != nil {
+            self.precision = precision
+            callback(precision!)
         } else {
             isTapped = true
             pale = false
         }
-        callback(precision)
     }
     
     var body: some View {
@@ -115,7 +115,7 @@ struct FiveDisks: View {
             color: color,
             pale: pale,
             paleColor: paleColor,
-            preferencesPrecision: preferencesPrecision,
+            precision: precision,
             down: down,
             up: up)
 
@@ -152,7 +152,7 @@ struct FiveDisks_Previews: PreviewProvider {
         return VStack {
             Button("back") { }
             FiveDisks(
-                preferencesPrecision: .constant(nil),
+                precision: .constant(nil),
                 radius: 200,
                 color: Color.red,
                 paleColor: Color.orange,

@@ -10,9 +10,10 @@ import SwiftUI
 
 
 struct PreferencesView: View {
-    @EnvironmentObject private var preferences: Preferences
+    @Binding var preferences: Preferences
+    
     private struct ThemeCell: View {
-        @EnvironmentObject private var preferences: Preferences
+        @Binding var preferences: Preferences
         let name: String
         let isSelected: Bool
         let isCustom: Bool
@@ -21,18 +22,21 @@ struct PreferencesView: View {
                 if isSelected {
                     Text(name == "" ? "Custom" :  name)
                         .font(.headline)
-                    NavigationLink(destination: PreferencesDetailView(displayTitle: $preferences.title)) {
-                        Group {
-                            if isCustom {
-                                Text("Edit")
-                                    .padding(.leading, 10)
-                                    .font(.headline)
-                            } else {
-                                Image(systemName: "info.circle")
-                                    .font(.title2.weight(.semibold))
-                            }
-                        }
-                    }
+                    NavigationLink(
+                        destination:
+                            PreferencesDetailView(preferences: $preferences,
+                                                  displayTitle: $preferences.title)) {
+                                                      Group {
+                                                          if isCustom {
+                                                              Text("Edit")
+                                                                  .padding(.leading, 10)
+                                                                  .font(.headline)
+                                                          } else {
+                                                              Image(systemName: "info.circle")
+                                                                  .font(.title2.weight(.semibold))
+                                                          }
+                                                      }
+                                                  }
                 } else {
                     Text(name == "" ? "Custom" :  name)
                 }
@@ -49,14 +53,15 @@ struct PreferencesView: View {
             .frame(height: 30)
         }
     }
-
+    
     private struct ThemesList: View {
-        @EnvironmentObject private var preferences: Preferences
-        var themeNames: [ThemeName]
+        @Binding var preferences: Preferences
         var body: some View {
+            let themeNames = preferences.themeNames
             VStack {
                 ForEach(themeNames) { themeName in
                     ThemeCell(
+                        preferences: $preferences,
                         name: themeName.name,
                         isSelected: themeName.id == preferences.selectedThemeIndex,
                         isCustom: themeName.isCustom)
@@ -73,7 +78,7 @@ struct PreferencesView: View {
     }
     
     private struct TimePicker: View {
-        @EnvironmentObject private var preferences: Preferences
+        @Binding var preferences: Preferences
         var body: some View {
             VStack(alignment: .leading) {
                 HStack  {
@@ -116,11 +121,11 @@ struct PreferencesView: View {
                 Spacer()
             }
             .padding(.vertical, 40)
-            TimePicker()
+            TimePicker(preferences: $preferences)
             Rectangle().fill(preferences.lightGray)
                 .frame(height: 0.5)
                 .padding(.leading)
-            ThemesList(themeNames: preferences.themeNames)
+            ThemesList(preferences: $preferences)
             Spacer()
         }
         .frame(maxWidth: 600)
@@ -129,8 +134,7 @@ struct PreferencesView: View {
 
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        PreferencesView()
-            .environmentObject(Preferences())
+        PreferencesView(preferences: .constant(Preferences()))
             .padding(.top, 70)
     }
 }

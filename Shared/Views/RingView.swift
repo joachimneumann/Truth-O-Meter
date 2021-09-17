@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RingView: View {
-    @EnvironmentObject private var preferences: Preferences
+    let time: Double
     let width: Double
     let activeColor: Color
     let passiveColor: Color
@@ -23,7 +23,7 @@ struct RingView: View {
                 .trim(from: 0, to: animateValue)
                 .stroke(activeColor, lineWidth: width)
                 .rotationEffect(Angle(degrees:-90))
-                .animation(.linear(duration: preferences.listenTime), value: animateValue)
+                .animation(.linear(duration: time), value: animateValue)
         }
         .onAppear() {
             animateValue = 1.0
@@ -35,6 +35,7 @@ struct RingView_Previews: PreviewProvider {
     static var previews: some View {
         func doNothing() {}
         return RingView(
+            time: 1.0,
             width: 10,
             activeColor: Color.red,
             passiveColor: Color.gray)

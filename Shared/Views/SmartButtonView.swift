@@ -9,10 +9,11 @@ import SwiftUI
 import GameKit /// for Audio
 
 struct SmartButtonView: View {
-    @EnvironmentObject private var preferences: Preferences
     let color: Color
     let gray: Color
     let paleColor: Color
+    let listenTime: Double
+    let analysisTime: Double
     let callback: (Precision) -> Void
     
     @State private var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
@@ -54,10 +55,10 @@ struct SmartButtonView: View {
         case .bullsEye:
             v = 0.0
         }
-        Needle.shared.setValueInSteps(v, totalTime: preferences.listenTime + preferences.analysisTime)
+        Needle.shared.setValueInSteps(v, totalTime: listenTime + analysisTime)
         tappedPrecision = precision
         animateRingView = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + preferences.listenTime) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + listenTime) {
             AudioServicesPlaySystemSound(stopRecording)
             callback(tappedPrecision)
         }
@@ -82,6 +83,7 @@ struct SmartButtonView: View {
             FrameCatcher(into: $smartButtonSize)
             if animateRingView {
                 RingView(
+                    time: listenTime,
                     width: config.ringWidth,
                     activeColor: color,
                     passiveColor: gray)
@@ -89,7 +91,7 @@ struct SmartButtonView: View {
                 Circle()
                     .stroke(gray, lineWidth: config.ringWidth)
             }
-            FiveDisks(preferencesPrecision: .constant(nil),
+            FiveDisks(precision: .constant(nil),
                       radius: config.fiveDisksRadius,
                       color: color,
                       paleColor: paleColor,
@@ -101,9 +103,12 @@ struct SmartButtonView: View {
 
 struct SmartButton_Previews: PreviewProvider {
     static var previews: some View {
-        SmartButtonView(color: Color.red,
-                        gray: Color.gray,
-                        paleColor: Color.orange) { p in
+        SmartButtonView(
+            color: Color.red,
+            gray: Color.gray,
+            paleColor: Color.orange,
+            listenTime: 1.0,
+            analysisTime: 1.0) { p in
         }
     }
 }

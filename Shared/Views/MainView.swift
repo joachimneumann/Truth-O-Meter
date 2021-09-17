@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var preferences: Preferences
+    @Binding var preferences: Preferences
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showSmartButton = true
@@ -19,6 +19,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             DisplayView(
+                title: $preferences.title,
                 colorful: displayColorful,
                 editTitle: false,
                 activeColor: preferences.primaryColor,
@@ -38,7 +39,9 @@ struct ContentView: View {
                 SmartButtonView(
                     color: preferences.primaryColor,
                     gray: preferences.lightGray,
-                    paleColor: preferences.secondaryColor) { p in
+                    paleColor: preferences.secondaryColor,
+                    listenTime: preferences.listenTime,
+                    analysisTime: preferences.analysisTime) { p in
                         Needle.shared.active(true, strongNoise: true)
                         displayColorful = true
                         showAnalysisView = true
@@ -70,24 +73,27 @@ struct ContentView: View {
 
 struct MainView: View {
     @Environment(\.colorScheme) var colorScheme
+    @State var preferences: Preferences = Preferences()
     var body: some View {
-        let preferences = Preferences(preferredColorScheme: colorScheme)
-        NavigationView {
+        preferences = Preferences(preferredColorScheme: colorScheme)
+        return NavigationView {
             VStack(alignment: .trailing) {
-                NavigationLink(destination: PreferencesView()) {
+                NavigationLink(destination: PreferencesView(preferences: $preferences)) {
                     Image(colorScheme == .light ? "settings" : "settings.dark")
                         .resizable()
                         .frame(width: 30, height: 30)
                         .padding(.trailing, 5)
                 }
                 .padding()
+#if targetEnvironment(macCatalyst)
+                .padding(.top, 20)
+#endif
                 .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
-                ContentView()
+                ContentView(preferences: $preferences)
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
         }
-        .environmentObject(preferences)
         .accentColor(colorScheme == .light ? .blue : .white)
     }
 }
