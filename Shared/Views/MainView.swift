@@ -18,22 +18,27 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            DisplayView(colorful: displayColorful, editTitle: false, activeColor: preferences.colors.bullshitRed, passiveColor: preferences.colors.lightGray, darkColor: preferences.colors.gray)
+            DisplayView(
+                colorful: displayColorful,
+                editTitle: false,
+                activeColor: preferences.primaryColor,
+                passiveColor: preferences.lightGray,
+                gray: preferences.gray)
             if showAnalysisView {
                 HorizontalProgressBar(
-                    activeColor: preferences.colors.lightGray,
-                    passiveColor: preferences.colors.lightGray.opacity(0.7),
+                    activeColor: preferences.lightGray,
+                    passiveColor: preferences.lightGray.opacity(0.7),
                     animationTime: preferences.analysisTime)
                 Text("Analysing...")
                     .font(analyseTitleFont)
-                    .foregroundColor(preferences.colors.gray)
+                    .foregroundColor(preferences.gray)
             }
             Spacer()
             if showSmartButton {
                 SmartButtonView(
-                    color: preferences.colors.bullshitRed,
-                    gray: preferences.colors.lightGray,
-                    paleColor: preferences.colors.paleBullshitRed) { p in
+                    color: preferences.primaryColor,
+                    gray: preferences.lightGray,
+                    paleColor: preferences.secondaryColor) { p in
                         Needle.shared.active(true, strongNoise: true)
                         displayColorful = true
                         showAnalysisView = true
@@ -47,7 +52,7 @@ struct ContentView: View {
                     .padding()
             }
             if showStampView {
-                Stamp(preferences.stampTop, preferences.stampBottom)
+                Stamp(preferences.stampTop, preferences.stampBottom, color: preferences.primaryColor)
                     .onTapGesture {
                         Needle.shared.setValue(0.5)
                         Needle.shared.active(false, strongNoise: false)
@@ -62,8 +67,11 @@ struct ContentView: View {
     }
 }
 
+
 struct MainView: View {
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
+        let preferences = Preferences(preferredColorScheme: colorScheme)
         NavigationView {
             VStack(alignment: .trailing) {
                 NavigationLink(destination: PreferencesView()) {
@@ -75,6 +83,7 @@ struct MainView: View {
                 .padding()
                 .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
                 ContentView()
+                    .environmentObject(preferences)
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
@@ -85,7 +94,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(Preferences())
     }
 }
 

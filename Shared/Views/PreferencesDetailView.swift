@@ -24,12 +24,13 @@ struct PreferencesDetailView: View {
                 DisplayView(
                     colorful: true,
                     editTitle: preferences.isCustom,
-                    activeColor: preferences.colors.bullshitRed,
-                    passiveColor: preferences.colors.lightGray,
-                    darkColor: preferences.colors.gray)
+                    activeColor: preferences.primaryColor,
+                    passiveColor: preferences.lightGray,
+                    gray: preferences.gray)
                     .padding(.trailing, 5)
                 Stamp(preferences.stampTop,
                       preferences.stampBottom,
+                      color: preferences.primaryColor,
                       angle: Angle(degrees: 0))
                 //.background(Color.yellow.opacity(0.2))
             }
@@ -43,7 +44,7 @@ struct PreferencesDetailView: View {
             FiveDisks(
                 preferencesPrecision: $preferences.precision,
                 radius: 200,
-                color: preferences.colors.bullshitRed,
+                color: preferences.primaryColor,
                 paleColor: Color.white,
                 callback: callback)
                 .aspectRatio(contentMode: .fit)
@@ -63,18 +64,18 @@ struct CustomTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)
-            .accentColor(preferences.colors.bullshitRed)
+            .accentColor(preferences.primaryColor)
             .mask(MaskView())
             .autocapitalization(.none)
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .strokeBorder(preferences.colors.bullshitRed, lineWidth: focused ? 3 : 0))
-            .background(preferences.colors.bullshitRed.opacity(0.1))
+                    .strokeBorder(preferences.primaryColor, lineWidth: focused ? 3 : 0))
+            .background(preferences.primaryColor.opacity(0.1))
             .multilineTextAlignment(.center)
             .lineLimit(1)
             .cornerRadius(cornerRadius)
             .font(.system(size: fontsize, weight: .bold))
-            .foregroundColor(preferences.colors.bullshitRed)
+            .foregroundColor(preferences.primaryColor)
     }
 }
 

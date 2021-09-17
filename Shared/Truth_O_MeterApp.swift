@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct Truth_O_MeterApp: App {
-    @State private var preferences = Preferences()
 #if targetEnvironment(macCatalyst)
     @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
 #endif
@@ -20,24 +19,7 @@ struct Truth_O_MeterApp: App {
     @State private var isTapped = false
     var body: some Scene {
         return WindowGroup {
-            VStack {
-//                Button("back") { isTapped.toggle() }
-//                SmartButtonView(isTapped: $isTapped,
-//                                color: C.color.bullshitRed,
-//                                paleColor: C.color.paleBullshitRed,
-//                                callback: ff)
-//                                .environmentObject(preferences)
-                //                FiveDisks(
-                //                    isTapped: $isTapped,
-                //                    preferencesPrecision: $preferencesPrecision,
-                //                    radius: 200,
-                //                    color: C.color.bullshitRed.opacity(0.2),
-                //                    paleColor: C.color.paleBullshitRed,
-                //                    callback: ff)
-            }
-                        MainView()
-                            .environmentObject(Preferences())
-            
+            MainView()
         }
     }
 }

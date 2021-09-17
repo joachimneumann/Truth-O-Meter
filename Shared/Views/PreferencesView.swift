@@ -63,7 +63,7 @@ struct PreferencesView: View {
                         .onTapGesture {
                             preferences.selectedThemeIndex = themeName.id
                         }
-                    Rectangle().fill(preferences.colors.lightGray)
+                    Rectangle().fill(preferences.lightGray)
                         .frame(height: 0.5)
                         .padding(.leading)
                 }
@@ -116,7 +116,7 @@ struct PreferencesView: View {
             }
             .padding(.vertical, 40)
             TimePicker()
-            Rectangle().fill(preferences.colors.lightGray)
+            Rectangle().fill(preferences.lightGray)
                 .frame(height: 0.5)
                 .padding(.leading)
             ThemesList(themeNames: preferences.themeNames)

@@ -36,7 +36,7 @@ struct DisplayView: View {
     @State private var editing = false
     let activeColor:Color
     let passiveColor:Color
-    let darkColor: Color
+    let gray: Color
     
     private let aspectRatio = 1.9
     
@@ -50,8 +50,8 @@ struct DisplayView: View {
                 DisplayBackground(
                     model: model,
                     colorful: true,
-                    lightColor: passiveColor,
-                    darkColor: darkColor,
+                    passiveColor: passiveColor,
+                    gray: gray,
                     activeColor: activeColor,
                     aspectRatio: aspectRatio)
                 if !editTitle {
@@ -61,7 +61,7 @@ struct DisplayView: View {
                         .minimumScaleFactor(0.01)
                         .frame(width: geo.size.width*0.6, height: geo.size.height, alignment: .center)
                         .offset(y: geo.size.height*0.15)
-                        .foregroundColor(colorful ? darkColor : passiveColor)
+                        .foregroundColor(colorful ? gray : passiveColor)
                 }
                 NeedleView(
                     displayMeasures:model.measures,
@@ -72,7 +72,7 @@ struct DisplayView: View {
                     TextField("", text: $preferences.title, onEditingChanged: { edit in
                         self.editing = edit
                     })
-                    .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: darkColor, focused: $editing))
+                    .textFieldStyle(CustomTitleTextFieldStyle(activeColor: activeColor, darkColor: gray, focused: $editing))
                 }
             }
         }
@@ -84,7 +84,7 @@ struct Display_Previews: PreviewProvider {
     static var previews: some View {
         let preferences = Preferences()
         Needle.shared.active(true, strongNoise: false)
-        return DisplayView(colorful: true, editTitle: false, activeColor: Color.red, passiveColor: Color(white: 0.7), darkColor: Color.gray)
+        return DisplayView(colorful: true, editTitle: false, activeColor: Color.red, passiveColor: Color(white: 0.7), gray: Color.gray)
             .padding()
             .environmentObject(preferences)
             .frame(width: 390, height: 400, alignment: .center)
