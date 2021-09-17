@@ -14,6 +14,7 @@ struct SmartButtonView: View {
     let paleColor: Color
     let listenTime: Double
     let analysisTime: Double
+    @Binding var displayColorful: Bool
     let callback: (Precision) -> Void
     
     @State private var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
@@ -56,6 +57,7 @@ struct SmartButtonView: View {
             v = 0.0
         }
         Needle.shared.setValueInSteps(v, totalTime: listenTime + analysisTime)
+        displayColorful = true
         tappedPrecision = precision
         animateRingView = true
         DispatchQueue.main.asyncAfter(deadline: .now() + listenTime) {
@@ -108,7 +110,8 @@ struct SmartButton_Previews: PreviewProvider {
             gray: Color.gray,
             paleColor: Color.orange,
             listenTime: 1.0,
-            analysisTime: 1.0) { p in
+            analysisTime: 1.0,
+            displayColorful: .constant(true)) { p in
         }
     }
 }

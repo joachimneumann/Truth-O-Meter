@@ -98,14 +98,14 @@ struct FiveDisks: View {
             pale = true
         }
     }
-    func up(_ precision: Precision?) {
-        if precision != nil {
-            self.precision = precision
-            callback(precision!)
+    func up(_ tappedPrecision: Precision) {
+        if self.precision != nil {
+            self.precision = tappedPrecision
         } else {
             isTapped = true
             pale = false
         }
+        callback(tappedPrecision)
     }
     
     var body: some View {
@@ -139,7 +139,6 @@ struct FiveDisks: View {
         init(_ precision: Precision, _ r: Double) {
             self.precision = precision
             self.padding = (1.0 - r) * 0.5
-            //print("padding \(padding)")
         }
     }
 }

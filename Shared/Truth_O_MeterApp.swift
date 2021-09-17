@@ -19,6 +19,7 @@ struct Truth_O_MeterApp: App {
     @State private var isTapped = false
     var body: some Scene {
         return WindowGroup {
+//            FiveDisks(precision: .constant(nil), radius: 300, color: Color.green, paleColor: Color.yellow) {x in }
             MainView()
         }
     }

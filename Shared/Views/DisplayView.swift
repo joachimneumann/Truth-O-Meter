@@ -49,7 +49,7 @@ struct DisplayView: View {
             ZStack {
                 DisplayBackground(
                     model: model,
-                    colorful: true,
+                    colorful: colorful,
                     passiveColor: passiveColor,
                     gray: gray,
                     activeColor: activeColor,

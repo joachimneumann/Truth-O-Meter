@@ -41,13 +41,15 @@ struct ContentView: View {
                     gray: preferences.lightGray,
                     paleColor: preferences.secondaryColor,
                     listenTime: preferences.listenTime,
-                    analysisTime: preferences.analysisTime) { p in
+                    analysisTime: preferences.analysisTime,
+                    displayColorful: $displayColorful) { p in
                         Needle.shared.active(true, strongNoise: true)
                         displayColorful = true
                         showAnalysisView = true
                         showSmartButton = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + preferences.analysisTime) {
                             Needle.shared.active(true, strongNoise: false)
+                            displayColorful = true
                             showAnalysisView = false
                             showStampView = true
                         }
