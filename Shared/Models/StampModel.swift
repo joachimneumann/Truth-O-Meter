@@ -12,10 +12,10 @@ struct StampModel {
     let borderWidth: Double
     let cornerRadius: Double
     let scale: Double
-    let maskSize: CGSize
+    let maskSize: Double
     let largeFontSize = 300.0
     
-    init(frameSize: CGSize, textSize: CGSize, angle: Double) {
+    init(fw: Float, fh: Float, tw: Float, th: Float, angle: Float) {
         
         ///
         /// for the math, see rectangleRotation.pptx
@@ -31,10 +31,6 @@ struct StampModel {
         /// because the border is drawn inside the margin
         assert(borderWidthFactor <= marginFactor)
         
-        let tw: Float = Float(textSize.width)
-        let th: Float = Float(textSize.height)
-        let fw: Float = Float(frameSize.width)
-        let fh: Float = Float(frameSize.height)
         let alpha:Float = angle > 0 ? Float(angle) : Float(-angle)
 
         let m: Float = th * marginFactor
@@ -66,11 +62,7 @@ struct StampModel {
         padding = Double(m)
         borderWidth = Double(b)
         cornerRadius = Double(1.5*b)
-        let maskW: Float = max(twr, thr)
-        let maskH: Float = max(twr, thr)
-        maskSize = CGSize(
-            width:  CGFloat(maskH),
-            height: CGFloat(maskW))
+        maskSize = Double(max(twr, thr))
         scale = Double(min(sw, sh))
     }
 }
