@@ -99,9 +99,12 @@ struct FiveDisks: View {
         }
     }
     func up(_ tappedPrecision: Precision) {
-        isTapped = true
-        pale = false
-        grayDisk = tappedPrecision
+        if preferenceScreen {
+            grayDisk = tappedPrecision
+        } else {
+            isTapped = true
+            pale = false
+        }
         callback(tappedPrecision)
     }
     

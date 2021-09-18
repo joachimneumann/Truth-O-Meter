@@ -17,6 +17,7 @@ struct PreferencesDetailView: View {
         stampTop = preferences.stampTop(precision)
         stampBottom = preferences.stampBottom(precision)
         let newNeedleValue = preferences.needleValue(forPrecision: precision)
+        Needle.shared.active(true, strongNoise: false)
         Needle.shared.setValue(newNeedleValue)
     }
     

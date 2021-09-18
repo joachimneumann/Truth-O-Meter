@@ -33,7 +33,11 @@ struct ContentView: View {
                     passiveColor: preferences.lightGray.opacity(0.7),
                     animationTime: preferences.analysisTime)
                 Text("Analysing...")
+#if targetEnvironment(macCatalyst)
                     .font(.title)
+#else
+                    .font(.headline)
+#endif
                     .foregroundColor(preferences.lightGray)
             }
             Spacer()
@@ -63,8 +67,8 @@ struct ContentView: View {
             if showStampView {
                 Stamp(stampTop, stampBottom, color: preferences.primaryColor)
                     .onTapGesture {
-                        Needle.shared.setValue(0.5)
                         Needle.shared.active(false, strongNoise: false)
+                        Needle.shared.setValue(0.5)
                         showStampView = false
                         showSmartButton = true
                         displayColorful = false
@@ -96,6 +100,10 @@ struct MainView: View {
 #endif
                 .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
                 ContentView(preferences: $preferences)
+                    .onAppear() {
+                        Needle.shared.active(false, strongNoise: false)
+                        Needle.shared.setValue(0.5)
+                    }
             }
             .ignoresSafeArea()
             .navigationBarHidden(true)
