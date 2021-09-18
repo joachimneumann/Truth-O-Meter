@@ -18,20 +18,19 @@ struct NeedleView: View {
         return Angle(radians: displayMeasures.completeAngle * (-0.5 + v))
     }
     var body: some View {
-        let angle = angle(needle.noisyValue)
-        return ZStack {
+        ZStack {
             Rectangle()
                 .foregroundColor(.clear)
                 .background(Capsule()
                                 .fill(needle.colorful ? activeColor : passiveColor)
                                 .clipShape(Rectangle())
                                 .frame(width: displayMeasures.thickLine, height: displayMeasures.radius2+displayMeasures.thickLine)
-                                .rotationEffect(angle, anchor: .bottom)
+                                .rotationEffect(angle(needle.noisyValue), anchor: .bottom)
                                 .offset(y:displayMeasures.needleYOffset)
-                                .animation(.linear(duration: 0.4), value: angle)
+                                .animation(.linear(duration: 0.4), value: needle.noisyValue)
                 )
+                .clipped()
         }
-        .clipped()
     }
     
     init(displayMeasures: DisplayMeasures, activeColor: Color, passiveColor: Color) {

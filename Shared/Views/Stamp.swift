@@ -77,23 +77,27 @@ struct Stamp: View {
         @Binding var textSize: CGSize
         var body: some View {
             Lines(firstLine: firstLine, secondLine: secondLine)
-            .font(.system(size: stampModel.largeFontSize).bold())
-            .foregroundColor(color)
-            .fixedSize()
-            .lineLimit(1)
-            .stampCaptureSize(in: $textSize)
-            .padding(stampModel.padding-stampModel.borderWidth/2)
-            .overlay(
-                RoundedRectangle(cornerRadius: stampModel.cornerRadius)
-                    .stroke(color, lineWidth: stampModel.borderWidth))
-            .padding(stampModel.borderWidth/2)
+                .font(.system(size: stampModel.largeFontSize).bold())
+                .foregroundColor(color)
+                .fixedSize()
+                .lineLimit(1)
+                .stampCaptureSize(in: $textSize)
+                .padding(stampModel.padding-stampModel.borderWidth/2)
+                .overlay(
+                    RoundedRectangle(cornerRadius: stampModel.cornerRadius)
+                        .stroke(color, lineWidth: stampModel.borderWidth))
+                .padding(stampModel.borderWidth/2)
         }
     }
     
     var body: some View {
         
-        let stampModel = StampModel(fw: Float(frameSize.width), fh: Float(frameSize.height),
-                                    tw: Float(textSize.width), th: Float(textSize.height), angle: Float(angle.radians))
+        let stampModel = StampModel(
+            fw: Float(frameSize.width),
+            fh: Float(frameSize.height),
+            tw: Float(textSize.width),
+            th: Float(textSize.height),
+            angle: Float(angle.radians))
         
         ZStack {
             FrameCatcher(into: $frameSize)
