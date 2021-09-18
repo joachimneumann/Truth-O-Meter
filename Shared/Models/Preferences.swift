@@ -30,9 +30,7 @@ class Preferences: ObservableObject {
         }
     }
     
-    var isCustom: Bool {
-        data.seletedTheme.isCustomisable
-    }
+    var isCustom: Bool { data.seletedTheme.isCustomisable }
     
     func stampTop(_ precision: Precision) -> String {
         data.seletedTheme.top(forPrecision: precision)
@@ -52,44 +50,27 @@ class Preferences: ObservableObject {
     }
 
     var selectedThemeIndex: Int {
-        get {
-            data.selectedThemeIndex
-        }
+        get { data.selectedThemeIndex }
         set {
             data.selectedThemeIndex = newValue
             objectWillChange.send()
         }
     }
-    var themeNames: [ThemeName] {
-        data.themeNames
-    }
+    
+    var themeNames: [ThemeName] { data.themeNames }
 
     var listenTimingIndex: Int {
-        get {
-            data.listenTimingIndex
-        }
-        set {
-            data.listenTimingIndex = newValue
-        }
+        get { data.listenTimingIndex }
+        set { data.listenTimingIndex = newValue }
     }
     var analysisTimingIndex: Int {
-        get {
-            data.analysisTimingIndex
-        }
-        set {
-            data.analysisTimingIndex = newValue
-        }
+        get { data.analysisTimingIndex }
+        set { data.analysisTimingIndex = newValue }
     }
     
-    var listenTime: Double {
-        data.listenTime
-    }
-    var analysisTime: Double {
-        data.analysisTime
-    }
-    var listenAndAnalysisTime: Double {
-        listenTime + analysisTime
-    }
+    var listenTime: Double { data.listenTime }
+    var analysisTime: Double { data.analysisTime }
+    var listenAndAnalysisTime: Double { listenTime + analysisTime }
 
     var listenTimeStrings: [String] {
         get {

@@ -192,9 +192,7 @@ struct PreferencesData {
     
     var selectedThemeIndex: Int {
         get { UserDefaults.standard.integer(forKey: Key.selectedTheme) }
-        set {
-            UserDefaults.standard.setValue(newValue, forKey: Key.selectedTheme)
-        }
+        set { UserDefaults.standard.setValue(newValue, forKey: Key.selectedTheme) }
     }
     
     var themeNames: [ThemeName] {

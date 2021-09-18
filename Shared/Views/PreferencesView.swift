@@ -68,6 +68,7 @@ struct PreferencesView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             preferences.selectedThemeIndex = themeName.id
+                            print("preferences.selectedThemeIndex=\(preferences.selectedThemeIndex)")
                         }
                     Rectangle().fill(preferences.lightGray)
                         .frame(height: 0.5)
