@@ -15,10 +15,10 @@ enum Precision {
 class Preferences: ObservableObject {
     private var data = PreferencesData()
     
-    let primaryColor:   Color
-    let secondaryColor: Color
-    let gray:           Color
-    let lightGray:      Color
+    var primaryColor:   Color
+    var secondaryColor: Color
+    var gray:           Color
+    var lightGray:      Color
 
     var title: String {
         get {
@@ -125,8 +125,8 @@ class Preferences: ObservableObject {
         }
     }
 
-    init(preferredColorScheme: ColorScheme = .light) {
-        if preferredColorScheme == .light {
+    func setPreferredColorScheme(_ colorScheme: ColorScheme) {
+        if colorScheme == .light {
             primaryColor = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
             secondaryColor = Color(red: 255.0/255.0, green: 220.0/255.0, blue: 218.0/255.0)
             gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
@@ -138,6 +138,12 @@ class Preferences: ObservableObject {
             gray = Color(white: 0.5)
             lightGray = Color(white: 0.7)
         }
+    }
+    init() {
+        primaryColor = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
+        secondaryColor = Color(red: 255.0/255.0, green: 220.0/255.0, blue: 218.0/255.0)
+        gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
+        lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         Needle.shared.setValue(needleValue(forPrecision: .middle))
     }
 }

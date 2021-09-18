@@ -81,7 +81,7 @@ struct MainView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var preferences: Preferences = Preferences()
     var body: some View {
-        preferences = Preferences(preferredColorScheme: colorScheme)
+        preferences.setPreferredColorScheme(colorScheme)
         return NavigationView {
             VStack(alignment: .trailing) {
                 NavigationLink(destination: PreferencesView(preferences: $preferences)) {
