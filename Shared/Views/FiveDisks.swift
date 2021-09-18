@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct FiveDisks: View {
-    @Binding var precision: Precision?
+    let preferenceScreen: Bool
     let radius: Double
     let color: Color
     let paleColor: Color
     let callback: (Precision) -> Void
-
+    
     @State var isTapped: Bool = false
+    @State var grayDisk: Precision = .middle
 
     let diskData = [
         DiskData(.outer,    0.8 - 0.05),
@@ -28,7 +29,6 @@ struct FiveDisks: View {
         let cr: Double
         let p: Double
         let c: Color
-        let precision: Precision?
         let gray = Color(white: 0.7)
         let down: () -> Void
         let up: (Precision) -> Void
@@ -37,26 +37,24 @@ struct FiveDisks: View {
              color: Color,
              pale: Bool,
              paleColor: Color,
-             precision: Precision?,
              down: @escaping () -> Void,
              up: @escaping (Precision) -> Void) {
             cr = isTapped ? radius/14.0 : radius*0.5
             p  = isTapped ? radius*0.25 : 0.0
             c = pale ? paleColor : color
-            self.precision = precision
             self.down = down
             self.up = up
         }
-        func fc(for grayPrecision: Precision) -> Color {
-            self.precision == grayPrecision ? gray : c
-        }
     }
+    
     
     private struct Edge: View {
         let config: Config
+        let color: Color
+        
         var body: some View {
             Rectangle()
-                .fill(config.fc(for: .edge))
+                .fill(color)
                 .cornerRadius(config.cr)
                 .padding(config.p)
                 .gesture(
@@ -73,10 +71,12 @@ struct FiveDisks: View {
     
     private struct Disk: View {
         let config: Config
+        let color: Color
+        let border: Bool
         let precision: Precision
         var body: some View {
             Circle()
-                .fill(config.fc(for: precision))
+                .fill(color)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged { value in
@@ -86,7 +86,7 @@ struct FiveDisks: View {
                             config.up(precision)
                         }
                 )
-            if config.precision != nil {
+            if border {
                 Circle()
                     .stroke(config.gray, lineWidth: 1)
             }
@@ -94,17 +94,14 @@ struct FiveDisks: View {
     }
     
     func down() {
-        if precision == nil && !pale {
+        if !preferenceScreen && !pale {
             pale = true
         }
     }
     func up(_ tappedPrecision: Precision) {
-        if self.precision != nil {
-            self.precision = tappedPrecision
-        } else {
-            isTapped = true
-            pale = false
-        }
+        isTapped = true
+        pale = false
+        grayDisk = tappedPrecision
         callback(tappedPrecision)
     }
     
@@ -115,15 +112,26 @@ struct FiveDisks: View {
             color: color,
             pale: pale,
             paleColor: paleColor,
-            precision: precision,
             down: down,
             up: up)
-
-        ZStack {
-            Edge(config: config)
+        
+        func fc(for precision: Precision) -> Color {
+            if preferenceScreen {
+                if grayDisk == precision {
+                    return config.gray
+                } else {
+                    return config.c
+                }
+            } else {
+                return config.c
+            }
+        }
+        
+        return ZStack {
+            Edge(config: config, color: fc(for: .edge))
             ForEach(diskData) { data in
-                Disk(config: config, precision: data.precision)
-                .padding(data.padding*radius)
+                Disk(config: config, color: fc(for: data.precision), border: preferenceScreen, precision: data.precision)
+                    .padding(data.padding*radius)
             }
             .isHidden(isTapped)
         }
@@ -145,18 +153,12 @@ struct FiveDisks: View {
 
 struct FiveDisks_Previews: PreviewProvider {
     static var previews: some View {
-        func ff(_ precision: Precision) {
-            print(precision)
-        }
-        return VStack {
-            Button("back") { }
-            FiveDisks(
-                precision: .constant(nil),
-                radius: 200,
-                color: Color.red,
-                paleColor: Color.orange,
-                callback: ff)
-        }
+        FiveDisks(
+            preferenceScreen: true,
+            radius: 200,
+            color: Color.red,
+            paleColor: Color.orange)
+        { p in }
     }
 }
 

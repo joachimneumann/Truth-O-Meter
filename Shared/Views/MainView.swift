@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var showAnalysisView = false
     @State private var showSmartButton = true
     @State private var showStampView = false
+    @State private var stampTop: String = ""
+    @State private var stampBottom: String? = nil
     
     let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
     
@@ -42,7 +44,9 @@ struct ContentView: View {
                     paleColor: preferences.secondaryColor,
                     listenTime: preferences.listenTime,
                     analysisTime: preferences.analysisTime,
-                    displayColorful: $displayColorful) { p in
+                    displayColorful: $displayColorful) { precision in
+                        stampTop = preferences.stampTop(precision)
+                        stampBottom = preferences.stampBottom(precision)
                         Needle.shared.active(true, strongNoise: true)
                         displayColorful = true
                         showAnalysisView = true
@@ -57,7 +61,7 @@ struct ContentView: View {
                     .padding()
             }
             if showStampView {
-                Stamp(preferences.stampTop, preferences.stampBottom, color: preferences.primaryColor)
+                Stamp(stampTop, stampBottom, color: preferences.primaryColor)
                     .onTapGesture {
                         Needle.shared.setValue(0.5)
                         Needle.shared.active(false, strongNoise: false)

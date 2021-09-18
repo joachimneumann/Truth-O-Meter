@@ -31,30 +31,23 @@ struct StampModel {
         /// because the border is drawn inside the margin
         assert(borderWidthFactor <= marginFactor)
         
-        let alpha:Float = angle > 0 ? Float(angle) : Float(-angle)
+        let alpha:Float = max(angle, -angle)
 
         let m: Float = th * marginFactor
         let twm: Float = tw + 2.0 * m
         let thm: Float = th + 2.0 * m
         
         let b:Float = th * borderWidthFactor
-        var temp: Float = thm / twm
-        let beta:Float = atan( temp )
-        let d: Float = sqrt(twm*twm+thm*thm)
-        temp = alpha+beta
-        let thr: Float = sin(temp)*d
+        let beta:Float = atan( thm / twm )
+        let thr: Float = sin(alpha+beta) * sqrt(twm*twm+thm*thm)
+        let twr: Float = sin(alpha)*thm + cos(alpha)*twm
         
-        let twr1: Float = sin(alpha)*thm
-        let twr2: Float = cos(alpha)*twm
-        let twr: Float = twr1 + twr2
+        let outerCornerRadius: Float = Float(1.5) * b + Float(0.5) * b
+        let beta2: Float = (Float(45.0) * Float.pi / Float(180.0)) - alpha
+        let offset: Float = outerCornerRadius * ( sqrt(Float(2.0)) * cos(beta2) - Float(1.0))
         
-        
-        let outerCornerRadius: Float = (1.5*b) + 0.5 * (b)
-        let beta2: Float = (45.0 * Float.pi / 180.0) - abs(alpha)
-        let offset: Float = outerCornerRadius * ( sqrt(2.0) * cos(beta2) - 1.0)
-        
-        let sw: Float = fw / (twr - 2 * offset)
-        let sh: Float = fh / (thr - 2 * offset)
+        let sw: Float = fw / (twr - Float(2.0) * offset)
+        let sh: Float = fh / (thr - Float(2.0) * offset)
         
         /// set the mask size large
         /// this allows me to handle single characters

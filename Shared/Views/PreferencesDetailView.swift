@@ -10,9 +10,12 @@ import SwiftUI
 struct PreferencesDetailView: View {
     @Binding var preferences: Preferences
     @Binding var displayTitle: String
-    
+    @State private var stampTop: String = ""
+    @State private var stampBottom: String? = nil
+
     func callback(_ precision: Precision) {
-        preferences.precision = precision
+        stampTop = preferences.stampTop(precision)
+        stampBottom = preferences.stampBottom(precision)
         let newNeedleValue = preferences.needleValue(forPrecision: precision)
         Needle.shared.setValue(newNeedleValue)
     }
@@ -29,8 +32,8 @@ struct PreferencesDetailView: View {
                     passiveColor: preferences.lightGray,
                     gray: preferences.gray)
                     .padding(.trailing, 5)
-                Stamp(preferences.stampTop,
-                      preferences.stampBottom,
+                Stamp(stampTop,
+                      stampBottom,
                       color: preferences.primaryColor,
                       angle: Angle(degrees: 0))
                 //.background(Color.yellow.opacity(0.2))
@@ -43,7 +46,7 @@ struct PreferencesDetailView: View {
             }
             Spacer(minLength: 0)
             FiveDisks(
-                precision: $preferences.precision,
+                preferenceScreen: true,
                 radius: 200,
                 color: preferences.primaryColor,
                 paleColor: Color.white,
@@ -86,19 +89,20 @@ struct EditableStampView: View {
     @State private var editingBottom = false
     let fontsize = 40.0
     var body: some View {
-        VStack {
-            TextField("Top", text: $preferences.stampTop, onEditingChanged: { edit in
-                self.editingTop = edit
-            })
-                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingTop))
-                .padding(.top, 24)
-            
-            TextField("Bottom", text: $preferences.nonNilStampBottom, onEditingChanged: { edit in
-                self.editingBottom = edit
-            })
-                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingBottom))
-                .padding(.bottom, 12)
-        }
+        Text("xx")
+//        VStack {
+//            TextField("Top", text: $stampTop, onEditingChanged: { edit in
+//                self.editingTop = edit
+//            })
+//                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingTop))
+//                .padding(.top, 24)
+//
+//            TextField("Bottom", text: $preferences.nonNilStampBottom, onEditingChanged: { edit in
+//                self.editingBottom = edit
+//            })
+//                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingBottom))
+//                .padding(.bottom, 12)
+//        }
     }
 }
 

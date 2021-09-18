@@ -8,11 +8,13 @@
 import Foundation
 import SwiftUI
 
+enum Precision {
+    case edge, outer, middle, inner, bullsEye
+}
+
 class Preferences: ObservableObject {
     private var data = PreferencesData()
     
-    @Published var precision: Precision?
-
     let primaryColor:   Color
     let secondaryColor: Color
     let gray:           Color
@@ -32,37 +34,21 @@ class Preferences: ObservableObject {
         data.seletedTheme.isCustomisable
     }
     
-    var stampTop: String {
-        get {
-            data.seletedTheme.top(forPrecision: precision!)
-        }
-        set {
-            data.setTop(top: newValue, forPrecision: precision!)
-            objectWillChange.send()
-        }
+    func stampTop(_ precision: Precision) -> String {
+        data.seletedTheme.top(forPrecision: precision)
     }
     
-    var nonNilStampBottom: String {
-        /// needed for binding in TextField
-        get {
-            stampBottom ?? ""
-        }
-        set {
-            stampBottom = newValue == "" ? nil : newValue
-        }
-    }
-    var stampBottom: String? {
-        get {
-            data.seletedTheme.bottom(forPrecision: precision!)
-        }
-        set {
-            if newValue == "" {
-                data.setBottom(bottom: nil, forPrecision: precision!)
-            } else {
-                data.setBottom(bottom: newValue, forPrecision: precision!)
-            }
-            objectWillChange.send()
-        }
+//    var nonNilStampBottom: String {
+//        /// needed for binding in TextField
+//        get {
+//            stampBottom ?? ""
+//        }
+//        set {
+//            stampBottom = newValue == "" ? nil : newValue
+//        }
+//    }
+    func stampBottom(_ precision: Precision) -> String? {
+        data.seletedTheme.bottom(forPrecision: precision)
     }
 
     var selectedThemeIndex: Int {
@@ -152,7 +138,6 @@ class Preferences: ObservableObject {
             gray = Color(white: 0.5)
             lightGray = Color(white: 0.7)
         }
-        precision = .middle
-        Needle.shared.setValue(needleValue(forPrecision: precision!))
+        Needle.shared.setValue(needleValue(forPrecision: .middle))
     }
 }

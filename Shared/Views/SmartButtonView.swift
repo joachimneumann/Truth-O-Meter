@@ -18,7 +18,6 @@ struct SmartButtonView: View {
     let callback: (Precision) -> Void
     
     @State private var smartButtonSize: CGSize = CGSize(width: 10, height: 10)
-    @State private var tappedPrecision: Precision = .bullsEye
 
     private struct FrameCatcher: View {
         @Binding var into: CGSize
@@ -58,13 +57,12 @@ struct SmartButtonView: View {
         }
         Needle.shared.setValueInSteps(v, totalTime: listenTime + analysisTime)
         displayColorful = true
-        tappedPrecision = precision
         animateRingView = true
         let whenWhen: DispatchTime = DispatchTime.now() +
             DispatchTimeInterval.milliseconds(Int(1000.0 * listenTime))
         DispatchQueue.main.asyncAfter(deadline: whenWhen) {
             AudioServicesPlaySystemSound(stopRecording)
-            callback(tappedPrecision)
+            callback(precision)
         }
     }
     
@@ -95,7 +93,7 @@ struct SmartButtonView: View {
                 Circle()
                     .stroke(gray, lineWidth: config.ringWidth)
             }
-            FiveDisks(precision: .constant(nil),
+            FiveDisks(preferenceScreen: false,
                       radius: config.fiveDisksRadius,
                       color: color,
                       paleColor: paleColor,
