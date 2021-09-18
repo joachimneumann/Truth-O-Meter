@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var preferences: Preferences
+    @EnvironmentObject var preferences: Preferences
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showSmartButton = true
@@ -83,12 +83,11 @@ struct ContentView: View {
 
 struct MainView: View {
     @Environment(\.colorScheme) var colorScheme
-    @State var preferences: Preferences = Preferences()
     var body: some View {
-        preferences.setPreferredColorScheme(colorScheme)
+        let preferences = Preferences(colorScheme: colorScheme)
         return NavigationView {
             VStack(alignment: .trailing) {
-                NavigationLink(destination: PreferencesView(preferences: $preferences)) {
+                NavigationLink(destination: PreferencesView()) {
                     Image(colorScheme == .light ? "settings" : "settings.dark")
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -99,7 +98,7 @@ struct MainView: View {
                 .padding(.top, 20)
 #endif
                 .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
-                ContentView(preferences: $preferences)
+                ContentView()
                     .onAppear() {
                         Needle.shared.active(false, strongNoise: false)
                         Needle.shared.setValue(0.5)
@@ -108,6 +107,7 @@ struct MainView: View {
             .ignoresSafeArea()
             .navigationBarHidden(true)
         }
+        .environmentObject(preferences)
         .accentColor(colorScheme == .light ? .blue : .white)
     }
 }

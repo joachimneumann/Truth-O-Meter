@@ -10,10 +10,10 @@ import SwiftUI
 
 
 struct PreferencesView: View {
-    @Binding var preferences: Preferences
-    
+    @EnvironmentObject var preferences: Preferences
+
     private struct ThemeCell: View {
-        @Binding var preferences: Preferences
+        @EnvironmentObject var preferences: Preferences
         let name: String
         let isSelected: Bool
         let isCustom: Bool
@@ -24,8 +24,7 @@ struct PreferencesView: View {
                         .font(.headline)
                     NavigationLink(
                         destination:
-                            PreferencesDetailView(preferences: $preferences,
-                                                  displayTitle: $preferences.title)) {
+                            PreferencesDetailView(displayTitle: $preferences.title)) {
                                                       Group {
                                                           if isCustom {
                                                               Text("Edit")
@@ -55,20 +54,18 @@ struct PreferencesView: View {
     }
     
     private struct ThemesList: View {
-        @Binding var preferences: Preferences
+        @EnvironmentObject var preferences: Preferences
         var body: some View {
             let themeNames = preferences.themeNames
             VStack {
                 ForEach(themeNames) { themeName in
                     ThemeCell(
-                        preferences: $preferences,
                         name: themeName.name,
                         isSelected: themeName.id == preferences.selectedThemeIndex,
                         isCustom: themeName.isCustom)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             preferences.selectedThemeIndex = themeName.id
-                            print("preferences.selectedThemeIndex=\(preferences.selectedThemeIndex)")
                         }
                     Rectangle().fill(preferences.lightGray)
                         .frame(height: 0.5)
@@ -79,7 +76,7 @@ struct PreferencesView: View {
     }
     
     private struct TimePicker: View {
-        @Binding var preferences: Preferences
+        @EnvironmentObject var preferences: Preferences
         var body: some View {
             VStack(alignment: .leading) {
                 HStack  {
@@ -122,11 +119,11 @@ struct PreferencesView: View {
                 Spacer()
             }
             .padding(.vertical, 40)
-            TimePicker(preferences: $preferences)
+            TimePicker()
             Rectangle().fill(preferences.lightGray)
                 .frame(height: 0.5)
                 .padding(.leading)
-            ThemesList(preferences: $preferences)
+            ThemesList()
             Spacer()
         }
         .frame(maxWidth: 600)
@@ -135,7 +132,8 @@ struct PreferencesView: View {
 
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
-        PreferencesView(preferences: .constant(Preferences()))
+        PreferencesView()
+            .environmentObject(Preferences(colorScheme: .light))
             .padding(.top, 70)
     }
 }

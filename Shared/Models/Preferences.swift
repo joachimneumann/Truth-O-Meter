@@ -106,7 +106,7 @@ class Preferences: ObservableObject {
         }
     }
 
-    func setPreferredColorScheme(_ colorScheme: ColorScheme) {
+    init(colorScheme: ColorScheme) {
         if colorScheme == .light {
             primaryColor = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
             secondaryColor = Color(red: 255.0/255.0, green: 220.0/255.0, blue: 218.0/255.0)
@@ -119,9 +119,6 @@ class Preferences: ObservableObject {
             gray = Color(white: 0.5)
             lightGray = Color(white: 0.7)
         }
-    }
-    
-    init() {
         Needle.shared.setValue(needleValue(forPrecision: .middle))
     }
 }

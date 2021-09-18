@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesDetailView: View {
-    @Binding var preferences: Preferences
+    @EnvironmentObject var preferences: Preferences
     @Binding var displayTitle: String
     @State private var stampTop: String = ""
     @State private var stampBottom: String? = nil
@@ -41,7 +41,7 @@ struct PreferencesDetailView: View {
             }
             .fixedSize(horizontal: false, vertical: true)
             if preferences.isCustom {
-                EditableStampView(preferences: $preferences)
+                EditableStampView()
             } else {
                 EmptyView()
             }
@@ -62,7 +62,7 @@ struct PreferencesDetailView: View {
 
 
 struct CustomTextFieldStyle: TextFieldStyle {
-    @Binding var preferences: Preferences
+    @EnvironmentObject var preferences: Preferences
     @Binding var focused: Bool
     let fontsize = 40.0
     let cornerRadius = 6.0
@@ -85,7 +85,6 @@ struct CustomTextFieldStyle: TextFieldStyle {
 }
 
 struct EditableStampView: View {
-    @Binding var preferences: Preferences
     @State private var editingTop = false
     @State private var editingBottom = false
     let fontsize = 40.0
@@ -95,13 +94,13 @@ struct EditableStampView: View {
 //            TextField("Top", text: $stampTop, onEditingChanged: { edit in
 //                self.editingTop = edit
 //            })
-//                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingTop))
+//                .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
 //                .padding(.top, 24)
 //
 //            TextField("Bottom", text: $preferences.nonNilStampBottom, onEditingChanged: { edit in
 //                self.editingBottom = edit
 //            })
-//                .textFieldStyle(CustomTextFieldStyle(preferences: $preferences, focused: $editingBottom))
+//                .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
 //                .padding(.bottom, 12)
 //        }
     }
@@ -110,6 +109,6 @@ struct EditableStampView: View {
 
 struct PreferencesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        return PreferencesDetailView(preferences: .constant(Preferences()), displayTitle: .constant("xx"))
+        return PreferencesDetailView(displayTitle: .constant("xx"))
     }
 }
