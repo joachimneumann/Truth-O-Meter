@@ -57,6 +57,9 @@ struct PreferencesDetailView: View {
             Spacer(minLength: 0)
         }
         .padding()
+        .onAppear() {
+            Needle.shared.active(true, strongNoise: false)
+        }
     }
 }
 

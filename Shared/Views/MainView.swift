@@ -20,70 +20,74 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            PreferencesButton()
-                .opacity(displayColorful ? 0.0 : preferences.preferencesButtonOpacity)
-                .animation(.easeIn(duration: 0.1), value: displayColorful)
-#if targetEnvironment(macCatalyst)
-                .padding(.top, 20)
-#endif
-                .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
-            DisplayView(
-                title: $preferences.title,
-                colorful: displayColorful,
-                editTitle: false,
-                activeColor: preferences.primaryColor,
-                passiveColor: preferences.lightGray,
-                gray: preferences.gray)
-            if showAnalysisView {
-                HorizontalProgressBar(
-                    activeColor: preferences.lightGray,
-                    passiveColor: preferences.lightGray.opacity(0.7),
-                    animationTime: preferences.analysisTime)
-                Text("Analysing...")
-#if targetEnvironment(macCatalyst)
-                    .font(.title)
-#else
-                    .font(.headline)
-#endif
-                    .foregroundColor(preferences.lightGray)
+            VStack {
+                PreferencesButton()
+                    .opacity(displayColorful ? 0.0 : preferences.preferencesButtonOpacity)
+                    .animation(.easeIn(duration: 0.1), value: displayColorful)
+    #if targetEnvironment(macCatalyst)
+                    .padding(.top, 20)
+    #endif
+                    .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
             }
-            Spacer()
-            if showSmartButton {
-                SmartButtonView(
-                    color: preferences.primaryColor,
-                    gray: preferences.lightGray,
-                    paleColor: preferences.secondaryColor,
-                    listenTime: preferences.listenTime,
-                    analysisTime: preferences.analysisTime,
-                    displayColorful: $displayColorful) { precision in
-                        stampTop = preferences.stampTop(precision)
-                        stampBottom = preferences.stampBottom(precision)
-                        Needle.shared.active(true, strongNoise: true)
-                        displayColorful = true
-                        showAnalysisView = true
-                        showSmartButton = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + preferences.analysisTime) {
-                            Needle.shared.active(true, strongNoise: false)
+            VStack {
+                DisplayView(
+                    title: $preferences.title,
+                    colorful: displayColorful,
+                    editTitle: false,
+                    activeColor: preferences.primaryColor,
+                    passiveColor: preferences.lightGray,
+                    gray: preferences.gray)
+                if showAnalysisView {
+                    HorizontalProgressBar(
+                        activeColor: preferences.lightGray,
+                        passiveColor: preferences.lightGray.opacity(0.7),
+                        animationTime: preferences.analysisTime)
+                    Text("Analysing...")
+    #if targetEnvironment(macCatalyst)
+                        .font(.title)
+    #else
+                        .font(.headline)
+    #endif
+                        .foregroundColor(preferences.lightGray)
+                }
+                Spacer()
+                if showSmartButton {
+                    SmartButtonView(
+                        color: preferences.primaryColor,
+                        gray: preferences.lightGray,
+                        paleColor: preferences.secondaryColor,
+                        listenTime: preferences.listenTime,
+                        analysisTime: preferences.analysisTime,
+                        displayColorful: $displayColorful) { precision in
+                            stampTop = preferences.stampTop(precision)
+                            stampBottom = preferences.stampBottom(precision)
+                            Needle.shared.active(true, strongNoise: true)
                             displayColorful = true
-                            showAnalysisView = false
-                            showStampView = true
+                            showAnalysisView = true
+                            showSmartButton = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + preferences.analysisTime) {
+                                Needle.shared.active(true, strongNoise: false)
+                                displayColorful = true
+                                showAnalysisView = false
+                                showStampView = true
+                            }
                         }
-                    }
-                    .padding()
+                        .padding()
+                }
+                if showStampView {
+                    Stamp(stampTop, stampBottom, color: preferences.primaryColor)
+                        .onTapGesture {
+                            Needle.shared.active(false, strongNoise: false)
+                            Needle.shared.setValue(0.5)
+                            showStampView = false
+                            showSmartButton = true
+                            displayColorful = false
+                        }
+                }
+                Spacer()
             }
-            if showStampView {
-                Stamp(stampTop, stampBottom, color: preferences.primaryColor)
-                    .onTapGesture {
-                        Needle.shared.active(false, strongNoise: false)
-                        Needle.shared.setValue(0.5)
-                        showStampView = false
-                        showSmartButton = true
-                        displayColorful = false
-                    }
-            }
-            Spacer()
+            .padding()
         }
-        .padding()
     }
 }
 
