@@ -20,6 +20,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            PreferencesButton()
+                .opacity(displayColorful ? 0.0 : preferences.preferencesButtonOpacity)
+                .animation(.easeIn(duration: 0.1), value: displayColorful)
+#if targetEnvironment(macCatalyst)
+                .padding(.top, 20)
+#endif
+                .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
             DisplayView(
                 title: $preferences.title,
                 colorful: displayColorful,
@@ -80,34 +87,35 @@ struct ContentView: View {
     }
 }
 
+struct PreferencesButton: View {
+    @EnvironmentObject var preferences: Preferences
+    var body: some View {
+        HStack {
+            Spacer()
+            NavigationLink(destination: PreferencesView()) {
+                Image(preferences.preferencesButton)
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .padding(.trailing, 5)
+            }
+            .padding()
+        }
+    }
+}
 
 struct MainView: View {
     @Environment(\.colorScheme) var colorScheme
     var body: some View {
-        let preferences = Preferences(colorScheme: colorScheme)
-        return NavigationView {
-            VStack(alignment: .trailing) {
-                NavigationLink(destination: PreferencesView()) {
-                    Image(colorScheme == .light ? "settings" : "settings.dark")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .padding(.trailing, 5)
+        NavigationView {
+            ContentView()
+                .onAppear() {
+                    Needle.shared.active(false, strongNoise: false)
+                    Needle.shared.setValue(0.5)
                 }
-                .padding()
-#if targetEnvironment(macCatalyst)
-                .padding(.top, 20)
-#endif
-                .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
-                ContentView()
-                    .onAppear() {
-                        Needle.shared.active(false, strongNoise: false)
-                        Needle.shared.setValue(0.5)
-                    }
-            }
-            .ignoresSafeArea()
-            .navigationBarHidden(true)
+                .ignoresSafeArea()
+                .navigationBarHidden(true)
         }
-        .environmentObject(preferences)
+        .environmentObject(Preferences(colorScheme: colorScheme))
         .accentColor(colorScheme == .light ? .blue : .white)
     }
 }

@@ -15,6 +15,8 @@ enum Precision {
 class Preferences: ObservableObject {
     private var data = PreferencesData()
     
+    var preferencesButton: String = ""
+    var preferencesButtonOpacity: Double = 1.0
     var primaryColor:   Color = Color(white: 0.5)
     var secondaryColor: Color = Color(white: 0.5)
     var gray:           Color = Color(white: 0.5)
@@ -108,12 +110,16 @@ class Preferences: ObservableObject {
 
     init(colorScheme: ColorScheme) {
         if colorScheme == .light {
+            preferencesButton = "settings"
+            preferencesButtonOpacity = 0.6
             primaryColor = Color(red: 255.0/255.0, green: 83.0/255.0, blue: 77.0/255.0)
             secondaryColor = Color(red: 255.0/255.0, green: 220.0/255.0, blue: 218.0/255.0)
             gray = Color(red:  88/255.0, green: 89/255.0, blue: 82/255.0)
             lightGray = Color(red:  188/255.0, green: 189/255.0, blue: 182/255.0)
         } else {
             // dark
+            preferencesButton = "settings.dark"
+            preferencesButtonOpacity = 1.0
             primaryColor = Color(red: 242.0/255.0, green: 224.0/255.0, blue: 136.0/255.0)
             secondaryColor = Color(white: 0.7)
             gray = Color(white: 0.5)
