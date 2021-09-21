@@ -15,12 +15,12 @@ enum Precision {
 class Preferences: ObservableObject {
     private var data = PreferencesData()
     
-    var preferencesButton: String = ""
-    var preferencesButtonOpacity: Double = 1.0
-    var primaryColor:   Color = Color(white: 0.5)
-    var secondaryColor: Color = Color(white: 0.5)
-    var gray:           Color = Color(white: 0.5)
-    var lightGray:      Color = Color(white: 0.5)
+    private(set) var preferencesButton: String = ""
+    private(set) var preferencesButtonOpacity: Double = 1.0
+    private(set) var primaryColor:   Color = Color(white: 0.5)
+    private(set) var secondaryColor: Color = Color(white: 0.5)
+    private(set) var gray:           Color = Color(white: 0.5)
+    private(set) var lightGray:      Color = Color(white: 0.5)
 
     var title: String {
         get {

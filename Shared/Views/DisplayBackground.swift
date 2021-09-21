@@ -31,7 +31,7 @@ struct DisplayBackground: View {
         .aspectRatio(aspectRatio, contentMode: .fit)
     }
     
-    struct MainArcBlack: Shape {
+    private struct MainArcBlack: Shape {
         let model: DisplayModel
         func path(in rect: CGRect) -> Path {
             var path = Path()
@@ -46,7 +46,7 @@ struct DisplayBackground: View {
     }
     
     
-    struct MainArcRed: Shape {
+    private struct MainArcRed: Shape {
         let model: DisplayModel
         func path(in rect: CGRect) -> Path {
             var path = Path()
@@ -60,7 +60,7 @@ struct DisplayBackground: View {
         }
     }
     
-    struct TopArcBlack: Shape {
+    private struct TopArcBlack: Shape {
         let model: DisplayModel
         let proportions = [0.12, 0.2, 0.265, 0.32, 0.37, 0.42, 0.47, 0.52, 0.57, 0.62, 0.66]
         func path(in rect: CGRect) -> Path {
@@ -96,7 +96,7 @@ struct DisplayBackground: View {
         }
     }
     
-    struct TopArcRed: Shape {
+    private struct TopArcRed: Shape {
         let model: DisplayModel
         func path(in rect: CGRect) -> Path {
             var temp = Path()
