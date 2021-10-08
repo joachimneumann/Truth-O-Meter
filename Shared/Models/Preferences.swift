@@ -21,7 +21,6 @@ class Preferences: ObservableObject {
     private(set) var secondaryColor: Color = Color(white: 0.5)
     private(set) var gray:           Color = Color(white: 0.5)
     private(set) var lightGray:      Color = Color(white: 0.5)
-
     var title: String {
         get {
             data.title
@@ -52,9 +51,9 @@ class Preferences: ObservableObject {
     }
 
     var selectedThemeIndex: Int {
-        get { data.selectedThemeIndex }
+        get { PreferencesData.selectedThemeIndex }
         set {
-            data.selectedThemeIndex = newValue
+            PreferencesData.selectedThemeIndex = newValue
             objectWillChange.send()
         }
     }
@@ -62,12 +61,12 @@ class Preferences: ObservableObject {
     var themeNames: [ThemeName] { data.themeNames }
 
     var listenTimingIndex: Int {
-        get { data.listenTimingIndex }
-        set { data.listenTimingIndex = newValue }
+        get { PreferencesData.listenTimingIndex }
+        set { PreferencesData.listenTimingIndex = newValue }
     }
     var analysisTimingIndex: Int {
-        get { data.analysisTimingIndex }
-        set { data.analysisTimingIndex = newValue }
+        get { PreferencesData.analysisTimingIndex }
+        set { PreferencesData.analysisTimingIndex = newValue }
     }
     
     var listenTime: Double { data.listenTime }

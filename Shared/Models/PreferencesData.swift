@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 struct Key {
     /// some key names might seem stange, but this is
@@ -40,17 +40,10 @@ struct Key {
 }
 
 struct Theme: Identifiable, Equatable {
+
     private(set) var id: Int
 
-    var title: String {
-        didSet {
-            UserDefaults.standard.set(title, forKey: Key.custom.title)
-        }
-    }
-    
-    mutating func setTitle(_ newTitle: String) {
-        title = newTitle
-    }
+    var title: String = ""
 
     mutating func setTop(top: String, forPrecision precision: Precision) {
         switch precision {
@@ -66,7 +59,7 @@ struct Theme: Identifiable, Equatable {
             bullsEye.top = top
         }
     }
-    mutating func setBottom(bottom: String?, forPrecision precision: Precision) {
+    mutating func setBottom(bottom: String, forPrecision precision: Precision) {
         switch precision {
         case .edge:
             edge.bottom = bottom
@@ -114,8 +107,8 @@ struct Theme: Identifiable, Equatable {
     
     struct StampTexts {
         var top: String
-        var bottom: String?
-        init(_ top_: String, _ bottom_: String?) { top = top_; bottom = bottom_ }
+        var bottom: String
+        init(_ top_: String, _ bottom_: String) { top = top_; bottom = bottom_ }
     }
 
     var edge: StampTexts
@@ -129,39 +122,39 @@ struct Theme: Identifiable, Equatable {
         switch forPrecision {
         case .edge:
             edge.top = newTop
-            if isCustomisable { UserDefaults.standard.set(newTop, forKey: Key.custom.edge.top) }
+            if isCustomisable { PreferencesData.customEdgeTop = newTop }
         case .outer:
             outer.top = newTop
-            if isCustomisable { UserDefaults.standard.set(newTop, forKey: Key.custom.outer.top) }
+            if isCustomisable { PreferencesData.customOuterTop = newTop }
         case .middle:
             middle.top = newTop
-            if isCustomisable { UserDefaults.standard.set(newTop, forKey: Key.custom.middle.top) }
+            if isCustomisable { PreferencesData.customMiddleTop = newTop }
         case .inner:
             inner.top = newTop
-            if isCustomisable { UserDefaults.standard.set(newTop, forKey: Key.custom.inner.top) }
+            if isCustomisable { PreferencesData.customInnerTop = newTop }
         case .bullsEye:
             bullsEye.top = newTop
-            if isCustomisable { UserDefaults.standard.set(newTop, forKey: Key.custom.bullsEye.top) }
+            if isCustomisable { PreferencesData.customBullsEyeTop = newTop }
         }
     }
     
-    mutating func setBottom(_ newBottom: String?, forPrecision: Precision) {
+    mutating func setBottom(_ newBottom: String, forPrecision: Precision) {
         switch forPrecision {
         case .edge:
             edge.bottom = newBottom
-            if isCustomisable { UserDefaults.standard.set(newBottom, forKey: Key.custom.edge.bottom) }
+            if isCustomisable { PreferencesData.customEdgeBottom = newBottom }
         case .outer:
             outer.bottom = newBottom
-            if isCustomisable { UserDefaults.standard.set(newBottom, forKey: Key.custom.outer.bottom) }
+            if isCustomisable { PreferencesData.customOuterBottom = newBottom }
         case .middle:
             middle.bottom = newBottom
-            if isCustomisable { UserDefaults.standard.set(newBottom, forKey: Key.custom.middle.bottom) }
+            if isCustomisable { PreferencesData.customMiddleBottom = newBottom }
         case .inner:
             inner.bottom = newBottom
-            if isCustomisable { UserDefaults.standard.set(newBottom, forKey: Key.custom.inner.bottom) }
+            if isCustomisable { PreferencesData.customInnerBottom = newBottom }
         case .bullsEye:
             bullsEye.bottom = newBottom
-            if isCustomisable { UserDefaults.standard.set(newBottom, forKey: Key.custom.bullsEye.bottom) }
+            if isCustomisable { PreferencesData.customBullsEyeBottom = newBottom }
         }
     }
 
@@ -178,21 +171,32 @@ struct ThemeName: Identifiable {
 }
 
 struct PreferencesData {
+
+    @AppStorage("listenTimingIndex")    static var listenTimingIndex: Int = 1
+    @AppStorage("analysisTimingIndex")  static var analysisTimingIndex: Int = 1
+    @AppStorage("customTitle")          static var customTitle: String = ""
+    @AppStorage("customEdgeTop")        static var customEdgeTop = ""
+    @AppStorage("customEdgeBottom")     static var customEdgeBottom = ""
+    @AppStorage("customOuterTop")       static var customOuterTop = ""
+    @AppStorage("customOuterBottom")    static var customOuterBottom = ""
+    @AppStorage("customMiddleTop")      static var customMiddleTop = ""
+    @AppStorage("customMiddleBottom")   static var customMiddleBottom = ""
+    @AppStorage("customInnerTop")       static var customInnerTop = ""
+    @AppStorage("customInnerBottom")    static var customInnerBottom = ""
+    @AppStorage("customBullsEyeTop")    static var customBullsEyeTop = ""
+    @AppStorage("customBullsEyeBottom") static var customBullsEyeBottom = ""
+    @AppStorage("selectedThemeIndex")   static var selectedThemeIndex: Int = 1
     
+
     mutating func setTop(top: String, forPrecision precision: Precision) {
         custom.setTop(top, forPrecision: precision)
     }
-    mutating func setBottom(bottom: String?, forPrecision precision: Precision) {
+    mutating func setBottom(bottom: String, forPrecision precision: Precision) {
         custom.setBottom(bottom, forPrecision: precision)
     }
     
     func stampBottom(forprecision precision: Precision) -> String? {
         seletedTheme.bottom(forPrecision: precision)
-    }
-    
-    var selectedThemeIndex: Int {
-        get { UserDefaults.standard.integer(forKey: Key.selectedTheme) }
-        set { UserDefaults.standard.setValue(newValue, forKey: Key.selectedTheme) }
     }
     
     var themeNames: [ThemeName] {
@@ -207,7 +211,7 @@ struct PreferencesData {
     
     
     var seletedTheme: Theme {
-        let s = selectedThemeIndex
+        let s = PreferencesData.selectedThemeIndex
         if s == 0 { return bullshit }
         if s == 1 { return singing }
         return custom
@@ -218,77 +222,48 @@ struct PreferencesData {
     }
     
     mutating func setTitle(_ newTitle: String) {
-        custom.setTitle(newTitle)
+        custom.title = newTitle
     }
     
     let waitTimes = [2, 4, 10]
     var listenTime: Double {
-        Double(waitTimes[listenTimingIndex])
+        Double(waitTimes[PreferencesData.listenTimingIndex])
     }
     
     let analysisTimes = [2, 4, 10]
     var analysisTime: Double {
-        Double(waitTimes[analysisTimingIndex])
-    }
-    
-    var listenTimingIndex: Int {
-        get {
-            if UserDefaults.standard.object(forKey: Key.listenTiming) == nil {
-                /// not set? use middle value of [0, 1, 2]
-                UserDefaults.standard.set(1, forKey: Key.listenTiming)
-            }
-            return UserDefaults.standard.integer(forKey: Key.listenTiming)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Key.listenTiming)
-        }
-    }
-    
-    var analysisTimingIndex: Int {
-        get {
-            if UserDefaults.standard.object(forKey: Key.analysisTiming) == nil {
-                UserDefaults.standard.set(1, forKey: Key.analysisTiming)
-            }
-            return UserDefaults.standard.integer(forKey: Key.analysisTiming)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Key.analysisTiming)
-        }
+        Double(waitTimes[PreferencesData.analysisTimingIndex])
     }
     
     private let bullshit = Theme(
         id: 0,
         title: "Bullshit-O-Meter",
         edge:     Theme.StampTexts("Absolute", "Bullshit"),
-        outer:    Theme.StampTexts("Bullshit", nil),
-        middle:   Theme.StampTexts("undecided", nil),
+        outer:    Theme.StampTexts("Bullshit", ""),
+        middle:   Theme.StampTexts("undecided", ""),
         inner:    Theme.StampTexts("Mostly", "True"),
-        bullsEye: Theme.StampTexts("True", nil),
+        bullsEye: Theme.StampTexts("True", ""),
         isCustomisable: false)
     
     private let singing = Theme(
         id: 2,
         title: "Voice-O-Meter",
-        edge:     Theme.StampTexts("Sexy", nil),
-        outer:    Theme.StampTexts("impressive", nil),
-        middle:   Theme.StampTexts("good", nil),
+        edge:     Theme.StampTexts("Sexy", ""),
+        outer:    Theme.StampTexts("impressive", ""),
+        middle:   Theme.StampTexts("good", ""),
         inner:    Theme.StampTexts("could be", "better"),
-        bullsEye: Theme.StampTexts("flimsy", nil),
+        bullsEye: Theme.StampTexts("flimsy", ""),
         isCustomisable: false)
     
-    private var custom = Theme(
-        id: 3,
-        title: UserDefaults.standard.string(forKey: Key.custom.title) ?? "",
-        edge:     Theme.StampTexts(UserDefaults.standard.string(forKey: Key.custom.edge.top)     ?? "",
-                                   UserDefaults.standard.string(forKey: Key.custom.edge.bottom)      ?? ""),
-        outer:    Theme.StampTexts(UserDefaults.standard.string(forKey: Key.custom.outer.top)    ?? "",
-                                   UserDefaults.standard.string(forKey: Key.custom.outer.bottom)     ?? ""),
-        middle:   Theme.StampTexts(UserDefaults.standard.string(forKey: Key.custom.middle.top)   ?? "",
-                                   UserDefaults.standard.string(forKey: Key.custom.middle.bottom)    ?? ""),
-        inner:    Theme.StampTexts(UserDefaults.standard.string(forKey: Key.custom.inner.top)    ?? "",
-                                   UserDefaults.standard.string(forKey: Key.custom.inner.bottom)     ?? ""),
-        bullsEye: Theme.StampTexts(UserDefaults.standard.string(forKey: Key.custom.bullsEye.top) ?? "",
-                                   UserDefaults.standard.string(forKey: Key.custom.bullsEye.bottom)  ?? ""),
-        isCustomisable: true)
-    
+
+    private var
+    custom = Theme(
+                id: 3,
+                title:    PreferencesData.customTitle,
+                edge:     Theme.StampTexts(PreferencesData.customEdgeTop,     PreferencesData.customEdgeBottom),
+                outer:    Theme.StampTexts(PreferencesData.customOuterTop,    PreferencesData.customOuterBottom),
+                middle:   Theme.StampTexts(PreferencesData.customMiddleTop,   PreferencesData.customMiddleBottom),
+                inner:    Theme.StampTexts(PreferencesData.customInnerTop,    PreferencesData.customInnerBottom),
+                bullsEye: Theme.StampTexts(PreferencesData.customBullsEyeTop, PreferencesData.customBullsEyeBottom),
+                isCustomisable: true)
 }
