@@ -114,7 +114,7 @@ struct PreferencesView: View {
             HStack {
                 Spacer()
                 NavigationLink(destination: InstructionView()) {
-                    Text("Show Instructions")
+                    Text("Instructions")
                 }
                 Spacer()
             }
