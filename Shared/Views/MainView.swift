@@ -25,9 +25,9 @@ struct ContentView: View {
                     .opacity(displayColorful ? 0.0 : preferences.preferencesButtonOpacity)
                     .animation(.easeIn(duration: 0.1), value: displayColorful)
     #if targetEnvironment(macCatalyst)
-                    .padding(.top, 20)
+                    .padding(.top, 20.0)
     #endif
-                    .padding(.trailing, UIDevice.current.hasNotch ? 10 : 0)
+                    .padding(.trailing, 10.0)
             }
             VStack {
                 DisplayView(
@@ -119,6 +119,7 @@ struct MainView: View {
                 .ignoresSafeArea()
                 .navigationBarHidden(true)
         }
+//        .navigationViewStyle(StackNavigationViewStyle()) // <- add here
         .environmentObject(Preferences(colorScheme: colorScheme))
         .accentColor(colorScheme == .light ? .blue : .white)
     }
@@ -127,13 +128,5 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-    }
-}
-
-extension UIDevice {
-    var hasNotch: Bool {
-        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let bottom = keyWindow?.safeAreaInsets.bottom ?? 0
-        return bottom > 0
     }
 }
