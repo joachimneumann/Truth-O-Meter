@@ -25,6 +25,7 @@ struct Truth_O_MeterApp: App {
 
 #if targetEnvironment(macCatalyst)
 class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -33,8 +34,11 @@ class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .forEach { windowScene in
-                windowScene.sizeRestrictions?.minimumSize = CGSize(width: 375.0*1.5, height: 667.0*1.5)
-                windowScene.sizeRestrictions?.maximumSize = CGSize(width: 375.0*1.5, height: 667.0*1.5)
+                if let restrictions = windowScene.sizeRestrictions {
+                    let size = CGSize(width: 375.0 * 1.5, height: 667.0 * 1.5)
+                    restrictions.minimumSize = size
+                    restrictions.maximumSize = size
+                }
             }
     }
 }
