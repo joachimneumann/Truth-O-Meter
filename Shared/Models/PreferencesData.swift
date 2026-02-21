@@ -173,7 +173,7 @@ struct ThemeName: Identifiable {
 struct PreferencesData {
 
     @AppStorage("listenTimingIndex")    static var listenTimingIndex: Int = 1
-    @AppStorage("analysisTimingIndex")  static var analysisTimingIndex: Int = 1
+    @AppStorage("analysisTimingIndex")  static var analysisTimingIndex: Int = 0
     @AppStorage("customTitle")          static var customTitle: String = ""
     @AppStorage("customEdgeTop")        static var customEdgeTop = ""
     @AppStorage("customEdgeBottom")     static var customEdgeBottom = ""
@@ -185,7 +185,7 @@ struct PreferencesData {
     @AppStorage("customInnerBottom")    static var customInnerBottom = ""
     @AppStorage("customBullsEyeTop")    static var customBullsEyeTop = ""
     @AppStorage("customBullsEyeBottom") static var customBullsEyeBottom = ""
-    @AppStorage("selectedThemeIndex")   static var selectedThemeIndex: Int = 1
+    @AppStorage("selectedThemeIndex")   static var selectedThemeIndex: Int = 5
     
 
     mutating func setTop(top: String, forPrecision precision: Precision) {
@@ -206,6 +206,7 @@ struct PreferencesData {
             ret.append(ThemeName(id: 1, name: singing.title,  isCustom: false))
             ret.append(ThemeName(id: 2, name: factCheck.title, isCustom: false))
             ret.append(ThemeName(id: 3, name: risk.title, isCustom: false))
+            ret.append(ThemeName(id: 5, name: truthOMeter.title, isCustom: false))
             ret.append(ThemeName(id: 4, name: custom.title, isCustom: true))
             return ret
         }
@@ -218,6 +219,7 @@ struct PreferencesData {
         if s == 1 { return singing }
         if s == 2 { return factCheck }
         if s == 3 { return risk }
+        if s == 5 { return truthOMeter }
         return custom
     }
     
@@ -279,7 +281,16 @@ struct PreferencesData {
         inner:    Theme.StampTexts("Low", ""),
         bullsEye: Theme.StampTexts("Minimal", ""),
         isCustomisable: false)
-    
+
+    private let truthOMeter = Theme(
+        id: 5,
+        title: "Truth-O-Meter",
+        edge:     Theme.StampTexts("True", ""),
+        outer:    Theme.StampTexts("Mostly", "True"),
+        middle:   Theme.StampTexts("Unclear", ""),
+        inner:    Theme.StampTexts("Mostly", "False"),
+        bullsEye: Theme.StampTexts("False", ""),
+        isCustomisable: false)
 
     private var
     custom = Theme(

@@ -78,14 +78,16 @@ struct SmartButtonView: View {
     }
 
     @State private var animateRingView: Bool = false
-    private let smallPhoneMaxWidth: CGFloat = 375
+    private let largePhoneMaxWidth: CGFloat = 430
 
-    private var adaptiveMaxWidth: CGFloat? {
+    private var adaptiveSideLength: CGFloat? {
 #if os(iOS)
         guard UIDevice.current.userInterfaceIdiom == .phone else { return nil }
         let screenWidth = UIScreen.main.bounds.width
-        guard screenWidth > smallPhoneMaxWidth else { return nil }
-        return screenWidth * 0.6
+        if screenWidth >= largePhoneMaxWidth {
+            return min(180, screenWidth * 0.42)
+        }
+        return min(190, screenWidth * 0.48)
 #else
         return nil
 #endif
@@ -112,7 +114,7 @@ struct SmartButtonView: View {
                       callback: tapped)
         }
         .padding(config.padding)
-        .frame(maxWidth: adaptiveMaxWidth)
+        .frame(width: adaptiveSideLength, height: adaptiveSideLength)
     }
 }
 

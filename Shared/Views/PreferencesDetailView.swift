@@ -42,6 +42,14 @@ struct PreferencesDetailView: View {
             }
         )
     }
+
+    private var iPadStampScale: CGFloat {
+#if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .pad ? 0.65 : 1.0
+#else
+        1.0
+#endif
+    }
     
     var body: some View {
         VStack {
@@ -59,6 +67,7 @@ struct PreferencesDetailView: View {
                       stampBottom,
                       color: preferences.primaryColor,
                       angle: Angle(degrees: 0))
+                    .scaleEffect(iPadStampScale)
                 //.background(Color.yellow.opacity(0.2))
             }
             .fixedSize(horizontal: false, vertical: true)

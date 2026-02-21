@@ -111,6 +111,12 @@ struct PreferencesView: View {
     
     var body: some View {
         VStack {
+            TimePicker()
+            Rectangle().fill(preferences.lightGray)
+                .frame(height: 0.5)
+                .padding(.leading)
+            ThemesList()
+            Spacer()
             HStack {
                 Spacer()
                 NavigationLink(destination: InstructionView()) {
@@ -119,12 +125,6 @@ struct PreferencesView: View {
                 Spacer()
             }
             .padding(.vertical, 40)
-            TimePicker()
-            Rectangle().fill(preferences.lightGray)
-                .frame(height: 0.5)
-                .padding(.leading)
-            ThemesList()
-            Spacer()
         }
         .frame(maxWidth: 600)
     }

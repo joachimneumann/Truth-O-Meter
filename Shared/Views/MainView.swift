@@ -17,6 +17,26 @@ private struct ContentView: View {
     @State private var stampBottom: String? = nil
     
     private let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
+
+    private var isIPad: Bool {
+#if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .pad
+#else
+        false
+#endif
+    }
+
+    private var iPadSmartButtonSize: CGFloat? {
+#if os(iOS)
+        isIPad ? (UIScreen.main.bounds.width * 0.4) : nil
+#else
+        nil
+#endif
+    }
+
+    private var iPadStampScale: CGFloat {
+        isIPad ? 0.65 : 1.0
+    }
     
     var body: some View {
         VStack {
@@ -73,9 +93,13 @@ private struct ContentView: View {
                             }
                         }
                         .padding()
+                        .frame(width: iPadSmartButtonSize, height: iPadSmartButtonSize)
                 }
                 if showStampView {
                     Stamp(stampTop, stampBottom, color: preferences.primaryColor)
+                        .scaleEffect(iPadStampScale)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 12)
                         .onTapGesture {
                             Needle.shared.active(false, strongNoise: false)
                             Needle.shared.setValue(0.5)
@@ -119,7 +143,7 @@ struct MainView: View {
                 .ignoresSafeArea()
                 .navigationBarHidden(true)
         }
-//        .navigationViewStyle(StackNavigationViewStyle()) // <- add here
+        .navigationViewStyle(StackNavigationViewStyle())
         .environmentObject(Preferences(colorScheme: colorScheme))
         .accentColor(colorScheme == .light ? .blue : .white)
     }
