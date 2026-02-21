@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct NeedleView: View {
-    @ObservedObject var needle = Needle.shared
+    @ObservedObject private var needle = Needle.shared
 
-    let displayMeasures: DisplayMeasures
-    let activeColor:Color
-    let passiveColor:Color
+    private let displayMeasures: DisplayMeasures
+    private let activeColor:Color
+    private let passiveColor:Color
     
-    func angle(_ v: Double) -> Angle {
+    private func angle(_ v: Double) -> Angle {
         return Angle(radians: displayMeasures.completeAngle * (-0.5 + v))
     }
     var body: some View {

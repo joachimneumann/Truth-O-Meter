@@ -32,7 +32,7 @@ struct SmartButtonView: View {
         }
     }
     
-    func tapped(_ precision: Precision) {
+    private func tapped(_ precision: Precision) {
         let startRecording:UInt32 = 1113
         let stopRecording:UInt32 = 1114
         /// source: https://github.com/TUNER88/iOSSystemSoundsLibrary
@@ -66,7 +66,7 @@ struct SmartButtonView: View {
         }
     }
     
-    struct Config {
+    private struct Config {
         let padding: Double
         let ringWidth: Double
         let fiveDisksRadius: Double
@@ -78,6 +78,18 @@ struct SmartButtonView: View {
     }
 
     @State private var animateRingView: Bool = false
+    private let smallPhoneMaxWidth: CGFloat = 375
+
+    private var adaptiveMaxWidth: CGFloat? {
+#if os(iOS)
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return nil }
+        let screenWidth = UIScreen.main.bounds.width
+        guard screenWidth > smallPhoneMaxWidth else { return nil }
+        return screenWidth * 0.6
+#else
+        return nil
+#endif
+    }
 
     var body: some View {
         let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
@@ -100,6 +112,7 @@ struct SmartButtonView: View {
                       callback: tapped)
         }
         .padding(config.padding)
+        .frame(maxWidth: adaptiveMaxWidth)
     }
 }
 

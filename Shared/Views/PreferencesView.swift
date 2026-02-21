@@ -10,10 +10,10 @@ import SwiftUI
 
 
 struct PreferencesView: View {
-    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject private var preferences: Preferences
 
     private struct ThemeCell: View {
-        @EnvironmentObject var preferences: Preferences
+        @EnvironmentObject private var preferences: Preferences
         let name: String
         let isSelected: Bool
         let isCustom: Bool
@@ -54,7 +54,7 @@ struct PreferencesView: View {
     }
     
     private struct ThemesList: View {
-        @EnvironmentObject var preferences: Preferences
+        @EnvironmentObject private var preferences: Preferences
         var body: some View {
             let themeNames = preferences.themeNames
             VStack {
@@ -76,7 +76,7 @@ struct PreferencesView: View {
     }
     
     private struct TimePicker: View {
-        @EnvironmentObject var preferences: Preferences
+        @EnvironmentObject private var preferences: Preferences
         var body: some View {
             VStack(alignment: .leading) {
                 HStack  {

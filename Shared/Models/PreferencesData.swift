@@ -204,7 +204,9 @@ struct PreferencesData {
             var ret = [ThemeName]()
             ret.append(ThemeName(id: 0, name: bullshit.title, isCustom: false))
             ret.append(ThemeName(id: 1, name: singing.title,  isCustom: false))
-            ret.append(ThemeName(id: 2, name: custom.title, isCustom: true))
+            ret.append(ThemeName(id: 2, name: factCheck.title, isCustom: false))
+            ret.append(ThemeName(id: 3, name: risk.title, isCustom: false))
+            ret.append(ThemeName(id: 4, name: custom.title, isCustom: true))
             return ret
         }
     }
@@ -214,6 +216,8 @@ struct PreferencesData {
         let s = PreferencesData.selectedThemeIndex
         if s == 0 { return bullshit }
         if s == 1 { return singing }
+        if s == 2 { return factCheck }
+        if s == 3 { return risk }
         return custom
     }
     
@@ -223,6 +227,7 @@ struct PreferencesData {
     
     mutating func setTitle(_ newTitle: String) {
         custom.title = newTitle
+        PreferencesData.customTitle = newTitle
     }
     
     let waitTimes = [2, 4, 10]
@@ -246,7 +251,7 @@ struct PreferencesData {
         isCustomisable: false)
     
     private let singing = Theme(
-        id: 2,
+        id: 1,
         title: "Voice-O-Meter",
         edge:     Theme.StampTexts("Sexy", ""),
         outer:    Theme.StampTexts("impressive", ""),
@@ -254,11 +259,31 @@ struct PreferencesData {
         inner:    Theme.StampTexts("could be", "better"),
         bullsEye: Theme.StampTexts("flimsy", ""),
         isCustomisable: false)
+
+    private let factCheck = Theme(
+        id: 2,
+        title: "Fact-Check-O-Meter",
+        edge:     Theme.StampTexts("False", ""),
+        outer:    Theme.StampTexts("Misleading", ""),
+        middle:   Theme.StampTexts("Unclear", ""),
+        inner:    Theme.StampTexts("Mostly", "True"),
+        bullsEye: Theme.StampTexts("True", ""),
+        isCustomisable: false)
+
+    private let risk = Theme(
+        id: 3,
+        title: "Risk-O-Meter",
+        edge:     Theme.StampTexts("Extreme", ""),
+        outer:    Theme.StampTexts("High", ""),
+        middle:   Theme.StampTexts("Medium", ""),
+        inner:    Theme.StampTexts("Low", ""),
+        bullsEye: Theme.StampTexts("Minimal", ""),
+        isCustomisable: false)
     
 
     private var
     custom = Theme(
-                id: 3,
+                id: 4,
                 title:    PreferencesData.customTitle,
                 edge:     Theme.StampTexts(PreferencesData.customEdgeTop,     PreferencesData.customEdgeBottom),
                 outer:    Theme.StampTexts(PreferencesData.customOuterTop,    PreferencesData.customOuterBottom),

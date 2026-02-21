@@ -14,10 +14,10 @@ struct FiveDisks: View {
     let paleColor: Color
     let callback: (Precision) -> Void
     
-    @State var isTapped: Bool = false
-    @State var grayDisk: Precision = .middle
+    @State private var isTapped: Bool = false
+    @State private var grayDisk: Precision = .middle
 
-    let diskData = [
+    private let diskData = [
         DiskData(.outer,    0.8 - 0.05),
         DiskData(.middle,   0.6 - 0.0125),
         DiskData(.inner,    0.4 + 0.0125),
@@ -25,7 +25,7 @@ struct FiveDisks: View {
     
     @State private var pale = false
     
-    struct Config {
+    private struct Config {
         let cr: Double
         let p: Double
         let c: Color
@@ -93,12 +93,12 @@ struct FiveDisks: View {
         }
     }
     
-    func down() {
+    private func down() {
         if !preferenceScreen && !pale {
             pale = true
         }
     }
-    func up(_ tappedPrecision: Precision) {
+    private func up(_ tappedPrecision: Precision) {
         if preferenceScreen {
             grayDisk = tappedPrecision
         } else {
@@ -143,7 +143,7 @@ struct FiveDisks: View {
         .frame(width: radius, height: radius)
     }
     
-    struct DiskData: Identifiable {
+    private struct DiskData: Identifiable {
         var id = UUID()
         let precision: Precision
         let padding: Double

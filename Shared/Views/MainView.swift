@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @EnvironmentObject var preferences: Preferences
+private struct ContentView: View {
+    @EnvironmentObject private var preferences: Preferences
     @State private var displayColorful = false
     @State private var showAnalysisView = false
     @State private var showSmartButton = true
@@ -16,7 +16,7 @@ struct ContentView: View {
     @State private var stampTop: String = ""
     @State private var stampBottom: String? = nil
     
-    let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
+    private let analyseTitleFont: Font = Font.system(size: UIScreen.main.bounds.width * 0.04).bold()
     
     var body: some View {
         VStack {
@@ -91,8 +91,8 @@ struct ContentView: View {
     }
 }
 
-struct PreferencesButton: View {
-    @EnvironmentObject var preferences: Preferences
+private struct PreferencesButton: View {
+    @EnvironmentObject private var preferences: Preferences
     var body: some View {
         HStack {
             Spacer()
@@ -108,7 +108,7 @@ struct PreferencesButton: View {
 }
 
 struct MainView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         NavigationView {
             ContentView()

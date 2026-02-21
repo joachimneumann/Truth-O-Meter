@@ -8,17 +8,39 @@
 import SwiftUI
 
 struct PreferencesDetailView: View {
-    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject private var preferences: Preferences
     @Binding var displayTitle: String
+    @State private var selectedPrecision: Precision = .middle
     @State private var stampTop: String = ""
     @State private var stampBottom: String? = nil
 
-    func callback(_ precision: Precision) {
+    private func callback(_ precision: Precision) {
+        selectedPrecision = precision
         stampTop = preferences.stampTop(precision)
         stampBottom = preferences.stampBottom(precision)
         let newNeedleValue = preferences.needleValue(forPrecision: precision)
         Needle.shared.active(true, strongNoise: false)
         Needle.shared.setValue(newNeedleValue)
+    }
+
+    private var stampTopBinding: Binding<String> {
+        Binding(
+            get: { stampTop },
+            set: { newValue in
+                stampTop = newValue
+                preferences.setStampTop(newValue, for: selectedPrecision)
+            }
+        )
+    }
+
+    private var stampBottomBinding: Binding<String> {
+        Binding(
+            get: { stampBottom ?? "" },
+            set: { newValue in
+                stampBottom = newValue
+                preferences.setStampBottom(newValue, for: selectedPrecision)
+            }
+        )
     }
     
     var body: some View {
@@ -41,7 +63,10 @@ struct PreferencesDetailView: View {
             }
             .fixedSize(horizontal: false, vertical: true)
             if preferences.isCustom {
-                EditableStampView()
+                EditableStampView(
+                    stampTop: stampTopBinding,
+                    stampBottom: stampBottomBinding
+                )
             } else {
                 EmptyView()
             }
@@ -59,16 +84,17 @@ struct PreferencesDetailView: View {
         .padding()
         .onAppear() {
             Needle.shared.active(true, strongNoise: false)
+            callback(selectedPrecision)
         }
     }
 }
 
 
-struct CustomTextFieldStyle: TextFieldStyle {
-    @EnvironmentObject var preferences: Preferences
+private struct CustomTextFieldStyle: TextFieldStyle {
+    @EnvironmentObject private var preferences: Preferences
     @Binding var focused: Bool
-    let fontsize = 40.0
-    let cornerRadius = 6.0
+    private let fontsize = 40.0
+    private let cornerRadius = 6.0
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .disableAutocorrection(true)
@@ -87,25 +113,26 @@ struct CustomTextFieldStyle: TextFieldStyle {
     }
 }
 
-struct EditableStampView: View {
+private struct EditableStampView: View {
     @State private var editingTop = false
     @State private var editingBottom = false
-    let fontsize = 40.0
+    @Binding var stampTop: String
+    @Binding var stampBottom: String
+
     var body: some View {
-        Text("xx")
-//        VStack {
-//            TextField("Top", text: $stampTop, onEditingChanged: { edit in
-//                self.editingTop = edit
-//            })
-//                .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
-//                .padding(.top, 24)
-//
-//            TextField("Bottom", text: $preferences.nonNilStampBottom, onEditingChanged: { edit in
-//                self.editingBottom = edit
-//            })
-//                .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
-//                .padding(.bottom, 12)
-//        }
+        VStack {
+            TextField("Top", text: $stampTop, onEditingChanged: { edit in
+                editingTop = edit
+            })
+            .textFieldStyle(CustomTextFieldStyle(focused: $editingTop))
+            .padding(.top, 24)
+
+            TextField("Bottom", text: $stampBottom, onEditingChanged: { edit in
+                editingBottom = edit
+            })
+            .textFieldStyle(CustomTextFieldStyle(focused: $editingBottom))
+            .padding(.bottom, 12)
+        }
     }
 }
 

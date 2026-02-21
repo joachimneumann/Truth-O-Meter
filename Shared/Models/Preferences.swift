@@ -50,6 +50,16 @@ class Preferences: ObservableObject {
         data.seletedTheme.bottom(forPrecision: precision)
     }
 
+    func setStampTop(_ newTop: String, for precision: Precision) {
+        data.setTop(top: newTop, forPrecision: precision)
+        objectWillChange.send()
+    }
+
+    func setStampBottom(_ newBottom: String, for precision: Precision) {
+        data.setBottom(bottom: newBottom, forPrecision: precision)
+        objectWillChange.send()
+    }
+
     var selectedThemeIndex: Int {
         get { PreferencesData.selectedThemeIndex }
         set {

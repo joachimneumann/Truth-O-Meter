@@ -12,7 +12,7 @@ struct Truth_O_MeterApp: App {
     
 // force window size on Mac
 #if targetEnvironment(macCatalyst)
-    @UIApplicationDelegateAdaptor var delegate: FSAppDelegate
+    @UIApplicationDelegateAdaptor private var delegate: FSAppDelegate
 #endif
     
     @State private var isTapped = false
@@ -24,7 +24,7 @@ struct Truth_O_MeterApp: App {
 }
 
 #if targetEnvironment(macCatalyst)
-class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
+private class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     
     func scene(
         _ scene: UIScene,
@@ -43,7 +43,7 @@ class FSSceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     }
 }
 
-class FSAppDelegate: NSObject, UIApplicationDelegate {
+private class FSAppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,
