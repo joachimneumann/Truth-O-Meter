@@ -80,41 +80,49 @@ struct SmartButtonView: View {
     @State private var animateRingView: Bool = false
     private let largePhoneMaxWidth: CGFloat = 430
 
-    private var adaptiveSideLength: CGFloat? {
+    private func adaptiveSideLength(for availableWidth: CGFloat) -> CGFloat? {
 #if os(iOS)
         guard UIDevice.current.userInterfaceIdiom == .phone else { return nil }
-        let screenWidth = UIScreen.main.bounds.width
-        if screenWidth >= largePhoneMaxWidth {
-            return min(180, screenWidth * 0.42)
+        if availableWidth >= largePhoneMaxWidth {
+            return min(180, availableWidth * 0.42)
         }
-        return min(190, screenWidth * 0.48)
+        return min(190, availableWidth * 0.48)
 #else
         return nil
 #endif
     }
 
     var body: some View {
-        let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
-        ZStack {
-            FrameCatcher(into: $smartButtonSize)
-            if animateRingView {
-                RingView(
-                    time: listenTime,
-                    width: config.ringWidth,
-                    activeColor: color,
-                    passiveColor: gray)
-            } else {
-                Circle()
-                    .stroke(gray, lineWidth: config.ringWidth)
+        GeometryReader { geometry in
+            let config = Config(radius: min(smartButtonSize.width, smartButtonSize.height))
+            let sideLength = adaptiveSideLength(for: geometry.size.width)
+            ZStack {
+                FrameCatcher(into: $smartButtonSize)
+                if animateRingView {
+                    RingView(
+                        time: listenTime,
+                        width: config.ringWidth,
+                        activeColor: color,
+                        passiveColor: gray)
+                } else {
+                    Circle()
+                        .stroke(gray, lineWidth: config.ringWidth)
+                }
+                FiveDisks(preferenceScreen: false,
+                          radius: config.fiveDisksRadius,
+                          color: color,
+                          paleColor: paleColor,
+                          callback: tapped)
             }
-            FiveDisks(preferenceScreen: false,
-                      radius: config.fiveDisksRadius,
-                      color: color,
-                      paleColor: paleColor,
-                      callback: tapped)
+            .padding(config.padding)
+            .frame(width: sideLength, height: sideLength)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(config.padding)
-        .frame(width: adaptiveSideLength, height: adaptiveSideLength)
+        .task(id: displayColorful) {
+            if !displayColorful {
+                animateRingView = false
+            }
+        }
     }
 }
 
